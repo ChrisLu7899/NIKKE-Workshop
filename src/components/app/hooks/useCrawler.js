@@ -13,7 +13,12 @@ import { getAccounts, setAccounts, getCharacters, setCalculatorData } from "../.
 import { applyCookieStr, clearSiteCookies, getCurrentCookies } from "../../../services/cookie.js";
 import { loadBaseAccountDict, getRoleName, prefetchMainlineCatalog, validateCookieWithAccount, getOutpostInfoWithAccount, getCampaignProgressWithAccount } from "../../../services/api.js";
 import { registerCookieRules, unregisterAllRules } from "../../../services/requestInterceptor.js";
-import { parseGameUidFromCookie } from "../../../domain/account.js";
+import {
+  parseGameOpenIdFromCookie,
+  parseGameUidFromCookie,
+  serializeBrowserCookies,
+} from "../../../domain/account.js";
+import { selectCurrentAccountIndex } from "../../../utils/singleAccount.js";
 import { BATCH_SIZE, STAGGER_DELAY } from "../constants.js";
 import { crawlWithEmptyDataRetry } from "../../../utils/crawlValidation.js";
 import { hydrateAccountCharacterData } from "../../../services/accountCharacterData.js";
@@ -178,75 +183,92 @@ export function useCrawler({
 
   // ========== Cookie 保存功能 ==========
   const handleSaveCookie = useCallback(async () => {
-    chrome.cookies.getAll({ url: "https://www.blablalink.com" }, async (cookies) => {
-      console.log(cookies);
+    setCookieLoading(true);
+    try {
+      const allCookies = await chrome.cookies.getAll({});
+      const cookies = allCookies.filter((cookie) =>
+        String(cookie?.domain || "").endsWith("blablalink.com")
+      );
       const token = cookies.find((c) => c.name === "game_token");
       if (!token) {
         addLog(t("notLogin"));
-        return;
+        return { success: false, reason: "not-logged-in" };
       }
       
       // 自动获取用户名
       let autoUsername = "";
+      let roleInfo = { role_name: "", area_id: "" };
       try {
-        const roleInfo = await getRoleName();
+        roleInfo = await getRoleName();
         autoUsername = roleInfo.role_name || "";
-        addLog(`${t("autoGetUsername")}: ${autoUsername}`);
+        if (autoUsername) addLog(`${t("autoGetUsername")}: ${autoUsername}`);
       } catch (error) {
         console.warn("自动获取用户名失败:", error);
         addLog(t("autoGetUsernameFail"));
-        autoUsername = t("noName");
       }
       
-      const cookieStr = cookies.map((c) => `${c.name}=${c.value}`).join("; ");
+      const cookieStr = serializeBrowserCookies(cookies);
       
       // 提取game_uid
-      const gameUidCookie = cookies.find(c => c.name === "game_uid");
-      const gameUid = gameUidCookie ? gameUidCookie.value : "";
+      const gameUid = parseGameUidFromCookie(cookieStr);
+      const gameOpenId = parseGameOpenIdFromCookie(cookieStr);
       
       const accounts = await getAccounts();
       
-      // 检查是否已存在相同email/game_uid或cookie的账号
-      let existingIndex = -1;
-      const emailLike = autoUsername && autoUsername.includes("@") ? autoUsername : "";
-      if (emailLike) {
-        existingIndex = accounts.findIndex(acc => acc.email === emailLike);
+      // 单账号模式：优先匹配当前会话，其次更新当前启用账号。
+      let existingIndex = gameUid
+        ? accounts.findIndex((account) => account.game_uid === gameUid)
+        : -1;
+      if (existingIndex === -1 && gameOpenId) {
+        existingIndex = accounts.findIndex((account) => account.game_openid === gameOpenId);
       }
-      if (gameUid) {
-        // 优先按game_uid查找
-        if (existingIndex === -1) {
-          existingIndex = accounts.findIndex(acc => acc.game_uid === gameUid);
-        }
-      }
-      if (existingIndex === -1) {
-        // 如果没有game_uid或找不到，则按cookie查找
-        existingIndex = accounts.findIndex(acc => acc.cookie === cookieStr);
-      }
+      if (existingIndex === -1) existingIndex = selectCurrentAccountIndex(accounts);
       
       const now = Date.now();
+      const baseAccount = existingIndex >= 0 ? accounts[existingIndex] : {};
+      const finalUsername = autoUsername
+        || baseAccount?.roleInfo?.role_name
+        || baseAccount?.username
+        || baseAccount?.name
+        || "";
+      const currentAccount = {
+        ...baseAccount,
+        username: finalUsername,
+        cookie: cookieStr,
+        cookieUpdatedAt: now,
+        game_uid: gameUid,
+        game_openid: gameOpenId,
+        roleInfo: {
+          ...(baseAccount?.roleInfo || {}),
+          role_name: finalUsername,
+          area_id: roleInfo?.area_id || baseAccount?.roleInfo?.area_id || "",
+        },
+        enabled: true,
+      };
+      const nextAccounts = accounts.map((account) => ({ ...account, enabled: false }));
+
       if (existingIndex !== -1) {
-        // 更新现有账号
-        accounts[existingIndex].cookie = cookieStr;
-        accounts[existingIndex].cookieUpdatedAt = now;
-        if (autoUsername) accounts[existingIndex].username = autoUsername;
-        if (gameUid) accounts[existingIndex].game_uid = gameUid;
-        addLog(`${t("accountUpdated")}: ${autoUsername}`);
+        nextAccounts[existingIndex] = currentAccount;
+        addLog(`${t("accountUpdated")}: ${finalUsername || t("loggedIn")}`);
       } else {
-        // 添加新账号
-        accounts.push({
-          username: autoUsername,
-          email: "",
-          password: "",
-          cookie: cookieStr,
-          cookieUpdatedAt: now,
-          game_uid: gameUid,
-          enabled: true,
-        });
-        addLog(`${t("accountSaved")}: ${autoUsername}`);
+        nextAccounts.push(currentAccount);
+        addLog(`${t("accountSaved")}: ${finalUsername || t("loggedIn")}`);
       }
       
-      await setAccounts(accounts);
-    });
+      await setAccounts(nextAccounts);
+      return {
+        success: true,
+        updated: existingIndex !== -1,
+        username: finalUsername,
+        roleInfo: currentAccount.roleInfo,
+      };
+    } catch (error) {
+      console.error("保存当前 Cookie 失败:", error);
+      addLog(`${t("cookieSaveFailed")}: ${error?.message || error}`);
+      return { success: false, reason: "save-failed", error };
+    } finally {
+      setCookieLoading(false);
+    }
   }, [t, addLog]);
 
   // 页面 Hook 只编排流程，角色数据的请求与合并由独立服务负责。

@@ -2,23 +2,71 @@
 // ========== App Header 组件 ==========
 
 import { memo } from "react";
-import { AppBar, Toolbar, Button } from "@mui/material";
-import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
+import { AppBar, Box, Button, CircularProgress, Toolbar } from "@mui/material";
+import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 
-const AppHeader = ({ t, onOpenAccountInfo }) => (
+const AppHeader = ({
+  t,
+  checking,
+  loggedIn,
+  username,
+  cookieLoading,
+  onOpenLogin,
+  onSaveCookie,
+}) => {
+  const loginLabel = checking
+    ? t("checkingLogin")
+    : loggedIn
+      ? username || t("loggedIn")
+      : t("login");
+
+  return (
     <AppBar position="sticky">
-      <Toolbar variant="dense" sx={{ justifyContent: "flex-start" }}>
+      <Toolbar variant="dense" sx={{ gap: 1 }}>
         <Button
           color="inherit"
           size="small"
-          startIcon={<ManageAccountsOutlinedIcon />}
-          onClick={onOpenAccountInfo}
-          sx={{ flexShrink: 0, whiteSpace: "nowrap", px: 1 }}
+          startIcon={loggedIn ? <PersonOutlineOutlinedIcon /> : <LoginOutlinedIcon />}
+          onClick={onOpenLogin}
+          disabled={checking}
+          title={loginLabel}
+          sx={{
+            flex: 1,
+            minWidth: 0,
+            justifyContent: "flex-start",
+            px: 1,
+          }}
         >
-          {t("accountInfo")}
+          <Box
+            component="span"
+            sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+          >
+            {loginLabel}
+          </Box>
+        </Button>
+        <Button
+          color="inherit"
+          variant="outlined"
+          size="small"
+          startIcon={cookieLoading
+            ? <CircularProgress size={16} color="inherit" />
+            : <SaveOutlinedIcon />}
+          onClick={onSaveCookie}
+          disabled={cookieLoading}
+          sx={{
+            flexShrink: 0,
+            whiteSpace: "nowrap",
+            borderColor: "rgba(255, 255, 255, 0.72)",
+            "&:hover": { borderColor: "common.white" },
+          }}
+        >
+          {t("saveOrUpdateCookie")}
         </Button>
       </Toolbar>
     </AppBar>
-);
+  );
+};
 
 export default memo(AppHeader);

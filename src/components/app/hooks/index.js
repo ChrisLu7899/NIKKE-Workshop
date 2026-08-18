@@ -4,5 +4,6 @@
 export { useSettings } from "./useSettings.js";
 export { useNotification } from "./useNotification.js";
 export { useCrawler } from "./useCrawler.js";
+export { useBlablalinkLoginStatus } from "./useBlablalinkLoginStatus.js";
 export { useAccountTransfer } from "./useAccountTransfer.js";
 export { useUpdateCheck } from "./useUpdateCheck.js";

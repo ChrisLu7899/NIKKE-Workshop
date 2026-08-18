@@ -38,7 +38,7 @@ NIKKE Workshop 是一个 Chromium 浏览器扩展，集成账号角色数据获�
 5. 为具体妮姬设置目标条件并运行有限状态 MDP。
 6. 在“全部结果”中查看或导出最终汇总。
 
-账号密码、Cookie、角色数据和计算结果默认保存在浏览器扩展的本地存储中。项目不提供云端账号同步服务。详细请求行为和风险边界见 [数据获取与请求安全说明](docs/数据获取与请求安全说明.md)。
+账号、Cookie、角色数据和计算结果仅保存在浏览器扩展的本地存储中，不会上传至本项目或其他第三方服务器；获取数据时仅与 Blablalink 进行必要通信。详细请求行为和风险边界见 [数据获取与请求安全说明](docs/数据获取与请求安全说明.md)。
 
 ## 本地开发
 
@@ -56,6 +56,8 @@ npm run build
 ## 项目来源与修改
 
 数据获取功能基于 [ExiaProject/ExiaInvasion](https://github.com/ExiaProject/ExiaInvasion) 开发，感谢原项目作者与贡献者。
+
+培养建议参考[屑芙蒂一图流](https://space.bilibili.com/17057196/dynamic)，感谢攻略作者的整理与分享。
 
 本项目在 ExiaInvasion `3.1.2` 的基础上进行了界面、账号流程、数据获取、列表管理、请求保护和洗词条计算器等大量修改。主要差异见 [MODIFICATIONS.md](MODIFICATIONS.md)。
 

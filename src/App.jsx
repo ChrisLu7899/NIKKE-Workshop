@@ -2,7 +2,7 @@
 // ========== NIKKE Workshop 主应用组件 ==========
 // 主要功能：账户管理、数据爬取和结果导出
 
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import {
   Container,
   Stack,
@@ -18,22 +18,18 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DownloadIcon from "@mui/icons-material/Download";
 import TRANSLATIONS from "./i18n/translations.js";
 import { initializeLevelStats } from "./services/levelStats.js";
-import { getAccounts } from "./services/storage.js";
 import { createLogFilename, formatLogText } from "./utils/logExport.js";
 import {
   useSettings,
   useNotification,
   useCrawler,
-  useAccountTransfer,
+  useBlablalinkLoginStatus,
   AppHeader,
   CrawlerTabContent,
-  SingleAccountDialog,
 } from "./components/app";
 
 // ========== React 主组件 ==========
 export default function App() {
-  const [accountInfoOpen, setAccountInfoOpen] = useState(false);
-
   useEffect(() => {
     initializeLevelStats().catch((error) => {
       console.warn("共享等级曲线初始化失败:", error);
@@ -60,19 +56,34 @@ export default function App() {
     forceSimulatedStatsLevel400: settings.forceSimulatedStatsLevel400,
     listenForExternalLogs: true,
   });
-  const accountTransfer = useAccountTransfer({ t, showMessage });
+  const loginStatus = useBlablalinkLoginStatus();
 
-  const handleLoginTest = useCallback(async () => {
-    const accounts = (await getAccounts()).filter((account) => account.enabled !== false);
-    if (!accounts.length) {
-      showMessage(t("emptyAccounts"), "warning");
+  const handleOpenLogin = useCallback(async () => {
+    try {
+      await loginStatus.openLogin();
+      showMessage(t("blablalinkLoginOpened"), "info");
+    } catch (error) {
+      console.error("打开 Blablalink 登录页失败:", error);
+      showMessage(t("blablalinkLoginOpenFailed"), "error");
+    }
+  }, [loginStatus, showMessage, t]);
+
+  const handleSaveOrUpdateCookie = useCallback(async () => {
+    const result = await crawler.handleSaveCookie();
+    if (!result?.success) {
+      showMessage(
+        result?.reason === "not-logged-in" ? t("notLoginHelp") : t("cookieSaveFailed"),
+        result?.reason === "not-logged-in" ? "warning" : "error",
+      );
+      await loginStatus.refresh({ resolveUsername: false });
       return;
     }
-    await crawler.handleStart({
-      loginTest: true,
-      forceActivateLoginTab: accounts.some((account) => !String(account.cookie || "").trim()),
-    });
-  }, [crawler, showMessage, t]);
+    await loginStatus.refresh({ resolveUsername: true });
+    showMessage(
+      result.updated ? t("cookieUpdatedSuccess") : t("cookieSavedSuccess"),
+      "success",
+    );
+  }, [crawler, loginStatus, showMessage, t]);
 
   const fullLogText = formatLogText(crawler.fullLogs);
   const hasFullLogs = Boolean(fullLogText);
@@ -127,25 +138,22 @@ export default function App() {
     <>
       <AppHeader
         t={t}
-        onOpenAccountInfo={() => setAccountInfoOpen(true)}
+        checking={loginStatus.checking}
+        loggedIn={loginStatus.loggedIn}
+        username={loginStatus.username}
+        cookieLoading={crawler.cookieLoading}
+        onOpenLogin={handleOpenLogin}
+        onSaveCookie={handleSaveOrUpdateCookie}
       />
       
       <Container sx={{ mt: 2, width: 340, pb: 1 }}>
         <Stack spacing={2}>
           <CrawlerTabContent
             t={t}
-            activateTab={settings.activateTab}
             server={settings.server}
             manualAreaId={settings.manualAreaId}
-            toggleActivateTab={settings.toggleActivateTab}
             changeServer={settings.changeServer}
             changeManualAreaId={settings.changeManualAreaId}
-            cookieLoading={crawler.cookieLoading}
-            handleSaveCookie={crawler.handleSaveCookie}
-            handleStart={crawler.handleStart}
-            handleLoginTest={handleLoginTest}
-            handleImportAccounts={accountTransfer.handleImportAccounts}
-            handleExportAccounts={accountTransfer.handleExportAccounts}
           />
 
           <Stack direction="row" spacing={1}>
@@ -204,6 +212,18 @@ export default function App() {
               ✍️ 作者：異界型w、夕紫
             </Typography>
             <Typography variant="caption" display="block" color="inherit">
+              📖 培养建议来自
+              <Link
+                href="https://space.bilibili.com/17057196/dynamic"
+                target="_blank"
+                rel="noopener noreferrer"
+                underline="hover"
+              >
+                屑芙蒂一图流
+              </Link>
+              ，感谢攻略作者的整理与分享。
+            </Typography>
+            <Typography variant="caption" display="block" color="inherit">
               🔗 数据获取功能基于
               <Link
                 href="https://github.com/ExiaProject/ExiaInvasion"
@@ -215,17 +235,13 @@ export default function App() {
               </Link>
               开发，感谢原项目作者与贡献者。
             </Typography>
+            <Typography variant="caption" display="block" color="inherit">
+              🔒 隐私说明：账号、角色与计算数据仅保存在本地，不会上传至本项目或其他第三方服务器；获取数据时仅与 Blablalink 进行必要通信。
+            </Typography>
           </Box>
 
         </Stack>
       </Container>
-
-      <SingleAccountDialog
-        open={accountInfoOpen}
-        onClose={() => setAccountInfoOpen(false)}
-        t={t}
-        showMessage={showMessage}
-      />
 
       <Snackbar
         open={notification.open}
