@@ -25,22 +25,42 @@ if (!isValidVersion) {
 
 const manifestSource = readFileSync(manifestPath, "utf8");
 const manifest = JSON.parse(manifestSource);
+const expectedVersionName = `NIKKE Workshop ${version}`;
+const expectedDescription = String(manifest.description || "").replace(
+  /\b\d+\.\d+\.\d+\b/,
+  version,
+);
 
-if (manifest.version === version) {
+if (
+  manifest.version === version
+  && manifest.version_name === expectedVersionName
+  && manifest.description === expectedDescription
+) {
   console.log(`public/manifest.json is already at version ${version}.`);
   process.exit(0);
 }
 
-const versionFieldPattern =
-  /^([ \t]*"version"[ \t]*:[ \t]*)"[^"\r\n]*"([ \t]*,[ \t]*)$/m;
+const replaceStringField = (source, field, value) => {
+  const pattern = new RegExp(
+    `^([ \\t]*"${field}"[ \\t]*:[ \\t]*)"[^"\\r\\n]*"([ \\t]*,[ \\t]*)$`,
+    "m",
+  );
+  if (!pattern.test(source)) {
+    throw new Error(`Could not locate the top-level ${field} field in public/manifest.json.`);
+  }
+  return source.replace(pattern, `$1"${value}"$2`);
+};
 
-if (!versionFieldPattern.test(manifestSource)) {
-  throw new Error("Could not locate the top-level version field in public/manifest.json.");
-}
-
-const updatedManifest = manifestSource.replace(
-  versionFieldPattern,
-  `$1"${version}"$2`,
+let updatedManifest = replaceStringField(
+  manifestSource,
+  "description",
+  expectedDescription,
+);
+updatedManifest = replaceStringField(updatedManifest, "version", version);
+updatedManifest = replaceStringField(
+  updatedManifest,
+  "version_name",
+  expectedVersionName,
 );
 
 writeFileSync(manifestPath, updatedManifest, "utf8");
