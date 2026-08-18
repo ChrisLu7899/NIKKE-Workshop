@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【王国大学习】NIKKE战术整备室</title>
+  </head>
+  <body>
+<header class="topbar">
+    <div class="appbar-inner">
+      <div class="appbar-brand">
+        <img src="images/icon-32.png" alt="" width="32" height="32">
+        <span>NIKKE Workshop</span>
+      </div>
+      <span class="appbar-page-title">洗词条计算器</span>
+    </div>
+    <div class="calculator-toolbar">
+      <div class="brand">
+        <h1>【王国大学习】NIKKE战术整备室</h1>
+      </div>
+      <div class="topbar-primary">
+        <select id="collection-select" aria-label="妮姬列表">
+          <option value="single-equipment">单装备模拟</option>
+          <option value="owned">已获得</option>
+        </select>
+        <select id="recommendation-select" aria-label="推荐方案">
+          <option value="" disabled selected>推荐方案</option>
+        </select>
+        <select id="character-select" aria-label="角色选择" hidden>
+          <option value="current">单装备模拟</option>
+        </select>
+        <details id="character-advice" class="character-advice" hidden>
+          <summary aria-label="查看当前妮姬的培养建议">
+            <span class="character-advice-label">培养建议</span>
+            <span id="character-advice-summary" class="character-advice-summary"></span>
+            <span class="character-advice-chevron" aria-hidden="true">▾</span>
+          </summary>
+          <div class="character-advice-popover" role="region" aria-label="培养建议详情">
+            <div class="character-advice-heading">
+              <strong>培养建议</strong>
+            </div>
+            <dl class="character-advice-details">
+              <div><dt>备注</dt><dd id="character-advice-note"></dd></div>
+              <div><dt>装备</dt><dd id="character-advice-equipment"></dd></div>
+              <div><dt>词条</dt><dd id="character-advice-lines"></dd></div>
+              <div><dt>技能</dt><dd id="character-advice-skills"></dd></div>
+              <div><dt>魔方</dt><dd id="character-advice-cube"></dd></div>
+              <div><dt>珍藏品</dt><dd id="character-advice-collectible"></dd></div>
+            </dl>
+          </div>
+        </details>
+      </div>
+    </div>
+  </header>
+
+  <main id="app" aria-busy="false">
+    <section class="panel" aria-labelledby="setup-title">
+      <div class="panel-header">
+        <div class="panel-header-copy">
+          <h2 id="setup-title">盘面设置</h2>
+          <p id="setup-description">词条不可重复；选择词条后，档位默认设为第 10 档。</p>
+        </div>
+        <div class="setup-actions">
+          <select id="target-preset" aria-label="目标词条预设" hidden>
+            <option value="">选择目标预设</option>
+            <option value="superior-attack">4优越4攻击</option>
+            <option value="superior">4优越</option>
+            <option value="attack">4攻击</option>
+          </select>
+          <select id="global-target-preset" aria-label="全局目标预设" hidden>
+            <option value="">选择目标预设</option>
+            <option value="top">4优越4攻击（顶级）</option>
+            <option value="graduation">4优越4攻击（毕业）</option>
+            <option value="excellent">4优越4攻击（优秀）</option>
+            <option value="starter">4优越4攻击（出村）</option>
+          </select>
+          <select id="calculation-mode" aria-label="计算模式" hidden>
+              <option value="global">全局</option>
+              <option value="equipment">独立</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="classic-equipment-mode">
+        <div class="form-section">
+          <div class="section-heading">
+            <div>
+              <h3>当前装备</h3>
+              <p>填写三个槽位现在的词条、档位和锁定状态。</p>
+            </div>
+          </div>
+          <div class="rows" id="initial-rows"></div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-heading">
+            <div>
+              <h3>目标词条池</h3>
+              <p>可设置 1～5 个候选，最多标记 3 个必选。</p>
+            </div>
+          </div>
+          <div class="rows" id="target-rows"></div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-heading">
+            <div>
+              <h3>最优结果</h3>
+            </div>
+          </div>
+          <pre class="inline-optimal-result empty-result" id="classic-optimal-result" aria-live="polite">运行算法测试后显示。</pre>
+        </div>
+      </div>
+
+      <div class="form-section" id="global-target-mode" hidden>
+        <div class="global-target-heading">
+          <div>
+            <h3>全局目标条件</h3>
+            <p>同一词条在每件装备上最多出现一次；合计数值允许高档词条补偿低档词条。</p>
+          </div>
+          <button class="button button-secondary" id="add-global-condition" type="button">添加条件</button>
+        </div>
+        <div class="global-condition-labels" aria-hidden="true">
+          <span>目标词条</span>
+          <span>至少条数</span>
+          <span>合计数值至少（%）</span>
+          <span></span>
+        </div>
+        <div class="global-condition-rows" id="global-condition-rows"></div>
+        <p class="visually-hidden" id="global-target-status" role="status" aria-live="polite">全局模式会自动分配四件装备的目标和档位。</p>
+      </div>
+
+      <div id="character-equipment-mode" hidden></div>
+    </section>
+
+    <section class="panel result-panel" aria-labelledby="calc-title">
+      <div class="panel-header">
+        <div class="panel-header-copy">
+          <h2 id="calc-title">模拟计算</h2>
+          <p>有限状态 MDP 在本机完成，不会上传数据。</p>
+        </div>
+        <div class="calculation-actions">
+          <button class="button button-primary" id="calculate" type="button">运行算法测试</button>
+          <button class="button button-secondary" id="reset" type="button">重置</button>
+        </div>
+      </div>
+
+      <p class="message calculation-message" id="message" role="alert" aria-live="assertive"></p>
+
+      <div class="progress-wrap" id="progress-wrap" hidden>
+        <div class="progress-track" role="progressbar" aria-label="计算进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <span class="progress-text" id="progress-text">准备计算…</span>
+      </div>
+
+      <div class="result-wrap">
+        <div class="result-tabs" role="tablist" aria-label="输出内容">
+          <button class="result-tab" id="result-tab" type="button" role="tab" aria-selected="true" aria-controls="result-panel">计算结果</button>
+          <button class="result-tab" id="details-tab" type="button" role="tab" aria-selected="false" aria-controls="details-panel" tabindex="-1">使用说明</button>
+          <button class="result-tab" id="all-results-tab" type="button" role="tab" aria-selected="false" aria-controls="all-results-panel" tabindex="-1">全部结果</button>
+        </div>
+        <div class="result-tab-panel" id="result-panel" role="tabpanel" aria-labelledby="result-tab">
+          <pre class="result-output empty-result" id="result" aria-live="polite">设置目标词条后，点击“运行算法测试”。</pre>
+        </div>
+        <div class="result-tab-panel" id="details-panel" role="tabpanel" aria-labelledby="details-tab" hidden>
+          <pre class="result-output" id="details">有限状态 MDP 的求解明细将在这里展示。</pre>
+        </div>
+        <div class="result-tab-panel" id="all-results-panel" role="tabpanel" aria-labelledby="all-results-tab" hidden>
+          <div class="saved-results-toolbar">
+            <div class="saved-results-summary">
+              <strong>妮姬测试汇总</strong>
+              <span id="saved-results-count">尚无已保存结果</span>
+            </div>
+            <div class="saved-results-actions">
+              <select id="results-sort" aria-label="结果排序">
+                <option value="time-asc" selected>时间顺序</option>
+                <option value="time-desc">时间倒序</option>
+                <option value="cost-asc">数量顺序</option>
+                <option value="cost-desc">数量倒序</option>
+              </select>
+              <button class="button button-secondary" id="download-all-results" type="button" disabled>下载 Excel</button>
+            </div>
+          </div>
+          <div class="saved-results-list" id="saved-results-list">
+            <p class="saved-results-empty">每名妮姬成功运行后，这里会保留其最后一次目标条件和最优结果。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+    <script type="module" src="/src/calculator/main.js"></script>
+  </body>
+</html>
