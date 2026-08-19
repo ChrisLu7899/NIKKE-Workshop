@@ -1,9 +1,9 @@
 {
   "name": "NIKKE Workshop",
   "short_name": "【王国大学习】NIKKE 战术整备室",
-  "description": "【王国大学习】NIKKE战术整备室 1.0.1，集成角色数据获取与洗词条计算器。",
-  "version": "1.0.1",
-  "version_name": "NIKKE Workshop 1.0.1",
+  "description": "【王国大学习】NIKKE战术整备室 1.0.2，集成角色数据获取与洗词条计算器。",
+  "version": "1.0.2",
+  "version_name": "NIKKE Workshop 1.0.2",
   "manifest_version": 3,
 
   "action": {
