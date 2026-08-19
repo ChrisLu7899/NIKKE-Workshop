@@ -8,11 +8,12 @@ NIKKE Workshop 是一个面向 Chromium 浏览器的本地扩展，集成账号�
 
 ## 新手入口
 
-- 📘 [完整图文操作指南（HTML）](docs/guide/index.html)
+- 📘 [在线打开完整图文操作指南](https://chrislu7899.github.io/NIKKE-Workshop/guide/)
+- 🗂️ [查看指南源文件](docs/guide/index.html)
 - 📦 [下载最新正式版](https://github.com/ChrisLu7899/NIKKE-Workshop/releases/latest)
 - 🔐 [数据获取与请求安全说明](docs/数据获取与请求安全说明.md)
 
-图文指南包含安装、登录与 Cookie、同步账号数据、图鉴与角色列表、洗词条计算器及算法说明。GitHub README 无法直接运行交互式 HTML；下载仓库后，可在浏览器中打开 `docs/guide/index.html` 获得完整的目录切换与图片浏览体验。
+图文指南包含安装、登录与 Cookie、同步账号数据、图鉴与角色列表、洗词条计算器及算法说明。点击“在线打开”即可直接浏览带目录切换的完整页面；下载仓库后，也可在本地打开 `docs/guide/index.html`。
 
 ## 主要功能
 
