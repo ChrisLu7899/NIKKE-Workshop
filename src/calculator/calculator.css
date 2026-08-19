@@ -587,15 +587,51 @@
     }
 
     .row-number {
+      padding: 0;
+      border: 1px solid transparent;
       width: 30px;
       height: 30px;
+      min-width: 30px;
+      min-height: 30px;
+      max-width: 30px;
+      max-height: 30px;
+      aspect-ratio: 1 / 1;
       display: grid;
       place-items: center;
-      border-radius: 50%;
+      border-radius: 999px;
       background: var(--surface-strong);
       color: var(--muted);
       font-size: 0.8rem;
       font-weight: 700;
+      line-height: 1;
+    }
+
+    button.row-number {
+      appearance: none;
+      cursor: pointer;
+      transition: color 140ms ease, background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+    }
+
+    button.row-number:hover:not(:disabled) {
+      border-color: color-mix(in srgb, var(--primary) 44%, transparent);
+      color: var(--primary);
+    }
+
+    button.row-number[aria-pressed="true"] {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 16%, transparent);
+    }
+
+    button.row-number:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    button.row-number:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
     }
 
     select,

@@ -102,7 +102,7 @@ test("character advice includes cultivation data, prefers the active preset, and
   assert.deepEqual(privatyAdvice.map(({ presetId }) => presetId), ["water-main-c", "flexible-support"]);
   assert.equal(privatyAdvice[0].lines, "无装弹、攻击、优越（优越和攻击收益接近）");
   assert.deepEqual(mergeRecommendationAdvice(privatyAdvice), {
-    note: "2级；可以轴外，很好用",
+    note: "2红级；可以轴外，很好用",
     equipment: "4T10，头手甲升级",
     lines: "无装弹、攻击、优越（优越和攻击收益接近）",
     skills: "10/10/7+",
@@ -114,4 +114,31 @@ test("character advice includes cultivation data, prefers the active preset, and
   assert.deepEqual(campaignOnlyCharacter.map(({ presetId }) => presetId), ["iron-main-c"]);
 
   assert.deepEqual(listRecommendationAdvice("missing-character"), []);
+});
+
+test("Scarlet output tiers preserve the source image's 红级 terminology", () => {
+  for (const [presetId, nameCode] of [
+    ["wind-main-c", "5156"],
+    ["electric-main-c", "5170"],
+    ["electric-main-c", "5124"],
+  ]) {
+    const preset = RECOMMENDATION_PRESETS.find(entry => entry.id === presetId);
+    const item = preset?.items.find(entry => entry.nameCode === nameCode);
+    assert.match(item?.note || "", /^3\.5红级/);
+  }
+
+  const redLotusShadow = RECOMMENDATION_PRESETS
+    .find(entry => entry.id === "wind-main-c")
+    ?.items.find(entry => entry.nameCode === "5105");
+  assert.match(redLotusShadow?.note || "", /^3红级/);
+
+  for (const preset of RECOMMENDATION_PRESETS) {
+    for (const item of preset.items) {
+      assert.doesNotMatch(
+        item.note,
+        /^(?:推荐|预计)?(?:\d+(?:\.\d+)?|1～3)级/,
+        `${preset.name} / ${item.name} 丢失“红级”专有词`,
+      );
+    }
+  }
 });

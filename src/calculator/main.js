@@ -19,6 +19,14 @@ import {
   mergeRecommendationAdvice,
   RECOMMENDATION_PRESET_GROUPS,
 } from "../data/recommendationPresets.js";
+import {
+  effectiveTargetGoal,
+  forcedRetentionMask,
+  includesForcedRetention,
+  lockTransitionCost,
+  rerollStoneCost,
+  validateForcedRetention,
+} from "./forcedRetention.js";
 
 "use strict";
 
@@ -206,6 +214,7 @@ import {
           tier: Number(line.tier || 0),
           valueText: Number(line.tier || 0) > 0 ? statTierText(line.stat, Number(line.tier)) : "",
           locked: Boolean(line.flagged ?? line.locked),
+          forceKeep: Boolean(line.forceKeep),
         }));
     }
 
@@ -671,6 +680,7 @@ import {
         const statSelect = row.querySelector(".stat-select");
         const tierSelect = row.querySelector(".tier-select");
         const flagInput = row.querySelector(".flag-input");
+        const forceKeepButton = row.querySelector(".force-retain-toggle");
 
         statSelect.value = line?.stat && STAT_NAMES.includes(line.stat) ? line.stat : "空词条";
         updateTierOptions(statSelect, tierSelect);
@@ -678,6 +688,10 @@ import {
           tierSelect.value = String(line.tier);
         }
         flagInput.checked = Boolean(line?.locked);
+        if (forceKeepButton) {
+          setForceRetention(forceKeepButton, Boolean(line?.forceKeep));
+          syncForceRetentionAvailability(row);
+        }
       });
     }
 
@@ -824,7 +838,7 @@ import {
 
     function setEquipmentSkipped(section, skipped) {
       section.classList.toggle("is-skipped", skipped);
-      section.querySelectorAll(".form-row select, .form-row input").forEach(control => {
+      section.querySelectorAll(".form-row select, .form-row input, .form-row button").forEach(control => {
         if (skipped) {
           control.disabled = true;
           return;
@@ -879,7 +893,9 @@ import {
       const isInitial = type === "initial";
       container.innerHTML = Array.from({ length: count }, (_, index) => `
         <div class="form-row" data-row="${index}">
-          <span class="row-number" aria-hidden="true">${index + 1}</span>
+          ${isInitial
+            ? `<button class="row-number force-retain-toggle" type="button" aria-pressed="false" aria-label="强制保留第 ${index + 1} 个当前词条" title="点击后，算法会锁定并保留此词条">${index + 1}</button>`
+            : `<span class="row-number" aria-hidden="true">${index + 1}</span>`}
           <select class="stat-select" aria-label="${isInitial ? "当前" : "目标"}第 ${index + 1} 个词条">
             ${optionsHtml(STAT_NAMES)}
           </select>
@@ -898,6 +914,7 @@ import {
         const tierSelect = row.querySelector(".tier-select");
         statSelect.addEventListener("change", () => {
           updateTierOptions(statSelect, tierSelect);
+          if (isInitial) syncForceRetentionAvailability(row);
           clearScopedOptimalResult(statSelect);
         });
         tierSelect.addEventListener("change", () => clearScopedOptimalResult(tierSelect));
@@ -914,7 +931,29 @@ import {
         container.querySelectorAll(".flag-input").forEach(checkbox => {
           checkbox.addEventListener("change", () => clearScopedOptimalResult(checkbox));
         });
+        container.querySelectorAll(".force-retain-toggle").forEach(button => {
+          button.addEventListener("click", () => {
+            setForceRetention(button, button.getAttribute("aria-pressed") !== "true");
+            clearScopedOptimalResult(button);
+          });
+        });
       }
+    }
+
+    function setForceRetention(button, forceKeep) {
+      if (!button) return;
+      button.setAttribute("aria-pressed", String(Boolean(forceKeep)));
+      button.title = forceKeep
+        ? "已强制保留；再次点击取消"
+        : "点击后，算法会锁定并保留此词条";
+    }
+
+    function syncForceRetentionAvailability(row) {
+      const button = row.querySelector(".force-retain-toggle");
+      if (!button) return;
+      const isEmpty = row.querySelector(".stat-select")?.value === "空词条";
+      button.disabled = isEmpty;
+      if (isEmpty) setForceRetention(button, false);
     }
 
     function updateTierOptions(statSelect, tierSelect) {
@@ -980,6 +1019,8 @@ import {
         tier.innerHTML = '<option value="0">空</option>';
         tier.disabled = true;
         row.querySelector(".flag-input").checked = false;
+        setForceRetention(row.querySelector(".force-retain-toggle"), false);
+        syncForceRetentionAvailability(row);
       });
       document.querySelectorAll(".equipment-skip-input").forEach(input => {
         input.checked = false;
@@ -1010,7 +1051,8 @@ import {
       return [...container.querySelectorAll(".form-row")].map(row => ({
         stat: row.querySelector(".stat-select").value,
         tier: Number(row.querySelector(".tier-select").value || 0),
-        flagged: row.querySelector(".flag-input").checked
+        flagged: row.querySelector(".flag-input").checked,
+        forceKeep: row.querySelector(".force-retain-toggle")?.getAttribute("aria-pressed") === "true",
       }));
     }
 
@@ -1022,6 +1064,8 @@ import {
       if (new Set(targetStats).size !== targetStats.length) return "目标池存在重复词条。";
       if (targetStats.length === 0) return "请至少设置 1 个目标词条。";
       if (targets.filter(item => item.stat !== "空词条" && item.flagged).length > 3) return "必选词条不能超过 3 个。";
+      const forcedRetentionError = validateForcedRetention(initial, targets);
+      if (forcedRetentionError) return forcedRetentionError;
       return "";
     }
     function tierSuccessProbability(minimumTier) {
@@ -1069,21 +1113,24 @@ import {
         slots: initialInput.map(item => {
           const code = exactCodeForStat(item.stat, model);
           const targetIndex = isTargetCode(code) ? targetIndexFromCode(code) : -1;
+          const forced = Boolean(item.forceKeep);
           return {
             code,
             ok: targetIndex >= 0 ? item.tier >= model.targets[targetIndex].minimumTier : false,
-            locked: targetIndex >= 0 && item.flagged
+            locked: Boolean(item.flagged) && (targetIndex >= 0 || forced),
+            forced,
+            statName: forced && targetIndex < 0 ? item.stat : "",
           };
         })
       };
     }
 
     function exactStateKey(state) {
-      return state.slots.map(slot => `${slot.code}:${slot.ok ? 1 : 0}:${slot.locked ? 1 : 0}`).join("|");
+      return state.slots.map(slot => `${slot.code}:${slot.ok ? 1 : 0}:${slot.locked ? 1 : 0}:${slot.forced ? 1 : 0}:${slot.statName || ""}`).join("|");
     }
 
     function exactBaseKey(state) {
-      return state.slots.map(slot => `${slot.code}:${slot.ok ? 1 : 0}`).join("|");
+      return state.slots.map(slot => `${slot.code}:${slot.ok ? 1 : 0}:${slot.forced ? 1 : 0}:${slot.statName || ""}`).join("|");
     }
 
     function exactLockMask(state) {
@@ -1098,39 +1145,37 @@ import {
 
     function exactNamesReady(state, model) {
       const present = new Set(state.slots.filter(slot => isTargetCode(slot.code)).map(slot => slot.code));
-      return [...model.mandatoryCodes].every(code => present.has(code)) && present.size >= model.goal;
+      const goal = effectiveTargetGoal(state.slots, model.goal, isTargetCode);
+      return [...model.mandatoryCodes].every(code => present.has(code)) && present.size >= goal;
     }
 
     function exactTerminal(state, model) {
       const qualified = new Set(state.slots.filter(slot => isTargetCode(slot.code) && slot.ok).map(slot => slot.code));
-      return [...model.mandatoryCodes].every(code => qualified.has(code)) && qualified.size >= model.goal;
+      const goal = effectiveTargetGoal(state.slots, model.goal, isTargetCode);
+      return [...model.mandatoryCodes].every(code => qualified.has(code)) && qualified.size >= goal;
     }
 
     function applyExactLocks(state, lockMask) {
       return {
         slots: state.slots.map((slot, index) => ({
           ...slot,
-          locked: isTargetCode(slot.code) && Boolean(lockMask & 1 << index)
+          locked: (isTargetCode(slot.code) || slot.forced) && Boolean(lockMask & 1 << index)
         }))
       };
     }
 
     function exactLockChangeCost(state, newMask) {
-      const oldMask = exactLockMask(state);
-      const retainedLocks = bitCount(oldMask & newMask);
-      const newLockCount = bitCount(newMask);
-      let cost = 0;
-      for (let activeLocks = retainedLocks + 1; activeLocks <= newLockCount; activeLocks += 1) {
-        cost += activeLocks + 1;
-      }
-      return cost;
+      return lockTransitionCost(exactLockMask(state), newMask);
     }
 
     function exactMasksForEligible(state, model, eligibleMask) {
       const masks = [];
-      const optionalLockQuota = model.goal - model.mandatoryCodes.size;
+      const requiredMask = forcedRetentionMask(state.slots);
+      const optionalLockQuota = effectiveTargetGoal(state.slots, model.goal, isTargetCode) - model.mandatoryCodes.size;
+      eligibleMask |= requiredMask;
       for (let mask = 0; mask < 8; mask += 1) {
         if ((mask & ~eligibleMask) !== 0 || bitCount(mask) >= 3) continue;
+        if (!includesForcedRetention(mask, state.slots)) continue;
         const optionalLocks = state.slots.filter((slot, index) => {
           return Boolean(mask & 1 << index) && isTargetCode(slot.code) && !model.mandatoryCodes.has(slot.code);
         }).length;
@@ -1181,6 +1226,8 @@ import {
       prepared.slots.forEach(slot => {
         if (slot.locked && isTargetCode(slot.code)) {
           usedActualStats.add(model.targets[targetIndexFromCode(slot.code)].name);
+        } else if (slot.locked && slot.statName) {
+          usedActualStats.add(slot.statName);
         }
       });
 
@@ -1199,7 +1246,7 @@ import {
 
         const appearanceProbability = SLOT_PROBS[slotIndex];
         if (appearanceProbability < 1) {
-          outputSlots[slotIndex] = { code: "X", ok: false, locked: false };
+          outputSlots[slotIndex] = { code: "X", ok: false, locked: false, forced: false, statName: "" };
           visit(slotIndex + 1, probability * (1 - appearanceProbability));
         }
 
@@ -1212,15 +1259,15 @@ import {
             const targetIndex = model.targetByName.get(statName);
             const successProbability = model.targets[targetIndex].successProbability;
             if (successProbability > 0) {
-              outputSlots[slotIndex] = { code: `T${targetIndex}`, ok: true, locked: false };
+              outputSlots[slotIndex] = { code: `T${targetIndex}`, ok: true, locked: false, forced: false, statName: "" };
               visit(slotIndex + 1, probability * statProbability * successProbability);
             }
             if (successProbability < 1) {
-              outputSlots[slotIndex] = { code: `T${targetIndex}`, ok: false, locked: false };
+              outputSlots[slotIndex] = { code: `T${targetIndex}`, ok: false, locked: false, forced: false, statName: "" };
               visit(slotIndex + 1, probability * statProbability * (1 - successProbability));
             }
           } else {
-            outputSlots[slotIndex] = { code: "X", ok: false, locked: false };
+            outputSlots[slotIndex] = { code: "X", ok: false, locked: false, forced: false, statName: "" };
             visit(slotIndex + 1, probability * statProbability);
           }
           usedActualStats.delete(statName);
@@ -1265,10 +1312,16 @@ import {
     }
 
     function exactActionDescription(state, action) {
-      const lockedSlots = state.slots
-        .map((slot, index) => action.lockMask & 1 << index ? `${index + 1}号位` : "")
+      const forcedSlots = state.slots
+        .map((slot, index) => slot.forced && action.lockMask & 1 << index ? `${index + 1}号位` : "")
         .filter(Boolean);
-      const lockText = lockedSlots.length ? `锁定 ${lockedSlots.join("、")}` : "全不锁";
+      const lockedSlots = state.slots
+        .map((slot, index) => !slot.forced && action.lockMask & 1 << index ? `${index + 1}号位` : "")
+        .filter(Boolean);
+      const lockParts = [];
+      if (forcedSlots.length) lockParts.push(`强制保留 ${forcedSlots.join("、")}`);
+      if (lockedSlots.length) lockParts.push(`锁定 ${lockedSlots.join("、")}`);
+      const lockText = lockParts.length ? lockParts.join("，") : "全不锁";
       return `${lockText}，${action.mode === "name" ? "洗词条名称" : "洗数值"}`;
     }
 
@@ -1293,6 +1346,9 @@ import {
         const record = queue[cursor];
         if (!record.terminal) {
           const choices = exactActionChoices(record.state, model);
+          if (!choices.length) {
+            throw new Error("强制保留占满了可锁位置，当前目标没有可执行的洗练动作");
+          }
           for (const { mode, lockMask } of choices) {
             const cacheKey = `${mode}|${exactBaseKey(record.state)}|${lockMask}`;
             let outcomes = transitionCache.get(cacheKey);
@@ -1316,7 +1372,7 @@ import {
             record.actions.push({
               mode,
               lockMask,
-              immediateCost: exactLockChangeCost(record.state, lockMask) + bitCount(lockMask) + 1,
+              immediateCost: exactLockChangeCost(record.state, lockMask) + rerollStoneCost(lockMask),
               transitions
             });
           }
@@ -1406,6 +1462,7 @@ import {
     }
 
     function formulaFastPath(initialState, model, firstAction) {
+      if (forcedRetentionMask(initialState.slots)) return null;
       if (!firstAction || firstAction.mode !== "name" || model.targets.length !== 3 || model.goal !== 3) return null;
       if (exactNamesReady(initialState, model)) return null;
       if (bitCount(firstAction.lockMask) !== 2) return null;
@@ -1421,7 +1478,7 @@ import {
       }, 0);
       const nameProbability = SLOT_PROBS[openIndex] * missingTarget.weight / remainingWeight;
       if (nameProbability <= 0) return null;
-      const rerollCost = bitCount(firstAction.lockMask) + 1;
+      const rerollCost = rerollStoneCost(firstAction.lockMask);
       const lockCost = exactLockChangeCost(initialState, firstAction.lockMask);
       const nameCost = rerollCost / nameProbability;
       const valueCost = rerollCost * (1 - missingTarget.successProbability) / missingTarget.successProbability;
