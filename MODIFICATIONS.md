@@ -5,7 +5,7 @@
 - 上游项目：[ExiaProject/ExiaInvasion](https://github.com/ExiaProject/ExiaInvasion)
 - 初始基准版本：`3.1.2`
 - 上游许可证：GNU General Public License v3.0
-- 当前项目版本：`NIKKE Workshop 1.0.0`
+- 当前项目版本：`NIKKE Workshop 1.0.2`
 
 本文件用于说明 NIKKE Workshop 相对上游项目的主要修改。Git 历史和源码中的 SPDX 标识用于记录后续具体变更。
 
@@ -41,6 +41,7 @@
 - 自动读取所选妮姬四件装备及现有词条
 - 支持单装备、独立四装备和全局目标条件
 - 使用有限状态 MDP 计算目标达成策略与期望石头消耗
+- 支持将现有词条设为强制保留，并将首次由未锁到锁定及后续锁定成本纳入求解
 - 支持目标预设、全局约束、跳过指定装备和每名妮姬最后一次结果
 - 增加全部结果汇总、排序与 Excel 导出
 
@@ -50,8 +51,8 @@
 - 修复账号导入时 Cookie 更新时间被误当作 Cookie 的问题
 - 保留 Chrome Manifest V3、侧边栏和本地存储模式
 - 增加源码测试、构建检查、静态资源来源说明和公开发布文档
+- 增加面向 Chrome 与 Edge 新用户的完整图文操作指南
 
 ## 许可边界
 
 本项目的程序代码继续采用 GPL-3.0-or-later。游戏角色、美术、名称和商标属于其各自权利人，不因包含在仓库中而转为 GPL 授权；详情见 `ASSET_SOURCES.md`。
-
