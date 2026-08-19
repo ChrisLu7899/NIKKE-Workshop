@@ -8,7 +8,7 @@ NIKKE Workshop 是一个面向 Chromium 浏览器的本地扩展，集成账号�
 
 ## 新手入口
 
-- 📘 [在线打开完整图文操作指南](https://chrislu7899.github.io/NIKKE-Workshop/guide/)（建议使用 `Ctrl + 单击` 或鼠标中键在新标签页打开）
+- 📘 [图文操作指南](https://chrislu7899.github.io/NIKKE-Workshop/guide/)
 - 📦 [下载最新正式版](https://github.com/ChrisLu7899/NIKKE-Workshop/releases/latest)
 - 🔐 [数据获取与请求安全说明](docs/数据获取与请求安全说明.md)
 
