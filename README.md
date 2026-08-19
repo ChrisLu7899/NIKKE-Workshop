@@ -70,6 +70,8 @@ npm run build
 
 构建结果位于 `dist/`。加载开发构建时，在浏览器扩展页面选择该目录。
 
+正式发布、同版本重发、压缩包校验和 GitHub Release 复核步骤见 [RELEASE_PROCESS.md](RELEASE_PROCESS.md)。
+
 ## 项目来源与修改
 
 数据获取功能基于 [ExiaProject/ExiaInvasion](https://github.com/ExiaProject/ExiaInvasion) 开发，感谢原项目作者与贡献者。

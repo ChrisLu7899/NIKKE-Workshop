@@ -11,6 +11,7 @@ import {
   resolveShowStats,
 } from './showStats.js';
 import { RESEARCH_LEVEL_DEFINITIONS } from './researchLevels.js';
+import { resolveSimplifiedChineseCharacterName } from '../data/characterNameOverrides.js';
 
 // 边框样式定义
 const mediumSide = { style: "medium", color: { argb: "FF000000" } };
@@ -251,7 +252,9 @@ export const saveDictToExcel = async (dict, lang = "en") => {  const t = (key) =
       // 第2行：人物名称（整块合并）
       ws.mergeCells(2, colCursor, 2, colCursor + widthPerChar - 1);
       const nameCell = ws.getCell(2, colCursor);
-      const characterName = lang === "en" ? charInfo.name_en : charInfo.name_cn;
+      const characterName = lang === "en"
+        ? charInfo.name_en
+        : resolveSimplifiedChineseCharacterName(charInfo);
       nameCell.value = characterName || charInfo.id;
       nameCell.alignment = { horizontal: "center", vertical: "middle" };
 

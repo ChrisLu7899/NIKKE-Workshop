@@ -4,13 +4,19 @@ import {
   buildCharactersConfig,
   flattenCharacterConfig,
 } from "../utils/characterCollections.js";
+import { resolveSimplifiedChineseCharacterName } from "./characterNameOverrides.js";
 
 export const COMMON_CHARACTER_TEMPLATE_KEY = "common";
 export const COMMON_CHARACTER_TEMPLATE_NAME = "常用";
 export const COMMON_CHARACTER_TEMPLATE_VERSION = 1;
 
+const commonCharacter = (nameCode, upstreamName) => ({
+  nameCode,
+  name: resolveSimplifiedChineseCharacterName({ nameCode, nameCn: upstreamName }),
+});
+
 export const COMMON_CHARACTER_LIST = Object.freeze([
-  { nameCode: "5129", name: "拉毗：小红帽" },
+  commonCharacter("5129", "拉毗：小红帽"),
   { nameCode: "5180", name: "雪子" },
   { nameCode: "5159", name: "迪塞尔：冬日甜心" },
   { nameCode: "5138", name: "米哈拉：羁绊锁链" },
@@ -31,7 +37,7 @@ export const COMMON_CHARACTER_LIST = Object.freeze([
   { nameCode: "5124", name: "灰姑娘" },
   { nameCode: "5152", name: "艾达" },
   { nameCode: "5175", name: "灰姑娘：琉璃波光" },
-  { nameCode: "5143", name: "蕾雯" },
+  commonCharacter("5143", "蕾雯"),
   { nameCode: "5176", name: "玛律恰那：海洋进修" },
   { nameCode: "5012", name: "白雪公主" },
   { nameCode: "5101", name: "小红帽" },
@@ -107,4 +113,3 @@ export const upsertCommonCharacterTemplate = ({
   }))];
   return { templates: next, template: common, missing };
 };
-

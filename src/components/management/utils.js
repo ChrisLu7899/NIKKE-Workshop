@@ -2,6 +2,7 @@
 // ========== 管理页面工具函数 ==========
 
 import { elementTranslationKeys, classTranslationKeys, corporationTranslationKeys } from "./constants.js";
+import { resolveCharacterDisplayName } from "../../data/characterNameOverrides.js";
 export {
   isEmptyAccountPlaceholder,
   normalizeStoredAccounts,
@@ -94,10 +95,7 @@ export const getBurstStageName = (stage, t) => {
  * 获取显示名称（中/英文）
  */
 export const getDisplayName = (nikke, lang) => {
-  if (!nikke) return "";
-  const zhName = nikke.name_cn || nikke.name_en || nikke.name_code || nikke.name;
-  const enName = nikke.name_en || nikke.name_cn || nikke.name_code || nikke.name;
-  return lang === "zh" ? zhName : enName;
+  return resolveCharacterDisplayName(nikke, lang);
 };
 
 /**

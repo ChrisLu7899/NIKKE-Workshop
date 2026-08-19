@@ -48,6 +48,7 @@ import {
 } from "./utils/calculatorSnapshot.js";
 import { getRecommendationPreset } from "./data/recommendationPresets.js";
 import { isCommonCharacterTemplate } from "./data/commonCharacterList.js";
+import { resolveCharacterDisplayName } from "./data/characterNameOverrides.js";
 import { setShowStat } from "./utils/showStats.js";
 import {
   DEFAULT_CHARACTER_SHOW_STATS,
@@ -194,10 +195,7 @@ const ManagementPage = () => {
   }, [t]);
 
   const getDisplayName = useCallback((nikke) => {
-    if (!nikke) return "";
-    const zhName = nikke.name_cn || nikke.name_en || nikke.name_code || nikke.name;
-    const enName = nikke.name_en || nikke.name_cn || nikke.name_code || nikke.name;
-    return lang === "zh" ? zhName : enName;
+    return resolveCharacterDisplayName(nikke, lang);
   }, [lang]);
 
   const getNikkeAvatarUrl = useCallback((nikke) => {

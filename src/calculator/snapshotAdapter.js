@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import { isVerifiedCalculatorSnapshot } from "../utils/calculatorSnapshot.js";
+import { resolveSimplifiedChineseCharacterName } from "../data/characterNameOverrides.js";
 
 const FUNCTION_TYPE_NAMES = {
   IncElementDmg: "优越代码伤害增加",
@@ -23,7 +24,7 @@ export function adaptCalculatorSnapshot(snapshot, { equipmentSlotNames, findTier
   accounts.forEach((account, accountIndex) => {
     const accountCharacters = Array.isArray(account?.characters) ? account.characters : [];
     accountCharacters.forEach((character) => {
-      const baseName = String(character?.nameCn || character?.nameEn || character?.nameCode || "未知妮姬");
+      const baseName = resolveSimplifiedChineseCharacterName(character) || "未知妮姬";
       const accountName = String(account?.accountName || "未命名账号");
       const equipments = equipmentSlotNames.map((label, slotIndex) => {
         const sourceLines = Array.isArray(character?.equipments?.[slotIndex])

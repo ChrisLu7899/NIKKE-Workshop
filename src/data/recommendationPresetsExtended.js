@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import { resolveSimplifiedChineseCharacterName } from "./characterNameOverrides.js";
+
 const item = (nameCode, name, note, equipment, lines, skills, cube, collectible) => ({
   nameCode,
-  name,
+  name: resolveSimplifiedChineseCharacterName({ nameCode, nameCn: name }),
   note,
   equipment,
   lines,

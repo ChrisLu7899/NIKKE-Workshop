@@ -2,6 +2,7 @@
 // 为洗词条计算器生成不含账号凭据的最小角色装备快照。
 
 import { isUnowned } from "./ael.js";
+import { resolveSimplifiedChineseCharacterName } from "../data/characterNameOverrides.js";
 
 const ELEMENT_ORDER = ["Electronic", "Fire", "Wind", "Water", "Iron", "Utility"];
 
@@ -32,7 +33,7 @@ const normalizeLimitBreak = (value) => ({
 const normalizeCharacter = (character) => ({
   id: String(character?.id ?? character?.name_code ?? ""),
   nameCode: String(character?.name_code ?? ""),
-  nameCn: String(character?.name_cn || character?.name_en || character?.name_code || "未知妮姬"),
+  nameCn: resolveSimplifiedChineseCharacterName(character) || "未知妮姬",
   nameEn: String(character?.name_en || character?.name_cn || character?.name_code || "Unknown Nikke"),
   level: normalizeNumber(character?.level ?? character?.lv),
   combat: normalizeNumber(character?.combat),
