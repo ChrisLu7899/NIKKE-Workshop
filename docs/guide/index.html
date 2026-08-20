@@ -260,7 +260,7 @@
 
     <section class="chapter-panel" id="chapter-calculator" role="tabpanel" aria-labelledby="tab-calculator" hidden>
       <section class="intro chapter-intro">
-        <div><h2>洗词条计算器</h2><p>根据当前装备盘面和目标词条，使用有限状态 MDP 计算期望石头消耗，并给出当前盘面的下一步最优操作。</p></div>
+        <div><h2>洗词条计算器</h2><p>根据当前装备盘面和目标词条，使用有限状态 MDP 计算期望石头消耗，并把最优策略整理成可以连续执行的操作阶段。</p></div>
       </section>
 
       <section class="subchapter" id="calculator-common-guide" aria-labelledby="calculator-common-title">
@@ -311,8 +311,8 @@
               <h3>运行计算</h3>
               <p>确认当前盘面、锁定状态和目标条件后，点击右上角的 <span class="em">“运行算法测试”</span>。单装备会计算一件装备；单角色则会同时处理所有未勾选“不跑”的装备。</p>
               <div class="privacy"><strong>不需要模拟次数或随机种子：</strong>这里运行的是有限状态 MDP 精确求解，不是蒙特卡洛抽样。整个计算在本机完成，不会上传装备数据。</div>
-              <p><span class="em">“预计消耗”</span> 是从当前盘面达到目标的数学期望，不代表每次实际洗练都会恰好消耗这个数量；<span class="em">“最佳动作”</span> 是当前只执行一次时的推荐操作。</p>
-              <div class="notice"><strong>每实际执行一次后都要重新计算：</strong>洗练结果会改变当前盘面。请把新词条、档位和锁定状态重新填入，再运行一次算法获取下一步建议。</div>
+              <p><span class="em">“最优结果”</span> 会按操作不变的连续阶段展示：每个阶段先写应持续执行的操作和停止条件，再同时显示该阶段自身的期望耗石，以及从该阶段开始完成全部目标的总期望耗石。</p>
+              <div class="notice"><strong>按停止条件切换阶段：</strong>同一阶段内可持续执行相同操作；达到“获得指定词条”或“指定数值达标”等条件后，再按下一阶段操作。条件步骤只在上一步尚未完成全部目标时执行。</div>
             </div>
           </section>
 
@@ -321,7 +321,7 @@
             <div>
               <h3>结果页签、重置与错误提示</h3>
               <ul class="key-list">
-                <li><strong>计算结果：</strong>显示期望石头和当前最佳动作，适合直接照着执行下一次洗练。</li>
+                <li><strong>计算结果：</strong>显示有限状态 MDP 的当前最佳动作和总期望；装备盘面下方的“最优结果”显示完整阶段式操作建议。</li>
                 <li><strong>使用说明：</strong>显示模型自检、有限状态 MDP 期望、状态数量、求解轮数和 Bellman 残差，用于核对求解是否正常。</li>
                 <li><strong>全部结果：</strong>用于汇总按具体妮姬运行并保存的最后一次结果；单装备模拟没有绑定妮姬，不会新增一条角色记录。</li>
                 <li><strong>重置：</strong>清空当前装备、目标池、锁定状态和本次结果，恢复到初始单装备盘面。</li>
@@ -348,8 +348,9 @@
             <span class="step-number" aria-hidden="true"></span>
             <div>
               <h3>读取单装备结果</h3>
-              <p>运行后，<span class="em">“预计消耗”</span> 是从当前盘面达到目标的数学期望；<span class="em">“最佳动作”</span> 是当前盘面只执行一次时的推荐操作，可能包括洗名称、洗数值或采用某种锁定组合。</p>
-              <div class="shots single"><figure class="shot"><img src="assets-redacted/20-calculator-single-result.png" alt="单装备有限状态 MDP 计算完成后的计算结果和最优建议"><figcaption>单装备结果会同时显示期望石头、当前最佳动作，以及盘面下方的简短最优建议。</figcaption></figure></div>
+              <p>运行后，每个阶段都包含两组数字：<span class="em">“约 X 颗石头”</span> 表示只完成当前阶段的期望耗石；括号中的 <span class="em">“总计约 Y 颗石头”</span> 表示从该阶段起点继续执行最优策略，直到全部目标完成的期望耗石。</p>
+              <p>如果洗出目标词条时数值可能不达标，结果会额外列出“若数值未达标”的条件阶段；这个阶段不会在前一步已经完成全部目标时执行。</p>
+              <div class="shots single"><figure class="shot"><img src="assets-redacted/20-calculator-single-result.png" alt="单装备有限状态 MDP 计算完成后的计算结果和最优建议"><figcaption>详细结果保留当前最佳动作；盘面下方的“最优结果”会进一步展示完整操作阶段及两种期望耗石。</figcaption></figure></div>
               <div class="notice"><strong>单装备结果不会写入妮姬汇总：</strong>它没有绑定具体妮姬，因此不会出现在“全部结果”或汇总 Excel 中。需要保存角色结果时，请选择具体妮姬后运行。</div>
             </div>
           </section>
@@ -454,7 +455,7 @@
                 <li><strong>转移：</strong>每种动作可能出现的下一盘面及其游戏概率。</li>
                 <li><strong>目标：</strong>满足候选 / 必选最低档位，或满足全局条数与合计数值。</li>
               </ul>
-              <p>算法使用 Bellman 迭代比较各状态下所有动作的“本次成本 + 后续期望成本”，直到残差足够小，得到最低期望石头和第一步最优动作。</p>
+              <p>算法使用 Bellman 迭代比较各状态下所有动作的“本次成本 + 后续期望成本”，直到残差足够小，得到每个状态下的最低期望与最优动作。界面再把连续采用相同操作的状态压缩成阶段，并保留阶段内全部随机分支的概率与成本。</p>
             </div>
           </section>
 
@@ -463,7 +464,7 @@
             <div>
               <h3>“精确”与“期望”分别代表什么</h3>
               <p><span class="em">精确求解</span> 指使用完整离散概率而不是随机抽样，所以不需要模拟次数和随机种子；<span class="em">期望石头</span> 是大量重复情况下的平均成本，不保证某一次实际洗练恰好等于这个数字。</p>
-              <p>每执行一次推荐动作后，随机结果会把装备带到新状态。此时应更新当前盘面并重新求解，不要把第一次建议当作固定不变的连续操作脚本。</p>
+              <p>阶段式建议只在当前操作仍符合该阶段说明时连续执行；达到停止条件后切换下一阶段。如果实际盘面与阶段条件不一致，或手动改变了锁定状态、目标或词条，请更新当前盘面并重新求解。</p>
               <div class="shots single"><figure class="shot"><img src="assets-redacted/21-calculator-single-details.png" alt="使用说明页签里的有限状态 MDP 状态数量、轮数与 Bellman 残差"><figcaption>“使用说明”会显示状态数量、求解轮数和 Bellman 残差，便于确认本次求解是否正常收敛。</figcaption></figure></div>
             </div>
           </section>

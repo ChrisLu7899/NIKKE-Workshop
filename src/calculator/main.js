@@ -27,6 +27,7 @@ import {
   rerollStoneCost,
   validateForcedRetention,
 } from "./forcedRetention.js";
+import { createPolicyStageSummary } from "./policySummary.js";
 
 "use strict";
 
@@ -798,10 +799,37 @@ import {
       element.classList.toggle("empty-result", isEmpty);
     }
 
+    function compactStageActionText(text) {
+      return text
+        .replace(/(\d+)号位/g, "词条$1")
+        .replace(/锁定\s+/g, "锁定")
+        .replace(/强制保留\s+/g, "强制保留")
+        .replace("洗词条名称", "洗名称");
+    }
+
     function inlineOptimalResultText({ exactSolution }) {
       const expectedCost = exactSolution?.value ?? 0;
       if (expectedCost <= 1e-9) return "当前盘面已经满足目标，无需消耗石头。";
-      return `预计消耗：约 ${expectedCost.toFixed(1)} 颗石头\n最优建议：${exactSolution.firstActionText}`;
+      const stages = exactSolution.policyStagePreview?.stages || [];
+      if (!stages.length) return `预计从当前盘面达标：约 ${expectedCost.toFixed(1)} 颗石头\n第一步：${exactSolution.firstActionText}`;
+      const numerals = ["一", "二", "三", "四", "五", "六", "七", "八"];
+      const lines = [];
+      stages.forEach((stage, index) => {
+        const operation = compactStageActionText(stage.actionText);
+        const milestone = stage.milestoneText || "";
+        const conditional = index > 0 && stages[index - 1].continuationProbability < 1 - 1e-9
+          ? stage.conditionText || "若上一步尚未完成全部目标，"
+          : "";
+        lines.push(
+          `${numerals[index] || index + 1}、${conditional}${operation}${milestone}`,
+          `   约 ${stage.stageExpectedCost.toFixed(1)} 颗石头（总计约 ${stage.totalExpectedCost.toFixed(1)} 颗石头）`,
+        );
+        if (index < stages.length - 1) lines.push("");
+      });
+      if (exactSolution.policyStagePreview?.branched) {
+        lines.push("后续存在多种最优操作分支，均已计入上述期望耗石。");
+      }
+      return lines.join("\n");
     }
 
     function clearScopedOptimalResult(control) {
@@ -1325,6 +1353,46 @@ import {
       return `${lockText}，${action.mode === "name" ? "洗词条名称" : "洗数值"}`;
     }
 
+    function exactStageMilestoneText(stage, recordList, model) {
+      function statusProbability(distribution, targetCode, predicate) {
+        return distribution.reduce((sum, item) => {
+          const state = recordList[item.stateIndex]?.state;
+          const matches = state?.slots.some(slot => slot.code === targetCode && predicate(slot));
+          return sum + (matches ? item.probability : 0);
+        }, 0);
+      }
+
+      const completedTargets = model.targets.filter(target => {
+        const before = statusProbability(stage.startDistribution, target.code, slot => slot.ok);
+        const after = statusProbability(stage.exitDistribution, target.code, slot => slot.ok);
+        return before < 1 - 1e-9 && after >= 1 - 1e-9;
+      });
+      if (completedTargets.length) {
+        return `直到达标（${completedTargets.map(target => target.name).join("、")}）`;
+      }
+
+      const acquiredTargets = model.targets.filter(target => {
+        const before = statusProbability(stage.startDistribution, target.code, () => true);
+        const after = statusProbability(stage.exitDistribution, target.code, () => true);
+        return before < 1 - 1e-9 && after >= 1 - 1e-9;
+      });
+      return acquiredTargets.length
+        ? `直到获得（${acquiredTargets.map(target => target.name).join("、")}）`
+        : "";
+    }
+
+    function exactStageConditionText(stage, recordList, model) {
+      const unqualifiedTargets = model.targets.filter(target => {
+        return stage.startDistribution.every(item => {
+          const state = recordList[item.stateIndex]?.state;
+          return state?.slots.some(slot => slot.code === target.code && !slot.ok);
+        });
+      });
+      return unqualifiedTargets.length
+        ? `若${unqualifiedTargets.map(target => target.name).join("、")}数值未达标，`
+        : "";
+    }
+
     async function solveExactOptimal(initialState, model, onProgress = () => {}, retainPolicy = false) {
       const startKey = exactStateKey(initialState);
       const records = new Map();
@@ -1450,10 +1518,23 @@ import {
       const startIndex = indexByKey.get(startKey);
       const firstActionIndex = policy[startIndex];
       const firstAction = firstActionIndex >= 0 ? recordList[startIndex].actions[firstActionIndex] : null;
+      const policyStagePreview = createPolicyStageSummary({
+        recordList,
+        policy,
+        values,
+        startIndex,
+        describeAction: exactActionDescription,
+      });
+      policyStagePreview.stages.forEach(stage => {
+        stage.milestoneText = exactStageMilestoneText(stage, recordList, model);
+        stage.conditionText = exactStageConditionText(stage, recordList, model);
+      });
       return {
         value: values[startIndex],
         firstAction,
         firstActionText: firstAction ? exactActionDescription(initialState, firstAction) : "目标已经完成",
+        policyStagePreview,
+        model,
         stateCount: recordList.length,
         iterations: completedIterations,
         residual,
