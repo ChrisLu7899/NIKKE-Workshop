@@ -7,6 +7,7 @@ import {
   mapResearchLevels,
 } from "../utils/researchLevels.js";
 import { parseCookieValue } from "../domain/account.js";
+import { parseEquipmentOptionLines } from "../utils/equipmentOptions.js";
 
 // ========== 主线目录缓存键 ==========
 const MAINLINE_CATALOG_MAP_KEY = "mainlineCatalogMap";
@@ -844,24 +845,7 @@ export const getCharacterDetails = async (areaId, nameCodes) => {
     const equipSlots = ['head', 'torso', 'arm', 'leg'];
     
     equipSlots.forEach((slot, idx) => {
-      const details = [];
-      for (let i = 1; i <= 3; i++) {
-        const optionKey = `${slot}_equip_option${i}_id`;
-        const optionId = char[optionKey];
-        if (optionId && optionId !== 0) {
-          const effect = effectsMap[optionId.toString()];
-          if (effect && effect.function_details) {
-            effect.function_details.forEach(func => {
-              details.push({
-                function_type: func.function_type,
-                function_value: Math.abs(func.function_value) / 100,
-                level: func.level,
-              });
-            });
-          }
-        }
-      }
-      equipments[idx] = details;
+      equipments[idx] = parseEquipmentOptionLines(char, slot, effectsMap);
     });
     
     return {
@@ -1247,24 +1231,7 @@ export const getCharacterDetailsWithAccount = async (account, areaId, nameCodes)
     const rawEquipments = [];
     
     equipSlots.forEach((slot, idx) => {
-      const details = [];
-      for (let i = 1; i <= 3; i++) {
-        const optionKey = `${slot}_equip_option${i}_id`;
-        const optionId = char[optionKey];
-        if (optionId && optionId !== 0) {
-          const effect = effectsMap[optionId.toString()];
-          if (effect && effect.function_details) {
-            effect.function_details.forEach(func => {
-              details.push({
-                function_type: func.function_type,
-                function_value: Math.abs(func.function_value) / 100,
-                level: func.level,
-              });
-            });
-          }
-        }
-      }
-      equipments[idx] = details;
+      equipments[idx] = parseEquipmentOptionLines(char, slot, effectsMap);
       rawEquipments[idx] = {
         tid: char[`${slot}_equip_tid`] ?? null,
         level: char[`${slot}_equip_lv`] ?? null,

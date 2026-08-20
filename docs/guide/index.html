@@ -57,7 +57,7 @@
     <section class="chapter-panel" id="chapter-install" role="tabpanel" aria-labelledby="tab-install">
     <section class="intro">
       <div><h2>安装扩展</h2><p>第一次使用只需完成以下五步。安装过程中不需要运行命令，也不需要安装 Node.js、Python 或其他环境。</p></div>
-      <span class="support">适用版本：1.0.2</span>
+      <span class="support">适用版本：1.0.3</span>
     </section>
 
     <div class="steps">
@@ -113,7 +113,7 @@
           <h3>选择扩展根目录</h3>
           <p>在文件夹选择窗口中，选中刚刚解压得到的 <span class="kbd">NIKKE-Workshop</span> 文件夹，然后点击 <span class="em">“选择文件夹”</span>。</p>
           <p>正确的根目录中应当可以直接看到 <span class="kbd">assets</span>、<span class="kbd">images</span>、<span class="kbd">manifest.json</span> 和 <span class="kbd">index.html</span>。不要选择 ZIP，也不要进入 assets 子文件夹。</p>
-          <div class="success"><span class="success-icon">✓</span><div><strong>安装成功的判断方法</strong>扩展程序页面出现“NIKKE Workshop 1.0.2”，并且右下角开关处于启用状态。示例截图中的版本号可能较旧，请以实际下载的最新版本为准。</div></div>
+      <div class="success"><span class="success-icon">✓</span><div><strong>安装成功的判断方法</strong>扩展程序页面出现“NIKKE Workshop 1.0.3”，并且右下角开关处于启用状态。示例截图中的版本号可能较旧，请以实际下载的最新版本为准。</div></div>
 <div class="shots single"><figure class="shot"><img src="assets-redacted/05-installed.png" alt="Chrome 扩展程序页面中已经安装并启用的 NIKKE Workshop"><figcaption>安装成功后，NIKKE Workshop 会出现在扩展程序列表中。</figcaption></figure></div>
         </div>
       </section>
@@ -283,10 +283,10 @@
               <p><span class="em">“当前装备”</span> 的三行分别对应装备现有的 1、2、3 号词条。每行先选择词条名称，再选择实际档位；没有词条的位置保持 <span class="em">“空词条”</span>。</p>
               <ul class="key-list">
                 <li><strong>词条和档位：</strong>必须按游戏内当前装备如实填写；同一件装备不能出现重复词条。</li>
-                <li><strong>已锁：</strong>表示这个词条在游戏中目前已经锁定。勾选后，算法会从当前锁定状态继续计算洗练成本。</li>
+                <li><strong>已锁：</strong>表示这个词条在游戏中目前已经锁定。Blablalink 不能提供词条是否已锁的数据，因此同步账号后必须对照游戏界面，手动勾选每个已锁词条。勾选后，算法会从当前锁定状态继续计算洗练成本。</li>
                 <li><strong>强制保留：</strong>点击词条左侧的圆形编号，编号变蓝后，该词条在后续策略中必须保留。再次点击可取消。</li>
               </ul>
-              <div class="notice"><strong>“已锁”和“强制保留”不是同一个概念：</strong>“已锁”描述游戏里的当前状态；“强制保留”描述你对最终方案的要求。未锁词条设为强制保留时，算法会同时计入从未锁到锁定，以及后续维持锁定所需的石头。</div>
+              <div class="notice"><strong>同步后请先检查锁定状态：</strong>Blablalink 只提供词条名称、档位和所在的 1/2/3 号位置，不提供游戏内是否已经锁定。计算前请对照游戏手动补全“已锁”。“已锁”描述游戏里的当前状态；“强制保留”描述你对最终方案的要求。未锁词条设为强制保留时，算法会同时计入从未锁到锁定，以及后续维持锁定所需的石头。</div>
               <div class="shots single"><figure class="shot"><img src="assets-redacted/19-calculator-single-filled.png" alt="已经填写当前词条、已锁状态、强制保留和目标池的单装备示例"><figcaption>示例中 1 号位蓝色编号代表强制保留，2 号位勾选“已锁”代表游戏内当前已经锁定。</figcaption></figure></div>
             </div>
           </section>

@@ -6,15 +6,17 @@ import { resolveSimplifiedChineseCharacterName } from "../data/characterNameOver
 
 const ELEMENT_ORDER = ["Electronic", "Fire", "Wind", "Water", "Iron", "Utility"];
 
-export const CALCULATOR_SNAPSHOT_VERSION = 2;
+export const CALCULATOR_SNAPSHOT_VERSION = 3;
 export const CALCULATOR_OWNERSHIP_SOURCE = "GetUserCharacters";
+const MIN_SUPPORTED_CALCULATOR_SNAPSHOT_VERSION = 2;
 
 export function isVerifiedCalculatorSnapshot(snapshot) {
-  return Number(snapshot?.version) >= CALCULATOR_SNAPSHOT_VERSION
+  return Number(snapshot?.version) >= MIN_SUPPORTED_CALCULATOR_SNAPSHOT_VERSION
     && snapshot?.ownershipSource === CALCULATOR_OWNERSHIP_SOURCE;
 }
 
-const normalizeEquipmentLine = (line) => ({
+const normalizeEquipmentLine = (line, fallbackPosition) => ({
+  position: Math.max(1, Math.min(3, Number(line?.position || fallbackPosition))),
   functionType: String(line?.function_type || ""),
   value: Number(line?.function_value || 0),
   level: Number(line?.level || 0),
@@ -41,7 +43,9 @@ const normalizeCharacter = (character) => ({
   limitBreak: normalizeLimitBreak(character?.limit_break ?? character?.limitBreak),
   equipments: Array.from({ length: 4 }, (_, slot) => {
     const lines = character?.equipments?.[slot];
-    return Array.isArray(lines) ? lines.map(normalizeEquipmentLine) : [];
+    return Array.isArray(lines)
+      ? lines.map((line, index) => normalizeEquipmentLine(line, index + 1))
+      : [];
   }),
 });
 

@@ -30,15 +30,22 @@ export function adaptCalculatorSnapshot(snapshot, { equipmentSlotNames, findTier
         const sourceLines = Array.isArray(character?.equipments?.[slotIndex])
           ? character.equipments[slotIndex]
           : [];
-        const lines = sourceLines.flatMap((line) => {
+        const lines = Array.from({ length: 3 }, () => null);
+        sourceLines.forEach((line, sourceIndex) => {
           const stat = FUNCTION_TYPE_NAMES[line?.functionType];
-          if (!stat) return [];
+          if (!stat) return;
           const percent = Number(line?.value || 0);
           const sourceTier = Number(line?.level || 0);
           const tier = Number.isInteger(sourceTier) && sourceTier >= 1 && sourceTier <= 15
             ? sourceTier
             : findTierForPercent(stat, percent);
-          return [{ stat, tier, percent, locked: false }];
+          const sourcePosition = Number(line?.position || sourceIndex + 1);
+          const position = Number.isInteger(sourcePosition) && sourcePosition >= 1 && sourcePosition <= 3
+            ? sourcePosition
+            : sourceIndex + 1;
+          if (position > 3) return;
+          // Blablalink 不提供游戏内永久锁定状态，导入后由用户手动勾选“已锁”。
+          lines[position - 1] = { stat, tier, percent, locked: false };
         });
         return { slotIndex, label, excelLabel: label, lines };
       });

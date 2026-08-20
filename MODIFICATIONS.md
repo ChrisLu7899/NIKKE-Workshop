@@ -5,7 +5,7 @@
 - 上游项目：[ExiaProject/ExiaInvasion](https://github.com/ExiaProject/ExiaInvasion)
 - 初始基准版本：`3.1.2`
 - 上游许可证：GNU General Public License v3.0
-- 当前项目版本：`NIKKE Workshop 1.0.2`
+- 当前项目版本：`NIKKE Workshop 1.0.3`
 
 本文件用于说明 NIKKE Workshop 相对上游项目的主要修改。Git 历史和源码中的 SPDX 标识用于记录后续具体变更。
 
@@ -40,6 +40,7 @@
 
 - 将洗词条计算器集成到扩展管理页面
 - 自动读取所选妮姬四件装备及现有词条
+- 保留 Blablalink 返回的词条 1/2/3 实际位置；锁定状态因接口不提供而由用户手动补充
 - 支持单装备、独立四装备和全局目标条件
 - 使用有限状态 MDP 计算目标达成策略与期望石头消耗
 - 支持将现有词条设为强制保留，并将首次由未锁到锁定及后续锁定成本纳入求解
