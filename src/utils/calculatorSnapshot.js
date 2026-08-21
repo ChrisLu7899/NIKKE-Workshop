@@ -3,16 +3,18 @@
 
 import { isUnowned } from "./ael.js";
 import { resolveSimplifiedChineseCharacterName } from "../data/characterNameOverrides.js";
+import { getRecordedLocalCharacters, localRecordToCalculatorCharacter } from "../domain/localCharacterRoster.js";
 
 const ELEMENT_ORDER = ["Electronic", "Fire", "Wind", "Water", "Iron", "Utility"];
 
-export const CALCULATOR_SNAPSHOT_VERSION = 3;
+export const CALCULATOR_SNAPSHOT_VERSION = 4;
 export const CALCULATOR_OWNERSHIP_SOURCE = "GetUserCharacters";
+export const CALCULATOR_UNIFIED_SOURCE = "NIKKEWorkshopCharacterData";
 const MIN_SUPPORTED_CALCULATOR_SNAPSHOT_VERSION = 2;
 
 export function isVerifiedCalculatorSnapshot(snapshot) {
   return Number(snapshot?.version) >= MIN_SUPPORTED_CALCULATOR_SNAPSHOT_VERSION
-    && snapshot?.ownershipSource === CALCULATOR_OWNERSHIP_SOURCE;
+    && [CALCULATOR_OWNERSHIP_SOURCE, CALCULATOR_UNIFIED_SOURCE].includes(snapshot?.ownershipSource);
 }
 
 const normalizeEquipmentLine = (line, fallbackPosition) => ({
@@ -59,7 +61,35 @@ export function buildCalculatorAccountSnapshot(dict) {
 
   return {
     accountName: String(dict?.name || "未命名账号"),
+    source: "sync",
     characters,
+  };
+}
+
+export function extractSyncedCalculatorSnapshot(snapshot) {
+  return {
+    version: CALCULATOR_SNAPSHOT_VERSION,
+    ownershipSource: CALCULATOR_OWNERSHIP_SOURCE,
+    updatedAt: snapshot?.updatedAt || Date.now(),
+    accounts: (Array.isArray(snapshot?.accounts) ? snapshot.accounts : [])
+      .filter((account) => account?.source !== "local"),
+  };
+}
+
+export function buildUnifiedCalculatorSnapshot(syncSnapshot, localRecords) {
+  const synced = extractSyncedCalculatorSnapshot(syncSnapshot || {});
+  const syncedCodes = new Set(synced.accounts.flatMap((account) => account.characters || []).map((character) => character.nameCode));
+  const localCharacters = getRecordedLocalCharacters(localRecords)
+    .map(localRecordToCalculatorCharacter)
+    .filter((character) => !syncedCodes.has(character.nameCode));
+  return {
+    version: CALCULATOR_SNAPSHOT_VERSION,
+    ownershipSource: CALCULATOR_UNIFIED_SOURCE,
+    updatedAt: Date.now(),
+    accounts: [
+      ...synced.accounts,
+      ...(localCharacters.length ? [{ accountName: "已录入", source: "local", characters: localCharacters }] : []),
+    ],
   };
 }
 

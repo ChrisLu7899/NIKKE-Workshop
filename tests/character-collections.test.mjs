@@ -10,6 +10,8 @@ import {
   characterCodeSet,
   filterAccountDictsToOwned,
   mergeNikkesIntoCharacters,
+  getGalleryToolbarMode,
+  isSystemCollectionSelectable,
 } from "../src/utils/characterCollections.js";
 
 const catalog = [
@@ -123,4 +125,18 @@ test("calculator recommendation collections preserve preset entry order", () => 
   }, []);
   const recommendation = collections.find((collection) => collection.id === "recommendation:stage-one-cooldown");
   assert.deepEqual(recommendation.characterCodes, ["5169", "5137", "5011", "5129", "5110"]);
+});
+
+test("recorded calculator collection is separate from owned and owned is absent without sync data", () => {
+  const collections = buildCalculatorCollections({ accounts: [{ source: "local", characters: [{ nameCode: "manual:1" }] }] }, []);
+  assert.deepEqual(collections.map((collection) => collection.id), ["recorded"]);
+  assert.deepEqual(collections[0].characterCodes, ["manual:1"]);
+});
+
+test("recorded is always selectable and switches to the local-gallery toolbar", () => {
+  assert.equal(isSystemCollectionSelectable("recorded", { hasOwned: false }), true);
+  assert.equal(isSystemCollectionSelectable("owned", { hasOwned: false }), false);
+  assert.equal(isSystemCollectionSelectable("owned", { hasOwned: true }), true);
+  assert.equal(getGalleryToolbarMode("recorded"), "local-gallery");
+  assert.equal(getGalleryToolbarMode("catalog"), "account");
 });

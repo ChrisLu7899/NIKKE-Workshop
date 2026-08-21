@@ -16,7 +16,17 @@ import {
 export const SYSTEM_COLLECTION_IDS = Object.freeze({
   catalog: "catalog",
   owned: "owned",
+  recorded: "recorded",
 });
+
+export function getGalleryToolbarMode(collectionId) {
+  return collectionId === SYSTEM_COLLECTION_IDS.recorded ? "local-gallery" : "account";
+}
+
+export function isSystemCollectionSelectable(collectionId, { hasOwned = false } = {}) {
+  if (collectionId === SYSTEM_COLLECTION_IDS.owned) return hasOwned;
+  return [SYSTEM_COLLECTION_IDS.catalog, SYSTEM_COLLECTION_IDS.recorded].includes(collectionId);
+}
 
 export const DEFAULT_CHARACTER_SHOW_STATS = Object.freeze([
   SHOW_STATS_CONFIG_MARKER,
@@ -167,18 +177,19 @@ export function applyCharacterConfigShowStatsToAccountDicts(accountDicts, charac
 
 export function buildCalculatorCollections(snapshot, templates) {
   const ownedCodes = new Set(
-    (Array.isArray(snapshot?.accounts) ? snapshot.accounts : []).flatMap((account) =>
+    (Array.isArray(snapshot?.accounts) ? snapshot.accounts : []).filter((account) => account?.source !== "local").flatMap((account) =>
       (Array.isArray(account?.characters) ? account.characters : [])
         .map((character) => normalizeCode(character?.nameCode))
         .filter(Boolean)),
   );
 
-  const collections = [{
-    id: SYSTEM_COLLECTION_IDS.owned,
-    name: "已获得",
-    characterCodes: [...ownedCodes],
-    system: true,
-  }];
+  const recordedCodes = new Set(
+    (Array.isArray(snapshot?.accounts) ? snapshot.accounts : []).filter((account) => account?.source === "local").flatMap((account) =>
+      (Array.isArray(account?.characters) ? account.characters : []).map((character) => normalizeCode(character?.nameCode)).filter(Boolean)),
+  );
+  const collections = [];
+  if (ownedCodes.size) collections.push({ id: SYSTEM_COLLECTION_IDS.owned, name: "已获得", characterCodes: [...ownedCodes], system: true });
+  if (recordedCodes.size) collections.push({ id: SYSTEM_COLLECTION_IDS.recorded, name: "已录入", characterCodes: [...recordedCodes], system: true });
 
   RECOMMENDATION_PRESETS.forEach((preset) => {
     const codes = preset.items
@@ -211,7 +222,7 @@ export function attachCalculatorCollections(snapshot, templates, preferredCollec
   const collections = buildCalculatorCollections(snapshot, templates);
   const defaultCollectionId = collections.some((collection) => collection.id === preferredCollectionId)
     ? preferredCollectionId
-    : SYSTEM_COLLECTION_IDS.owned;
+    : collections[0]?.id || "";
   return {
     ...snapshot,
     collections,

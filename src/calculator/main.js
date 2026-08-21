@@ -35,7 +35,10 @@ import {
 } from "./globalPlanSearch.js";
 import {
   createManualFourEquipmentCharacter,
+  isStandaloneCalculatorCollection,
   MANUAL_FOUR_EQUIPMENT_COLLECTION_ID,
+  shouldShowRecommendationSelector,
+  SINGLE_EQUIPMENT_COLLECTION_ID,
 } from "./manualEquipment.js";
 import { createPolicyBranchStage } from "./policyTree.js";
 import { unavailableStatsForRow } from "./statOptions.js";
@@ -90,7 +93,6 @@ import { unavailableStatsForRow } from "./statOptions.js";
     const GLOBAL_EXACT_SEARCH_BEAM = 3;
     const GLOBAL_EXACT_NEIGHBOR_LIMIT = 12;
     const GLOBAL_EXACT_SEARCH_PATIENCE = 2;
-    const SINGLE_EQUIPMENT_COLLECTION_ID = "single-equipment";
     const DEFAULT_COLLECTION_SELECTOR_ID = "recommendation-default";
     const RECOMMENDATION_COLLECTION_PREFIX = "recommendation:";
     const manualFourEquipmentCharacter = createManualFourEquipmentCharacter(EQUIPMENT_SLOT_NAMES);
@@ -557,7 +559,22 @@ import { unavailableStatsForRow } from "./statOptions.js";
       ));
     }
 
+    function syncRecommendationSelectorVisibility() {
+      const standaloneMode = isStandaloneCalculatorCollection(collectionSelect.value);
+      if (standaloneMode) recommendationSelect.value = "";
+      const hasRecommendations = importedCollections.some((collection) =>
+        String(collection?.id || "").startsWith(RECOMMENDATION_COLLECTION_PREFIX));
+      const visible = shouldShowRecommendationSelector({
+        collectionId: collectionSelect.value,
+        hasCharacterData: importedCharacters.length > 0,
+        hasRecommendations,
+      });
+      recommendationSelect.hidden = !visible;
+      recommendationSelect.disabled = !hasRecommendations;
+    }
+
     function refreshCharacterSelect() {
+      syncRecommendationSelectorVisibility();
       const fragment = document.createDocumentFragment();
       if (!recommendationSelect.value && collectionSelect.value === MANUAL_FOUR_EQUIPMENT_COLLECTION_ID) {
         const manualOption = document.createElement("option");
@@ -689,6 +706,32 @@ import { unavailableStatsForRow } from "./statOptions.js";
       refreshCharacterSelect();
     }
 
+    function populateUnsyncedSelectors() {
+      importedCharacters = [];
+      importedCollections = [];
+
+      const collectionFragment = document.createDocumentFragment();
+      const singleEquipmentOption = document.createElement("option");
+      singleEquipmentOption.value = SINGLE_EQUIPMENT_COLLECTION_ID;
+      singleEquipmentOption.textContent = "单装备模拟";
+      collectionFragment.append(singleEquipmentOption);
+      const manualFourEquipmentOption = document.createElement("option");
+      manualFourEquipmentOption.value = MANUAL_FOUR_EQUIPMENT_COLLECTION_ID;
+      manualFourEquipmentOption.textContent = "四装备全局模拟";
+      collectionFragment.append(manualFourEquipmentOption);
+      collectionSelect.replaceChildren(collectionFragment);
+      collectionSelect.value = SINGLE_EQUIPMENT_COLLECTION_ID;
+
+      const recommendationPlaceholder = document.createElement("option");
+      recommendationPlaceholder.value = "";
+      recommendationPlaceholder.textContent = "推荐方案";
+      recommendationPlaceholder.disabled = true;
+      recommendationSelect.replaceChildren(recommendationPlaceholder);
+      recommendationSelect.value = "";
+      syncRecommendationSelectorVisibility();
+      refreshCharacterSelect();
+    }
+
     function calculatorSnapshotToCharacters(snapshot) {
       return adaptCalculatorSnapshot(snapshot, {
         equipmentSlotNames: EQUIPMENT_SLOT_NAMES,
@@ -698,7 +741,10 @@ import { unavailableStatsForRow } from "./statOptions.js";
 
     function applyCalculatorSnapshot(snapshot) {
       const characters = calculatorSnapshotToCharacters(snapshot);
-      if (!characters.length) return false;
+      if (!characters.length) {
+        populateUnsyncedSelectors();
+        return false;
+      }
       populateCharacterSelect(characters, snapshot);
       return true;
     }
@@ -2671,6 +2717,7 @@ import { unavailableStatsForRow } from "./statOptions.js";
     createRows(targetRows, 5, "target");
     resetGlobalConditions();
     setDetails(DEFAULT_DETAILS);
+    populateUnsyncedSelectors();
     resultTab.addEventListener("click", () => activateOutputTab("result"));
     detailsTab.addEventListener("click", () => activateOutputTab("details"));
     allResultsTab.addEventListener("click", () => activateOutputTab("all"));

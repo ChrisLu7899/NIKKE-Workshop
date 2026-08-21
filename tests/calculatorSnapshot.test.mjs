@@ -31,7 +31,7 @@ test("calculator snapshot keeps owned equipment data and removes account credent
     },
   }]);
 
-  assert.equal(snapshot.version, 3);
+  assert.equal(snapshot.version, 4);
   assert.equal(snapshot.ownershipSource, "GetUserCharacters");
   assert.equal(snapshot.accounts.length, 1);
   assert.equal(snapshot.accounts[0].accountName, "测试账号");

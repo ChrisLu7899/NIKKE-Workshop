@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { memo, useMemo, useState } from "react";
+import { memo, useMemo, useRef, useState } from "react";
 import {
   Alert,
   Badge,
@@ -43,6 +43,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import SyncIcon from "@mui/icons-material/Sync";
 import TuneIcon from "@mui/icons-material/Tune";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+import LocalCharacterEntryDrawer from "./LocalCharacterEntryDrawer.jsx";
+import {
+  EQUIPMENT_FUNCTION_LABELS,
+  getRecordedLocalCharacters,
+  localCharacterKey,
+} from "../../domain/localCharacterRoster.js";
 import {
   RECOMMENDATION_PRESETS,
   RECOMMENDATION_PRESET_GROUPS,
@@ -56,21 +63,13 @@ import {
   flattenCharacterConfig,
   mergeNikkesIntoCharacters,
   removeCodesFromCharacters,
+  getGalleryToolbarMode,
+  isSystemCollectionSelectable,
 } from "../../utils/characterCollections.js";
 import { resolveShowStats } from "../../utils/showStats.js";
 import { isCommonCharacterTemplate } from "../../data/commonCharacterList.js";
 
-const STAT_TYPE_NAMES = {
-  IncElementDmg: "优越代码伤害增加",
-  StatAtk: "攻击力增加",
-  StatAmmoLoad: "最大装弹数增加",
-  StatChargeTime: "蓄力速度增加",
-  StatChargeDamage: "蓄力伤害增加",
-  StatCritical: "暴击率增加",
-  StatCriticalDamage: "暴击伤害增加",
-  StatAccuracyCircle: "命中率增加",
-  StatDef: "防御力增加",
-};
+const STAT_TYPE_NAMES = EQUIPMENT_FUNCTION_LABELS;
 
 const FALLBACK_COPY = {
   zh: {
@@ -78,6 +77,7 @@ const FALLBACK_COPY = {
     catalog: "全图鉴",
     defaultCollection: "默认",
     owned: "已获得",
+    recorded: "已录入",
     search: "搜索妮姬",
     filters: "筛选",
     sortCombat: "战斗力",
@@ -128,6 +128,7 @@ const FALLBACK_COPY = {
     catalog: "Full catalog",
     defaultCollection: "Default",
     owned: "Owned",
+    recorded: "Recorded",
     search: "Search Nikkes",
     filters: "Filters",
     sortCombat: "Combat power",
@@ -242,6 +243,13 @@ const CharacterGalleryTabContent = ({
   t,
   lang,
   nikkeList,
+  standardCatalog,
+  localRecords,
+  recordedCount,
+  onSaveLocalCharacter,
+  onDeleteLocalCharacter,
+  onImportLocalGallery,
+  onExportLocalGallery,
   templates,
   defaultTemplateId,
   selectedTemplateId,
@@ -294,6 +302,10 @@ const CharacterGalleryTabContent = ({
   const [filterAnchorEl, setFilterAnchorEl] = useState(null);
   const [outputAnchorEl, setOutputAnchorEl] = useState(null);
   const [detailNikke, setDetailNikke] = useState(null);
+  const [entryNikke, setEntryNikke] = useState(null);
+  const [createCustomOpen, setCreateCustomOpen] = useState(false);
+  const [importSummary, setImportSummary] = useState(null);
+  const importInputRef = useRef(null);
   const [multiSelectMode, setMultiSelectMode] = useState(false);
   const [selectedCodes, setSelectedCodes] = useState(() => new Set());
   const [targetTemplateId, setTargetTemplateId] = useState("");
@@ -318,6 +330,11 @@ const CharacterGalleryTabContent = ({
     return map;
   }, [ownedSnapshot]);
   const ownedCodes = useMemo(() => new Set(ownedCharacterMap.keys()), [ownedCharacterMap]);
+  const recordedCharacters = useMemo(() => getRecordedLocalCharacters(localRecords), [localRecords]);
+  const localRecordMap = useMemo(() => new Map((localRecords || []).flatMap((record) => [
+    [record.localId, record], [localCharacterKey(record), record],
+  ])), [localRecords]);
+  const recordedCodes = useMemo(() => new Set(recordedCharacters.map(localCharacterKey)), [recordedCharacters]);
 
   const currentTemplate = useMemo(() => {
     if (!String(activeCollectionId).startsWith("template:")) return null;
@@ -353,6 +370,9 @@ const CharacterGalleryTabContent = ({
     if (activeCollectionId === SYSTEM_COLLECTION_IDS.owned) {
       return (nikkeList || []).filter((nikke) => ownedCodes.has(normalizeCode(nikke?.name_code)));
     }
+    if (activeCollectionId === SYSTEM_COLLECTION_IDS.recorded) {
+      return (nikkeList || []).filter((nikke) => recordedCodes.has(normalizeCode(nikke?.name_code)));
+    }
     if (currentRecommendation) {
       const recommendationOrder = new Map(
         currentRecommendation.items.map((entry, index) => [normalizeCode(entry.nameCode), index]),
@@ -368,7 +388,7 @@ const CharacterGalleryTabContent = ({
       return (nikkeList || []).filter((nikke) => currentListCodes.has(normalizeCode(nikke?.name_code)));
     }
     return [];
-  }, [activeCollectionId, currentListCodes, currentRecommendation, currentTemplate, nikkeList, ownedCodes]);
+  }, [activeCollectionId, currentListCodes, currentRecommendation, currentTemplate, nikkeList, ownedCodes, recordedCodes]);
 
   const visibleNikkes = useMemo(() => {
     const query = search.trim().toLocaleLowerCase();
@@ -513,7 +533,9 @@ const CharacterGalleryTabContent = ({
   const handleCardClick = (nikke) => {
     const code = normalizeCode(nikke?.name_code);
     if (!multiSelectMode) {
-      setDetailNikke(nikke);
+      const localRecord = localRecordMap.get(nikke?._localRecordId) || localRecordMap.get(code);
+      if (!ownedCodes.has(code) || localRecord?.custom) setEntryNikke(nikke);
+      else setDetailNikke(nikke);
       return;
     }
     if (!ownedCodes.has(code)) return;
@@ -560,12 +582,28 @@ const CharacterGalleryTabContent = ({
   const selectedDetail = detailNikke
     ? ownedCharacterMap.get(normalizeCode(detailNikke?.name_code))
     : null;
+  const entryRecord = entryNikke
+    ? (localRecordMap.get(entryNikke?._localRecordId) || localRecordMap.get(normalizeCode(entryNikke?.name_code)) || null)
+    : null;
+  const catalogOptions = useMemo(() => {
+    const unique = (key) => [...new Set((standardCatalog || []).map((character) => character?.[key]).filter(Boolean))];
+    return { elements: unique("element"), classes: unique("class"), bursts: unique("use_burst_skill"), corporations: unique("corporation"), weapons: unique("weapon_type"), rarities: unique("original_rare") };
+  }, [standardCatalog]);
+  const catalogOptionLabels = useMemo(() => ({
+    element: getElementName,
+    class: getClassName,
+    burstStage: getBurstStageName,
+    corporation: getCorporationName,
+  }), [getBurstStageName, getClassName, getCorporationName, getElementName]);
 
   return (
     <Box sx={{ pb: multiSelectMode ? 12 : 3 }}>
       <Box sx={{ display: "flex", alignItems: { xs: "flex-start", md: "center" }, gap: 2, mb: 2, flexWrap: "wrap" }}>
-        <Box>
-          <Typography variant="h5" component="h1" sx={{ fontWeight: 600 }}>{copy.title}</Typography>
+        <Box sx={{ flex: "1 1 auto" }}>
+          <Stack direction="row" alignItems="center" gap={1.5} flexWrap="wrap">
+            <Typography variant="h5" component="h1" sx={{ fontWeight: 600 }}>{copy.title}</Typography>
+            <Button size="small" variant="outlined" startIcon={<AddIcon />} onClick={() => setCreateCustomOpen(true)}>自定义角色</Button>
+          </Stack>
           <Stack direction="row" spacing={1.5} sx={{ mt: 0.5, color: "text.secondary", flexWrap: "wrap" }}>
             <Typography variant="body2">{copy.catalogCount.replace("{count}", String((nikkeList || []).length))}</Typography>
             <Typography variant="body2">{copy.ownedCount.replace("{count}", String(ownedCodes.size))}</Typography>
@@ -584,7 +622,8 @@ const CharacterGalleryTabContent = ({
         >
           {currentRecommendation ? <MenuItem value="recommendation-default" disabled>{copy.defaultCollection}</MenuItem> : null}
           <MenuItem value={SYSTEM_COLLECTION_IDS.catalog}>{copy.catalog}</MenuItem>
-          <MenuItem value={SYSTEM_COLLECTION_IDS.owned} disabled={!ownedCodes.size}>{copy.owned}</MenuItem>
+          <MenuItem value={SYSTEM_COLLECTION_IDS.owned} disabled={!isSystemCollectionSelectable(SYSTEM_COLLECTION_IDS.owned, { hasOwned: ownedCodes.size > 0 })}>{copy.owned}</MenuItem>
+          <MenuItem value={SYSTEM_COLLECTION_IDS.recorded}>{copy.recorded}（{recordedCount || 0}）</MenuItem>
           {templates.length ? <Divider component="li" /> : null}
           {templates.map((template) => (
             <MenuItem key={template.id} value={`template:${template.id}`}>{template.name}</MenuItem>
@@ -767,6 +806,7 @@ const CharacterGalleryTabContent = ({
           {visibleNikkes.map((nikke) => {
             const code = normalizeCode(nikke?.name_code);
             const accountCharacter = ownedCharacterMap.get(code);
+            const localRecord = localRecordMap.get(nikke?._localRecordId) || localRecordMap.get(code);
             const owned = Boolean(accountCharacter);
             const selected = selectedCodes.has(code);
             const avatar = getNikkeAvatarUrl(nikke);
@@ -824,8 +864,11 @@ const CharacterGalleryTabContent = ({
                     <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 1, fontVariantNumeric: "tabular-nums" }}>
                       {`Lv. ${accountCharacter.level} · ${formatLimitBreak(accountCharacter)}`}
                     </Typography>
+                  ) : localRecord && toFiniteNumber(localRecord?.level) !== null ? (
+                    <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 1 }}>{`Lv. ${localRecord.level}`}</Typography>
                   ) : null}
                 </Box>
+                {localRecord && recordedCodes.has(code) ? <Chip size="small" color={localRecord.custom ? "secondary" : "primary"} label={localRecord.custom ? "自定义" : "已录入"} sx={{ position: "absolute", right: 4, bottom: 4, height: 20 }} /> : null}
                 {multiSelectMode ? (
                   <Checkbox checked={selected} disabled={!owned} size="small" tabIndex={-1} sx={{ position: "absolute", top: 2, right: 2, p: 0.5 }} />
                 ) : null}
@@ -848,6 +891,15 @@ const CharacterGalleryTabContent = ({
 
       {!multiSelectMode ? (
         <Box sx={{ position: "sticky", bottom: 0, zIndex: 5, mt: 2, px: 1.5, py: 1, display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap", border: "1px solid", borderColor: "divider", bgcolor: "rgba(255,255,255,0.96)", boxShadow: "0 -4px 8px rgba(23,32,51,0.06)" }}>
+          {getGalleryToolbarMode(activeCollectionId) === "local-gallery" ? (<>
+            <input ref={importInputRef} hidden type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onChange={async (event) => {
+              const file = event.target.files?.[0]; event.target.value = ""; if (!file) return;
+              try { const summary = await onImportLocalGallery(file); setImportSummary(summary); } catch { /* 已由上层显示错误 */ }
+            }} />
+            <Button variant="contained" startIcon={<UploadFileIcon />} onClick={() => importInputRef.current?.click()}>导入图鉴</Button>
+            <Button variant="outlined" startIcon={<DownloadOutlinedIcon />} onClick={onExportLocalGallery}>导出图鉴</Button>
+            <Typography variant="caption" color="text.secondary">文件只在扩展本地解析，不会上传服务器；空列表也可导出模板。</Typography>
+          </>) : (<>
           <Button variant="contained" startIcon={fetchLoading ? <CircularProgress size={18} color="inherit" /> : <SyncIcon />} onClick={onFetchCharacterData} disabled={!nikkeList?.length || fetchLoading || downloadLoading || actionsDisabled || Boolean(syncBlockedReason)}>{copy.sync}</Button>
           <Button variant="outlined" startIcon={downloadLoading ? <CircularProgress size={18} color="inherit" /> : <DownloadOutlinedIcon />} onClick={onDownloadCharacterData} disabled={!dataReady || activeCollectionId === SYSTEM_COLLECTION_IDS.catalog || fetchLoading || downloadLoading || actionsDisabled}>{t("downloadCharacterData")}</Button>
           <Button
@@ -864,6 +916,7 @@ const CharacterGalleryTabContent = ({
             {copy.downloadScopeHint}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ ml: { md: "auto" } }}>{copy.selectedCount.replace("{count}", String(collectionNikkes.length))}</Typography>
+          </>)}
         </Box>
       ) : (
         <Box sx={{ position: "fixed", left: { xs: 16, md: 40 }, right: { xs: 16, md: 40 }, bottom: 18, zIndex: 20, display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap", px: 2, py: 1.25, border: "1px solid", borderColor: "divider", bgcolor: "background.paper", boxShadow: "0 6px 16px rgba(23,32,51,0.14)", borderRadius: 1.5 }}>
@@ -965,6 +1018,27 @@ const CharacterGalleryTabContent = ({
           </>
         ) : null}
       </Drawer>
+
+      {entryNikke ? <LocalCharacterEntryDrawer
+        key={entryRecord?.localId || normalizeCode(entryNikke?.name_code)}
+        open={Boolean(entryNikke)} onClose={() => setEntryNikke(null)}
+        catalogCharacter={entryNikke?._isCustom ? null : entryNikke}
+        record={entryRecord} custom={Boolean(entryNikke?._isCustom)} catalogOptions={catalogOptions} optionLabels={catalogOptionLabels}
+        onSave={(draft) => onSaveLocalCharacter({ catalogCharacter: entryNikke?._isCustom ? null : entryNikke, draft, custom: Boolean(entryNikke?._isCustom), existingLocalId: entryRecord?.localId || "" })}
+        onDelete={async () => { await onDeleteLocalCharacter(entryRecord.localId); setEntryNikke(null); }}
+      /> : null}
+      {createCustomOpen ? <LocalCharacterEntryDrawer
+        key="new-custom-character"
+        open={createCustomOpen} onClose={() => setCreateCustomOpen(false)} custom catalogOptions={catalogOptions} optionLabels={catalogOptionLabels}
+        onSave={(draft) => onSaveLocalCharacter({ draft, custom: true, existingLocalId: "" })}
+      /> : null}
+
+      <Dialog open={Boolean(importSummary)} onClose={() => setImportSummary(null)} fullWidth maxWidth="sm">
+        <DialogTitle>本地图鉴导入完成</DialogTitle><DialogContent dividers>
+          <Typography>{`匹配 ${importSummary?.matched || 0}，更新 ${importSummary?.updated || 0}，新建 ${importSummary?.created || 0}，跳过 ${importSummary?.skipped || 0}`}</Typography>
+          {importSummary?.errors?.length ? <Alert severity="warning" sx={{ mt: 2 }}>{importSummary.errors.join("；")}</Alert> : null}
+        </DialogContent><DialogActions><Button onClick={() => setImportSummary(null)}>确认</Button></DialogActions>
+      </Dialog>
 
       <Dialog open={createDialogOpen} onClose={() => setCreateDialogOpen(false)} fullWidth maxWidth="xs">
         <DialogTitle>{copy.createList}</DialogTitle>

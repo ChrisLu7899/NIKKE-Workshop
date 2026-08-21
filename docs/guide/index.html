@@ -57,7 +57,7 @@
     <section class="chapter-panel" id="chapter-install" role="tabpanel" aria-labelledby="tab-install">
     <section class="intro">
       <div><h2>安装扩展</h2><p>第一次使用只需完成以下五步。安装过程中不需要运行命令，也不需要安装 Node.js、Python 或其他环境。</p></div>
-      <span class="support">适用版本：1.0.4</span>
+      <span class="support">适用版本：1.0.5</span>
     </section>
 
     <div class="steps">
@@ -113,7 +113,7 @@
           <h3>选择扩展根目录</h3>
           <p>在文件夹选择窗口中，选中刚刚解压得到的 <span class="kbd">NIKKE-Workshop</span> 文件夹，然后点击 <span class="em">“选择文件夹”</span>。</p>
           <p>正确的根目录中应当可以直接看到 <span class="kbd">assets</span>、<span class="kbd">images</span>、<span class="kbd">manifest.json</span> 和 <span class="kbd">index.html</span>。不要选择 ZIP，也不要进入 assets 子文件夹。</p>
-      <div class="success"><span class="success-icon">✓</span><div><strong>安装成功的判断方法</strong>扩展程序页面出现“NIKKE Workshop 1.0.4”，并且右下角开关处于启用状态。示例截图中的版本号可能较旧，请以实际下载的最新版本为准。</div></div>
+      <div class="success"><span class="success-icon">✓</span><div><strong>安装成功的判断方法</strong>扩展程序页面出现“NIKKE Workshop 1.0.5”，并且右下角开关处于启用状态。示例截图中的版本号可能较旧，请以实际下载的最新版本为准。</div></div>
 <div class="shots single"><figure class="shot"><img src="assets-redacted/05-installed.png" alt="Chrome 扩展程序页面中已经安装并启用的 NIKKE Workshop"><figcaption>安装成功后，NIKKE Workshop 会出现在扩展程序列表中。</figcaption></figure></div>
         </div>
       </section>
@@ -242,6 +242,17 @@
             <figure class="shot"><img src="assets-redacted/12-custom-list-create.png" alt="妮姬多选状态下的新建列表窗口"><figcaption>在“已获得”中多选妮姬，再新建列表或加入已有列表。</figcaption></figure>
             <figure class="shot"><img src="assets-redacted/13-custom-list-saved.png" alt="新建完成后只显示所选角色的自选列表"><figcaption>保存后可从主列表下拉框打开自选列表。</figcaption></figure>
           </div>
+        </div>
+      </section>
+
+      <section class="step">
+        <span class="step-number" aria-hidden="true"></span>
+        <div>
+          <h3>手动录入角色与本地图鉴</h3>
+          <p>没有同步账号数据时，可在 <span class="em">“全图鉴”</span> 中点击标准角色，在右侧抽屉填写等级、突破、战斗力、好感度以及四件装备的三个固定词条位置；保存后角色会进入始终可用的 <span class="em">“已录入”</span> 列表。</p>
+          <p>点击“妮姬图鉴”标题旁的 <span class="em">“自定义角色”</span>，可以补充内置图鉴中没有的角色。属性、职业、爆裂阶段、企业、武器和稀有度使用受控选项，保存后会显示“自定义”标记。</p>
+          <p>切换到“已录入”后，底部工具栏会改为 <span class="em">“导入图鉴 / 导出图鉴”</span>。即使当前列表为空，也可以导出带说明和表头的 Excel 模板；导入和导出都只在扩展本地处理，不会上传服务器。</p>
+          <div class="notice"><strong>同步覆盖规则：</strong>完整同步成功后，标准图鉴角色的手动账号数据会被同步数据覆盖；同步没有发现的标准角色会保留并标记，自定义角色不会被覆盖。同步失败或中断不会修改已有手动数据。</div>
         </div>
       </section>
 

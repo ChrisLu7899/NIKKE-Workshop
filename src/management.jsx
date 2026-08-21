@@ -44,8 +44,19 @@ import { useTemplateManagement } from "./components/management/hooks/useTemplate
 import { useCrawler } from "./components/app/hooks/useCrawler.js";
 import {
   buildCalculatorSnapshot,
+  buildUnifiedCalculatorSnapshot,
+  extractSyncedCalculatorSnapshot,
   isVerifiedCalculatorSnapshot,
 } from "./utils/calculatorSnapshot.js";
+import { getLocalCharacterRoster, setLocalCharacterRoster } from "./services/localCharacterRoster.js";
+import {
+  deleteLocalCharacterRecord,
+  getRecordedLocalCharacters,
+  localRecordToCatalogCharacter,
+  reconcileLocalCharactersAfterSync,
+  saveLocalCharacterRecord,
+} from "./domain/localCharacterRoster.js";
+import { exportLocalGalleryBuffer, importLocalGalleryBuffer } from "./utils/localGalleryExcel.js";
 import { getRecommendationPreset } from "./data/recommendationPresets.js";
 import { isCommonCharacterTemplate } from "./data/commonCharacterList.js";
 import { resolveCharacterDisplayName } from "./data/characterNameOverrides.js";
@@ -83,6 +94,8 @@ const ManagementPage = () => {
   const [ownedShowStats, setOwnedShowStats] = useState([...DEFAULT_CHARACTER_SHOW_STATS]);
   const [recommendationShowStatsById, setRecommendationShowStatsById] = useState({});
   const [activeCollectionId, setActiveCollectionId] = useState(SYSTEM_COLLECTION_IDS.catalog);
+  const [localRoster, setLocalRosterState] = useState({ schemaVersion: 1, records: [] });
+  const [localRosterLoaded, setLocalRosterLoaded] = useState(false);
   const t = useCallback((k) => TRANSLATIONS[lang][k] || k, [lang]);
 
   // ========== 核心状态管理 ==========
@@ -202,6 +215,55 @@ const ManagementPage = () => {
     return buildNikkeAvatarUrl(nikke, nikkeResourceIdMap);
   }, [nikkeResourceIdMap]);
 
+  const galleryNikkeList = useMemo(() => {
+    const customCharacters = localRoster.records.filter((record) => record.custom).map(localRecordToCatalogCharacter);
+    return [...nikkeList, ...customCharacters];
+  }, [localRoster.records, nikkeList]);
+
+  const persistLocalRecords = useCallback(async (records) => {
+    const roster = await setLocalCharacterRoster({ schemaVersion: 1, records });
+    setLocalRosterState(roster);
+    return roster;
+  }, []);
+
+  const handleSaveLocalCharacter = useCallback(async ({ catalogCharacter, draft, custom, existingLocalId }) => {
+    const result = saveLocalCharacterRecord(localRoster.records, {
+      catalogCharacter, draft, custom, existingLocalId, catalog: nikkeList,
+    });
+    if (!result.errors.length) {
+      await persistLocalRecords(result.records);
+      showMessage(custom ? "自定义角色已保存" : "角色录入已保存", "success");
+    }
+    return result;
+  }, [localRoster.records, nikkeList, persistLocalRecords, showMessage]);
+
+  const handleDeleteLocalCharacter = useCallback(async (localId) => {
+    await persistLocalRecords(deleteLocalCharacterRecord(localRoster.records, localId));
+    showMessage("本地录入已删除，标准图鉴资料未受影响", "success");
+  }, [localRoster.records, persistLocalRecords, showMessage]);
+
+  const handleExportLocalGallery = useCallback(async () => {
+    const buffer = await exportLocalGalleryBuffer(localRoster.records);
+    const url = URL.createObjectURL(new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }));
+    const anchor = document.createElement("a");
+    anchor.href = url; anchor.download = `NIKKE-Workshop-本地图鉴-${new Date().toISOString().slice(0, 10)}.xlsx`;
+    anchor.click(); URL.revokeObjectURL(url);
+    showMessage("本地图鉴已导出", "success");
+  }, [localRoster.records, showMessage]);
+
+  const handleImportLocalGallery = useCallback(async (file) => {
+    try {
+      const result = await importLocalGalleryBuffer(await file.arrayBuffer(), {
+        catalog: nikkeList, existingRecords: localRoster.records,
+      });
+      await persistLocalRecords(result.records);
+      return result.summary;
+    } catch (error) {
+      showMessage(error?.message || "导入图鉴失败", "error");
+      throw error;
+    }
+  }, [localRoster.records, nikkeList, persistLocalRecords, showMessage]);
+
   const toggleLang = useCallback(async (e) => {
     const newLang = e.target.checked ? "en" : "zh";
     setLang(newLang);
@@ -269,6 +331,7 @@ const ManagementPage = () => {
   }, []);
 
   const handleFetchCharacterData = useCallback(async () => {
+    if (!window.confirm("同步成功后，标准图鉴角色的手动数据将被账号数据覆盖；自定义角色不会受到影响。")) return;
     const charactersOverride = buildCharactersConfig(nikkeList, {
       showEquipDetails: characters?.options?.showEquipDetails !== false,
       showStats: ownedShowStats,
@@ -278,7 +341,7 @@ const ManagementPage = () => {
       manualAreaId,
       charactersOverride,
     });
-    if (outcome?.successAccountCount > 0 && outcome.accountDicts?.length) {
+    if (outcome?.successAccountCount > 0 && outcome.accountDicts?.length && !outcome.error) {
       const commonResult = await ensureCommonTemplate(nikkeList);
       const currentTemplates = commonResult?.templates || templateManagement.templates;
       const currentCommonTemplate = commonResult?.template
@@ -288,18 +351,21 @@ const ManagementPage = () => {
         ? `template:${currentCommonTemplate.id}`
         : SYSTEM_COLLECTION_IDS.owned;
       const ownedAccountDicts = filterAccountDictsToOwned(outcome.accountDicts);
+      const syncedSnapshot = buildCalculatorSnapshot(ownedAccountDicts);
+      const reconciliation = reconcileLocalCharactersAfterSync(localRoster.records, syncedSnapshot, nikkeList);
+      await persistLocalRecords(reconciliation.records);
       const snapshot = attachCalculatorCollections(
-        buildCalculatorSnapshot(ownedAccountDicts),
+        buildUnifiedCalculatorSnapshot(syncedSnapshot, reconciliation.records),
         currentTemplates,
         commonCollectionId,
       );
-      const calculatorCharacterCount = snapshot.accounts.reduce(
+      const calculatorCharacterCount = syncedSnapshot.accounts.reduce(
         (sum, account) => sum + account.characters.length,
         0,
       );
       if (calculatorCharacterCount > 0) {
         await setCalculatorData(snapshot);
-        setOwnedSnapshot(snapshot);
+        setOwnedSnapshot(syncedSnapshot);
         setCalculatorFrameKey((current) => current + 1);
         setFetchedData({
           accountDicts: ownedAccountDicts,
@@ -309,12 +375,12 @@ const ManagementPage = () => {
           await templateManagement.handleTemplateChange(currentCommonTemplate.id);
         }
         setActiveCollectionId(commonCollectionId);
-        showMessage(t("characterDataReady"), "success");
+        showMessage(`${t("characterDataReady")}；覆盖 ${reconciliation.summary.overwrittenStandardCount} 条标准角色录入，保留 ${reconciliation.summary.retainedCustomCount} 个自定义角色`, "success");
         return;
       }
     }
     showMessage(outcome?.error || t("characterDataFailed"), "warning");
-  }, [characters?.options?.showEquipDetails, crawler, ensureCommonTemplate, manualAreaId, nikkeList, ownedShowStats, showMessage, t, templateManagement]);
+  }, [characters?.options?.showEquipDetails, crawler, ensureCommonTemplate, localRoster.records, manualAreaId, nikkeList, ownedShowStats, persistLocalRecords, showMessage, t, templateManagement]);
 
   const handleDownloadCharacterData = useCallback(async () => {
     if (!activeCollectionDownloadReady) {
@@ -412,13 +478,14 @@ const ManagementPage = () => {
   useEffect(() => {
     getCalculatorData().then((snapshot) => {
       if (!isVerifiedCalculatorSnapshot(snapshot)) return;
-      const hasOwnedCharacters = (Array.isArray(snapshot?.accounts) ? snapshot.accounts : [])
+      const syncedSnapshot = extractSyncedCalculatorSnapshot(snapshot);
+      const hasOwnedCharacters = syncedSnapshot.accounts
         .some((account) => Array.isArray(account?.characters) && account.characters.length > 0);
       if (hasOwnedCharacters) {
-        setOwnedSnapshot(snapshot);
+        setOwnedSnapshot(syncedSnapshot);
         setFetchedData({
           accountDicts: [],
-          characterCount: snapshot.accounts.reduce(
+          characterCount: syncedSnapshot.accounts.reduce(
             (sum, account) => sum + (Array.isArray(account?.characters) ? account.characters.length : 0),
             0,
           ),
@@ -428,6 +495,24 @@ const ManagementPage = () => {
       console.warn("读取已获取妮姬数据失败:", error);
     });
   }, []);
+
+  useEffect(() => {
+    getLocalCharacterRoster().then((roster) => {
+      setLocalRosterState(roster); setLocalRosterLoaded(true);
+    }).catch((error) => {
+      console.warn("读取本地图鉴失败:", error); setLocalRosterLoaded(true);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!localRosterLoaded) return;
+    const unified = attachCalculatorCollections(
+      buildUnifiedCalculatorSnapshot(ownedSnapshot, localRoster.records),
+      templateManagement.templates,
+      activeCollectionId === SYSTEM_COLLECTION_IDS.catalog ? SYSTEM_COLLECTION_IDS.recorded : activeCollectionId,
+    );
+    setCalculatorData(unified).catch((error) => console.warn("更新统一计算器数据失败:", error));
+  }, [activeCollectionId, localRoster.records, localRosterLoaded, ownedSnapshot, templateManagement.templates]);
 
   // 管理页 Tab 持久化
   useEffect(() => {
@@ -445,16 +530,15 @@ const ManagementPage = () => {
   const handleManagementTabChange = useCallback(async (e, newTab) => {
     if (newTab === 0 || newTab === 1) {
       if (newTab === 1) {
-        if (ownedSnapshot) {
+        if (ownedSnapshot || localRoster.records.length) {
           const calculatorSnapshot = attachCalculatorCollections(
-            ownedSnapshot,
+            buildUnifiedCalculatorSnapshot(ownedSnapshot, localRoster.records),
             templateManagement.templates,
             activeCollectionId === SYSTEM_COLLECTION_IDS.catalog
-              ? SYSTEM_COLLECTION_IDS.owned
+              ? (ownedSnapshot ? SYSTEM_COLLECTION_IDS.owned : SYSTEM_COLLECTION_IDS.recorded)
               : activeCollectionId,
           );
           await setCalculatorData(calculatorSnapshot);
-          setOwnedSnapshot(calculatorSnapshot);
         }
         setCalculatorFrameHeight(720);
         setCalculatorFrameKey((current) => current + 1);
@@ -462,7 +546,7 @@ const ManagementPage = () => {
       setTab(newTab);
       chrome.storage.local.set({ managementTab: newTab, managementLayoutVersion: 2 });
     }
-  }, [activeCollectionId, ownedSnapshot, templateManagement.templates]);
+  }, [activeCollectionId, localRoster.records, ownedSnapshot, templateManagement.templates]);
 
   // 语言和本地设置初始化
   useEffect(() => {
@@ -565,7 +649,14 @@ const ManagementPage = () => {
           <CharacterGalleryTabContent
             t={t}
             lang={lang}
-            nikkeList={nikkeList}
+            nikkeList={galleryNikkeList}
+            standardCatalog={nikkeList}
+            localRecords={localRoster.records}
+            recordedCount={getRecordedLocalCharacters(localRoster.records).length}
+            onSaveLocalCharacter={handleSaveLocalCharacter}
+            onDeleteLocalCharacter={handleDeleteLocalCharacter}
+            onImportLocalGallery={handleImportLocalGallery}
+            onExportLocalGallery={handleExportLocalGallery}
             templates={templateManagement.templates}
             defaultTemplateId={templateManagement.defaultTemplateId}
             selectedTemplateId={templateManagement.selectedTemplateId}
