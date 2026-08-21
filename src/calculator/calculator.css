@@ -567,8 +567,106 @@
       background: var(--surface);
       color: var(--ink);
       font: 0.82rem/1.65 "Cascadia Mono", "Microsoft YaHei UI", monospace;
-      white-space: pre-wrap;
       overflow-wrap: anywhere;
+    }
+
+    .inline-optimal-result-text {
+      white-space: pre-wrap;
+    }
+
+    .policy-tree {
+      margin-top: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      font-family: Inter, "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+    }
+
+    .policy-tree > summary {
+      width: fit-content;
+      cursor: pointer;
+      color: var(--primary);
+      font-weight: 700;
+      list-style-position: inside;
+    }
+
+    .policy-stage {
+      margin-top: 10px;
+    }
+
+    .policy-stage-heading {
+      display: grid;
+      gap: 2px;
+    }
+
+    .policy-stage-heading > span,
+    .policy-stage-note,
+    .policy-branch-copy small {
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .policy-stage-note {
+      margin: 5px 0 8px;
+      line-height: 1.55;
+    }
+
+    .policy-branch-list {
+      display: grid;
+      border: 1px solid var(--line);
+      border-radius: var(--control-radius);
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .policy-branch + .policy-branch {
+      border-top: 1px solid var(--line);
+    }
+
+    .policy-branch > summary {
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr);
+      gap: 8px;
+      align-items: start;
+      padding: 9px 10px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .policy-branch > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .policy-branch[open] > summary {
+      background: var(--surface-strong);
+    }
+
+    .policy-branch-probability {
+      color: var(--primary);
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .policy-branch-copy {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .policy-branch-copy > span {
+      color: var(--ink);
+      font-size: 0.76rem;
+      line-height: 1.5;
+    }
+
+    .policy-branch > .policy-stage {
+      margin: 0;
+      padding: 8px 10px 12px 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .policy-branch-complete .policy-branch-probability,
+    .policy-stage-complete {
+      color: var(--success, #167955);
     }
 
     .inline-optimal-result.empty-result {
@@ -832,6 +930,21 @@
 
     .result-tab-panel[hidden] {
       display: none;
+    }
+
+    .classic-optimal-result-section {
+      padding: 16px 20px 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
+    }
+
+    .classic-optimal-result-section[hidden] {
+      display: none;
+    }
+
+    .classic-optimal-result-section h3 {
+      margin: 0 0 10px;
+      font-size: 0.92rem;
     }
 
     .result-output {

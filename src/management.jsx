@@ -610,24 +610,23 @@ const ManagementPage = () => {
             syncBlockedReason={crawler.crawlBlockedReason}
           />
         )}
-        {tab === 1 && (
-          <Box
-            component="iframe"
-            ref={calculatorFrameRef}
-            key={calculatorFrameKey}
-            src={`${chrome.runtime.getURL("calculator.html")}?embedded=1`}
-            title={t("openCalculator")}
-            scrolling="no"
-            sx={{
-              display: "block",
-              width: "100%",
-              height: `${calculatorFrameHeight}px`,
-              minHeight: 720,
-              border: 0,
-              bgcolor: "background.default",
-            }}
-          />
-        )}
+        <Box
+          component="iframe"
+          ref={calculatorFrameRef}
+          key={calculatorFrameKey}
+          src={`${chrome.runtime.getURL("calculator.html")}?embedded=1`}
+          title={t("openCalculator")}
+          scrolling="no"
+          aria-hidden={tab !== 1}
+          sx={{
+            display: tab === 1 ? "block" : "none",
+            width: "100%",
+            height: `${calculatorFrameHeight}px`,
+            minHeight: 720,
+            border: 0,
+            bgcolor: "background.default",
+          }}
+        />
       </Container>
 
       <Dialog open={settingsOpen} onClose={() => setSettingsOpen(false)} fullWidth maxWidth="sm">

@@ -28,6 +28,17 @@ import {
   validateForcedRetention,
 } from "./forcedRetention.js";
 import { createPolicyStageSummary } from "./policySummary.js";
+import {
+  expandGlobalPlanNeighbors,
+  selectDiversifiedAssignments,
+  selectDiversifiedPlans,
+} from "./globalPlanSearch.js";
+import {
+  createManualFourEquipmentCharacter,
+  MANUAL_FOUR_EQUIPMENT_COLLECTION_ID,
+} from "./manualEquipment.js";
+import { createPolicyBranchStage } from "./policyTree.js";
+import { unavailableStatsForRow } from "./statOptions.js";
 
 "use strict";
 
@@ -72,12 +83,17 @@ import { createPolicyStageSummary } from "./policySummary.js";
       { stat: "攻击力增加", ...GLOBAL_STAT_DEFAULTS["攻击力增加"] },
       { stat: "最大装弹数增加", ...GLOBAL_STAT_DEFAULTS["最大装弹数增加"] }
     ];
-    const GLOBAL_ASSIGNMENTS_PER_MASK = 3;
-    const GLOBAL_PLAN_BEAM_PER_LINE_COUNT = 16;
-    const GLOBAL_EXACT_PLAN_LIMIT = 6;
+    const GLOBAL_ASSIGNMENTS_PER_MASK = 12;
+    const GLOBAL_PLAN_BEAM_PER_LINE_COUNT = 64;
+    const GLOBAL_EXACT_PLAN_LIMIT = 10;
+    const GLOBAL_EXACT_SEARCH_ROUNDS = 4;
+    const GLOBAL_EXACT_SEARCH_BEAM = 3;
+    const GLOBAL_EXACT_NEIGHBOR_LIMIT = 12;
+    const GLOBAL_EXACT_SEARCH_PATIENCE = 2;
     const SINGLE_EQUIPMENT_COLLECTION_ID = "single-equipment";
     const DEFAULT_COLLECTION_SELECTOR_ID = "recommendation-default";
     const RECOMMENDATION_COLLECTION_PREFIX = "recommendation:";
+    const manualFourEquipmentCharacter = createManualFourEquipmentCharacter(EQUIPMENT_SLOT_NAMES);
 
     const SLOT_PROBS = [1, 0.5, 0.3];
     const TIER_PROBS = [...Array(5).fill(12), ...Array(5).fill(7), ...Array(5).fill(1)];
@@ -124,6 +140,7 @@ import { createPolicyStageSummary } from "./policySummary.js";
     const targetPresetSelect = document.querySelector("#target-preset");
     const globalTargetPresetSelect = document.querySelector("#global-target-preset");
     const classicOptimalResult = document.querySelector("#classic-optimal-result");
+    const classicOptimalResultSection = document.querySelector("#classic-optimal-result-section");
     const globalTargetMode = document.querySelector("#global-target-mode");
     const globalConditionRows = document.querySelector("#global-condition-rows");
     const addGlobalConditionButton = document.querySelector("#add-global-condition");
@@ -132,6 +149,7 @@ import { createPolicyStageSummary } from "./policySummary.js";
     let importedCollections = [];
     let selectedCharacterAdvice = [];
     let runRecordStore = normalizeRunRecordStore(null);
+    const characterExactSolutionCache = new Map();
     const DEFAULT_DETAILS = [
       "使用说明",
       "=".repeat(36),
@@ -159,6 +177,9 @@ import { createPolicyStageSummary } from "./policySummary.js";
     }
 
     function selectedCharacter() {
+      if (characterSelect.value === MANUAL_FOUR_EQUIPMENT_COLLECTION_ID) {
+        return manualFourEquipmentCharacter;
+      }
       const index = selectedCharacterIndex();
       return Number.isInteger(index) && index >= 0 ? importedCharacters[index] : null;
     }
@@ -538,6 +559,17 @@ import { createPolicyStageSummary } from "./policySummary.js";
 
     function refreshCharacterSelect() {
       const fragment = document.createDocumentFragment();
+      if (!recommendationSelect.value && collectionSelect.value === MANUAL_FOUR_EQUIPMENT_COLLECTION_ID) {
+        const manualOption = document.createElement("option");
+        manualOption.value = MANUAL_FOUR_EQUIPMENT_COLLECTION_ID;
+        manualOption.textContent = "四装备全局模拟";
+        fragment.append(manualOption);
+        characterSelect.replaceChildren(fragment);
+        characterSelect.value = MANUAL_FOUR_EQUIPMENT_COLLECTION_ID;
+        characterSelect.hidden = true;
+        showCharacterEquipmentMode(manualFourEquipmentCharacter);
+        return;
+      }
       if (!recommendationSelect.value && collectionSelect.value === SINGLE_EQUIPMENT_COLLECTION_ID) {
         const classicOption = document.createElement("option");
         classicOption.value = "current";
@@ -595,6 +627,10 @@ import { createPolicyStageSummary } from "./policySummary.js";
       singleEquipmentOption.value = SINGLE_EQUIPMENT_COLLECTION_ID;
       singleEquipmentOption.textContent = "单装备模拟";
       collectionFragment.append(singleEquipmentOption);
+      const manualFourEquipmentOption = document.createElement("option");
+      manualFourEquipmentOption.value = MANUAL_FOUR_EQUIPMENT_COLLECTION_ID;
+      manualFourEquipmentOption.textContent = "四装备全局模拟";
+      collectionFragment.append(manualFourEquipmentOption);
       const defaultOption = document.createElement("option");
       defaultOption.value = DEFAULT_COLLECTION_SELECTOR_ID;
       defaultOption.textContent = "默认";
@@ -694,6 +730,32 @@ import { createPolicyStageSummary } from "./policySummary.js";
           syncForceRetentionAvailability(row);
         }
       });
+      syncEquipmentStatOptions(container);
+    }
+
+    function characterExactSolutionCacheKey(characterKey, mode, equipmentIndex) {
+      return `${characterKey}::${mode}::${equipmentIndex}`;
+    }
+
+    function cacheCharacterExactSolutions(characterKey, mode, equipmentResults) {
+      const prefix = `${characterKey}::`;
+      [...characterExactSolutionCache.keys()].forEach(key => {
+        if (key.startsWith(prefix)) characterExactSolutionCache.delete(key);
+      });
+      (equipmentResults || []).forEach((item, fallbackIndex) => {
+        if (item?.skipped || !item?.exactSolution) return;
+        const equipmentIndex = Number(item.index ?? fallbackIndex);
+        characterExactSolutionCache.set(
+          characterExactSolutionCacheKey(characterKey, mode, equipmentIndex),
+          item.exactSolution,
+        );
+      });
+    }
+
+    function cachedCharacterExactSolution(characterKey, mode, equipmentIndex) {
+      return characterExactSolutionCache.get(
+        characterExactSolutionCacheKey(characterKey, mode, equipmentIndex),
+      );
     }
 
     function restoreCharacterRunRecord(character) {
@@ -719,11 +781,17 @@ import { createPolicyStageSummary } from "./policySummary.js";
         }
 
         const savedEquipment = resultByIndex.get(index);
-        setInlineOptimalResult(
-          section.querySelector(".equipment-optimal-result"),
-          savedEquipment?.optimalText || (skipInput.checked ? "本次已跳过。" : "运行算法测试后显示。"),
-          !savedEquipment,
-        );
+        const cachedSolution = cachedCharacterExactSolution(characterKey, record.mode, index);
+        const output = section.querySelector(".equipment-optimal-result");
+        if (cachedSolution && !skipInput.checked) {
+          renderInlineOptimalResult(output, cachedSolution);
+        } else {
+          setInlineOptimalResult(
+            output,
+            savedEquipment?.optimalText || (skipInput.checked ? "本次已跳过。" : "运行算法测试后显示。"),
+            !savedEquipment,
+          );
+        }
         if (record.mode === "global") {
           section.querySelector(".global-assignment-output").textContent = skipInput.checked
             ? "本次已跳过。"
@@ -768,7 +836,7 @@ import { createPolicyStageSummary } from "./policySummary.js";
           </div>
           <div class="equipment-editor-block equipment-result-block">
             <h4 class="equipment-block-title">最优结果</h4>
-            <pre class="inline-optimal-result empty-result equipment-optimal-result" aria-live="polite">运行算法测试后显示。</pre>
+            <div class="inline-optimal-result empty-result equipment-optimal-result" aria-live="polite">运行算法测试后显示。</div>
           </div>
         </section>
       `).join("");
@@ -797,6 +865,116 @@ import { createPolicyStageSummary } from "./policySummary.js";
       if (!element) return;
       element.textContent = text;
       element.classList.toggle("empty-result", isEmpty);
+    }
+
+    function exactBranchStateText(state, model) {
+      if (!state?.slots) return "盘面状态不可用";
+      return state.slots.map((slot, index) => {
+        let name = slot.statName || "非目标词条";
+        if (isTargetCode(slot.code)) {
+          name = model.targets[targetIndexFromCode(slot.code)]?.name || "目标词条";
+          name += slot.ok ? "（达标）" : "（未达标）";
+        }
+        const locked = slot.locked ? " · 已锁" : "";
+        return `词条${index + 1}：${name}${locked}`;
+      }).join("；");
+    }
+
+    function policyTreeStageElement(exactSolution, stateIndex, depth, ancestorIndexes) {
+      const policyData = exactSolution.policyData;
+      const stage = createPolicyBranchStage({
+        records: policyData.records,
+        policy: policyData.policy,
+        values: policyData.values,
+        startIndex: stateIndex,
+        describeAction: exactActionDescription,
+      });
+      const wrap = document.createElement("div");
+      wrap.className = "policy-stage";
+      if (!stage) {
+        wrap.textContent = "该分支暂时无法展开。";
+        return wrap;
+      }
+      if (stage.terminal) {
+        wrap.classList.add("policy-stage-complete");
+        wrap.textContent = "目标已经完成，无需继续操作。";
+        return wrap;
+      }
+
+      const heading = document.createElement("div");
+      heading.className = "policy-stage-heading";
+      heading.innerHTML = `<strong>本阶段：${compactStageActionText(stage.actionText)}</strong><span>本阶段约 ${stage.stageExpectedCost.toFixed(1)} 颗 · 从此处完成约 ${stage.totalExpectedCost.toFixed(1)} 颗</span>`;
+      wrap.append(heading);
+
+      const note = document.createElement("p");
+      note.className = "policy-stage-note";
+      note.textContent = "以下概率表示反复执行本阶段操作后，最终进入各分支的概率。";
+      wrap.append(note);
+
+      const list = document.createElement("div");
+      list.className = "policy-branch-list";
+      stage.branches.forEach(branch => {
+        const details = document.createElement("details");
+        details.className = `policy-branch${branch.terminal ? " policy-branch-complete" : ""}`;
+        const summary = document.createElement("summary");
+        const probability = `${(branch.probability * 100).toFixed(branch.probability < 0.01 ? 2 : 1)}%`;
+        const stateText = exactBranchStateText(branch.state, exactSolution.model);
+        summary.innerHTML = `<span class="policy-branch-probability">${probability}</span><span class="policy-branch-copy"><strong>${branch.terminal ? "目标完成" : compactStageActionText(branch.nextActionText)}</strong><span>${stateText}</span><small>${branch.terminal ? "无需继续消耗" : `从该分支完成约 ${branch.remainingExpectedCost.toFixed(1)} 颗石头`}</small></span>`;
+        details.append(summary);
+
+        if (!branch.terminal) {
+          details.addEventListener("toggle", () => {
+            if (!details.open || details.dataset.loaded === "true") return;
+            details.dataset.loaded = "true";
+            if (depth >= 10 || ancestorIndexes.has(branch.stateIndex)) {
+              const cycle = document.createElement("p");
+              cycle.className = "policy-stage-note";
+              cycle.textContent = "该分支会回到已显示的策略状态，请继续按上方相同操作执行。";
+              details.append(cycle);
+              return;
+            }
+            const nextAncestors = new Set(ancestorIndexes);
+            nextAncestors.add(branch.stateIndex);
+            details.append(policyTreeStageElement(exactSolution, branch.stateIndex, depth + 1, nextAncestors));
+          });
+        }
+        list.append(details);
+      });
+      wrap.append(list);
+      return wrap;
+    }
+
+    function renderInlineOptimalResult(element, exactSolution) {
+      if (!element) return;
+      const expectedCost = exactSolution?.value ?? 0;
+      if (!exactSolution?.policyData || expectedCost <= 1e-9) {
+        setInlineOptimalResult(element, inlineOptimalResultText({ exactSolution }));
+        return;
+      }
+      element.replaceChildren();
+      element.classList.remove("empty-result");
+
+      const text = document.createElement("div");
+      text.className = "inline-optimal-result-text";
+      text.textContent = inlineOptimalResultText({ exactSolution });
+      element.append(text);
+
+      const tree = document.createElement("details");
+      tree.className = "policy-tree";
+      const treeSummary = document.createElement("summary");
+      treeSummary.textContent = "查看完整决策树";
+      tree.append(treeSummary);
+      tree.addEventListener("toggle", () => {
+        if (!tree.open || tree.dataset.loaded === "true") return;
+        tree.dataset.loaded = "true";
+        tree.append(policyTreeStageElement(
+          exactSolution,
+          exactSolution.policyData.startIndex,
+          0,
+          new Set([exactSolution.policyData.startIndex]),
+        ));
+      });
+      element.append(tree);
     }
 
     function compactStageActionText(text) {
@@ -885,6 +1063,9 @@ import { createPolicyStageSummary } from "./policySummary.js";
       document.body.classList.remove("character-layout-active");
       app.classList.remove("character-layout");
       classicEquipmentMode.hidden = false;
+      classicOptimalResultSection.hidden = false;
+      allResultsTab.hidden = true;
+      if (allResultsTab.getAttribute("aria-selected") === "true") activateOutputTab("result");
       characterEquipmentMode.hidden = true;
       characterEquipmentMode.replaceChildren();
       calculationModeSelect.hidden = true;
@@ -904,6 +1085,8 @@ import { createPolicyStageSummary } from "./policySummary.js";
       document.body.classList.add("character-layout-active");
       app.classList.add("character-layout");
       classicEquipmentMode.hidden = true;
+      classicOptimalResultSection.hidden = true;
+      allResultsTab.hidden = false;
       characterEquipmentMode.hidden = false;
       calculationModeSelect.hidden = false;
       targetPresetSelect.value = "";
@@ -911,7 +1094,7 @@ import { createPolicyStageSummary } from "./policySummary.js";
       setCalculationMode("global");
       calculateButton.disabled = false;
       showMessage("");
-      if (!restoreCharacterRunRecord(character)) {
+      if (character.transient || !restoreCharacterRunRecord(character)) {
         setResult("设置四件装备的目标词条后，点击“运行算法测试”。可勾选“不跑”跳过单件装备。", true);
         setDetails(DEFAULT_DETAILS);
       }
@@ -943,6 +1126,7 @@ import { createPolicyStageSummary } from "./policySummary.js";
         statSelect.addEventListener("change", () => {
           updateTierOptions(statSelect, tierSelect);
           if (isInitial) syncForceRetentionAvailability(row);
+          syncEquipmentStatOptions(container);
           clearScopedOptimalResult(statSelect);
         });
         tierSelect.addEventListener("change", () => clearScopedOptimalResult(tierSelect));
@@ -966,6 +1150,20 @@ import { createPolicyStageSummary } from "./policySummary.js";
           });
         });
       }
+      syncEquipmentStatOptions(container);
+    }
+
+    function syncEquipmentStatOptions(container) {
+      if (!container) return;
+      const rows = [...container.querySelectorAll(".form-row")];
+      const selectedStats = rows.map(row => row.querySelector(".stat-select")?.value || "空词条");
+      rows.forEach((row, rowIndex) => {
+        const statSelect = row.querySelector(".stat-select");
+        const unavailableStats = unavailableStatsForRow(selectedStats, rowIndex);
+        [...statSelect.options].forEach(option => {
+          option.disabled = option.value !== "空词条" && unavailableStats.has(option.value);
+        });
+      });
     }
 
     function setForceRetention(button, forceKeep) {
@@ -1030,7 +1228,8 @@ import { createPolicyStageSummary } from "./policySummary.js";
         { name: "details", tab: detailsTab, panel: detailsPanel },
         { name: "all", tab: allResultsTab, panel: allResultsPanel },
       ];
-      const active = tabs.find(item => item.name === tabName) || tabs[0];
+      const availableTabs = tabs.filter(item => !item.tab.hidden);
+      const active = availableTabs.find(item => item.name === tabName) || availableTabs[0] || tabs[0];
       tabs.forEach(item => {
         const selected = item === active;
         item.tab.setAttribute("aria-selected", String(selected));
@@ -1050,6 +1249,7 @@ import { createPolicyStageSummary } from "./policySummary.js";
         setForceRetention(row.querySelector(".force-retain-toggle"), false);
         syncForceRetentionAvailability(row);
       });
+      document.querySelectorAll(".rows").forEach(syncEquipmentStatOptions);
       document.querySelectorAll(".equipment-skip-input").forEach(input => {
         input.checked = false;
         setEquipmentSkipped(input.closest(".character-equipment-slot"), false);
@@ -1538,7 +1738,7 @@ import { createPolicyStageSummary } from "./policySummary.js";
         stateCount: recordList.length,
         iterations: completedIterations,
         residual,
-        policyData: retainPolicy ? { records: recordList, policy, startIndex } : null
+        policyData: retainPolicy ? { records: recordList, policy, values, startIndex } : null
       };
     }
 
@@ -1787,13 +1987,11 @@ import { createPolicyStageSummary } from "./policySummary.js";
         const assignment = { tiers, count, totalBasis, mask, approximateCost };
         const group = groupedByMask.get(mask) || [];
         group.push(assignment);
-        group.sort((left, right) => left.approximateCost - right.approximateCost || left.totalBasis - right.totalBasis);
-        if (group.length > GLOBAL_ASSIGNMENTS_PER_MASK) group.length = GLOBAL_ASSIGNMENTS_PER_MASK;
         groupedByMask.set(mask, group);
       }
 
       return [...groupedByMask.values()]
-        .flat()
+        .flatMap(group => selectDiversifiedAssignments(group, GLOBAL_ASSIGNMENTS_PER_MASK))
         .sort((left, right) => left.approximateCost - right.approximateCost || left.totalBasis - right.totalBasis);
     }
 
@@ -1803,7 +2001,7 @@ import { createPolicyStageSummary } from "./policySummary.js";
         .join("/");
     }
 
-    function pruneGlobalPlans(plans, requiredLines) {
+    function pruneGlobalPlans(plans, requiredLines, conditions) {
       const bestBySignature = new Map();
       plans.forEach(plan => {
         const signature = globalPlanSignature(plan);
@@ -1818,9 +2016,11 @@ import { createPolicyStageSummary } from "./policySummary.js";
         group.push(plan);
         grouped.set(key, group);
       });
-      return [...grouped.values()].flatMap(group => group
-        .sort((left, right) => left.approximateCost - right.approximateCost)
-        .slice(0, GLOBAL_PLAN_BEAM_PER_LINE_COUNT));
+      return [...grouped.values()].flatMap(group => selectDiversifiedPlans(group, {
+        conditions,
+        tierBasis: statTierBasisPoints,
+        limit: GLOBAL_PLAN_BEAM_PER_LINE_COUNT,
+      }));
     }
 
     function combineGlobalAssignments(conditions, assignmentLists, activeEquipments, requiredLines) {
@@ -1854,7 +2054,7 @@ import { createPolicyStageSummary } from "./policySummary.js";
             });
           }
         }
-        plans = pruneGlobalPlans(nextPlans, requiredLines);
+        plans = pruneGlobalPlans(nextPlans, requiredLines, conditions.slice(0, conditionIndex + 1));
         if (!plans.length) break;
       }
 
@@ -1913,7 +2113,7 @@ import { createPolicyStageSummary } from "./policySummary.js";
         "",
         separator,
         `所选静态分配合计期望：约 ${bestResult.totalExpectedCost.toFixed(1)} 颗石头`,
-        `候选静态分配 ${candidateCount} 个，本次使用有限状态 MDP 比较前 ${evaluatedCount} 个。`,
+        `候选池共 ${candidateCount} 个，本次使用有限状态 MDP 精算 ${evaluatedCount} 个（包含多指标初筛与通用邻域方案）。`,
         "这是静态目标分配；每实际洗一次后，请重新导入盘面并再次计算。",
         separator,
         resultFooter()
@@ -1943,9 +2143,9 @@ import { createPolicyStageSummary } from "./policySummary.js";
       lines.push(
         "",
         "分配方法说明",
-        "先枚举各词条在四件装备上的档位组合，再以近似成本筛选可行分配。",
-        "最终候选中的每件装备使用有限状态 MDP 求解，合计值为各装备期望之和。",
-        "当前测试版比较的是筛选后的静态分配，不等同于完整的跨装备动态最优策略。"
+        "先枚举各词条在四件装备上的档位组合，以近似成本、档位均衡、超额数值和装备负载多项指标保留候选。",
+        "随后从多个候选出发，通用搜索升降档、增减目标条数、跨装备移动和满槽交换，并使用有限状态 MDP 计算真实期望。",
+        "最终结果是计算预算内找到的最低期望静态分配；不等同于不设时间上限的全空间穷举或跨装备动态策略。"
       );
       return lines.join("\n");
     }
@@ -2002,41 +2202,106 @@ import { createPolicyStageSummary } from "./policySummary.js";
           throw new Error("这些全局条件无法在每件装备最多 3 条词条的限制下同时满足。请减少条数、合计数值或跳过条件。 ");
         }
 
-        const plansToEvaluate = candidatePlans.slice(0, GLOBAL_EXACT_PLAN_LIMIT);
-        globalTargetStatus.textContent = `找到 ${candidatePlans.length} 个候选，正在使用有限状态 MDP 比较前 ${plansToEvaluate.length} 个。`;
+        const initialPlans = selectDiversifiedPlans(candidatePlans, {
+          conditions: config.conditions,
+          tierBasis: statTierBasisPoints,
+          limit: GLOBAL_EXACT_PLAN_LIMIT,
+        });
+        globalTargetStatus.textContent = `找到 ${candidatePlans.length} 个初筛候选，正在使用有限状态 MDP 精算 ${initialPlans.length} 个多样化方案。`;
         const cache = new Map();
         const evaluatedResults = [];
         const failedPlans = [];
-        for (let planIndex = 0; planIndex < plansToEvaluate.length; planIndex += 1) {
-          const plan = plansToEvaluate[planIndex];
-          const equipmentResults = [];
-          let totalExpectedCost = 0;
-          let planFailed = false;
-          for (let equipmentIndex = 0; equipmentIndex < activeEquipments.length; equipmentIndex += 1) {
-            const equipment = activeEquipments[equipmentIndex];
-            const targets = plan.targetsByEquipment[equipmentIndex];
-            const completedProfiles = planIndex * activeEquipments.length + equipmentIndex;
-            const totalProfiles = plansToEvaluate.length * activeEquipments.length;
-            const basePercent = 15 + completedProfiles / totalProfiles * 83;
-            setBatchProgress(basePercent, `候选 ${planIndex + 1}/${plansToEvaluate.length} · ${equipment.label} · 有限状态 MDP…`);
-            try {
-              const exactSolution = await solveGlobalEquipmentProfile(equipment, targets, cache, () => {});
-              equipmentResults.push({ ...equipment, targets, exactSolution });
-              totalExpectedCost += exactSolution.value;
-            } catch (error) {
-              failedPlans.push(error instanceof Error ? error.message : String(error));
-              planFailed = true;
-              break;
+        const evaluatedSignatures = new Set();
+        const evaluatePlanBatch = async (plans, progressStart, progressEnd, phaseLabel) => {
+          const pendingPlans = plans.filter(plan => !evaluatedSignatures.has(globalPlanSignature(plan)));
+          for (let planIndex = 0; planIndex < pendingPlans.length; planIndex += 1) {
+            const plan = pendingPlans[planIndex];
+            const equipmentResults = [];
+            let totalExpectedCost = 0;
+            let planFailed = false;
+            evaluatedSignatures.add(globalPlanSignature(plan));
+            for (let equipmentIndex = 0; equipmentIndex < activeEquipments.length; equipmentIndex += 1) {
+              const equipment = activeEquipments[equipmentIndex];
+              const targets = plan.targetsByEquipment[equipmentIndex];
+              const completedProfiles = planIndex * activeEquipments.length + equipmentIndex;
+              const totalProfiles = Math.max(1, pendingPlans.length * activeEquipments.length);
+              const percent = progressStart + completedProfiles / totalProfiles * (progressEnd - progressStart);
+              setBatchProgress(percent, `${phaseLabel} ${planIndex + 1}/${pendingPlans.length} · ${equipment.label} · 有限状态 MDP…`);
+              try {
+                const exactSolution = await solveGlobalEquipmentProfile(equipment, targets, cache, () => {});
+                equipmentResults.push({ ...equipment, targets, exactSolution });
+                totalExpectedCost += exactSolution.value;
+              } catch (error) {
+                failedPlans.push(error instanceof Error ? error.message : String(error));
+                planFailed = true;
+                break;
+              }
             }
+            if (!planFailed) evaluatedResults.push({ plan, equipmentResults, totalExpectedCost });
           }
-          if (!planFailed) evaluatedResults.push({ plan, equipmentResults, totalExpectedCost });
-        }
+        };
+
+        await evaluatePlanBatch(initialPlans, 15, 45, "初筛候选");
 
         if (!evaluatedResults.length) {
           throw new Error(failedPlans[0] || "候选分配均未能完成有限状态 MDP 求解。请降低目标或减少条件后重试。");
         }
+        let neighborhoodCandidateCount = 0;
+        let roundsWithoutImprovement = 0;
+        let previousBestCost = evaluatedResults.reduce(
+          (best, result) => Math.min(best, result.totalExpectedCost),
+          Number.POSITIVE_INFINITY
+        );
+        for (let round = 0; round < GLOBAL_EXACT_SEARCH_ROUNDS; round += 1) {
+          evaluatedResults.sort((left, right) => left.totalExpectedCost - right.totalExpectedCost);
+          const searchSeeds = evaluatedResults.slice(0, GLOBAL_EXACT_SEARCH_BEAM);
+          const rawNeighborhoodPlans = searchSeeds.flatMap(result => expandGlobalPlanNeighbors(result.plan, {
+            conditions: config.conditions,
+            tierBasis: statTierBasisPoints,
+            estimateCost: (equipmentIndex, stat, tier) => estimateGlobalTargetCost(
+              activeEquipments[equipmentIndex],
+              stat,
+              tier
+            ),
+            perConditionLimit: GLOBAL_EXACT_NEIGHBOR_LIMIT,
+          })).filter(plan => !evaluatedSignatures.has(globalPlanSignature(plan)));
+          const neighborhoodPlans = selectDiversifiedPlans(rawNeighborhoodPlans, {
+            conditions: config.conditions,
+            tierBasis: statTierBasisPoints,
+            limit: GLOBAL_EXACT_NEIGHBOR_LIMIT,
+          });
+          if (!neighborhoodPlans.length) break;
+          neighborhoodCandidateCount += neighborhoodPlans.length;
+          globalTargetStatus.textContent = `全局搜索第 ${round + 1} 轮：正在精算 ${neighborhoodPlans.length} 个通用邻域方案。`;
+          const roundSpan = 53 / GLOBAL_EXACT_SEARCH_ROUNDS;
+          const progressStart = 45 + round * roundSpan;
+          await evaluatePlanBatch(neighborhoodPlans, progressStart, progressStart + roundSpan, `全局搜索 ${round + 1}`);
+
+          const currentBestCost = evaluatedResults.reduce(
+            (best, result) => Math.min(best, result.totalExpectedCost),
+            Number.POSITIVE_INFINITY
+          );
+          if (currentBestCost < previousBestCost - 0.0001) {
+            previousBestCost = currentBestCost;
+            roundsWithoutImprovement = 0;
+          } else {
+            roundsWithoutImprovement += 1;
+            if (roundsWithoutImprovement >= GLOBAL_EXACT_SEARCH_PATIENCE) break;
+          }
+        }
+
         evaluatedResults.sort((left, right) => left.totalExpectedCost - right.totalExpectedCost);
         const bestResult = evaluatedResults[0];
+
+        for (let index = 0; index < bestResult.equipmentResults.length; index += 1) {
+          const item = bestResult.equipmentResults[index];
+          if (!item.targets.length) continue;
+          setBatchProgress(98 + (index / bestResult.equipmentResults.length) * 2, `${item.label} · 生成可展开决策树…`);
+          const targetInput = globalTargetInput(item.targets);
+          const model = buildExactModel(targetInput);
+          const initialState = buildExactInitialState(item.initialInput, model);
+          item.exactSolution = await solveExactOptimal(initialState, model, () => {}, true);
+        }
 
         const activeResultByIndex = new Map(bestResult.equipmentResults.map(item => [item.index, item]));
         allEquipments.forEach(equipment => {
@@ -2048,7 +2313,7 @@ import { createPolicyStageSummary } from "./policySummary.js";
           }
           const item = activeResultByIndex.get(equipment.index);
           section.querySelector(".global-assignment-output").textContent = globalAssignmentText(item.targets);
-          setInlineOptimalResult(section.querySelector(".equipment-optimal-result"), inlineOptimalResultText(item));
+          renderInlineOptimalResult(section.querySelector(".equipment-optimal-result"), item.exactSolution);
         });
 
         setBatchProgress(100, "全局条件分配与有限状态 MDP 计算完成");
@@ -2058,12 +2323,13 @@ import { createPolicyStageSummary } from "./policySummary.js";
           bestResult,
           config.conditions,
           activeEquipments,
-          candidatePlans.length,
+          candidatePlans.length + neighborhoodCandidateCount,
           evaluatedResults.length
         );
         const detailsText = buildGlobalConditionDetails(characterName, bestResult, config.conditions);
         setResult(resultText);
         setDetails(detailsText);
+        cacheCharacterExactSolutions(selectedCharacterKey(), "global", bestResult.equipmentResults);
         await saveRunRecord(buildGlobalRunRecord({
           characterName,
           allEquipments,
@@ -2303,12 +2569,12 @@ import { createPolicyStageSummary } from "./policySummary.js";
               ? `${equipment.label} · 已检查 ${current} 个状态，发现 ${detail} 个状态…`
               : `${equipment.label} · 第 ${current} 轮求解，残差 ${Number(detail).toExponential(2)}…`;
             setBatchProgress(percent, text);
-          });
+          }, true);
           const formulaResult = findFormulaFastPath(exactInitialState, exactModel);
           const computedResult = { ...equipment, exactSolution, formulaResult };
           computedResults.push(computedResult);
           const equipmentOutput = characterEquipmentMode.querySelector(`[data-equipment-index="${equipment.index}"] .equipment-optimal-result`);
-          setInlineOptimalResult(equipmentOutput, inlineOptimalResultText(computedResult));
+          renderInlineOptimalResult(equipmentOutput, exactSolution);
           setBatchProgress(segmentEnd, `${equipment.label} · 计算完成`);
         }
 
@@ -2318,6 +2584,7 @@ import { createPolicyStageSummary } from "./policySummary.js";
         const detailsText = buildCharacterBatchDetails(characterName, equipmentResults);
         setResult(resultText);
         setDetails(detailsText);
+        cacheCharacterExactSolutions(selectedCharacterKey(), "equipment", equipmentResults);
         await saveRunRecord(buildIndependentRunRecord({
           characterName,
           equipmentResults,
@@ -2381,10 +2648,10 @@ import { createPolicyStageSummary } from "./policySummary.js";
             progressTrack.setAttribute("aria-valuenow", "70");
             progressText.textContent = `有限状态 MDP：第 ${current} 轮求解，残差 ${Number(detail).toExponential(2)}…`;
           }
-        });
+        }, true);
         const formulaResult = findFormulaFastPath(exactInitialState, exactModel);
         setResult(buildExactResultOutput(exactSolution, targetInput));
-        setInlineOptimalResult(classicOptimalResult, inlineOptimalResultText({ exactSolution }));
+        renderInlineOptimalResult(classicOptimalResult, exactSolution);
         setDetails(buildDetailsOutput({ exactSolution, formulaResult }));
         activateOutputTab("result");
       } catch (error) {
@@ -2408,13 +2675,17 @@ import { createPolicyStageSummary } from "./policySummary.js";
     detailsTab.addEventListener("click", () => activateOutputTab("details"));
     allResultsTab.addEventListener("click", () => activateOutputTab("all"));
     const outputTabs = [resultTab, detailsTab, allResultsTab];
-    outputTabs.forEach((tab, index) => {
+    outputTabs.forEach(tab => {
       tab.addEventListener("keydown", event => {
         if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
         event.preventDefault();
+        const availableTabs = outputTabs.filter(item => !item.hidden);
+        const index = availableTabs.indexOf(tab);
+        if (index < 0) return;
         const offset = event.key === "ArrowRight" ? 1 : -1;
-        const nextIndex = (index + offset + outputTabs.length) % outputTabs.length;
-        const nextName = ["result", "details", "all"][nextIndex];
+        const nextIndex = (index + offset + availableTabs.length) % availableTabs.length;
+        const nextTab = availableTabs[nextIndex];
+        const nextName = nextTab === resultTab ? "result" : nextTab === detailsTab ? "details" : "all";
         activateOutputTab(nextName, true);
       });
     });

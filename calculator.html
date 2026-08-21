@@ -21,6 +21,7 @@
       <div class="topbar-primary">
         <select id="collection-select" aria-label="妮姬列表">
           <option value="single-equipment">单装备模拟</option>
+          <option value="manual-four-equipment">四装备全局模拟</option>
           <option value="owned">已获得</option>
         </select>
         <select id="recommendation-select" aria-label="推荐方案">
@@ -102,14 +103,6 @@
           <div class="rows" id="target-rows"></div>
         </div>
 
-        <div class="form-section">
-          <div class="section-heading">
-            <div>
-              <h3>最优结果</h3>
-            </div>
-          </div>
-          <pre class="inline-optimal-result empty-result" id="classic-optimal-result" aria-live="polite">运行算法测试后显示。</pre>
-        </div>
       </div>
 
       <div class="form-section" id="global-target-mode" hidden>
@@ -161,6 +154,10 @@
           <button class="result-tab" id="all-results-tab" type="button" role="tab" aria-selected="false" aria-controls="all-results-panel" tabindex="-1">全部结果</button>
         </div>
         <div class="result-tab-panel" id="result-panel" role="tabpanel" aria-labelledby="result-tab">
+          <section class="classic-optimal-result-section" id="classic-optimal-result-section" aria-labelledby="classic-optimal-result-title">
+            <h3 id="classic-optimal-result-title">最优结果</h3>
+            <div class="inline-optimal-result empty-result" id="classic-optimal-result" aria-live="polite">运行算法测试后显示。</div>
+          </section>
           <pre class="result-output empty-result" id="result" aria-live="polite">设置目标词条后，点击“运行算法测试”。</pre>
         </div>
         <div class="result-tab-panel" id="details-panel" role="tabpanel" aria-labelledby="details-tab" hidden>
