@@ -4,7 +4,7 @@
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { cp, mkdir, rm, writeFile } from 'node:fs/promises'
+import { cp, mkdir, rm } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { COMMON_CHARACTER_LIST } from './src/data/commonCharacterList.js'
 
@@ -30,8 +30,10 @@ const copyLocalOcrAssets = () => ({
     await cp(resolve('node_modules/@tesseract.js-data/chi_sim/4.0.0/chi_sim.traineddata.gz'), resolve(ocrRoot, 'lang/chi_sim.traineddata.gz'))
 
     const screenshotsRoot = resolve(output, 'screenshots')
+    // The preset folders are intentionally empty. Recreate this generated tree
+    // so stale README/placeholder text files can never leak into a release ZIP.
+    await rm(screenshotsRoot, { recursive: true, force: true })
     await mkdir(screenshotsRoot, { recursive: true })
-    await writeFile(resolve(screenshotsRoot, 'README.txt'), '每个角色使用一个同名文件夹；将该角色的装备详情截图放入文件夹后，在扩展中点击“图片识别”。\r\n非“常用”角色请自行新建文件夹，文件夹名必须与图鉴角色名一致。\r\n', 'utf8')
     await Promise.all(COMMON_CHARACTER_LIST.map(async ({ name }) => {
       const folder = resolve(screenshotsRoot, name)
       await mkdir(folder, { recursive: true })
