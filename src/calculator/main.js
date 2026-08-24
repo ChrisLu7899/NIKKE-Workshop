@@ -42,6 +42,7 @@ import {
 } from "./manualEquipment.js";
 import { createPolicyBranchStage } from "./policyTree.js";
 import { unavailableStatsForRow } from "./statOptions.js";
+import { summarizeEquipmentEffects } from "./equipmentEffectOverview.js";
 
 "use strict";
 
@@ -137,6 +138,8 @@ import { unavailableStatsForRow } from "./statOptions.js";
     };
     const classicEquipmentMode = document.querySelector("#classic-equipment-mode");
     const characterEquipmentMode = document.querySelector("#character-equipment-mode");
+    const equipmentEffectOverview = document.querySelector("#equipment-effect-overview");
+    const equipmentEffectOverviewValues = document.querySelector("#equipment-effect-overview-values");
     const setupDescription = document.querySelector("#setup-description");
     const calculationModeSelect = document.querySelector("#calculation-mode");
     const targetPresetSelect = document.querySelector("#target-preset");
@@ -150,6 +153,7 @@ import { unavailableStatsForRow } from "./statOptions.js";
     let importedCharacters = [];
     let importedCollections = [];
     let selectedCharacterAdvice = [];
+    let showEquipmentEffectOverview = false;
     let runRecordStore = normalizeRunRecordStore(null);
     const characterExactSolutionCache = new Map();
     const DEFAULT_DETAILS = [
@@ -573,7 +577,7 @@ import { unavailableStatsForRow } from "./statOptions.js";
       recommendationSelect.disabled = !hasRecommendations;
     }
 
-    function refreshCharacterSelect() {
+    function refreshCharacterSelect(preferredCharacterCode = "") {
       syncRecommendationSelectorVisibility();
       const fragment = document.createDocumentFragment();
       if (!recommendationSelect.value && collectionSelect.value === MANUAL_FOUR_EQUIPMENT_COLLECTION_ID) {
@@ -612,8 +616,15 @@ import { unavailableStatsForRow } from "./statOptions.js";
 
       characterSelect.replaceChildren(fragment);
       if (characterIndexes.length) {
-        characterSelect.value = `excel-character-${characterIndexes[0]}`;
-        showCharacterEquipmentMode(importedCharacters[characterIndexes[0]]);
+        const normalizedPreferredCode = String(preferredCharacterCode || "").trim();
+        const preferredIndex = normalizedPreferredCode
+          ? characterIndexes.find((index) => (
+              String(importedCharacters[index]?.nameCode || "").trim() === normalizedPreferredCode
+            ))
+          : undefined;
+        const selectedIndex = Number.isInteger(preferredIndex) ? preferredIndex : characterIndexes[0];
+        characterSelect.value = `excel-character-${selectedIndex}`;
+        showCharacterEquipmentMode(importedCharacters[selectedIndex]);
       } else {
         const emptyOption = document.createElement("option");
         emptyOption.value = "current";
@@ -703,7 +714,7 @@ import { unavailableStatsForRow } from "./statOptions.js";
           ? defaultCollectionId
           : (regularCollections[0]?.id || SINGLE_EQUIPMENT_COLLECTION_ID);
       }
-      refreshCharacterSelect();
+      refreshCharacterSelect(String(snapshot?.defaultCharacterCode || ""));
     }
 
     function populateUnsyncedSelectors() {
@@ -905,6 +916,25 @@ import { unavailableStatsForRow } from "./statOptions.js";
           if (calculationModeSelect.value === "global") clearGlobalPlanOutputs();
         });
       });
+    }
+
+    function renderEquipmentEffectOverview() {
+      const visible = showEquipmentEffectOverview && !characterEquipmentMode.hidden;
+      equipmentEffectOverview.hidden = !visible;
+      if (!visible) {
+        equipmentEffectOverviewValues.replaceChildren();
+        return;
+      }
+
+      const currentLines = [...characterEquipmentMode.querySelectorAll(".equipment-current-rows")]
+        .flatMap(container => readRows(container));
+      const summary = summarizeEquipmentEffects(currentLines, STAT_TIER_VALUES);
+      equipmentEffectOverviewValues.innerHTML = summary.map(item => `
+        <span class="equipment-effect-item">
+          <span class="equipment-effect-name">${escapeHtml(item.stat)}</span>
+          <strong class="equipment-effect-value">${item.formattedValue}</strong>
+        </span>
+      `).join("");
     }
 
     function setInlineOptimalResult(element, text, isEmpty = false) {
@@ -1113,6 +1143,8 @@ import { unavailableStatsForRow } from "./statOptions.js";
       allResultsTab.hidden = true;
       if (allResultsTab.getAttribute("aria-selected") === "true") activateOutputTab("result");
       characterEquipmentMode.hidden = true;
+      showEquipmentEffectOverview = false;
+      renderEquipmentEffectOverview();
       characterEquipmentMode.replaceChildren();
       calculationModeSelect.hidden = true;
       targetPresetSelect.hidden = true;
@@ -1134,6 +1166,8 @@ import { unavailableStatsForRow } from "./statOptions.js";
       classicOptimalResultSection.hidden = true;
       allResultsTab.hidden = false;
       characterEquipmentMode.hidden = false;
+      showEquipmentEffectOverview = !character.transient;
+      renderEquipmentEffectOverview();
       calculationModeSelect.hidden = false;
       targetPresetSelect.value = "";
       globalTargetPresetSelect.value = "";
@@ -1174,8 +1208,12 @@ import { unavailableStatsForRow } from "./statOptions.js";
           if (isInitial) syncForceRetentionAvailability(row);
           syncEquipmentStatOptions(container);
           clearScopedOptimalResult(statSelect);
+          if (isInitial) renderEquipmentEffectOverview();
         });
-        tierSelect.addEventListener("change", () => clearScopedOptimalResult(tierSelect));
+        tierSelect.addEventListener("change", () => {
+          clearScopedOptimalResult(tierSelect);
+          if (isInitial) renderEquipmentEffectOverview();
+        });
       });
 
       if (!isInitial) {
@@ -1296,6 +1334,7 @@ import { unavailableStatsForRow } from "./statOptions.js";
         syncForceRetentionAvailability(row);
       });
       document.querySelectorAll(".rows").forEach(syncEquipmentStatOptions);
+      renderEquipmentEffectOverview();
       document.querySelectorAll(".equipment-skip-input").forEach(input => {
         input.checked = false;
         setEquipmentSkipped(input.closest(".character-equipment-slot"), false);

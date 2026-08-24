@@ -17,6 +17,7 @@ const commonCharacter = (nameCode, upstreamName) => ({
 
 export const COMMON_CHARACTER_LIST = Object.freeze([
   commonCharacter("5129", "拉毗：小红帽"),
+  { nameCode: "5065", name: "皇冠" },
   { nameCode: "5180", name: "雪子" },
   { nameCode: "5159", name: "迪塞尔：冬日甜心" },
   { nameCode: "5138", name: "米哈拉：羁绊锁链" },

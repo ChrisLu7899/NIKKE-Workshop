@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import {
-  Alert, Box, Button, Chip, Divider, Drawer, FormControl, InputLabel, MenuItem,
+  Alert, Box, Button, Checkbox, Chip, Divider, Drawer, FormControl, FormControlLabel, InputLabel, MenuItem,
   Select, Stack, TextField, Typography,
 } from "@mui/material";
 import {
@@ -101,13 +101,14 @@ export default function LocalCharacterEntryDrawer({
           <Box key={SLOT_NAMES[slotIndex]} sx={{ p: 1.5, border: "1px solid", borderColor: "divider", borderRadius: 1.5 }}>
             <Typography variant="subtitle2" sx={{ mb: 1 }}>{SLOT_NAMES[slotIndex]}</Typography>
             <Stack spacing={1}>{slot.map((line, lineIndex) => (
-              <Box key={line.position} sx={{ display: "grid", gridTemplateColumns: "28px minmax(0, 1.7fr) minmax(80px, 1fr) minmax(70px, .8fr)", gap: 1, alignItems: "center" }}>
+              <Box key={line.position} sx={{ display: "grid", gridTemplateColumns: "28px minmax(0, 1.7fr) minmax(80px, 1fr) minmax(70px, .8fr) auto", gap: 1, alignItems: "center" }}>
                 <Typography color="text.secondary">{lineIndex + 1}</Typography>
                 <TextField select size="small" label="词条" value={line.functionType} onChange={(event) => updateLine(slotIndex, lineIndex, "functionType", event.target.value)}>
                   <MenuItem value="">空词条</MenuItem>{EQUIPMENT_FUNCTION_TYPES.map((type) => <MenuItem key={type} value={type}>{EQUIPMENT_FUNCTION_LABELS[type]}</MenuItem>)}
                 </TextField>
                 <TextField type="number" size="small" label="数值" value={line.value} onChange={(event) => updateLine(slotIndex, lineIndex, "value", event.target.value)} inputProps={{ step: "0.01" }} />
                 <TextField type="number" size="small" label="档位" value={line.level} onChange={(event) => updateLine(slotIndex, lineIndex, "level", event.target.value)} inputProps={{ min: 1, max: 15 }} />
+                <FormControlLabel control={<Checkbox checked={line.locked === true} disabled={!line.functionType} onChange={(event) => updateLine(slotIndex, lineIndex, "locked", event.target.checked)} />} label="已锁" />
               </Box>
             ))}</Stack>
           </Box>

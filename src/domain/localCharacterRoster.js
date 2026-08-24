@@ -3,12 +3,13 @@
 
 import { resolveSimplifiedChineseCharacterName } from "../data/characterNameOverrides.js";
 
-export const LOCAL_CHARACTER_SCHEMA_VERSION = 1;
+export const LOCAL_CHARACTER_SCHEMA_VERSION = 2;
 export const LOCAL_CHARACTER_SOURCES = Object.freeze({
   manual: "manual",
   excel: "excel",
   sync: "sync",
   custom: "custom",
+  screenshot: "screenshot",
 });
 
 export const EQUIPMENT_SLOT_COUNT = 4;
@@ -56,6 +57,7 @@ export function createEmptyEquipments() {
       functionType: "",
       value: null,
       level: null,
+      locked: null,
     }))
   ));
 }
@@ -67,6 +69,7 @@ function normalizeEquipmentLine(line, position) {
     functionType: EQUIPMENT_FUNCTION_TYPES.includes(functionType) ? functionType : "",
     value: optionalNumber(line?.value ?? line?.function_value, { min: 0 }),
     level: optionalNumber(line?.level, { integer: true, min: 1, max: 15 }),
+    locked: typeof line?.locked === "boolean" ? line.locked : null,
   };
 }
 
@@ -348,6 +351,7 @@ export function localRecordToCalculatorCharacter(record) {
         functionType: line.functionType,
         value: line.value,
         level: line.level,
+        locked: line.locked,
       }))),
   };
 }
@@ -408,6 +412,7 @@ export function reconcileLocalCharactersAfterSync(records, snapshot, catalog, no
           ...line,
           value: mergeOptionalSyncedField(line.value, existingLine.value, `equipments.${slotIndex}.${lineIndex}.value`, supplementFields),
           level: mergeOptionalSyncedField(line.level, existingLine.level, `equipments.${slotIndex}.${lineIndex}.level`, supplementFields),
+          locked: mergeOptionalSyncedField(line.locked, existingLine.locked, `equipments.${slotIndex}.${lineIndex}.locked`, supplementFields),
         };
       });
     });

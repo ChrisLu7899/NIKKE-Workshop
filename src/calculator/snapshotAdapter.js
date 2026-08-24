@@ -44,8 +44,8 @@ export function adaptCalculatorSnapshot(snapshot, { equipmentSlotNames, findTier
             ? sourcePosition
             : sourceIndex + 1;
           if (position > 3) return;
-          // Blablalink 不提供游戏内永久锁定状态，导入后由用户手动勾选“已锁”。
-          lines[position - 1] = { stat, tier, percent, locked: false };
+          // Blablalink 不提供永久锁定状态；本地截图录入可以显式携带该字段。
+          lines[position - 1] = { stat, tier, percent, locked: line?.locked === true };
         });
         return { slotIndex, label, excelLabel: label, lines };
       });

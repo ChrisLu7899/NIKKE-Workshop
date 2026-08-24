@@ -35,3 +35,8 @@ private-key.pem
 # Temporary build files
 dist.crx
 *.crx
+
+# Local OCR development artifacts
+*.traineddata
+__pycache__/
+*.pyc

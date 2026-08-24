@@ -218,7 +218,12 @@ export function buildCalculatorCollections(snapshot, templates) {
   return collections;
 }
 
-export function attachCalculatorCollections(snapshot, templates, preferredCollectionId = SYSTEM_COLLECTION_IDS.owned) {
+export function attachCalculatorCollections(
+  snapshot,
+  templates,
+  preferredCollectionId = SYSTEM_COLLECTION_IDS.owned,
+  preferredCharacterCode = "",
+) {
   const collections = buildCalculatorCollections(snapshot, templates);
   const defaultCollectionId = collections.some((collection) => collection.id === preferredCollectionId)
     ? preferredCollectionId
@@ -227,5 +232,6 @@ export function attachCalculatorCollections(snapshot, templates, preferredCollec
     ...snapshot,
     collections,
     defaultCollectionId,
+    defaultCharacterCode: normalizeCode(preferredCharacterCode),
   };
 }

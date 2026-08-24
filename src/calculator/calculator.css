@@ -176,6 +176,60 @@
       overflow: clip;
     }
 
+    .equipment-effect-overview {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      min-width: 0;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
+    }
+
+    .equipment-effect-overview[hidden] { display: none; }
+
+    .equipment-effect-overview h2 {
+      flex: 0 0 auto;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+
+    .equipment-effect-overview-values {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      overflow-x: auto;
+      padding-block: 2px;
+      scrollbar-width: thin;
+    }
+
+    .equipment-effect-item {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: baseline;
+      gap: 6px;
+      padding: 6px 9px;
+      border: 1px solid var(--line);
+      border-radius: var(--control-radius);
+      background: var(--surface);
+      white-space: nowrap;
+    }
+
+    .equipment-effect-name {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .equipment-effect-value {
+      color: var(--primary);
+      font-size: 0.86rem;
+      font-variant-numeric: tabular-nums;
+    }
+
     .panel-header {
       padding: 18px 20px;
       border-bottom: 1px solid var(--line);
@@ -1103,6 +1157,7 @@
       .brand p { max-width: 30ch; }
       main { margin-top: 14px; gap: 14px; }
       .panel-header, .form-section, .controls { padding: 16px; }
+      .equipment-effect-overview { align-items: flex-start; flex-direction: column; gap: 8px; padding: 14px 16px; }
       .panel-header { align-items: flex-start; flex-wrap: wrap; }
       .calculation-actions { width: 100%; margin-left: 0; }
       .calculation-actions .button-primary { flex: 1; min-width: 0; }

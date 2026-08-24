@@ -22,6 +22,7 @@ const normalizeEquipmentLine = (line, fallbackPosition) => ({
   functionType: String(line?.function_type || ""),
   value: Number(line?.function_value || 0),
   level: Number(line?.level || 0),
+  ...(typeof line?.locked === "boolean" ? { locked: line.locked } : {}),
 });
 
 const normalizeNumber = (value) => {

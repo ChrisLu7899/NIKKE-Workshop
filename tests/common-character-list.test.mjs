@@ -18,9 +18,11 @@ const catalog = COMMON_CHARACTER_LIST.map((entry, index) => ({
 }));
 
 test("common list contains the requested unique Nikkes in source order", () => {
-  assert.equal(COMMON_CHARACTER_LIST.length, 26);
-  assert.equal(new Set(COMMON_CHARACTER_LIST.map((entry) => entry.nameCode)).size, 26);
+  assert.equal(COMMON_CHARACTER_LIST.length, 27);
+  assert.equal(new Set(COMMON_CHARACTER_LIST.map((entry) => entry.nameCode)).size, 27);
   assert.equal(COMMON_CHARACTER_LIST[0].name, "拉毗：小红帽");
+  assert.equal(COMMON_CHARACTER_LIST[1].nameCode, "5065");
+  assert.equal(COMMON_CHARACTER_LIST[1].name, "皇冠");
   assert.equal(COMMON_CHARACTER_LIST.at(-1).name, "拉普拉斯");
 });
 
@@ -47,4 +49,3 @@ test("legacy default template migrates to a fixed common template", () => {
   );
   assert.deepEqual(result.missing, []);
 });
-

@@ -226,15 +226,33 @@ const ManagementPage = () => {
     return roster;
   }, []);
 
-  const handleSaveLocalCharacter = useCallback(async ({ catalogCharacter, draft, custom, existingLocalId }) => {
+  const handleSaveLocalCharacter = useCallback(async ({ catalogCharacter, draft, custom, existingLocalId, source = null }) => {
     const result = saveLocalCharacterRecord(localRoster.records, {
-      catalogCharacter, draft, custom, existingLocalId, catalog: nikkeList,
+      catalogCharacter, draft, custom, existingLocalId, source, catalog: nikkeList,
     });
     if (!result.errors.length) {
       await persistLocalRecords(result.records);
       showMessage(custom ? "自定义角色已保存" : "角色录入已保存", "success");
     }
     return result;
+  }, [localRoster.records, nikkeList, persistLocalRecords, showMessage]);
+
+  const handleSaveLocalCharacterBatch = useCallback(async (items) => {
+    let workingRecords = localRoster.records;
+    const saved = [];
+    const errors = [];
+    (Array.isArray(items) ? items : []).forEach((item) => {
+      const result = saveLocalCharacterRecord(workingRecords, { ...item, catalog: nikkeList });
+      if (result.errors.length) errors.push(...result.errors.map((message) => `${item.characterName || "角色"}：${message}`));
+      else {
+        workingRecords = result.records;
+        saved.push(result.record);
+      }
+    });
+    if (errors.length) return { saved: [], errors };
+    await persistLocalRecords(workingRecords);
+    showMessage(`图片识别数据已保存：${saved.length} 名角色`, "success");
+    return { saved, errors: [] };
   }, [localRoster.records, nikkeList, persistLocalRecords, showMessage]);
 
   const handleDeleteLocalCharacter = useCallback(async (localId) => {
@@ -548,6 +566,23 @@ const ManagementPage = () => {
     }
   }, [activeCollectionId, localRoster.records, ownedSnapshot, templateManagement.templates]);
 
+  const handleOpenCharacterCalculator = useCallback(async ({ characterCode, collectionId }) => {
+    const preferredCollectionId = collectionId === SYSTEM_COLLECTION_IDS.catalog
+      ? (ownedSnapshot ? SYSTEM_COLLECTION_IDS.owned : SYSTEM_COLLECTION_IDS.recorded)
+      : collectionId;
+    const calculatorSnapshot = attachCalculatorCollections(
+      buildUnifiedCalculatorSnapshot(ownedSnapshot, localRoster.records),
+      templateManagement.templates,
+      preferredCollectionId,
+      characterCode,
+    );
+    await setCalculatorData(calculatorSnapshot);
+    setCalculatorFrameHeight(720);
+    setCalculatorFrameKey((current) => current + 1);
+    setTab(1);
+    chrome.storage.local.set({ managementTab: 1, managementLayoutVersion: 2 });
+  }, [localRoster.records, ownedSnapshot, templateManagement.templates]);
+
   // 语言和本地设置初始化
   useEffect(() => {
     chrome.storage.local.get("settings", (r) => {
@@ -654,6 +689,7 @@ const ManagementPage = () => {
             localRecords={localRoster.records}
             recordedCount={getRecordedLocalCharacters(localRoster.records).length}
             onSaveLocalCharacter={handleSaveLocalCharacter}
+            onSaveLocalCharacterBatch={handleSaveLocalCharacterBatch}
             onDeleteLocalCharacter={handleDeleteLocalCharacter}
             onImportLocalGallery={handleImportLocalGallery}
             onExportLocalGallery={handleExportLocalGallery}
@@ -699,6 +735,7 @@ const ManagementPage = () => {
             onOpenSettings={() => setSettingsOpen(true)}
             actionsDisabled={manualAreaIdInvalid}
             syncBlockedReason={crawler.crawlBlockedReason}
+            onOpenCharacterCalculator={handleOpenCharacterCalculator}
           />
         )}
         <Box

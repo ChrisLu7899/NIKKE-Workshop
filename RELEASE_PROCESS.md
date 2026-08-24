@@ -20,7 +20,7 @@
 ```powershell
 $workshopRepo = "C:\Users\Lucifer\Desktop\NIKKE\线上版\NIKKE-Workshop-source"
 $workshopReleaseRoot = "C:\Users\Lucifer\Desktop\NIKKE\线上版"
-$workshopVersion = "1.0.5"
+$workshopVersion = "1.0.7"
 Set-Location -LiteralPath $workshopRepo
 ```
 

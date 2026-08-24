@@ -107,8 +107,9 @@ test("calculator snapshot receives owned and non-empty custom collections", () =
     id: "1",
     name: "主力",
     data: buildCharactersConfig([catalog[0]]),
-  }], "template:1");
+  }], "template:1", "c1");
   assert.equal(preferred.defaultCollectionId, "template:1");
+  assert.equal(preferred.defaultCharacterCode, "c1");
 });
 
 test("calculator recommendation collections preserve preset entry order", () => {

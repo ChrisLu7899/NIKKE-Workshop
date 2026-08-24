@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { memo, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 import {
   Alert,
   Badge,
@@ -45,6 +45,10 @@ import SyncIcon from "@mui/icons-material/Sync";
 import TuneIcon from "@mui/icons-material/Tune";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import LocalCharacterEntryDrawer from "./LocalCharacterEntryDrawer.jsx";
+import ScreenshotOcrImportDialog from "./ScreenshotOcrImportDialog.jsx";
+import DocumentScannerOutlinedIcon from "@mui/icons-material/DocumentScannerOutlined";
+import { prewarmLocalScreenshotOcr } from "../../services/localScreenshotOcr.js";
+import { summarizeTopEquipmentAffixes } from "../../domain/equipmentAffixSummary.js";
 import {
   EQUIPMENT_FUNCTION_LABELS,
   getRecordedLocalCharacters,
@@ -109,6 +113,7 @@ const FALLBACK_COPY = {
     ownedCount: "已拥有 {count}",
     catalogCount: "图鉴 {count}",
     details: "角色信息",
+    calculateCharacter: "洗词条",
     notOwned: "账号尚未获得",
     noOwnedData: "同步账号数据后可查看当前装备并创建列表。",
     equipment: "装备 {slot}",
@@ -160,6 +165,7 @@ const FALLBACK_COPY = {
     ownedCount: "{count} owned",
     catalogCount: "{count} catalog entries",
     details: "Character details",
+    calculateCharacter: "Calculator",
     notOwned: "Not owned on this account",
     noOwnedData: "Sync account data to inspect equipment and create lists.",
     equipment: "Equipment {slot}",
@@ -247,6 +253,7 @@ const CharacterGalleryTabContent = ({
   localRecords,
   recordedCount,
   onSaveLocalCharacter,
+  onSaveLocalCharacterBatch,
   onDeleteLocalCharacter,
   onImportLocalGallery,
   onExportLocalGallery,
@@ -292,6 +299,7 @@ const CharacterGalleryTabContent = ({
   onOpenSettings,
   actionsDisabled,
   syncBlockedReason,
+  onOpenCharacterCalculator,
 }) => {
   const copy = FALLBACK_COPY[lang === "en" ? "en" : "zh"];
   const [search, setSearch] = useState("");
@@ -304,6 +312,7 @@ const CharacterGalleryTabContent = ({
   const [detailNikke, setDetailNikke] = useState(null);
   const [entryNikke, setEntryNikke] = useState(null);
   const [createCustomOpen, setCreateCustomOpen] = useState(false);
+  const [screenshotOcrOpen, setScreenshotOcrOpen] = useState(false);
   const [importSummary, setImportSummary] = useState(null);
   const importInputRef = useRef(null);
   const [multiSelectMode, setMultiSelectMode] = useState(false);
@@ -318,6 +327,20 @@ const CharacterGalleryTabContent = ({
     corporations: [],
     weapons: [],
   });
+
+  useEffect(() => {
+    const warmUp = () => {
+      prewarmLocalScreenshotOcr().catch(() => {
+        // 预热失败不会阻断管理页；用户开始识别时会重新尝试并显示具体错误。
+      });
+    };
+    if (typeof globalThis.requestIdleCallback === "function") {
+      const idleId = globalThis.requestIdleCallback(warmUp, { timeout: 2000 });
+      return () => globalThis.cancelIdleCallback?.(idleId);
+    }
+    const timeoutId = globalThis.setTimeout(warmUp, 500);
+    return () => globalThis.clearTimeout(timeoutId);
+  }, []);
 
   const ownedCharacterMap = useMemo(() => {
     const map = new Map();
@@ -603,6 +626,7 @@ const CharacterGalleryTabContent = ({
           <Stack direction="row" alignItems="center" gap={1.5} flexWrap="wrap">
             <Typography variant="h5" component="h1" sx={{ fontWeight: 600 }}>{copy.title}</Typography>
             <Button size="small" variant="outlined" startIcon={<AddIcon />} onClick={() => setCreateCustomOpen(true)}>自定义角色</Button>
+            <Button size="small" variant="outlined" startIcon={<DocumentScannerOutlinedIcon />} onClick={() => setScreenshotOcrOpen(true)}>图片识别</Button>
           </Stack>
           <Stack direction="row" spacing={1.5} sx={{ mt: 0.5, color: "text.secondary", flexWrap: "wrap" }}>
             <Typography variant="body2">{copy.catalogCount.replace("{count}", String((nikkeList || []).length))}</Typography>
@@ -810,6 +834,7 @@ const CharacterGalleryTabContent = ({
             const owned = Boolean(accountCharacter);
             const selected = selectedCodes.has(code);
             const avatar = getNikkeAvatarUrl(nikke);
+            const equipmentSummary = summarizeTopEquipmentAffixes((accountCharacter || localRecord)?.equipments);
             return (
               <Box
                 component="button"
@@ -868,6 +893,37 @@ const CharacterGalleryTabContent = ({
                     <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 1 }}>{`Lv. ${localRecord.level}`}</Typography>
                   ) : null}
                 </Box>
+                {equipmentSummary.length ? (
+                  <Box
+                    sx={{
+                      gridColumn: "1 / -1",
+                      display: "grid",
+                      gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                      columnGap: 1.25,
+                      rowGap: 0.25,
+                      pt: 0.75,
+                      pb: localRecord && recordedCodes.has(code) ? 2.5 : 0,
+                      borderTop: "1px solid",
+                      borderColor: "divider",
+                    }}
+                  >
+                    {equipmentSummary.map((item) => (
+                      <Box
+                        key={item.functionType}
+                        sx={{
+                          minWidth: 0,
+                          display: "grid",
+                          gridTemplateColumns: "2.5rem minmax(0, 1fr)",
+                          columnGap: 0.5,
+                          alignItems: "baseline",
+                        }}
+                      >
+                        <Typography variant="caption" color="text.secondary" sx={{ whiteSpace: "nowrap" }}>{item.shortLabel}</Typography>
+                        <Typography variant="caption" color="text.primary" sx={{ fontWeight: 600, fontVariantNumeric: "tabular-nums" }}>{item.roundedValue}</Typography>
+                      </Box>
+                    ))}
+                  </Box>
+                ) : null}
                 {localRecord && recordedCodes.has(code) ? <Chip size="small" color={localRecord.custom ? "secondary" : "primary"} label={localRecord.custom ? "自定义" : "已录入"} sx={{ position: "absolute", right: 4, bottom: 4, height: 20 }} /> : null}
                 {multiSelectMode ? (
                   <Checkbox checked={selected} disabled={!owned} size="small" tabIndex={-1} sx={{ position: "absolute", top: 2, right: 2, p: 0.5 }} />
@@ -984,8 +1040,26 @@ const CharacterGalleryTabContent = ({
                   />
                 ) : null}
               </Box>
-              <Box>
-                <Typography variant="h5" sx={{ fontWeight: 600, textWrap: "balance" }}>{getDisplayName(detailNikke)}</Typography>
+              <Box sx={{ minWidth: 0 }}>
+                <Stack direction="row" spacing={1} alignItems="flex-start" justifyContent="space-between">
+                  <Typography variant="h5" sx={{ minWidth: 0, fontWeight: 600, textWrap: "balance" }}>{getDisplayName(detailNikke)}</Typography>
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    startIcon={<TuneIcon />}
+                    onClick={() => {
+                      const characterCode = normalizeCode(detailNikke?.name_code);
+                      setDetailNikke(null);
+                      onOpenCharacterCalculator?.({
+                        characterCode,
+                        collectionId: activeCollectionId,
+                      });
+                    }}
+                    sx={{ flexShrink: 0, whiteSpace: "nowrap" }}
+                  >
+                    {copy.calculateCharacter}
+                  </Button>
+                </Stack>
                 <Stack direction="row" spacing={0.75} useFlexGap flexWrap="wrap" sx={{ mt: 1.5 }}>
                   <Chip size="small" label={getElementName(detailNikke.element)} />
                   <Chip size="small" label={getClassName(detailNikke.class)} />
@@ -1032,6 +1106,13 @@ const CharacterGalleryTabContent = ({
         open={createCustomOpen} onClose={() => setCreateCustomOpen(false)} custom catalogOptions={catalogOptions} optionLabels={catalogOptionLabels}
         onSave={(draft) => onSaveLocalCharacter({ draft, custom: true, existingLocalId: "" })}
       /> : null}
+      <ScreenshotOcrImportDialog
+        open={screenshotOcrOpen}
+        onClose={() => setScreenshotOcrOpen(false)}
+        standardCatalog={standardCatalog}
+        localRecords={localRecords}
+        onSaveLocalCharacterBatch={onSaveLocalCharacterBatch}
+      />
 
       <Dialog open={Boolean(importSummary)} onClose={() => setImportSummary(null)} fullWidth maxWidth="sm">
         <DialogTitle>本地图鉴导入完成</DialogTitle><DialogContent dividers>
