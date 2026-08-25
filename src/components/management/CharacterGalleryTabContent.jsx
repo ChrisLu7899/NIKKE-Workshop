@@ -1100,6 +1100,14 @@ const CharacterGalleryTabContent = ({
         record={entryRecord} custom={Boolean(entryNikke?._isCustom)} catalogOptions={catalogOptions} optionLabels={catalogOptionLabels}
         onSave={(draft) => onSaveLocalCharacter({ catalogCharacter: entryNikke?._isCustom ? null : entryNikke, draft, custom: Boolean(entryNikke?._isCustom), existingLocalId: entryRecord?.localId || "" })}
         onDelete={async () => { await onDeleteLocalCharacter(entryRecord.localId); setEntryNikke(null); }}
+        onOpenCalculator={entryRecord ? () => {
+          const characterCode = localCharacterKey(entryRecord);
+          setEntryNikke(null);
+          onOpenCharacterCalculator?.({
+            characterCode,
+            collectionId: SYSTEM_COLLECTION_IDS.recorded,
+          });
+        } : undefined}
       /> : null}
       {createCustomOpen ? <LocalCharacterEntryDrawer
         key="new-custom-character"

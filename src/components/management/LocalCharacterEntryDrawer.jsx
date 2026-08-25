@@ -5,6 +5,7 @@ import {
   Alert, Box, Button, Checkbox, Chip, Divider, Drawer, FormControl, FormControlLabel, InputLabel, MenuItem,
   Select, Stack, TextField, Typography,
 } from "@mui/material";
+import TuneIcon from "@mui/icons-material/Tune";
 import {
   EQUIPMENT_FUNCTION_LABELS,
   EQUIPMENT_FUNCTION_TYPES,
@@ -41,6 +42,7 @@ function recordToDraft(record) {
 
 export default function LocalCharacterEntryDrawer({
   open, onClose, catalogCharacter, record, custom = false, catalogOptions, optionLabels, onSave, onDelete,
+  onOpenCalculator,
 }) {
   const [draft, setDraft] = useState(() => record ? recordToDraft(record) : emptyDraft(catalogCharacter, custom));
   const [errors, setErrors] = useState([]);
@@ -67,7 +69,20 @@ export default function LocalCharacterEntryDrawer({
     <Drawer anchor="right" open={open} onClose={onClose} PaperProps={{ sx: { width: { xs: "min(96vw, 620px)", sm: 620 }, p: 2.5 } }}>
       <Stack direction="row" alignItems="center" justifyContent="space-between" gap={2}>
         <Box><Typography variant="h6">{title}</Typography><Typography variant="body2" color="text.secondary">数据只保存在当前浏览器本地。</Typography></Box>
-        {record?.syncMissing ? <Chip color="warning" size="small" label="同步未发现" /> : null}
+        <Stack direction="row" alignItems="center" gap={1} sx={{ flexShrink: 0 }}>
+          {record?.syncMissing ? <Chip color="warning" size="small" label="同步未发现" /> : null}
+          {record && onOpenCalculator ? (
+            <Button
+              size="small"
+              variant="outlined"
+              startIcon={<TuneIcon />}
+              onClick={onOpenCalculator}
+              sx={{ whiteSpace: "nowrap" }}
+            >
+              洗词条
+            </Button>
+          ) : null}
+        </Stack>
       </Stack>
       <Divider sx={{ my: 2 }} />
       {errors.length ? <Alert severity="error" sx={{ mb: 2 }}>{errors.join("；")}</Alert> : null}

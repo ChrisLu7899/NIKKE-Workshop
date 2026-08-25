@@ -18,10 +18,10 @@
 设置本次路径与版本；不要复用 `$HOME` 等系统变量：
 
 ```powershell
-$workshopRepo = "C:\Users\Lucifer\Desktop\NIKKE\线上版\NIKKE-Workshop-source"
-$workshopReleaseRoot = "C:\Users\Lucifer\Desktop\NIKKE\线上版"
+Set-Location -LiteralPath "D:\path\to\NIKKE-Workshop-source"
+$workshopRepo = (Get-Location).Path
+$workshopReleaseRoot = Split-Path -Parent $workshopRepo
 $workshopVersion = "1.0.7"
-Set-Location -LiteralPath $workshopRepo
 ```
 
 检查工作区、远端和运行环境：

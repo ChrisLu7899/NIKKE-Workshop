@@ -1,5 +1,7 @@
 """Developer diagnostic for the constrained affix-value template matcher."""
 
+import os
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -7,7 +9,7 @@ from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCREENSHOTS = Path(r"C:\Users\Lucifer\Desktop\NIKKE\screenshots")
+SCREENSHOTS = Path(os.environ.get("NIKKE_OCR_SCREENSHOTS", ROOT / "screenshots"))
 TEMPLATES = ROOT / "public" / "ocr" / "affix-value-templates"
 
 CASES = [
@@ -123,7 +125,7 @@ def main() -> None:
     paths = {path.name: path for path in SCREENSHOTS.rglob("*.png")}
     for filename, function_type, position, expected in CASES:
         observed, crop = screenshot_value_mask(paths[filename], position)
-        debug_dir = Path.home() / "AppData" / "Local" / "Temp" / "nikke-ocr-debug"
+        debug_dir = Path(tempfile.gettempdir()) / "nikke-ocr-debug"
         debug_dir.mkdir(parents=True, exist_ok=True)
         crop.save(debug_dir / filename)
         Image.fromarray(observed * 255).save(debug_dir / f"mask-{filename}")

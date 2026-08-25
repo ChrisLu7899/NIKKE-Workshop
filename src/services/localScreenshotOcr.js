@@ -12,6 +12,8 @@ import {
   createEquipmentRecognitionRegions,
   locateEquipmentEffectRowCenters,
   locateLargestEquipmentPanel,
+  locateOverloadLogoFromRgba,
+  projectEquipmentPanelFromOverload,
 } from "../domain/equipmentScreenshotTemplate.js";
 import { matchEquipmentIcon } from "./equipmentIconMatcher.js";
 import { matchEquipmentValueTemplate } from "./equipmentValueTemplateMatcher.js";
@@ -62,7 +64,10 @@ function canvasPreviewUrl(bitmap, rect, { maximumWidth = 720 } = {}) {
 }
 
 function locateEquipmentPanel(bitmap) {
-  const sampleWidth = Math.min(360, bitmap.width);
+  // 完整游戏截图中的装备弹窗通常只占画面宽度约 25%～35%。
+  // 360px 的旧采样会把三行词条和面板边缘压缩得过小，导致正确弹窗
+  // 在连通域阶段断裂。800px 仍足够轻量，同时可以保留面板结构。
+  const sampleWidth = Math.min(800, bitmap.width);
   const scale = sampleWidth / bitmap.width;
   const sampleHeight = Math.max(1, Math.round(bitmap.height * scale));
   const canvas = document.createElement("canvas");
@@ -71,6 +76,35 @@ function locateEquipmentPanel(bitmap) {
   const context = canvas.getContext("2d", { willReadFrequently: true });
   context.drawImage(bitmap, 0, 0, sampleWidth, sampleHeight);
   const pixels = context.getImageData(0, 0, sampleWidth, sampleHeight).data;
+  const overload = locateOverloadLogoFromRgba(pixels, sampleWidth, sampleHeight);
+  if (overload) {
+    const overloadBounds = {
+      left: overload.bounds.left / scale,
+      top: overload.bounds.top / scale,
+      width: overload.bounds.width / scale,
+      height: overload.bounds.height / scale,
+    };
+    const projection = projectEquipmentPanelFromOverload(overloadBounds, {
+      imageWidth: bitmap.width,
+      imageHeight: bitmap.height,
+    });
+    if (projection?.visibleBounds) {
+      const fullyVisible = projection.visibleCoverage >= 0.94;
+      return {
+        bounds: projection.visibleBounds,
+        confidence: overload.confidence === "high" && fullyVisible ? "high" : "needs_confirmation",
+        coverage: projection.visibleCoverage,
+        source: "overload-geometry",
+        overload: {
+          bounds: overloadBounds,
+          confidence: overload.confidence,
+          score: overload.score,
+          evidence: overload.evidence,
+        },
+        clippedEdges: projection.clippedEdges,
+      };
+    }
+  }
   const mask = new Uint8Array(sampleWidth * sampleHeight);
   for (let index = 0, pixel = 0; index < pixels.length; index += 4, pixel += 1) {
     const red = pixels[index];
@@ -78,7 +112,9 @@ function locateEquipmentPanel(bitmap) {
     const blue = pixels[index + 2];
     const luminance = (red * 0.299) + (green * 0.587) + (blue * 0.114);
     const chroma = Math.max(red, green, blue) - Math.min(red, green, blue);
-    mask[pixel] = luminance >= 188 && chroma <= 52 ? 1 : 0;
+    // 弹窗并非纯白：透明阴影、未满级底部区域和截图压缩都会把亮度
+    // 拉低。适度放宽阈值，但继续用低色差排除角色立绘和大多数背景。
+    mask[pixel] = luminance >= 178 && chroma <= 68 ? 1 : 0;
   }
   const located = locateLargestEquipmentPanel(mask, sampleWidth, sampleHeight);
   if (!located) {
@@ -86,6 +122,7 @@ function locateEquipmentPanel(bitmap) {
       bounds: { left: 0, top: 0, width: bitmap.width, height: bitmap.height },
       confidence: "fallback",
       coverage: 1,
+      source: "full-image-fallback",
     };
   }
   const padding = Math.max(2, Math.round(2 / scale));
@@ -95,8 +132,9 @@ function locateEquipmentPanel(bitmap) {
   const bottom = Math.min(bitmap.height, Math.ceil((located.top + located.height) / scale) + padding);
   return {
     bounds: { left, top, width: right - left, height: bottom - top },
-    confidence: "high",
+    confidence: "needs_confirmation",
     coverage: located.coverage,
+    source: "bright-panel-fallback",
   };
 }
 
@@ -329,6 +367,9 @@ async function recognizeImage(file, workers, { characterName, onProgress }) {
       effectRows: regions.effectRows,
       confidence: panelDetection.confidence,
       coverage: panelDetection.coverage,
+      source: panelDetection.source,
+      overload: panelDetection.overload || null,
+      clippedEdges: panelDetection.clippedEdges || null,
       effectRowsLocated: effectRowCenters.length === 3,
     },
     equipmentSlot,
@@ -339,7 +380,11 @@ async function recognizeImage(file, workers, { characterName, onProgress }) {
     equipmentSlotSource,
     lines,
     warnings: [
-      ...(panelDetection.confidence !== "high" ? ["未可靠定位白色装备面板，已按整张图片回退识别"] : []),
+      ...(panelDetection.confidence !== "high" ? [
+        panelDetection.source === "overload-geometry"
+          ? "OVERLOAD 几何定位到的面板存在裁切或置信度不足，请确认"
+          : "未检测到可靠的 OVERLOAD 标识，白色装备面板定位需要确认",
+      ] : []),
       ...(!equipmentSlot ? ["未识别装备部位"] : []),
       ...(equipmentIconMatch.confidence === "low" ? ["装备图标匹配置信度较低，建议检查部位"] : []),
       ...(slotConflict ? [`装备图标判定为${slotFromIcon || "未知"}，名称/标签判定为${slotFromName || slotFromLabel || "未知"}；已优先采用装备图标`] : []),
