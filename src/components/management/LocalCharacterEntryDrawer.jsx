@@ -14,7 +14,7 @@ import {
   normalizeLocalCharacterRecord,
 } from "../../domain/localCharacterRoster.js";
 
-const SLOT_NAMES = ["头部装备", "身体装备", "手部装备", "足部装备"];
+const SLOT_NAMES = ["头部", "身躯", "臂部", "腿部"];
 const PROFILE_FIELDS = [
   ["element", "属性", "elements"], ["class", "职业", "classes"],
   ["burstStage", "爆裂阶段", "bursts"], ["corporation", "企业", "corporations"],

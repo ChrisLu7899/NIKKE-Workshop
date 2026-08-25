@@ -75,7 +75,7 @@ test("calculator snapshot adapter preserves equipment line positions and leaves 
       }],
     }],
   }, {
-    equipmentSlotNames: ["头部装备", "身体装备", "手部装备", "足部装备"],
+    equipmentSlotNames: ["头部", "身躯", "臂部", "腿部"],
     findTierForPercent: () => 0,
   });
 
@@ -102,7 +102,7 @@ test("calculator ignores legacy snapshots whose ownership was inferred incorrect
     version: 1,
     accounts: [{ accountName: "旧缓存", characters: [{ nameCode: "legacy" }] }],
   }, {
-    equipmentSlotNames: ["头部装备", "身体装备", "手部装备", "足部装备"],
+    equipmentSlotNames: ["头部", "身躯", "臂部", "腿部"],
     findTierForPercent: () => 0,
   });
 

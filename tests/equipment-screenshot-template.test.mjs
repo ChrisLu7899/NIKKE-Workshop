@@ -255,7 +255,7 @@ test("three evenly spaced lock-icon runs are selected from unrelated dark contro
   assert.ok(Math.abs(centers[2] - 893) < 1);
 });
 
-test("two lock icons infer the trailing unearned-effect row on unleveled equipment", () => {
+test("two adjacent lock icons infer the trailing unearned-effect row", () => {
   const scores = [];
   const addRun = (start, end, score) => {
     for (let y = start; y <= end; y += 1) scores.push({ y, score });
@@ -265,6 +265,27 @@ test("two lock icons infer the trailing unearned-effect row on unleveled equipme
   addRun(833, 867, 28);
   // “LV 升级”是更靠下且更高的深色控件，不应被当成第三条效果栏。
   addRun(930, 990, 40);
+  scores.push({ y: 1040, score: 0 });
+  scores.sort((left, right) => left.y - right.y);
+  const centers = locateEquipmentEffectRowCenters(scores, {
+    panelWidth: 666,
+    minimumScore: 5,
+  });
+  assert.equal(centers.length, 3);
+  assert.ok(Math.abs(centers[0] - 807) < 1);
+  assert.ok(Math.abs(centers[1] - 850) < 1);
+  assert.ok(Math.abs(centers[2] - 893) < 1);
+});
+
+test("two separated lock icons infer an unearned-effect row in the middle", () => {
+  const scores = [];
+  const addRun = (start, end, score) => {
+    for (let y = start; y <= end; y += 1) scores.push({ y, score });
+    scores.push({ y: end + 1, score: 0 });
+  };
+  addRun(790, 824, 30);
+  addRun(876, 910, 29);
+  addRun(940, 995, 40); // unrelated footer button
   scores.push({ y: 1040, score: 0 });
   scores.sort((left, right) => left.y - right.y);
   const centers = locateEquipmentEffectRowCenters(scores, {

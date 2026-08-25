@@ -427,8 +427,8 @@ export function createEquipmentRecognitionRegions(rawPanelBounds, { effectRowCen
  * 从装备面板右侧锁图标列的逐行暗像素分数中定位三条效果栏中心。
  *
  * 锁图标与词条同行，并且不受截图底部是否出现“LV 升级”等额外区域影响。
- * 满级装备有三枚锁图标；未满级装备的“未获得效果”行没有锁图标，因此也
- * 支持用前两枚锁图标和固定栏距推导第三行。底部升级按钮不会参与推导。
+ * 满级装备有三枚锁图标；“未获得效果”行没有锁图标，因此也支持用两枚
+ * 锁图标和固定栏距补出缺失的任意一行。底部升级按钮不会参与推导。
  */
 export function locateEquipmentEffectRowCenters(
   rowScores,
@@ -493,24 +493,33 @@ export function locateEquipmentEffectRowCenters(
   }
   if (best) return best.selected.map((candidate) => candidate.center);
 
-  // 未满级装备只有前两行存在锁图标。选择间距最接近模板行距的一对，
-  // 然后按两行的实际间距推导“未获得效果”所在的第三行中心。
+  // “未获得效果”可能出现在三个物理位置中的任意一行。两枚锁相邻时
+  // 保持既有行为并向下补第三行；两枚锁相隔约两个标准栏距时，它们属于
+  // 第一、第三行，使用中点补出缺失的第二行。
   let bestPair = null;
   for (let first = 0; first < candidates.length - 1; first += 1) {
     for (let second = first + 1; second < candidates.length; second += 1) {
       const firstCandidate = candidates[first];
       const secondCandidate = candidates[second];
       const gap = secondCandidate.center - firstCandidate.center;
-      const deviation = Math.abs(gap - expectedStep);
+      const span = Math.abs(gap - (expectedStep * 2)) < Math.abs(gap - expectedStep) ? 2 : 1;
+      const deviation = Math.abs(gap - (expectedStep * span));
       if (deviation > expectedStep * 0.38) continue;
       const strengthBonus = Math.log1p(firstCandidate.strength + secondCandidate.strength);
       const score = (deviation / expectedStep) - (strengthBonus * 0.02);
       if (!bestPair || score < bestPair.score) {
-        bestPair = { score, firstCandidate, secondCandidate, gap };
+        bestPair = { score, firstCandidate, secondCandidate, gap, span };
       }
     }
   }
   if (!bestPair) return [];
+  if (bestPair.span === 2) {
+    return [
+      bestPair.firstCandidate.center,
+      bestPair.firstCandidate.center + (bestPair.gap / 2),
+      bestPair.secondCandidate.center,
+    ];
+  }
   const inferredThird = bestPair.secondCandidate.center + bestPair.gap;
   const maximumY = Math.max(...rowScores.map((entry) => Number(entry?.y) || 0));
   if (inferredThird > maximumY) return [];

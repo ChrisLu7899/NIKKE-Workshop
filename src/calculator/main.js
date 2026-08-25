@@ -76,7 +76,7 @@ import { summarizeEquipmentEffects } from "./equipmentEffectOverview.js";
       "防御力增加": COMMON_TIERS
     };
 
-    const EQUIPMENT_SLOT_NAMES = ["头部装备", "身体装备", "手部装备", "足部装备"];
+    const EQUIPMENT_SLOT_NAMES = ["头部", "身躯", "臂部", "腿部"];
     const TARGET_PRESETS = {
       "superior-attack": ["优越代码伤害增加", "攻击力增加"],
       superior: ["优越代码伤害增加"],

@@ -21,7 +21,7 @@
 Set-Location -LiteralPath "D:\path\to\NIKKE-Workshop-source"
 $workshopRepo = (Get-Location).Path
 $workshopReleaseRoot = Split-Path -Parent $workshopRepo
-$workshopVersion = "1.0.7"
+$workshopVersion = "1.0.8"
 ```
 
 检查工作区、远端和运行环境：

@@ -10,7 +10,7 @@ import {
 } from "../src/calculator/manualEquipment.js";
 
 test("manual global mode creates four editable blank equipment panels", () => {
-  const slots = ["头部装备", "身体装备", "手部装备", "足部装备"];
+  const slots = ["头部", "身躯", "臂部", "腿部"];
   const character = createManualFourEquipmentCharacter(slots);
   assert.equal(MANUAL_FOUR_EQUIPMENT_COLLECTION_ID, "manual-four-equipment");
   assert.equal(character.name, "四装备全局模拟");

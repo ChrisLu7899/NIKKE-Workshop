@@ -22,18 +22,18 @@ const createRecord = (id, family, name, slot, assetFile) => Object.freeze({
 });
 
 export const EQUIPMENT_ICON_CATALOG = Object.freeze([
-  createRecord("99-head", "99型", "99型头盔", "头部装备", "99-head.png"),
-  createRecord("99-body", "99型", "99型防护服", "身体装备", "99-body.png"),
-  createRecord("99-arms", "99型", "99型臂铠", "手部装备", "99-arms.png"),
-  createRecord("99-legs", "99型", "99型护腿", "足部装备", "99-legs.png"),
-  createRecord("vmetal-head", "V金属", "v金属面罩", "头部装备", "vmetal-head.png"),
-  createRecord("vmetal-body", "V金属", "v金属背心", "身体装备", "vmetal-body.png"),
-  createRecord("vmetal-arms", "V金属", "v金属护臂", "手部装备", "vmetal-arms.png"),
-  createRecord("vmetal-legs", "V金属", "v金属靴子", "足部装备", "vmetal-legs.png"),
-  createRecord("code-head", "代码XXX", "代码XXX护目镜", "头部装备", "code-head.png"),
-  createRecord("code-body", "代码XXX", "代码XXX夹克", "身体装备", "code-body.png"),
-  createRecord("code-arms", "代码XXX", "代码XXX手套", "手部装备", "code-arms.png"),
-  createRecord("code-legs", "代码XXX", "代码XXX鞋", "足部装备", "code-legs.png"),
+  createRecord("99-head", "99型", "99型头盔", "头部", "99-head.png"),
+  createRecord("99-body", "99型", "99型防护服", "身躯", "99-body.png"),
+  createRecord("99-arms", "99型", "99型臂铠", "臂部", "99-arms.png"),
+  createRecord("99-legs", "99型", "99型护腿", "腿部", "99-legs.png"),
+  createRecord("vmetal-head", "V金属", "v金属面罩", "头部", "vmetal-head.png"),
+  createRecord("vmetal-body", "V金属", "v金属背心", "身躯", "vmetal-body.png"),
+  createRecord("vmetal-arms", "V金属", "v金属护臂", "臂部", "vmetal-arms.png"),
+  createRecord("vmetal-legs", "V金属", "v金属靴子", "腿部", "vmetal-legs.png"),
+  createRecord("code-head", "代码XXX", "代码XXX护目镜", "头部", "code-head.png"),
+  createRecord("code-body", "代码XXX", "代码XXX夹克", "身躯", "code-body.png"),
+  createRecord("code-arms", "代码XXX", "代码XXX手套", "臂部", "code-arms.png"),
+  createRecord("code-legs", "代码XXX", "代码XXX鞋", "腿部", "code-legs.png"),
 ]);
 
 export const EQUIPMENT_ICON_BY_ID = Object.freeze(Object.fromEntries(

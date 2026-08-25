@@ -36,7 +36,7 @@ test("export workbook contains total, character blocks, comparisons and advice",
     totalExpectedCost: 42.5,
     equipmentResults: [{
       index: 0,
-      label: "头部装备",
+      label: "头部",
       skipped: false,
       currentLines,
       targets: [

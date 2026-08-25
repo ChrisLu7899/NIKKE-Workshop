@@ -20,50 +20,50 @@ import {
 const rgbaPixels = (...colors) => Uint8ClampedArray.from(colors.flatMap(([red, green, blue, alpha = 255]) => [red, green, blue, alpha]));
 
 test("equipment slot OCR maps the screenshot's second grey label to four physical slots", () => {
-  assert.equal(matchEquipmentSlot("全 头部"), "头部装备");
-  assert.equal(matchEquipmentSlot("峙身躯"), "身体装备");
-  assert.equal(matchEquipmentSlot("点 涌部"), "手部装备");
-  assert.equal(matchEquipmentSlot("涌?部"), "手部装备");
-  assert.equal(matchEquipmentSlot("R 。 腿部"), "足部装备");
+  assert.equal(matchEquipmentSlot("全 头部"), "头部");
+  assert.equal(matchEquipmentSlot("峙身躯"), "身躯");
+  assert.equal(matchEquipmentSlot("点 涌部"), "臂部");
+  assert.equal(matchEquipmentSlot("涌?部"), "臂部");
+  assert.equal(matchEquipmentSlot("R 。 腿部"), "腿部");
 });
 
 test("the 12 overload equipment names determine their physical slot before the noisy corner label", () => {
-  assert.equal(matchEquipmentSlotFromName("v金属面罩"), "头部装备");
-  assert.equal(matchEquipmentSlotFromName("99型头盔"), "头部装备");
-  assert.equal(matchEquipmentSlotFromName("代码XXX护目镜"), "头部装备");
-  assert.equal(matchEquipmentSlotFromName("V 金属背心"), "身体装备");
-  assert.equal(matchEquipmentSlotFromName("99型防护服"), "身体装备");
-  assert.equal(matchEquipmentSlotFromName("代码A1夹克"), "身体装备");
-  assert.equal(matchEquipmentSlotFromName("v金属护臂"), "手部装备");
-  assert.equal(matchEquipmentSlotFromName("99型臂铠"), "手部装备");
-  assert.equal(matchEquipmentSlotFromName("代码XXX手套"), "手部装备");
-  assert.equal(matchEquipmentSlotFromName("v金属靴子"), "足部装备");
-  assert.equal(matchEquipmentSlotFromName("99型护腿"), "足部装备");
-  assert.equal(matchEquipmentSlotFromName("代码XXX鞋"), "足部装备");
+  assert.equal(matchEquipmentSlotFromName("v金属面罩"), "头部");
+  assert.equal(matchEquipmentSlotFromName("99型头盔"), "头部");
+  assert.equal(matchEquipmentSlotFromName("代码XXX护目镜"), "头部");
+  assert.equal(matchEquipmentSlotFromName("V 金属背心"), "身躯");
+  assert.equal(matchEquipmentSlotFromName("99型防护服"), "身躯");
+  assert.equal(matchEquipmentSlotFromName("代码A1夹克"), "身躯");
+  assert.equal(matchEquipmentSlotFromName("v金属护臂"), "臂部");
+  assert.equal(matchEquipmentSlotFromName("99型臂铠"), "臂部");
+  assert.equal(matchEquipmentSlotFromName("代码XXX手套"), "臂部");
+  assert.equal(matchEquipmentSlotFromName("v金属靴子"), "腿部");
+  assert.equal(matchEquipmentSlotFromName("99型护腿"), "腿部");
+  assert.equal(matchEquipmentSlotFromName("代码XXX鞋"), "腿部");
 });
 
 test("equipment slot resolution always prefers a recognized equipment name over a noisy label", () => {
   assert.deepEqual(resolveEquipmentSlot({ rawEquipmentName: "v金属护臂", rawSlot: "涌?部" }), {
-    equipmentSlot: "手部装备",
+    equipmentSlot: "臂部",
     equipmentSlotSource: "equipmentName",
-    slotFromName: "手部装备",
-    slotFromLabel: "手部装备",
+    slotFromName: "臂部",
+    slotFromLabel: "臂部",
     conflict: false,
   });
-  assert.equal(resolveEquipmentSlot({ rawEquipmentName: "代码XXX护目镜", rawSlot: "念头部" }).equipmentSlot, "头部装备");
+  assert.equal(resolveEquipmentSlot({ rawEquipmentName: "代码XXX护目镜", rawSlot: "念头部" }).equipmentSlot, "头部");
 });
 
 test("equipment icon match takes priority over noisy name and corner-label OCR", () => {
   assert.deepEqual(resolveEquipmentSlot({
     rawEquipmentName: "99型头盔",
     rawSlot: "头部",
-    equipmentIconMatch: { slot: "手部装备", confidence: "high" },
+    equipmentIconMatch: { slot: "臂部", confidence: "high" },
   }), {
-    equipmentSlot: "手部装备",
+    equipmentSlot: "臂部",
     equipmentSlotSource: "equipmentIcon",
-    slotFromIcon: "手部装备",
-    slotFromName: "头部装备",
-    slotFromLabel: "头部装备",
+    slotFromIcon: "臂部",
+    slotFromName: "头部",
+    slotFromLabel: "头部",
     conflict: true,
   });
 });
@@ -146,7 +146,7 @@ test("unreadable labels are never inferred from a coincidental legal number", ()
 test("OCR merge preserves physical positions, including a blank second line", () => {
   const equipments = mergeOcrEntriesIntoEquipments(null, [{
     characterName: "拉毗：小红帽",
-    equipmentSlot: "足部装备",
+    equipmentSlot: "腿部",
     lines: [
       { position: 1, functionType: "StatAmmoLoad", value: 68.93, level: 11, locked: true },
       { position: 2, functionType: "", value: null, level: null, locked: null },
@@ -167,7 +167,7 @@ test("preview validation only blocks unresolved or contradictory OCR results", (
   const valid = [{
     characterName: "拉毗：小红帽",
     fileName: "足部.png",
-    equipmentSlot: "足部装备",
+    equipmentSlot: "腿部",
     lines: [
       { position: 1, functionType: "StatAmmoLoad", value: 68.93, level: 11, locked: true },
       { position: 2, functionType: "", value: null, level: null, locked: null },

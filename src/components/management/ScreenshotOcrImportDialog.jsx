@@ -170,7 +170,7 @@ export default function ScreenshotOcrImportDialog({
           directory=""
         />
         <Alert severity="info" sx={{ mb: 2 }}>
-          请选择包含角色子文件夹的 screenshots 根目录。程序会先定位截图中的白色装备面板，再读取装备图标、装备名称、三条词条名称与数值以及锁定状态。识别完全在本机完成，不会上传图片。
+          推荐直接选择安装目录内预置的 <code>NIKKE-Workshop\screenshots</code> 文件夹，无需另外新建 screenshots 根目录。请先将装备截图放入对应的角色子文件夹；如果没有对应角色文件夹，再按图鉴中的完整角色名新建。程序会先定位截图中的白色装备面板，再读取装备图标、装备名称、三条词条名称与数值以及锁定状态。识别完全在本机完成，不会上传图片。
         </Alert>
         <Stack direction={{ xs: "column", sm: "row" }} spacing={1} alignItems={{ sm: "center" }} sx={{ mb: 2 }}>
           <Button variant="outlined" startIcon={<FolderOpenIcon />} onClick={chooseFolder} disabled={running}>选择截图目录</Button>
