@@ -18,6 +18,46 @@ export const OCR_VALUE_STYLES = Object.freeze({
   DARK_BLUE: "dark-blue-text",
 });
 
+export const OCR_EQUIPMENT_LINE_STATES = Object.freeze({
+  UNEARNED: "unearned",
+  UNLOCKED: "unlocked",
+  LOCKED: "locked",
+  NEEDS_CONFIRMATION: "needs-confirmation",
+});
+
+const hasFiniteOcrNumber = (value) => (
+  value !== null
+  && value !== ""
+  && Number.isFinite(Number(value))
+);
+
+const hasIntegerOcrTier = (value) => (
+  value !== null
+  && value !== ""
+  && Number.isInteger(Number(value))
+);
+
+export function resolveOcrEquipmentLineState({
+  unearned = false,
+  functionType = "",
+  value = null,
+  level = null,
+  locked = null,
+} = {}) {
+  if (unearned) return OCR_EQUIPMENT_LINE_STATES.UNEARNED;
+  if (
+    functionType
+    && hasFiniteOcrNumber(value)
+    && hasIntegerOcrTier(level)
+    && typeof locked === "boolean"
+  ) {
+    return locked
+      ? OCR_EQUIPMENT_LINE_STATES.LOCKED
+      : OCR_EQUIPMENT_LINE_STATES.UNLOCKED;
+  }
+  return OCR_EQUIPMENT_LINE_STATES.NEEDS_CONFIRMATION;
+}
+
 export function expectedOcrValueStyle(level) {
   const tier = Number(level);
   if (tier >= 1 && tier <= 11) return OCR_VALUE_STYLES.LIGHT_BLACK;
@@ -221,6 +261,8 @@ export function createOcrLabelPreviewLine(position, {
       alternateLabel,
       valueStyle,
       unearned: true,
+      state: OCR_EQUIPMENT_LINE_STATES.UNEARNED,
+      requiresConfirmation: false,
       warnings: [],
     };
   }
@@ -233,11 +275,13 @@ export function createOcrLabelPreviewLine(position, {
       value: null,
       level: null,
       locked: null,
-      confidence: "high",
+      confidence: "low",
       rawLabel,
       alternateLabel,
       valueStyle,
-      warnings: [],
+      state: OCR_EQUIPMENT_LINE_STATES.NEEDS_CONFIRMATION,
+      requiresConfirmation: true,
+      warnings: ["词条区域为空或未识别，请确认"],
     };
   }
   const warnings = [
@@ -254,6 +298,8 @@ export function createOcrLabelPreviewLine(position, {
     rawLabel,
     alternateLabel,
     valueStyle,
+    state: OCR_EQUIPMENT_LINE_STATES.NEEDS_CONFIRMATION,
+    requiresConfirmation: true,
     warnings,
   };
 }
@@ -270,10 +316,11 @@ export function validateOcrPreview(entries) {
     else if (entry.equipmentSlot) seenByCharacter.set(slotKey, true);
     const used = new Set();
     (entry.lines || []).forEach((line) => {
+      if (line.requiresConfirmation) errors.push(`${entry.characterName}${entry.equipmentSlot}词条${line.position}需要确认识别结果`);
       if (!line.functionType) return;
       if (used.has(line.functionType)) errors.push(`${entry.characterName}${entry.equipmentSlot}存在重复词条：${EQUIPMENT_FUNCTION_LABELS[line.functionType]}`);
       used.add(line.functionType);
-      if (!Number.isFinite(Number(line.value)) || !Number.isInteger(Number(line.level))) errors.push(`${entry.characterName}${entry.equipmentSlot}词条${line.position}需要确认数值与档位`);
+      if (!hasFiniteOcrNumber(line.value) || !hasIntegerOcrTier(line.level)) errors.push(`${entry.characterName}${entry.equipmentSlot}词条${line.position}需要确认数值与档位`);
       else if (Math.abs(Number(line.value) - Number(tierValue(line.functionType, line.level))) > 0.001) errors.push(`${entry.characterName}${entry.equipmentSlot}词条${line.position}的数值与档位不一致`);
       else if (!isOcrValueStyleCompatible(line.level, line.valueStyle)) errors.push(`${entry.characterName}${entry.equipmentSlot}词条${line.position}的字色与档位不一致`);
       if (line.locked === null) errors.push(`${entry.characterName}${entry.equipmentSlot}词条${line.position}需要确认锁定状态`);

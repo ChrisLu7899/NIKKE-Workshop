@@ -6,11 +6,14 @@ import {
   classifyOcrLockStateFromRgba,
   classifyOcrValueStyleFromRgba,
   createOcrLabelPreviewLine,
+  OCR_EQUIPMENT_LINE_STATES,
+  resolveOcrEquipmentLineState,
   resolveEquipmentSlot,
 } from "../domain/equipmentScreenshotOcr.js";
 import {
   createEquipmentRecognitionRegions,
   locateEquipmentEffectRowCenters,
+  locateEquipmentEffectRowCentersFromBandScores,
   locateLargestEquipmentPanel,
   locateOverloadLogoFromRgba,
   projectEquipmentPanelFromOverload,
@@ -139,6 +142,47 @@ function locateEquipmentPanel(bitmap) {
 }
 
 function locateEffectRowCenters(bitmap, panel) {
+  // 三个物理位置（包括“未获得效果”）都有固定的横向底边。先扫描整个
+  // 词条宽带，定位三条等距短横边；锁图标只作为旧截图的保守回退。
+  const bandLeft = Math.round(panel.left + (panel.width * 0.075));
+  const bandRight = Math.round(panel.left + (panel.width * 0.94));
+  const bandTop = Math.round(panel.top + (panel.height * 0.45));
+  const bandBottom = Math.round(panel.top + (panel.height * 0.9));
+  const bandWidth = Math.max(1, bandRight - bandLeft);
+  const bandHeight = Math.max(1, bandBottom - bandTop);
+  const bandCanvas = document.createElement("canvas");
+  bandCanvas.width = bandWidth;
+  bandCanvas.height = bandHeight;
+  const bandContext = bandCanvas.getContext("2d", { willReadFrequently: true });
+  bandContext.drawImage(
+    bitmap,
+    bandLeft,
+    bandTop,
+    bandWidth,
+    bandHeight,
+    0,
+    0,
+    bandWidth,
+    bandHeight,
+  );
+  const bandPixels = bandContext.getImageData(0, 0, bandWidth, bandHeight).data;
+  const bandScores = Array.from({ length: bandHeight }, (_, relativeY) => {
+    let score = 0;
+    for (let x = 0; x < bandWidth; x += 1) {
+      const offset = ((relativeY * bandWidth) + x) * 4;
+      const luminance = (bandPixels[offset] * 0.299)
+        + (bandPixels[offset + 1] * 0.587)
+        + (bandPixels[offset + 2] * 0.114);
+      if (luminance < 140) score += 1;
+    }
+    return { y: bandTop + relativeY, score };
+  });
+  const structuralCenters = locateEquipmentEffectRowCentersFromBandScores(bandScores, {
+    panelWidth: panel.width,
+    minimumScore: Math.max(8, Math.round(bandWidth * 0.7)),
+  });
+  if (structuralCenters.length === 3) return structuralCenters;
+
   const left = Math.round(panel.left + (panel.width * 0.86));
   const right = Math.round(panel.left + (panel.width * 0.96));
   const top = Math.round(panel.top + (panel.height * 0.45));
@@ -339,6 +383,16 @@ async function recognizeImage(file, workers, { characterName, onProgress }) {
         };
       }
     }
+    const state = resolveOcrEquipmentLineState(previewLine);
+    previewLine = {
+      ...previewLine,
+      state,
+      requiresConfirmation: state === OCR_EQUIPMENT_LINE_STATES.NEEDS_CONFIRMATION
+        || effectRowCenters.length !== 3,
+      warnings: effectRowCenters.length === 3
+        ? previewLine.warnings
+        : [...(previewLine.warnings || []), "三条词条栏定位不确定，请确认"],
+    };
     lines.push(previewLine);
   }
   const rawSlot = slotResult.data.text.trim();
@@ -388,6 +442,7 @@ async function recognizeImage(file, workers, { characterName, onProgress }) {
       ...(!equipmentSlot ? ["未识别装备部位"] : []),
       ...(equipmentIconMatch.confidence === "low" ? ["装备图标匹配置信度较低，建议检查部位"] : []),
       ...(slotConflict ? [`装备图标判定为${slotFromIcon || "未知"}，名称/标签判定为${slotFromName || slotFromLabel || "未知"}；已优先采用装备图标`] : []),
+      ...(effectRowCenters.length !== 3 ? ["三条词条栏未可靠定位，识别结果需要逐行确认"] : []),
       ...lines.flatMap((line) => line.warnings || []),
     ],
   };

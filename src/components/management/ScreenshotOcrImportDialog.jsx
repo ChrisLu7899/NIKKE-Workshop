@@ -110,7 +110,12 @@ export default function ScreenshotOcrImportDialog({
   )));
   const updateLine = (entryId, position, patch) => updateEntry(entryId, (entry) => ({
     ...entry,
-    lines: entry.lines.map((line) => line.position === position ? { ...line, ...patch, warnings: [] } : line),
+    lines: entry.lines.map((line) => line.position === position ? {
+      ...line,
+      ...patch,
+      warnings: [],
+      requiresConfirmation: false,
+    } : line),
   }));
 
   const save = async () => {

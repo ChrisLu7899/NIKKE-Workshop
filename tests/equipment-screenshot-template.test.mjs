@@ -5,6 +5,7 @@ import {
   OVERLOAD_PANEL_GEOMETRY,
   createEquipmentRecognitionRegions,
   locateEquipmentEffectRowCenters,
+  locateEquipmentEffectRowCentersFromBandScores,
   locateLargestEquipmentPanel,
   locateOverloadLogoFromRgba,
   projectEquipmentPanelFromOverload,
@@ -255,7 +256,7 @@ test("three evenly spaced lock-icon runs are selected from unrelated dark contro
   assert.ok(Math.abs(centers[2] - 893) < 1);
 });
 
-test("two adjacent lock icons infer the trailing unearned-effect row", () => {
+test("two adjacent lock icons remain ambiguous without structural row borders", () => {
   const scores = [];
   const addRun = (start, end, score) => {
     for (let y = start; y <= end; y += 1) scores.push({ y, score });
@@ -271,10 +272,7 @@ test("two adjacent lock icons infer the trailing unearned-effect row", () => {
     panelWidth: 666,
     minimumScore: 5,
   });
-  assert.equal(centers.length, 3);
-  assert.ok(Math.abs(centers[0] - 807) < 1);
-  assert.ok(Math.abs(centers[1] - 850) < 1);
-  assert.ok(Math.abs(centers[2] - 893) < 1);
+  assert.deepEqual(centers, []);
 });
 
 test("two separated lock icons infer an unearned-effect row in the middle", () => {
@@ -296,4 +294,67 @@ test("two separated lock icons infer an unearned-effect row in the middle", () =
   assert.ok(Math.abs(centers[0] - 807) < 1);
   assert.ok(Math.abs(centers[1] - 850) < 1);
   assert.ok(Math.abs(centers[2] - 893) < 1);
+});
+
+test("structural row borders locate all eight present/empty layouts independently of locks", () => {
+  let checked = 0;
+  [648, 796].forEach((panelWidth) => {
+    const expectedCenters = [820, 820 + (panelWidth * 0.0645), 820 + (panelWidth * 0.129)];
+    for (let occupancy = 0; occupancy < 8; occupancy += 1) {
+      const scores = Array.from({ length: 340 }, (_, index) => ({ y: 700 + index, score: 0 }));
+      const byY = new Map(scores.map((entry) => [entry.y, entry]));
+      expectedCenters.forEach((center, position) => {
+        const border = Math.round(center + (panelWidth * 0.027));
+        for (let y = border - 1; y <= border + 1; y += 1) byY.get(y).score = 620;
+        // 有词条的行可能包含较深文字，但不足以形成横跨卡片的边界。
+        if (occupancy & (1 << position)) {
+          for (let y = Math.round(center - 9); y <= Math.round(center + 9); y += 1) {
+            byY.get(y).score = Math.max(byY.get(y).score, 380);
+          }
+        }
+      });
+      // 底部按钮是较厚的深色区域，应被边界高度约束排除。
+      for (let y = 990; y <= 1035; y += 1) byY.get(y).score = 650;
+      const centers = locateEquipmentEffectRowCentersFromBandScores(scores, {
+        panelWidth,
+        minimumScore: 500,
+      });
+      assert.equal(centers.length, 3, `panel ${panelWidth}, occupancy ${occupancy.toString(2).padStart(3, "0")}`);
+      centers.forEach((center, index) => {
+        assert.ok(Math.abs(center - expectedCenters[index]) <= 1.5);
+      });
+      checked += 1;
+    }
+  });
+  assert.equal(checked, 16);
+});
+
+test("structural row borders use the lower edge of every dark tier-15 row layout", () => {
+  const panelWidth = 801;
+  const expectedCenters = [820, 820 + (panelWidth * 0.0645), 820 + (panelWidth * 0.129)];
+  let checked = 0;
+  for (let darkRows = 1; darkRows < 8; darkRows += 1) {
+    const scores = Array.from({ length: 420 }, (_, index) => ({ y: 700 + index, score: 0 }));
+    const byY = new Map(scores.map((entry) => [entry.y, entry]));
+    expectedCenters.forEach((center, position) => {
+      const border = Math.round(center + (panelWidth * 0.027));
+      if (darkRows & (1 << position)) {
+        const rowTop = Math.round(border - (panelWidth * 0.054) + 1);
+        for (let y = rowTop; y <= border; y += 1) byY.get(y).score = 650;
+      } else {
+        for (let y = border - 1; y <= border + 1; y += 1) byY.get(y).score = 620;
+      }
+    });
+    for (let y = 990; y <= 1056; y += 1) byY.get(y).score = 650;
+    const centers = locateEquipmentEffectRowCentersFromBandScores(scores, {
+      panelWidth,
+      minimumScore: 500,
+    });
+    assert.equal(centers.length, 3, `dark rows ${darkRows.toString(2).padStart(3, "0")}`);
+    centers.forEach((center, index) => {
+      assert.ok(Math.abs(center - expectedCenters[index]) <= 1.5);
+    });
+    checked += 1;
+  }
+  assert.equal(checked, 7);
 });

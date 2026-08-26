@@ -2,6 +2,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  OCR_EQUIPMENT_LINE_STATES,
   OCR_VALUE_STYLES,
   classifyOcrLockStateFromRgba,
   classifyOcrValueStyleFromRgba,
@@ -13,9 +14,11 @@ import {
   matchEquipmentSlot,
   matchEquipmentSlotFromName,
   mergeOcrEntriesIntoEquipments,
+  resolveOcrEquipmentLineState,
   resolveEquipmentSlot,
   validateOcrPreview,
 } from "../src/domain/equipmentScreenshotOcr.js";
+import { tierValue } from "../src/domain/equipmentAffixes.js";
 
 const rgbaPixels = (...colors) => Uint8ClampedArray.from(colors.flatMap(([red, green, blue, alpha = 255]) => [red, green, blue, alpha]));
 
@@ -84,7 +87,25 @@ test("label recognition waits for constrained value-template evidence", () => {
   assert.equal(line.value, null);
   assert.equal(line.level, null);
   assert.equal(line.locked, false);
+  assert.equal(resolveOcrEquipmentLineState(line), OCR_EQUIPMENT_LINE_STATES.NEEDS_CONFIRMATION);
   assert.match(line.warnings.join("；"), /数值模板待匹配/);
+});
+
+test("null value and tier cannot be coerced into a completed zero-valued line", () => {
+  const line = {
+    position: 1,
+    functionType: "StatAtk",
+    value: null,
+    level: null,
+    locked: false,
+  };
+  assert.equal(resolveOcrEquipmentLineState(line), OCR_EQUIPMENT_LINE_STATES.NEEDS_CONFIRMATION);
+  assert.match(validateOcrPreview([{
+    characterName: "测试角色",
+    fileName: "null-value.png",
+    equipmentSlot: "头部",
+    lines: [line],
+  }]).join("；"), /需要确认数值与档位/);
 });
 
 test("unleveled equipment's unearned-effect row remains a blank physical slot", () => {
@@ -100,7 +121,18 @@ test("unleveled equipment's unearned-effect row remains a blank physical slot", 
   assert.equal(line.level, null);
   assert.equal(line.locked, null);
   assert.equal(line.unearned, true);
+  assert.equal(line.state, OCR_EQUIPMENT_LINE_STATES.UNEARNED);
+  assert.equal(line.requiresConfirmation, false);
   assert.deepEqual(line.warnings, []);
+});
+
+test("an unreadable blank crop requires confirmation instead of silently becoming unearned", () => {
+  const line = createOcrLabelPreviewLine(1, { rawLabel: "", alternateLabel: "" });
+  assert.equal(line.functionType, "");
+  assert.equal(line.unearned, undefined);
+  assert.equal(line.state, OCR_EQUIPMENT_LINE_STATES.NEEDS_CONFIRMATION);
+  assert.equal(line.requiresConfirmation, true);
+  assert.match(line.warnings.join("；"), /为空或未识别/);
 });
 
 test("value colors constrain OCR to the only tiers allowed by the game UI", () => {
@@ -182,4 +214,56 @@ test("preview validation only blocks unresolved or contradictory OCR results", (
   const errors = validateOcrPreview(invalid).join("；");
   assert.match(errors, /数值与档位不一致/);
   assert.match(errors, /需要确认锁定状态/);
+});
+
+test("all 27 empty/unlocked/locked physical-row states resolve without position drift", () => {
+  const stateCodes = ["E", "U", "L"];
+  const functionTypes = ["StatAtk", "StatAmmoLoad", "IncElementDmg"];
+  let checked = 0;
+  stateCodes.forEach((first) => stateCodes.forEach((second) => stateCodes.forEach((third) => {
+    const codes = [first, second, third];
+    const lines = codes.map((code, index) => {
+      if (code === "E") {
+        return {
+          position: index + 1,
+          functionType: "",
+          value: null,
+          level: null,
+          locked: null,
+          unearned: true,
+          state: resolveOcrEquipmentLineState({ unearned: true }),
+          requiresConfirmation: false,
+        };
+      }
+      const functionType = functionTypes[index];
+      const level = 10 + index;
+      const locked = code === "L";
+      const line = {
+        position: index + 1,
+        functionType,
+        value: tierValue(functionType, level),
+        level,
+        locked,
+        valueStyle: expectedOcrValueStyle(level),
+        requiresConfirmation: false,
+      };
+      return { ...line, state: resolveOcrEquipmentLineState(line) };
+    });
+    assert.deepEqual(lines.map((line) => line.position), [1, 2, 3]);
+    assert.deepEqual(lines.map((line) => line.state), codes.map((code) => (
+      code === "E"
+        ? OCR_EQUIPMENT_LINE_STATES.UNEARNED
+        : code === "L"
+          ? OCR_EQUIPMENT_LINE_STATES.LOCKED
+          : OCR_EQUIPMENT_LINE_STATES.UNLOCKED
+    )));
+    assert.deepEqual(validateOcrPreview([{
+      characterName: `测试角色-${checked}`,
+      fileName: `${codes.join("")}.png`,
+      equipmentSlot: "头部",
+      lines,
+    }]), []);
+    checked += 1;
+  })));
+  assert.equal(checked, 27);
 });

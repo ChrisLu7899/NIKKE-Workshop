@@ -493,9 +493,9 @@ export function locateEquipmentEffectRowCenters(
   }
   if (best) return best.selected.map((candidate) => candidate.center);
 
-  // “未获得效果”可能出现在三个物理位置中的任意一行。两枚锁相邻时
-  // 保持既有行为并向下补第三行；两枚锁相隔约两个标准栏距时，它们属于
-  // 第一、第三行，使用中点补出缺失的第二行。
+  // “未获得效果”可能出现在三个物理位置中的任意一行。两枚相邻的锁
+  // 无法判断缺失的是第一行还是第三行，因此不能靠猜测补行；只有两枚锁
+  // 相隔约两个标准栏距时，才可无歧义地补出中间行。
   let bestPair = null;
   for (let first = 0; first < candidates.length - 1; first += 1) {
     for (let second = first + 1; second < candidates.length; second += 1) {
@@ -520,10 +520,95 @@ export function locateEquipmentEffectRowCenters(
       bestPair.secondCandidate.center,
     ];
   }
-  const inferredThird = bestPair.secondCandidate.center + bestPair.gap;
-  const maximumY = Math.max(...rowScores.map((entry) => Number(entry?.y) || 0));
-  if (inferredThird > maximumY) return [];
-  return [bestPair.firstCandidate.center, bestPair.secondCandidate.center, inferredThird];
+  return [];
+}
+
+/**
+ * 从词条卡片横向扫描分数中定位三条固定效果栏。
+ *
+ * 每个物理词条位置（包括“未获得效果”）都有一条横跨卡片的深色底边，
+ * 因而它比可选的锁图标更适合作为几何锚点。输入分数是每个 y 坐标在
+ * 词条卡片宽带内的深色像素数；算法只接受三条短、强且等距的横边，
+ * 排除底部操作按钮、升级按钮以及大面积深色背景。
+ */
+export function locateEquipmentEffectRowCentersFromBandScores(
+  rowScores,
+  { panelWidth, minimumScore = 1 } = {},
+) {
+  const width = Math.max(1, Number(panelWidth) || 1);
+  if (!Array.isArray(rowScores) || rowScores.length === 0) return [];
+
+  const runs = [];
+  let current = [];
+  rowScores.forEach((entry) => {
+    const y = Number(entry?.y);
+    const score = Number(entry?.score) || 0;
+    if (Number.isFinite(y) && score >= minimumScore) {
+      if (current.length && y > current[current.length - 1].y + 1) {
+        runs.push(current);
+        current = [];
+      }
+      current.push({ y, score });
+    } else if (current.length) {
+      runs.push(current);
+      current = [];
+    }
+  });
+  if (current.length) runs.push(current);
+
+  const maximumBorderHeight = Math.max(3, width * 0.022);
+  const candidates = runs
+    .flatMap((run) => {
+      const total = run.reduce((sum, entry) => sum + entry.score, 0);
+      const height = run[run.length - 1].y - run[0].y + 1;
+      if (height <= maximumBorderHeight) {
+        return [{
+          center: run.reduce((sum, entry) => sum + (entry.y * entry.score), 0) / total,
+          strength: total,
+          height,
+        }];
+      }
+      // 15 档词条使用整行深色背景，会与底边连成约 0.054 个面板宽度
+      // 的色块。此时色块下沿就是同一个固定底边。按钮明显更高，不能
+      // 通过这一高度窗口。
+      if (height >= width * 0.04 && height <= width * 0.068) {
+        const edgeEntries = run.slice(-Math.max(1, Math.round(width * 0.004)));
+        return [{
+          center: run[run.length - 1].y,
+          strength: edgeEntries.reduce((sum, entry) => sum + entry.score, 0),
+          height,
+        }];
+      }
+      return [];
+    })
+    .sort((left, right) => left.center - right.center);
+
+  const expectedStep = width * 0.0645;
+  let best = null;
+  for (let first = 0; first < candidates.length - 2; first += 1) {
+    for (let second = first + 1; second < candidates.length - 1; second += 1) {
+      for (let third = second + 1; third < candidates.length; third += 1) {
+        const selected = [candidates[first], candidates[second], candidates[third]];
+        const firstGap = selected[1].center - selected[0].center;
+        const secondGap = selected[2].center - selected[1].center;
+        const deviations = [
+          Math.abs(firstGap - expectedStep),
+          Math.abs(secondGap - expectedStep),
+          Math.abs(firstGap - secondGap),
+        ];
+        if (Math.max(...deviations) > expectedStep * 0.28) continue;
+        const spacingPenalty = deviations.reduce((sum, value) => sum + value, 0) / expectedStep;
+        const strengthBonus = Math.log1p(selected.reduce((sum, item) => sum + item.strength, 0));
+        const score = spacingPenalty - (strengthBonus * 0.015);
+        if (!best || score < best.score) best = { score, selected };
+      }
+    }
+  }
+  if (!best) return [];
+
+  // 底边到词条栏中心的距离是栏高的一半（0.054 / 2 个面板宽度）。
+  const halfRowHeight = width * 0.027;
+  return best.selected.map((candidate) => candidate.center - halfRowHeight);
 }
 
 /**
