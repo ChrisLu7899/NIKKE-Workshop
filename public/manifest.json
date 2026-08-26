@@ -49,6 +49,9 @@
     "*://*.blablalink.com/*",
     "https://nikke-db.github.io/*"
   ],
+  "optional_host_permissions": [
+    "https://pinkuro.top/*"
+  ],
 
   "background": {
     "service_worker": "background.js",

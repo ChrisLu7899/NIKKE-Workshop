@@ -32,6 +32,7 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import CloudDownloadOutlinedIcon from "@mui/icons-material/CloudDownloadOutlined";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
@@ -44,6 +45,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import SyncIcon from "@mui/icons-material/Sync";
 import TuneIcon from "@mui/icons-material/Tune";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
+import AkaDataImportDialog from "./AkaDataImportDialog.jsx";
 import LocalCharacterEntryDrawer from "./LocalCharacterEntryDrawer.jsx";
 import ScreenshotOcrImportDialog from "./ScreenshotOcrImportDialog.jsx";
 import DocumentScannerOutlinedIcon from "@mui/icons-material/DocumentScannerOutlined";
@@ -313,6 +315,7 @@ const CharacterGalleryTabContent = ({
   const [entryNikke, setEntryNikke] = useState(null);
   const [createCustomOpen, setCreateCustomOpen] = useState(false);
   const [screenshotOcrOpen, setScreenshotOcrOpen] = useState(false);
+  const [akaDataOpen, setAkaDataOpen] = useState(false);
   const [importSummary, setImportSummary] = useState(null);
   const importInputRef = useRef(null);
   const [multiSelectMode, setMultiSelectMode] = useState(false);
@@ -627,6 +630,7 @@ const CharacterGalleryTabContent = ({
             <Typography variant="h5" component="h1" sx={{ fontWeight: 600 }}>{copy.title}</Typography>
             <Button size="small" variant="outlined" startIcon={<AddIcon />} onClick={() => setCreateCustomOpen(true)}>自定义角色</Button>
             <Button size="small" variant="outlined" startIcon={<DocumentScannerOutlinedIcon />} onClick={() => setScreenshotOcrOpen(true)}>图片识别</Button>
+            <Button size="small" variant="outlined" startIcon={<CloudDownloadOutlinedIcon />} onClick={() => setAkaDataOpen(true)}>阿卡数据</Button>
           </Stack>
           <Stack direction="row" spacing={1.5} sx={{ mt: 0.5, color: "text.secondary", flexWrap: "wrap" }}>
             <Typography variant="body2">{copy.catalogCount.replace("{count}", String((nikkeList || []).length))}</Typography>
@@ -865,7 +869,7 @@ const CharacterGalleryTabContent = ({
                   "@media (prefers-reduced-motion: reduce)": { transition: "none" },
                 }}
               >
-                <Box sx={{ width: 72, height: 86, borderRadius: 1, bgcolor: "action.hover", overflow: "hidden" }}>
+                <Box sx={{ width: 72, height: 86, borderRadius: 1, bgcolor: "common.white", overflow: "hidden" }}>
                   {avatar ? (
                     <Box
                       component="img"
@@ -1027,7 +1031,7 @@ const CharacterGalleryTabContent = ({
             </Box>
             <Divider sx={{ my: 2 }} />
             <Box sx={{ display: "grid", gridTemplateColumns: "112px 1fr", gap: 2 }}>
-              <Box sx={{ width: 112, height: 140, borderRadius: 1.5, bgcolor: "action.hover", overflow: "hidden" }}>
+              <Box sx={{ width: 112, height: 140, borderRadius: 1.5, bgcolor: "common.white", overflow: "hidden" }}>
                 {getNikkeAvatarUrl(detailNikke) ? (
                   <Box
                     component="img"
@@ -1117,6 +1121,13 @@ const CharacterGalleryTabContent = ({
       <ScreenshotOcrImportDialog
         open={screenshotOcrOpen}
         onClose={() => setScreenshotOcrOpen(false)}
+        standardCatalog={standardCatalog}
+        localRecords={localRecords}
+        onSaveLocalCharacterBatch={onSaveLocalCharacterBatch}
+      />
+      <AkaDataImportDialog
+        open={akaDataOpen}
+        onClose={() => setAkaDataOpen(false)}
         standardCatalog={standardCatalog}
         localRecords={localRecords}
         onSaveLocalCharacterBatch={onSaveLocalCharacterBatch}

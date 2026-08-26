@@ -10,6 +10,7 @@ export const LOCAL_CHARACTER_SOURCES = Object.freeze({
   sync: "sync",
   custom: "custom",
   screenshot: "screenshot",
+  aka: "aka",
 });
 
 export const EQUIPMENT_SLOT_COUNT = 4;

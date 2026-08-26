@@ -8,6 +8,7 @@ import {
 } from "../utils/researchLevels.js";
 import { parseCookieValue } from "../domain/account.js";
 import { parseEquipmentOptionLines } from "../utils/equipmentOptions.js";
+import { withChinaExclusiveCharacters } from "../data/chinaExclusiveCharacters.js";
 
 // ========== 主线目录缓存键 ==========
 const MAINLINE_CATALOG_MAP_KEY = "mainlineCatalogMap";
@@ -1324,18 +1325,22 @@ export const fetchAndCacheNikkeDirectory = async () => {
       });
     }
 
-    await new Promise((res) => chrome.storage.local.set({ [NIKKE_DIR_CACHE_KEY]: nikkes }, res));
-    return nikkes;
+    const completeDirectory = withChinaExclusiveCharacters(nikkes);
+    await new Promise((res) => chrome.storage.local.set({ [NIKKE_DIR_CACHE_KEY]: completeDirectory }, res));
+    return completeDirectory;
   } catch (e) {
     console.warn('获取人物目录失败:', e);
     // 回退读取缓存
     const cached = await new Promise((res) => chrome.storage.local.get(NIKKE_DIR_CACHE_KEY, (r) => res(r[NIKKE_DIR_CACHE_KEY] || [])));
-    return cached || [];
+    return withChinaExclusiveCharacters(cached);
   }
 };
 
 export const getCachedNikkeDirectory = async () =>
-  new Promise((res) => chrome.storage.local.get(NIKKE_DIR_CACHE_KEY, (r) => res(r[NIKKE_DIR_CACHE_KEY] || [])));
+  new Promise((res) => chrome.storage.local.get(
+    NIKKE_DIR_CACHE_KEY,
+    (r) => res(withChinaExclusiveCharacters(r[NIKKE_DIR_CACHE_KEY] || [])),
+  ));
 
 let nikkeDirectoryEnsurePromise = null;
 
@@ -1345,7 +1350,9 @@ let nikkeDirectoryEnsurePromise = null;
  */
 export const ensureNikkeDirectory = async () => {
   const cached = await getCachedNikkeDirectory().catch(() => []);
-  if (Array.isArray(cached) && cached.length > 0) return cached;
+  const hasRemoteDirectory = Array.isArray(cached)
+    && cached.some((character) => !character?.china_exclusive);
+  if (hasRemoteDirectory) return cached;
   if (!nikkeDirectoryEnsurePromise) {
     nikkeDirectoryEnsurePromise = fetchAndCacheNikkeDirectory();
   }

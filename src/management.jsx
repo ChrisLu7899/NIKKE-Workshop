@@ -28,6 +28,7 @@ import {
 } from "./services/storage.js";
 import { parseManualAreaId } from "./utils/areaId.js";
 import { getNikkeAvatarUrl as buildNikkeAvatarUrl } from "./utils/nikkeAvatar.js";
+import { withChinaExclusiveCharacters } from "./data/chinaExclusiveCharacters.js";
 import ManagementHeader from "./components/management/ManagementHeader.jsx";
 import CharacterGalleryTabContent from "./components/management/CharacterGalleryTabContent.jsx";
 import SettingsTabContent from "./components/management/SettingsTabContent.jsx";
@@ -217,7 +218,7 @@ const ManagementPage = () => {
 
   const galleryNikkeList = useMemo(() => {
     const customCharacters = localRoster.records.filter((record) => record.custom).map(localRecordToCatalogCharacter);
-    return [...nikkeList, ...customCharacters];
+    return withChinaExclusiveCharacters([...nikkeList, ...customCharacters]);
   }, [localRoster.records, nikkeList]);
 
   const persistLocalRecords = useCallback(async (records) => {
@@ -237,7 +238,7 @@ const ManagementPage = () => {
     return result;
   }, [localRoster.records, nikkeList, persistLocalRecords, showMessage]);
 
-  const handleSaveLocalCharacterBatch = useCallback(async (items) => {
+  const handleSaveLocalCharacterBatch = useCallback(async (items, { sourceLabel = "图片识别" } = {}) => {
     let workingRecords = localRoster.records;
     const saved = [];
     const errors = [];
@@ -251,7 +252,7 @@ const ManagementPage = () => {
     });
     if (errors.length) return { saved: [], errors };
     await persistLocalRecords(workingRecords);
-    showMessage(`图片识别数据已保存：${saved.length} 名角色`, "success");
+    showMessage(`${sourceLabel}数据已保存：${saved.length} 名角色`, "success");
     return { saved, errors: [] };
   }, [localRoster.records, nikkeList, persistLocalRecords, showMessage]);
 

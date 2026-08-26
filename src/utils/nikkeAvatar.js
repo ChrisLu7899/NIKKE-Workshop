@@ -15,6 +15,12 @@ export const getNikkeResourceId = (nikke, resourceIdMap) => {
 
 export const getNikkeAvatarUrl = (nikke, resourceIdMap) => {
   if (!SHOW_NIKKE_IMAGES) return "";
+  const directUrl = String(nikke?.avatar_url ?? nikke?.avatarUrl ?? "").trim();
+  if (directUrl) {
+    if (/^(?:[a-z][a-z\d+.-]*:|\/)/i.test(directUrl)) return directUrl;
+    if (globalThis.chrome?.runtime?.getURL) return chrome.runtime.getURL(directUrl);
+    return `/${directUrl.replace(/^\/+/, "")}`;
+  }
   const rid = getNikkeResourceId(nikke, resourceIdMap);
   if (rid === undefined || rid === null || rid === "") return "";
   const ridStr = String(rid).padStart(3, "0");

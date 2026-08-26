@@ -12,3 +12,10 @@ test("display mode restores Nikke avatar URLs", () => {
     "https://nikke-db.github.io/images/sprite/si_c101_00_s.png",
   );
 });
+
+test("bundled CN-only avatars resolve without an external resource id", () => {
+  assert.equal(
+    getNikkeAvatarUrl({ avatar_url: "images/characters/cn-exclusive-huapi-thumb.png" }),
+    "/images/characters/cn-exclusive-huapi-thumb.png",
+  );
+});
