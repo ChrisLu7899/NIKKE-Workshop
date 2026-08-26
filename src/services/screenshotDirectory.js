@@ -16,25 +16,10 @@ export function groupScreenshotFiles(files) {
   return [...groups.entries()].map(([characterName, images]) => ({ characterName, images }));
 }
 
-export async function readScreenshotDirectoryHandle(rootHandle) {
-  const files = [];
-  for await (const [characterName, handle] of rootHandle.entries()) {
-    if (handle.kind !== "directory") continue;
-    for await (const [, fileHandle] of handle.entries()) {
-      if (fileHandle.kind !== "file" || !IMAGE_PATTERN.test(fileHandle.name)) continue;
-      const file = await fileHandle.getFile();
-      Object.defineProperty(file, "relativePath", { value: `${rootHandle.name}/${characterName}/${file.name}` });
-      files.push(file);
-    }
-  }
-  return groupScreenshotFiles(files);
-}
-
-export async function chooseScreenshotDirectory({ fallbackInput } = {}) {
-  if (typeof window.showDirectoryPicker === "function") {
-    const handle = await window.showDirectoryPicker({ mode: "read" });
-    return readScreenshotDirectoryHandle(handle);
-  }
+export function chooseScreenshotDirectory({ fallbackInput } = {}) {
+  // 始终使用 webkitdirectory：部分 Chromium 环境通过 showDirectoryPicker
+  // 枚举目录句柄时会漏掉名称以“~”开头或含特殊字符的有效截图，而目录
+  // 文件控件会完整保留这些文件及其 webkitRelativePath。
   fallbackInput?.click();
   return null;
 }
