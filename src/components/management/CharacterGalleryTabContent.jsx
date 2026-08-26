@@ -15,7 +15,6 @@ import {
   DialogTitle,
   Divider,
   Drawer,
-  FormControlLabel,
   IconButton,
   InputAdornment,
   ListSubheader,
@@ -54,6 +53,7 @@ import { summarizeTopEquipmentAffixes } from "../../domain/equipmentAffixSummary
 import {
   EQUIPMENT_FUNCTION_LABELS,
   getRecordedLocalCharacters,
+  hasLocalCharacterData,
   localCharacterKey,
 } from "../../domain/localCharacterRoster.js";
 import {
@@ -66,13 +66,10 @@ import {
   SYSTEM_COLLECTION_IDS,
   buildCharactersConfig,
   characterCodeSet,
-  flattenCharacterConfig,
   mergeNikkesIntoCharacters,
   removeCodesFromCharacters,
-  getGalleryToolbarMode,
   isSystemCollectionSelectable,
 } from "../../utils/characterCollections.js";
-import { resolveShowStats } from "../../utils/showStats.js";
 import { isCommonCharacterTemplate } from "../../data/commonCharacterList.js";
 
 const STAT_TYPE_NAMES = EQUIPMENT_FUNCTION_LABELS;
@@ -82,7 +79,7 @@ const FALLBACK_COPY = {
     title: "妮姬图鉴",
     catalog: "全图鉴",
     defaultCollection: "默认",
-    owned: "已获得",
+    owned: "已同步",
     recorded: "已录入",
     search: "搜索妮姬",
     filters: "筛选",
@@ -112,7 +109,7 @@ const FALLBACK_COPY = {
     cancel: "取消",
     listName: "列表名称",
     selectedCount: "已选择 {count} 名妮姬",
-    ownedCount: "已拥有 {count}",
+    ownedCount: "已同步 {count}",
     catalogCount: "图鉴 {count}",
     details: "角色信息",
     calculateCharacter: "洗词条",
@@ -122,11 +119,7 @@ const FALLBACK_COPY = {
     noEquipmentLines: "暂无词条",
     customLists: "自建列表",
     listEmpty: "这个列表暂时没有妮姬。可以进入多选模式后添加。",
-    selectOwnedOnly: "自建列表只能加入账号已获得的妮姬。",
-    globalOutputHint: "输出字段应用于当前列表",
-    outputSettings: "输出设置",
-    outputSettingsHint: "选择下载当前列表时需要包含的数据字段。",
-    downloadScopeHint: "下载当前列表的全部已获得妮姬；如需部分角色，请先建立单独列表。",
+    selectOwnedOnly: "自建列表只能加入账号已同步的妮姬。",
     selectAll: "全选",
     clearSelection: "全不选",
   },
@@ -134,7 +127,7 @@ const FALLBACK_COPY = {
     title: "Nikke Gallery",
     catalog: "Full catalog",
     defaultCollection: "Default",
-    owned: "Owned",
+    owned: "Synced",
     recorded: "Recorded",
     search: "Search Nikkes",
     filters: "Filters",
@@ -164,7 +157,7 @@ const FALLBACK_COPY = {
     cancel: "Cancel",
     listName: "List name",
     selectedCount: "{count} selected",
-    ownedCount: "{count} owned",
+    ownedCount: "{count} synced",
     catalogCount: "{count} catalog entries",
     details: "Character details",
     calculateCharacter: "Calculator",
@@ -174,11 +167,7 @@ const FALLBACK_COPY = {
     noEquipmentLines: "No effects",
     customLists: "Custom lists",
     listEmpty: "This list is empty. Enter selection mode to add Nikkes.",
-    selectOwnedOnly: "Only owned Nikkes can be added to a custom list.",
-    globalOutputHint: "Output fields apply to the current list",
-    outputSettings: "Output fields",
-    outputSettingsHint: "Choose the fields included when downloading the current list.",
-    downloadScopeHint: "Downloads include every owned Nikke in the current list. Create a separate list for a smaller scope.",
+    selectOwnedOnly: "Only synced Nikkes can be added to a custom list.",
     selectAll: "Select all",
     clearSelection: "Clear all",
   },
@@ -253,7 +242,6 @@ const CharacterGalleryTabContent = ({
   nikkeList,
   standardCatalog,
   localRecords,
-  recordedCount,
   onSaveLocalCharacter,
   onSaveLocalCharacterBatch,
   onDeleteLocalCharacter,
@@ -276,28 +264,15 @@ const CharacterGalleryTabContent = ({
   handleDeleteTemplate,
   handleCreateTemplateFromData,
   handleUpdateTemplateData,
-  characters,
   getElementName,
   getClassName,
   getCorporationName,
   getBurstStageName,
   getNikkeAvatarUrl,
   getDisplayName,
-  updateAllCharactersShowStats,
-  equipStatKeys,
-  equipStatLabels,
-  basicStatKeys,
-  simulatedStatKeys,
   ownedSnapshot,
-  ownedShowStats,
-  onOwnedShowStatChange,
-  recommendationShowStats,
-  onRecommendationShowStatChange,
   fetchLoading,
-  downloadLoading,
-  dataReady,
   onFetchCharacterData,
-  onDownloadCharacterData,
   onOpenSettings,
   actionsDisabled,
   syncBlockedReason,
@@ -310,7 +285,6 @@ const CharacterGalleryTabContent = ({
   ));
   const [sortDirection, setSortDirection] = useState("desc");
   const [filterAnchorEl, setFilterAnchorEl] = useState(null);
-  const [outputAnchorEl, setOutputAnchorEl] = useState(null);
   const [detailNikke, setDetailNikke] = useState(null);
   const [entryNikke, setEntryNikke] = useState(null);
   const [createCustomOpen, setCreateCustomOpen] = useState(false);
@@ -367,6 +341,10 @@ const CharacterGalleryTabContent = ({
     const id = String(activeCollectionId).slice("template:".length);
     return templates.find((template) => template.id === id) || null;
   }, [activeCollectionId, templates]);
+  const commonTemplate = useMemo(
+    () => templates.find(isCommonCharacterTemplate) || null,
+    [templates],
+  );
   const currentRecommendation = useMemo(
     () => getRecommendationPreset(activeCollectionId),
     [activeCollectionId],
@@ -416,6 +394,17 @@ const CharacterGalleryTabContent = ({
     return [];
   }, [activeCollectionId, currentListCodes, currentRecommendation, currentTemplate, nikkeList, ownedCodes, recordedCodes]);
 
+  const exportableRecords = useMemo(() => {
+    const seen = new Set();
+    return collectionNikkes.flatMap((nikke) => {
+      const code = normalizeCode(nikke?._localRecordId || nikke?.name_code);
+      const record = localRecordMap.get(nikke?._localRecordId) || localRecordMap.get(code);
+      if (!record || seen.has(record.localId) || !hasLocalCharacterData(record)) return [];
+      seen.add(record.localId);
+      return [record];
+    });
+  }, [collectionNikkes, localRecordMap]);
+
   const visibleNikkes = useMemo(() => {
     const query = search.trim().toLocaleLowerCase();
     const filtered = collectionNikkes.filter((nikke) => {
@@ -433,8 +422,10 @@ const CharacterGalleryTabContent = ({
     });
     if (currentRecommendation && effectiveSortMode === "default") return filtered;
     return [...filtered].sort((left, right) => {
-      const leftOwned = ownedCharacterMap.get(normalizeCode(left?.name_code));
-      const rightOwned = ownedCharacterMap.get(normalizeCode(right?.name_code));
+      const leftCode = normalizeCode(left?.name_code);
+      const rightCode = normalizeCode(right?.name_code);
+      const leftOwned = localRecordMap.get(leftCode) || ownedCharacterMap.get(leftCode);
+      const rightOwned = localRecordMap.get(rightCode) || ownedCharacterMap.get(rightCode);
       const rarityScore = (nikke) => ({ SSR: 3, SR: 2, R: 1 }[String(nikke?.original_rare || "").toUpperCase()] || 0);
       const valueFor = (nikke, owned) => {
         if (effectiveSortMode === "combat") return toFiniteNumber(owned?.combat);
@@ -453,57 +444,7 @@ const CharacterGalleryTabContent = ({
       }
       return (nikkeList || []).indexOf(left) - (nikkeList || []).indexOf(right);
     });
-  }, [collectionNikkes, currentRecommendation, effectiveSortMode, filters, nikkeList, ownedCharacterMap, search, sortDirection]);
-
-  const simulatedStatLabels = useMemo(
-    () => [t("simulatedHp"), t("simulatedAtk"), t("simulatedDef")],
-    [t],
-  );
-  const globalStatColumns = useMemo(() => {
-    const basicLabels = {
-      limit_break: t("limitBreak"),
-      skill1_level: t("skill1"),
-      skill2_level: t("skill2"),
-      skill_burst_level: t("burst"),
-    };
-    return [
-      { key: "AtkElemLbScore", label: t("atkElemLbScore") },
-      ...(basicStatKeys || []).map((key) => ({ key, label: basicLabels[key] || key })),
-      ...(simulatedStatKeys || []).map((key, index) => ({ key, label: simulatedStatLabels[index] || key })),
-      ...(equipStatKeys || []).map((key, index) => ({ key, label: equipStatLabels[index] || key })),
-    ];
-  }, [basicStatKeys, equipStatKeys, equipStatLabels, simulatedStatKeys, simulatedStatLabels, t]);
-  const configuredCharacters = useMemo(() => {
-    if (activeCollectionId === SYSTEM_COLLECTION_IDS.owned) {
-      return ownedCodes.size ? [{ showStats: ownedShowStats }] : [];
-    }
-    if (currentRecommendation) {
-      return [{ showStats: recommendationShowStats }];
-    }
-    return currentTemplate ? flattenCharacterConfig(characters) : [];
-  }, [activeCollectionId, characters, currentRecommendation, currentTemplate, ownedCodes.size, ownedShowStats, recommendationShowStats]);
-  const globalStatStates = useMemo(() => Object.fromEntries(globalStatColumns.map(({ key }) => {
-    const visibleCount = configuredCharacters.filter((character) =>
-      resolveShowStats(character.showStats).effective.includes(key)).length;
-    return [key, {
-      checked: configuredCharacters.length > 0 && visibleCount === configuredCharacters.length,
-      indeterminate: visibleCount > 0 && visibleCount < configuredCharacters.length,
-    }];
-  })), [configuredCharacters, globalStatColumns]);
-  const globalOutputEnabled = Boolean(
-    activeCollectionId !== SYSTEM_COLLECTION_IDS.catalog,
-  );
-  const updateGlobalShowStat = (key, checked) => {
-    if (activeCollectionId === SYSTEM_COLLECTION_IDS.owned) {
-      onOwnedShowStatChange(key, checked);
-      return;
-    }
-    if (currentRecommendation) {
-      onRecommendationShowStatChange(activeCollectionId, key, checked);
-      return;
-    }
-    updateAllCharactersShowStats(key, checked);
-  };
+  }, [collectionNikkes, currentRecommendation, effectiveSortMode, filters, localRecordMap, nikkeList, ownedCharacterMap, search, sortDirection]);
 
   const selectableVisibleCodes = useMemo(
     () => visibleNikkes
@@ -535,7 +476,6 @@ const CharacterGalleryTabContent = ({
   const changeCollection = (collectionId) => {
     setSelectedCodes(new Set());
     setMultiSelectMode(false);
-    setOutputAnchorEl(null);
     setSortMode((current) => {
       if (getRecommendationPreset(collectionId)) return "default";
       return current === "default" ? "combat" : current;
@@ -606,7 +546,11 @@ const CharacterGalleryTabContent = ({
   };
 
   const selectedDetail = detailNikke
-    ? ownedCharacterMap.get(normalizeCode(detailNikke?.name_code))
+    ? (
+        localRecordMap.get(detailNikke?._localRecordId)
+        || localRecordMap.get(normalizeCode(detailNikke?.name_code))
+        || ownedCharacterMap.get(normalizeCode(detailNikke?.name_code))
+      )
     : null;
   const entryRecord = entryNikke
     ? (localRecordMap.get(entryNikke?._localRecordId) || localRecordMap.get(normalizeCode(entryNikke?.name_code)) || null)
@@ -631,6 +575,11 @@ const CharacterGalleryTabContent = ({
             <Button size="small" variant="outlined" startIcon={<AddIcon />} onClick={() => setCreateCustomOpen(true)}>自定义角色</Button>
             <Button size="small" variant="outlined" startIcon={<DocumentScannerOutlinedIcon />} onClick={() => setScreenshotOcrOpen(true)}>图片识别</Button>
             <Button size="small" variant="outlined" startIcon={<CloudDownloadOutlinedIcon />} onClick={() => setAkaDataOpen(true)}>阿卡数据</Button>
+            <input ref={importInputRef} hidden type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onChange={async (event) => {
+              const file = event.target.files?.[0]; event.target.value = ""; if (!file) return;
+              try { const summary = await onImportLocalGallery(file); setImportSummary(summary); } catch { /* 已由上层显示错误 */ }
+            }} />
+            <Button size="small" variant="outlined" startIcon={<UploadFileIcon />} onClick={() => importInputRef.current?.click()}>本地数据</Button>
           </Stack>
           <Stack direction="row" spacing={1.5} sx={{ mt: 0.5, color: "text.secondary", flexWrap: "wrap" }}>
             <Typography variant="body2">{copy.catalogCount.replace("{count}", String((nikkeList || []).length))}</Typography>
@@ -650,10 +599,12 @@ const CharacterGalleryTabContent = ({
         >
           {currentRecommendation ? <MenuItem value="recommendation-default" disabled>{copy.defaultCollection}</MenuItem> : null}
           <MenuItem value={SYSTEM_COLLECTION_IDS.catalog}>{copy.catalog}</MenuItem>
-          <MenuItem value={SYSTEM_COLLECTION_IDS.owned} disabled={!isSystemCollectionSelectable(SYSTEM_COLLECTION_IDS.owned, { hasOwned: ownedCodes.size > 0 })}>{copy.owned}</MenuItem>
-          <MenuItem value={SYSTEM_COLLECTION_IDS.recorded}>{copy.recorded}（{recordedCount || 0}）</MenuItem>
+          <Divider component="li" />
+          <MenuItem value={SYSTEM_COLLECTION_IDS.owned} disabled={!isSystemCollectionSelectable(SYSTEM_COLLECTION_IDS.owned)}>{copy.owned}</MenuItem>
+          <MenuItem value={SYSTEM_COLLECTION_IDS.recorded}>{copy.recorded}</MenuItem>
           {templates.length ? <Divider component="li" /> : null}
-          {templates.map((template) => (
+          {commonTemplate ? <MenuItem value={`template:${commonTemplate.id}`}>{commonTemplate.name}</MenuItem> : null}
+          {editableTemplates.map((template) => (
             <MenuItem key={template.id} value={`template:${template.id}`}>{template.name}</MenuItem>
           ))}
         </TextField>
@@ -695,10 +646,10 @@ const CharacterGalleryTabContent = ({
 
         {currentTemplate ? (
           <Stack direction="row" spacing={0.25}>
-            <Tooltip title={currentTemplateFixed ? "“常用”是固定列表" : t("templateRename")}><span><IconButton disabled={currentTemplateFixed} onClick={() => startRenameTemplate(currentTemplate.id)}><EditIcon fontSize="small" /></IconButton></span></Tooltip>
-            <Tooltip title={t("copy")}><IconButton onClick={() => handleDuplicateTemplate(currentTemplate.id)}><ContentCopyIcon fontSize="small" /></IconButton></Tooltip>
+            <Tooltip title={currentTemplateFixed ? "“常用”是固定列表" : t("templateRename")}><span><IconButton aria-label={t("templateRename")} disabled={currentTemplateFixed} onClick={() => startRenameTemplate(currentTemplate.id)}><EditIcon fontSize="small" /></IconButton></span></Tooltip>
+            <Tooltip title={t("copy")}><IconButton aria-label={t("copy")} onClick={() => handleDuplicateTemplate(currentTemplate.id)}><ContentCopyIcon fontSize="small" /></IconButton></Tooltip>
             <Tooltip title={currentTemplateFixed || currentTemplate.id === defaultTemplateId ? t("templateDefaultLocked") : t("templateDelete")}>
-              <span><IconButton color="error" disabled={currentTemplateFixed || currentTemplate.id === defaultTemplateId} onClick={() => handleDeleteTemplate(currentTemplate.id)}><DeleteIcon fontSize="small" /></IconButton></span>
+              <span><IconButton aria-label={t("templateDelete")} color="error" disabled={currentTemplateFixed || currentTemplate.id === defaultTemplateId} onClick={() => handleDeleteTemplate(currentTemplate.id)}><DeleteIcon fontSize="small" /></IconButton></span>
             </Tooltip>
           </Stack>
         ) : null}
@@ -766,7 +717,7 @@ const CharacterGalleryTabContent = ({
             {sortDirection === "desc" ? <ArrowDownwardIcon fontSize="small" /> : <ArrowUpwardIcon fontSize="small" />}
           </IconButton>
         </Tooltip>
-        <Tooltip title={t("managementSettings")}><IconButton onClick={onOpenSettings}><SettingsOutlinedIcon /></IconButton></Tooltip>
+        <Tooltip title={t("managementSettings")}><IconButton aria-label={t("managementSettings")} onClick={onOpenSettings}><SettingsOutlinedIcon /></IconButton></Tooltip>
         <Button
           variant={multiSelectMode ? "contained" : "outlined"}
           startIcon={multiSelectMode ? <CheckIcon /> : <LibraryAddCheckIcon />}
@@ -836,9 +787,10 @@ const CharacterGalleryTabContent = ({
             const accountCharacter = ownedCharacterMap.get(code);
             const localRecord = localRecordMap.get(nikke?._localRecordId) || localRecordMap.get(code);
             const owned = Boolean(accountCharacter);
+            const effectiveCharacter = localRecord || accountCharacter;
             const selected = selectedCodes.has(code);
             const avatar = getNikkeAvatarUrl(nikke);
-            const equipmentSummary = summarizeTopEquipmentAffixes((accountCharacter || localRecord)?.equipments);
+            const equipmentSummary = summarizeTopEquipmentAffixes(effectiveCharacter?.equipments);
             return (
               <Box
                 component="button"
@@ -889,12 +841,10 @@ const CharacterGalleryTabContent = ({
                     <Chip size="small" label={getElementName(nikke?.element)} sx={{ height: 22, borderRadius: 1, bgcolor: "#e3f2fd", color: "#0d47a1", "& .MuiChip-label": { px: 0.75, fontSize: "0.7rem" } }} />
                     <Chip size="small" variant="outlined" label={getBurstStageName(nikke?.use_burst_skill)} sx={{ height: 22, borderRadius: 1, "& .MuiChip-label": { px: 0.75, fontSize: "0.7rem" } }} />
                   </Stack>
-                  {owned && toFiniteNumber(accountCharacter?.level) !== null ? (
+                  {effectiveCharacter && toFiniteNumber(effectiveCharacter?.level) !== null ? (
                     <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 1, fontVariantNumeric: "tabular-nums" }}>
-                      {`Lv. ${accountCharacter.level} · ${formatLimitBreak(accountCharacter)}`}
+                      {`Lv. ${effectiveCharacter.level} · ${formatLimitBreak(effectiveCharacter)}`}
                     </Typography>
-                  ) : localRecord && toFiniteNumber(localRecord?.level) !== null ? (
-                    <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 1 }}>{`Lv. ${localRecord.level}`}</Typography>
                   ) : null}
                 </Box>
                 {equipmentSummary.length ? (
@@ -906,7 +856,7 @@ const CharacterGalleryTabContent = ({
                       columnGap: 1.25,
                       rowGap: 0.25,
                       pt: 0.75,
-                      pb: localRecord && recordedCodes.has(code) ? 2.5 : 0,
+                      pb: localRecord?.custom ? 2.5 : 0,
                       borderTop: "1px solid",
                       borderColor: "divider",
                     }}
@@ -928,7 +878,7 @@ const CharacterGalleryTabContent = ({
                     ))}
                   </Box>
                 ) : null}
-                {localRecord && recordedCodes.has(code) ? <Chip size="small" color={localRecord.custom ? "secondary" : "primary"} label={localRecord.custom ? "自定义" : "已录入"} sx={{ position: "absolute", right: 4, bottom: 4, height: 20 }} /> : null}
+                {localRecord?.custom ? <Chip size="small" color="secondary" label="自定义" sx={{ position: "absolute", right: 4, bottom: 4, height: 20 }} /> : null}
                 {multiSelectMode ? (
                   <Checkbox checked={selected} disabled={!owned} size="small" tabIndex={-1} sx={{ position: "absolute", top: 2, right: 2, p: 0.5 }} />
                 ) : null}
@@ -951,32 +901,8 @@ const CharacterGalleryTabContent = ({
 
       {!multiSelectMode ? (
         <Box sx={{ position: "sticky", bottom: 0, zIndex: 5, mt: 2, px: 1.5, py: 1, display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap", border: "1px solid", borderColor: "divider", bgcolor: "rgba(255,255,255,0.96)", boxShadow: "0 -4px 8px rgba(23,32,51,0.06)" }}>
-          {getGalleryToolbarMode(activeCollectionId) === "local-gallery" ? (<>
-            <input ref={importInputRef} hidden type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onChange={async (event) => {
-              const file = event.target.files?.[0]; event.target.value = ""; if (!file) return;
-              try { const summary = await onImportLocalGallery(file); setImportSummary(summary); } catch { /* 已由上层显示错误 */ }
-            }} />
-            <Button variant="contained" startIcon={<UploadFileIcon />} onClick={() => importInputRef.current?.click()}>导入图鉴</Button>
-            <Button variant="outlined" startIcon={<DownloadOutlinedIcon />} onClick={onExportLocalGallery}>导出图鉴</Button>
-            <Typography variant="caption" color="text.secondary">文件只在扩展本地解析，不会上传服务器；空列表也可导出模板。</Typography>
-          </>) : (<>
-          <Button variant="contained" startIcon={fetchLoading ? <CircularProgress size={18} color="inherit" /> : <SyncIcon />} onClick={onFetchCharacterData} disabled={!nikkeList?.length || fetchLoading || downloadLoading || actionsDisabled || Boolean(syncBlockedReason)}>{copy.sync}</Button>
-          <Button variant="outlined" startIcon={downloadLoading ? <CircularProgress size={18} color="inherit" /> : <DownloadOutlinedIcon />} onClick={onDownloadCharacterData} disabled={!dataReady || activeCollectionId === SYSTEM_COLLECTION_IDS.catalog || fetchLoading || downloadLoading || actionsDisabled}>{t("downloadCharacterData")}</Button>
-          <Button
-            variant="outlined"
-            startIcon={<TuneIcon />}
-            disabled={!globalOutputEnabled}
-            onClick={(event) => setOutputAnchorEl(event.currentTarget)}
-            aria-haspopup="dialog"
-            aria-expanded={Boolean(outputAnchorEl)}
-          >
-            {copy.outputSettings}
-          </Button>
-          <Typography variant="caption" color="text.secondary" sx={{ flex: "1 1 360px", maxWidth: 620, lineHeight: 1.4 }}>
-            {copy.downloadScopeHint}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ ml: { md: "auto" } }}>{copy.selectedCount.replace("{count}", String(collectionNikkes.length))}</Typography>
-          </>)}
+          <Button variant="contained" startIcon={fetchLoading ? <CircularProgress size={18} color="inherit" /> : <SyncIcon />} onClick={onFetchCharacterData} disabled={!nikkeList?.length || fetchLoading || actionsDisabled || Boolean(syncBlockedReason)}>{copy.sync}</Button>
+          <Button variant="outlined" startIcon={<DownloadOutlinedIcon />} onClick={() => onExportLocalGallery(exportableRecords)} disabled={!exportableRecords.length || fetchLoading}>导出图鉴</Button>
         </Box>
       ) : (
         <Box sx={{ position: "fixed", left: { xs: 16, md: 40 }, right: { xs: 16, md: 40 }, bottom: 18, zIndex: 20, display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap", px: 2, py: 1.25, border: "1px solid", borderColor: "divider", bgcolor: "background.paper", boxShadow: "0 6px 16px rgba(23,32,51,0.14)", borderRadius: 1.5 }}>
@@ -994,33 +920,6 @@ const CharacterGalleryTabContent = ({
           <Button sx={{ ml: { md: "auto" } }} onClick={() => { setMultiSelectMode(false); setSelectedCodes(new Set()); }}>{copy.cancel}</Button>
         </Box>
       )}
-
-      <Popover
-        open={Boolean(outputAnchorEl)}
-        anchorEl={outputAnchorEl}
-        onClose={() => setOutputAnchorEl(null)}
-        anchorOrigin={{ vertical: "top", horizontal: "left" }}
-        transformOrigin={{ vertical: "bottom", horizontal: "left" }}
-        slotProps={{ paper: { sx: { width: { xs: "min(92vw, 560px)", sm: 560 }, maxHeight: "min(70vh, 620px)", p: 2, mb: 0.75 } } }}
-      >
-        <Typography variant="subtitle2">{copy.outputSettings}</Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5, mb: 1.5 }}>{copy.outputSettingsHint}</Typography>
-        <Box sx={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", columnGap: 1, rowGap: 0.25 }}>
-          {globalStatColumns.map(({ key, label }) => {
-            const state = globalStatStates[key] || { checked: false, indeterminate: false };
-            return (
-              <FormControlLabel
-                key={key}
-                sx={{ m: 0, minWidth: 0, "& .MuiFormControlLabel-label": { fontSize: "0.82rem" } }}
-                control={<Checkbox size="small" checked={state.checked} indeterminate={state.indeterminate} onChange={() => updateGlobalShowStat(key, !state.checked)} />}
-                label={label}
-              />
-            );
-          })}
-        </Box>
-        <Divider sx={{ my: 1.5 }} />
-        <Typography variant="caption" color="text.secondary">{copy.globalOutputHint}</Typography>
-      </Popover>
 
       <Drawer anchor="right" open={Boolean(detailNikke)} onClose={() => setDetailNikke(null)} PaperProps={{ sx: { width: { xs: "min(94vw, 440px)", sm: 440 }, p: 2.5 } }}>
         {detailNikke ? (

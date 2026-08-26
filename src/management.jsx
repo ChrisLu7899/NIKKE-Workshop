@@ -22,7 +22,6 @@ import { initializeLevelStats } from "./services/levelStats.js";
 import {
   getCharacters,
   getCalculatorData,
-  getSettings,
   setCalculatorData,
   setSettings,
 } from "./services/storage.js";
@@ -33,14 +32,10 @@ import ManagementHeader from "./components/management/ManagementHeader.jsx";
 import CharacterGalleryTabContent from "./components/management/CharacterGalleryTabContent.jsx";
 import SettingsTabContent from "./components/management/SettingsTabContent.jsx";
 import {
-  equipStatKeys,
-  basicStatKeys,
-  simulatedStatKeys,
   elementTranslationKeys,
   classTranslationKeys,
   corporationTranslationKeys,
 } from "./components/management/constants.js";
-import { useCharacterActions } from "./components/management/hooks/useCharacterActions.js";
 import { useTemplateManagement } from "./components/management/hooks/useTemplateManagement.js";
 import { useCrawler } from "./components/app/hooks/useCrawler.js";
 import {
@@ -52,52 +47,36 @@ import {
 import { getLocalCharacterRoster, setLocalCharacterRoster } from "./services/localCharacterRoster.js";
 import {
   deleteLocalCharacterRecord,
-  getRecordedLocalCharacters,
   localRecordToCatalogCharacter,
   reconcileLocalCharactersAfterSync,
   saveLocalCharacterRecord,
 } from "./domain/localCharacterRoster.js";
 import { exportLocalGalleryBuffer, importLocalGalleryBuffer } from "./utils/localGalleryExcel.js";
-import { getRecommendationPreset } from "./data/recommendationPresets.js";
 import { isCommonCharacterTemplate } from "./data/commonCharacterList.js";
 import { resolveCharacterDisplayName } from "./data/characterNameOverrides.js";
-import { setShowStat } from "./utils/showStats.js";
 import {
-  DEFAULT_CHARACTER_SHOW_STATS,
   SYSTEM_COLLECTION_IDS,
-  applyCharacterConfigShowStatsToAccountDicts,
-  applyShowStatsToAccountDicts,
   attachCalculatorCollections,
   buildCharactersConfig,
-  characterCodeSet,
   filterAccountDictsToOwned,
 } from "./utils/characterCollections.js";
 
 // ========== 管理页面主组件 ==========
 
 const ManagementPage = () => {
-  /* ========== 语言设置同步 ========== */
-  const [lang, setLang] = useState("zh");
+  const lang = "zh";
   const [forceSimulatedStatsLevel400, setForceSimulatedStatsLevel400] = useState(false);
-  const [crawlerSettings, setCrawlerSettings] = useState({
-    saveAsZip: false,
-    exportJson: false,
-    activateTab: false,
-    server: "global",
-  });
+  const [crawlerServer, setCrawlerServer] = useState("global");
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [calculatorFrameKey, setCalculatorFrameKey] = useState(0);
   const calculatorFrameRef = useRef(null);
   const [calculatorFrameHeight, setCalculatorFrameHeight] = useState(720);
   const [manualAreaId, setManualAreaId] = useState("");
-  const [fetchedData, setFetchedData] = useState(null);
   const [ownedSnapshot, setOwnedSnapshot] = useState(null);
-  const [ownedShowStats, setOwnedShowStats] = useState([...DEFAULT_CHARACTER_SHOW_STATS]);
-  const [recommendationShowStatsById, setRecommendationShowStatsById] = useState({});
   const [activeCollectionId, setActiveCollectionId] = useState(SYSTEM_COLLECTION_IDS.catalog);
   const [localRoster, setLocalRosterState] = useState({ schemaVersion: 1, records: [] });
   const [localRosterLoaded, setLocalRosterLoaded] = useState(false);
-  const t = useCallback((k) => TRANSLATIONS[lang][k] || k, [lang]);
+  const t = useCallback((k) => TRANSLATIONS.zh[k] || k, []);
 
   // ========== 核心状态管理 ==========
   const [tab, setTab] = useState(0);
@@ -132,23 +111,10 @@ const ManagementPage = () => {
   });
   const ensureCommonTemplate = templateManagement.ensureCommonTemplate;
 
-  const characterActions = useCharacterActions({
-    t,
-    characters,
-    setCharactersData,
-    nikkeList,
-    showMessage,
-  });
-
   const crawler = useCrawler({
     t,
-    lang,
-    saveAsZip: crawlerSettings.saveAsZip,
-    exportJson: crawlerSettings.exportJson,
-    activateTab: crawlerSettings.activateTab,
-    server: crawlerSettings.server,
+    server: crawlerServer,
     forceSimulatedStatsLevel400,
-    broadcastLogs: true,
   });
   const manualAreaIdInvalid = !parseManualAreaId(manualAreaId).valid;
 
@@ -166,18 +132,6 @@ const ManagementPage = () => {
   const iconUrl = useMemo(() => chrome.runtime.getURL("images/icon-128.png"), []);
 
   // ========== 工具函数 ==========
-  const equipStatLabels = [
-    t("elementAdvantage"),
-    t("attack"),
-    t("ammo"),
-    t("chargeSpeed"),
-    t("chargeDamage"),
-    t("critical"),
-    t("criticalDamage"),
-    t("hit"),
-    t("defense")
-  ];
-
   const getElementName = useCallback((element) => {
     const key = elementTranslationKeys[element];
     return key ? t(key) : element;
@@ -261,14 +215,19 @@ const ManagementPage = () => {
     showMessage("本地录入已删除，标准图鉴资料未受影响", "success");
   }, [localRoster.records, persistLocalRecords, showMessage]);
 
-  const handleExportLocalGallery = useCallback(async () => {
-    const buffer = await exportLocalGalleryBuffer(localRoster.records);
+  const handleExportLocalGallery = useCallback(async (records) => {
+    const scopedRecords = Array.isArray(records) ? records : [];
+    if (!scopedRecords.length) {
+      showMessage("当前列表没有可导出的角色数据", "warning");
+      return;
+    }
+    const buffer = await exportLocalGalleryBuffer(scopedRecords, { includeSynced: true });
     const url = URL.createObjectURL(new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }));
     const anchor = document.createElement("a");
-    anchor.href = url; anchor.download = `NIKKE-Workshop-本地图鉴-${new Date().toISOString().slice(0, 10)}.xlsx`;
+    anchor.href = url; anchor.download = `NIKKE-Workshop-图鉴-${new Date().toISOString().slice(0, 10)}.xlsx`;
     anchor.click(); URL.revokeObjectURL(url);
-    showMessage("本地图鉴已导出", "success");
-  }, [localRoster.records, showMessage]);
+    showMessage(`已导出当前列表中的 ${scopedRecords.length} 名角色`, "success");
+  }, [showMessage]);
 
   const handleImportLocalGallery = useCallback(async (file) => {
     try {
@@ -283,80 +242,18 @@ const ManagementPage = () => {
     }
   }, [localRoster.records, nikkeList, persistLocalRecords, showMessage]);
 
-  const toggleLang = useCallback(async (e) => {
-    const newLang = e.target.checked ? "en" : "zh";
-    setLang(newLang);
-    const current = await getSettings();
-    await setSettings({
-      ...current,
-      lang: newLang
-    });
-  }, []);
-
   const toggleForceSimulatedStatsLevel400 = useCallback((e) => {
     const next = e.target.checked;
     setForceSimulatedStatsLevel400(next);
     setSettings({ forceSimulatedStatsLevel400: next });
   }, []);
 
-  const fetchedDataReady = Boolean(
-    fetchedData
-    && fetchedData.accountDicts?.length,
-  );
-
-  const activeCollectionTemplate = useMemo(() => {
-    if (!String(activeCollectionId).startsWith("template:")) return null;
-    const templateId = String(activeCollectionId).slice("template:".length);
-    return templateManagement.templates.find((template) => template.id === templateId) || null;
-  }, [activeCollectionId, templateManagement.templates]);
-  const activeRecommendationPreset = useMemo(
-    () => getRecommendationPreset(activeCollectionId),
-    [activeCollectionId],
-  );
-
-  const activeCollectionDownloadReady = Boolean(
-    fetchedDataReady
-    && activeCollectionId !== SYSTEM_COLLECTION_IDS.catalog
-    && (
-      activeCollectionId === SYSTEM_COLLECTION_IDS.owned
-      || characterCodeSet(activeCollectionTemplate?.data).size
-      || activeRecommendationPreset?.items?.length
-    ),
-  );
-
-  const handleOwnedShowStatChange = useCallback((key, checked) => {
-    setOwnedShowStats((current) => {
-      const next = setShowStat(current, key, checked);
-      setSettings({ ownedShowStats: next });
-      return next;
-    });
-  }, []);
-
-  const activeRecommendationShowStats = useMemo(() => {
-    if (!activeRecommendationPreset) return [...DEFAULT_CHARACTER_SHOW_STATS];
-    const stored = recommendationShowStatsById[activeCollectionId];
-    return Array.isArray(stored) ? stored : [...DEFAULT_CHARACTER_SHOW_STATS];
-  }, [activeCollectionId, activeRecommendationPreset, recommendationShowStatsById]);
-
-  const handleRecommendationShowStatChange = useCallback((collectionId, key, checked) => {
-    setRecommendationShowStatsById((current) => {
-      const base = Array.isArray(current[collectionId])
-        ? current[collectionId]
-        : [...DEFAULT_CHARACTER_SHOW_STATS];
-      const next = { ...current, [collectionId]: setShowStat(base, key, checked) };
-      setSettings({ recommendationShowStatsById: next });
-      return next;
-    });
-  }, []);
-
   const handleFetchCharacterData = useCallback(async () => {
     if (!window.confirm("同步成功后，标准图鉴角色的手动数据将被账号数据覆盖；自定义角色不会受到影响。")) return;
     const charactersOverride = buildCharactersConfig(nikkeList, {
       showEquipDetails: characters?.options?.showEquipDetails !== false,
-      showStats: ownedShowStats,
     });
     const outcome = await crawler.handleStart({
-      deferExport: true,
       manualAreaId,
       charactersOverride,
     });
@@ -386,10 +283,6 @@ const ManagementPage = () => {
         await setCalculatorData(snapshot);
         setOwnedSnapshot(syncedSnapshot);
         setCalculatorFrameKey((current) => current + 1);
-        setFetchedData({
-          accountDicts: ownedAccountDicts,
-          characterCount: calculatorCharacterCount,
-        });
         if (currentCommonTemplate) {
           await templateManagement.handleTemplateChange(currentCommonTemplate.id);
         }
@@ -399,40 +292,7 @@ const ManagementPage = () => {
       }
     }
     showMessage(outcome?.error || t("characterDataFailed"), "warning");
-  }, [characters?.options?.showEquipDetails, crawler, ensureCommonTemplate, localRoster.records, manualAreaId, nikkeList, ownedShowStats, persistLocalRecords, showMessage, t, templateManagement]);
-
-  const handleDownloadCharacterData = useCallback(async () => {
-    if (!activeCollectionDownloadReady) {
-      showMessage(t("characterDataRequired"), "warning");
-      return;
-    }
-    const allowedCodes = activeCollectionId === SYSTEM_COLLECTION_IDS.owned
-      ? null
-      : activeRecommendationPreset
-        ? new Set(activeRecommendationPreset.items.map((entry) => String(entry.nameCode)))
-        : characterCodeSet(activeCollectionTemplate?.data);
-    const filteredAccountDicts = filterAccountDictsToOwned(fetchedData.accountDicts, allowedCodes);
-    const scopedAccountDicts = activeCollectionTemplate
-      ? applyCharacterConfigShowStatsToAccountDicts(filteredAccountDicts, characters)
-      : applyShowStatsToAccountDicts(
-          filteredAccountDicts,
-          activeCollectionId === SYSTEM_COLLECTION_IDS.owned
-            ? ownedShowStats
-            : activeRecommendationPreset
-              ? activeRecommendationShowStats
-              : null,
-        );
-    if (!scopedAccountDicts.length) {
-      showMessage(t("characterDataRequired"), "warning");
-      return;
-    }
-    const outcome = await crawler.handleDownloadAccountData(scopedAccountDicts);
-    if (outcome?.downloadCount > 0) {
-      showMessage(t("characterDownloadStarted"), "success");
-    } else {
-      showMessage(t("characterDownloadFailed"), "error");
-    }
-  }, [activeCollectionDownloadReady, activeCollectionId, activeCollectionTemplate, activeRecommendationPreset, activeRecommendationShowStats, characters, crawler, fetchedData, ownedShowStats, showMessage, t]);
+  }, [characters?.options?.showEquipDetails, crawler, ensureCommonTemplate, localRoster.records, manualAreaId, nikkeList, persistLocalRecords, showMessage, t, templateManagement]);
 
   const handleCollectionChange = useCallback(async (collectionId) => {
     if (String(collectionId).startsWith("template:")) {
@@ -502,13 +362,6 @@ const ManagementPage = () => {
         .some((account) => Array.isArray(account?.characters) && account.characters.length > 0);
       if (hasOwnedCharacters) {
         setOwnedSnapshot(syncedSnapshot);
-        setFetchedData({
-          accountDicts: [],
-          characterCount: syncedSnapshot.accounts.reduce(
-            (sum, account) => sum + (Array.isArray(account?.characters) ? account.characters.length : 0),
-            0,
-          ),
-        });
       }
     }).catch((error) => {
       console.warn("读取已获取妮姬数据失败:", error);
@@ -584,50 +437,20 @@ const ManagementPage = () => {
     chrome.storage.local.set({ managementTab: 1, managementLayoutVersion: 2 });
   }, [localRoster.records, ownedSnapshot, templateManagement.templates]);
 
-  // 语言和本地设置初始化
+  // 本地设置初始化
   useEffect(() => {
     chrome.storage.local.get("settings", (r) => {
       const nextSettings = r.settings || {};
-      const nextLang = nextSettings.lang || "zh";
-      setLang(nextLang);
       setForceSimulatedStatsLevel400(Boolean(nextSettings.forceSimulatedStatsLevel400));
       setManualAreaId(String(nextSettings.manualAreaId || ""));
-      setCrawlerSettings({
-        saveAsZip: Boolean(nextSettings.saveAsZip),
-        exportJson: Boolean(nextSettings.exportJson),
-        activateTab: Boolean(nextSettings.activateTab),
-        server: nextSettings.server || "global",
-      });
-      setOwnedShowStats(Array.isArray(nextSettings.ownedShowStats)
-        ? nextSettings.ownedShowStats
-        : [...DEFAULT_CHARACTER_SHOW_STATS]);
-      setRecommendationShowStatsById(
-        nextSettings.recommendationShowStatsById && typeof nextSettings.recommendationShowStatsById === "object"
-          ? nextSettings.recommendationShowStatsById
-          : {},
-      );
+      setCrawlerServer(nextSettings.server || "global");
     });
     const handler = (c, area) => {
       if (area === "local" && c.settings) {
         const nextSettings = c.settings.newValue || {};
-        const nextLang = nextSettings.lang || "zh";
-        setLang(nextLang);
         setForceSimulatedStatsLevel400(Boolean(nextSettings.forceSimulatedStatsLevel400));
         setManualAreaId(String(nextSettings.manualAreaId || ""));
-        setCrawlerSettings({
-          saveAsZip: Boolean(nextSettings.saveAsZip),
-          exportJson: Boolean(nextSettings.exportJson),
-          activateTab: Boolean(nextSettings.activateTab),
-          server: nextSettings.server || "global",
-        });
-        setOwnedShowStats(Array.isArray(nextSettings.ownedShowStats)
-          ? nextSettings.ownedShowStats
-          : [...DEFAULT_CHARACTER_SHOW_STATS]);
-        setRecommendationShowStatsById(
-          nextSettings.recommendationShowStatsById && typeof nextSettings.recommendationShowStatsById === "object"
-            ? nextSettings.recommendationShowStatsById
-            : {},
-        );
+        setCrawlerServer(nextSettings.server || "global");
       }
     };
     chrome.storage.onChanged.addListener(handler);
@@ -672,8 +495,6 @@ const ManagementPage = () => {
     <>
       <ManagementHeader
         iconUrl={iconUrl}
-        lang={lang}
-        onToggleLang={toggleLang}
       />
       
       <Container maxWidth={false} sx={{ mt: 3, px: { xs: 2, md: 3 }, pb: 4 }}>
@@ -688,7 +509,6 @@ const ManagementPage = () => {
             nikkeList={galleryNikkeList}
             standardCatalog={nikkeList}
             localRecords={localRoster.records}
-            recordedCount={getRecordedLocalCharacters(localRoster.records).length}
             onSaveLocalCharacter={handleSaveLocalCharacter}
             onSaveLocalCharacterBatch={handleSaveLocalCharacterBatch}
             onDeleteLocalCharacter={handleDeleteLocalCharacter}
@@ -711,28 +531,15 @@ const ManagementPage = () => {
             handleDeleteTemplate={handleDeleteCollection}
             handleCreateTemplateFromData={templateManagement.handleCreateTemplateFromData}
             handleUpdateTemplateData={templateManagement.handleUpdateTemplateData}
-            characters={characters}
             getElementName={getElementName}
             getClassName={getClassName}
             getCorporationName={getCorporationName}
             getBurstStageName={getBurstStageName}
-            equipStatKeys={equipStatKeys}
-            equipStatLabels={equipStatLabels}
             getNikkeAvatarUrl={getNikkeAvatarUrl}
             getDisplayName={getDisplayName}
-            updateAllCharactersShowStats={characterActions.updateAllCharactersShowStats}
-            basicStatKeys={basicStatKeys}
-            simulatedStatKeys={simulatedStatKeys}
             ownedSnapshot={ownedSnapshot}
-            ownedShowStats={ownedShowStats}
-            onOwnedShowStatChange={handleOwnedShowStatChange}
-            recommendationShowStats={activeRecommendationShowStats}
-            onRecommendationShowStatChange={handleRecommendationShowStatChange}
             fetchLoading={crawler.loading}
-            downloadLoading={crawler.downloadLoading}
-            dataReady={activeCollectionDownloadReady}
             onFetchCharacterData={handleFetchCharacterData}
-            onDownloadCharacterData={handleDownloadCharacterData}
             onOpenSettings={() => setSettingsOpen(true)}
             actionsDisabled={manualAreaIdInvalid}
             syncBlockedReason={crawler.crawlBlockedReason}

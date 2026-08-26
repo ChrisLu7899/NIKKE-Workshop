@@ -3,9 +3,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  LOCAL_CHARACTER_SOURCES,
   createEmptyLocalCharacterRoster,
   deleteLocalCharacterRecord,
   getRecordedLocalCharacters,
+  hasLocalCharacterData,
   reconcileLocalCharactersAfterSync,
   saveLocalCharacterRecord,
   normalizeCharacterName,
@@ -74,6 +76,35 @@ test("sync preserves a manually supplemented equipment position that the source 
   assert.equal(result.records[0].equipments[0][0].value, 14.63);
   assert.equal(result.records[0].equipments[0][2].functionType, "IncElementDmg");
   assert.ok(result.records[0].manualSupplementFields.includes("equipments.0.2"));
+});
+
+test("a later local import replaces the synced source and data", () => {
+  const synced = reconcileLocalCharactersAfterSync([], {
+    accounts: [{ source: "sync", characters: [{ nameCode: "c1", level: 500, equipments: [[], [], [], []] }] }],
+  }, catalog, 1);
+  const imported = saveLocalCharacterRecord(synced.records, {
+    catalogCharacter: catalog[0],
+    draft: { level: 600, equipments: equipment },
+    existingLocalId: "standard:c1",
+    source: LOCAL_CHARACTER_SOURCES.excel,
+    catalog,
+    now: 2,
+  });
+
+  assert.equal(imported.record.source, LOCAL_CHARACTER_SOURCES.excel);
+  assert.equal(imported.record.level, 600);
+  assert.equal(imported.record.equipments[0][0].value, 11.81);
+  assert.equal(getRecordedLocalCharacters(imported.records).length, 1);
+});
+
+test("export eligibility requires account fields or equipment data", () => {
+  const blank = saveLocalCharacterRecord([], { catalogCharacter: catalog[0], draft: {}, catalog }).record;
+  const zeroCombat = saveLocalCharacterRecord([], { catalogCharacter: catalog[0], draft: { combat: 0 }, catalog }).record;
+  const equipped = saveLocalCharacterRecord([], { catalogCharacter: catalog[0], draft: { equipments: equipment }, catalog }).record;
+
+  assert.equal(hasLocalCharacterData(blank), false);
+  assert.equal(hasLocalCharacterData(zeroCombat), true);
+  assert.equal(hasLocalCharacterData(equipped), true);
 });
 
 test("failed sync leaves manual data unchanged when reconciliation is not committed", () => {

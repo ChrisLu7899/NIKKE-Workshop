@@ -19,13 +19,8 @@ export const SYSTEM_COLLECTION_IDS = Object.freeze({
   recorded: "recorded",
 });
 
-export function getGalleryToolbarMode(collectionId) {
-  return collectionId === SYSTEM_COLLECTION_IDS.recorded ? "local-gallery" : "account";
-}
-
-export function isSystemCollectionSelectable(collectionId, { hasOwned = false } = {}) {
-  if (collectionId === SYSTEM_COLLECTION_IDS.owned) return hasOwned;
-  return [SYSTEM_COLLECTION_IDS.catalog, SYSTEM_COLLECTION_IDS.recorded].includes(collectionId);
+export function isSystemCollectionSelectable(collectionId) {
+  return Object.values(SYSTEM_COLLECTION_IDS).includes(collectionId);
 }
 
 export const DEFAULT_CHARACTER_SHOW_STATS = Object.freeze([
@@ -143,38 +138,6 @@ export function filterAccountDictsToOwned(accountDicts, allowedCodes = null) {
   });
 }
 
-export function applyShowStatsToAccountDicts(accountDicts, showStats) {
-  if (!Array.isArray(showStats)) return accountDicts;
-  return (Array.isArray(accountDicts) ? accountDicts : []).map((dict) => ({
-    ...dict,
-    elements: Object.fromEntries(ELEMENT_KEYS.map((element) => [
-      element,
-      (Array.isArray(dict?.elements?.[element]) ? dict.elements[element] : [])
-        .map((character) => ({ ...character, showStats: [...showStats] })),
-    ])),
-  }));
-}
-
-export function applyCharacterConfigShowStatsToAccountDicts(accountDicts, characters) {
-  const showStatsByCode = new Map(
-    flattenCharacterConfig(characters)
-      .filter((character) => Array.isArray(character?.showStats))
-      .map((character) => [normalizeCode(character.name_code), character.showStats]),
-  );
-  if (!showStatsByCode.size) return accountDicts;
-  return (Array.isArray(accountDicts) ? accountDicts : []).map((dict) => ({
-    ...dict,
-    elements: Object.fromEntries(ELEMENT_KEYS.map((element) => [
-      element,
-      (Array.isArray(dict?.elements?.[element]) ? dict.elements[element] : [])
-        .map((character) => {
-          const showStats = showStatsByCode.get(normalizeCode(character?.name_code));
-          return showStats ? { ...character, showStats: [...showStats] } : character;
-        }),
-    ])),
-  }));
-}
-
 export function buildCalculatorCollections(snapshot, templates) {
   const ownedCodes = new Set(
     (Array.isArray(snapshot?.accounts) ? snapshot.accounts : []).filter((account) => account?.source !== "local").flatMap((account) =>
@@ -188,7 +151,7 @@ export function buildCalculatorCollections(snapshot, templates) {
       (Array.isArray(account?.characters) ? account.characters : []).map((character) => normalizeCode(character?.nameCode)).filter(Boolean)),
   );
   const collections = [];
-  if (ownedCodes.size) collections.push({ id: SYSTEM_COLLECTION_IDS.owned, name: "已获得", characterCodes: [...ownedCodes], system: true });
+  if (ownedCodes.size) collections.push({ id: SYSTEM_COLLECTION_IDS.owned, name: "已同步", characterCodes: [...ownedCodes], system: true });
   if (recordedCodes.size) collections.push({ id: SYSTEM_COLLECTION_IDS.recorded, name: "已录入", characterCodes: [...recordedCodes], system: true });
 
   RECOMMENDATION_PRESETS.forEach((preset) => {

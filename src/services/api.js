@@ -647,46 +647,6 @@ export const getRoleName = async (onDiagnostic) => {
   return { role_name: "", area_id: areaId };
 };
 
-// 获取同步器等级：必须传入从 getRoleName 获得的 area_id
-export const getSyncroLevel = (areaId) => {
-  if (areaId === undefined || areaId === null || areaId === "") {
-    return Promise.reject(new Error("缺少 areaId，需先调用 getRoleName 获取"));
-  }
-  return postJson(
-    "https://api.blablalink.com/api/game/proxy/Game/GetUserProfileOutpostInfo",
-    { nikke_area_id: parseInt(areaId) }
-  )
-    .then((j) => {
-      const level = j?.data?.outpost_info?.synchro_level;
-      return Number.isFinite(level) ? level : 0;
-    })
-    .catch((err) => {
-      console.warn("获取同步器等级失败", err);
-      return 0;
-    });
-};
-// 获取前哨信息（同步器等级 + 前哨基地等级）
-export const getOutpostInfo = (areaId) => {
-  if (areaId === undefined || areaId === null || areaId === "") {
-    return Promise.reject(new Error("缺少 areaId，需先调用 getRoleName 获取"));
-  }
-  return postJson(
-    "https://api.blablalink.com/api/game/proxy/Game/GetUserProfileOutpostInfo",
-    { nikke_area_id: parseInt(areaId) }
-  )
-    .then((j) => {
-      const info = j?.data?.outpost_info || {};
-      return {
-        synchroLevel: Number.isFinite(info.synchro_level) ? info.synchro_level : 0,
-        outpostLevel: Number.isFinite(info.outpost_battle_level) ? info.outpost_battle_level : 0,
-      };
-    })
-    .catch((err) => {
-      console.warn("获取前哨信息失败", err);
-      return { synchroLevel: 0, outpostLevel: 0 };
-    });
-};
-
 // ========== 主线目录：预抓取与映射 ==========
 // 递归遍历对象，收集可能的关卡ID与名称
 const buildStageMap = (root) => {
@@ -749,11 +709,6 @@ export const prefetchMainlineCatalog = async () => {
   }
 };
 
-export const getCachedMainlineCatalog = async () =>
-  new Promise((res) =>
-    chrome.storage.local.get(MAINLINE_CATALOG_MAP_KEY, (r) => res(r[MAINLINE_CATALOG_MAP_KEY] || {}))
-  );
-
 // 提取短格式：保留第一个空格之前的字符（如 "40-22B-1 STAGE" => "40-22B-1"）
 const toShortStage = (name) => {
   if (!name || typeof name !== "string") return "";
@@ -771,30 +726,6 @@ export const mapStageIdToShortName = (catalogMapObj, stageId) => {
   const name = catalogMapObj?.[key];
   if (typeof name === "string") return toShortStage(name) || name;
   return "";
-};
-
-// 获取账号主线进度（Normal/Hard），并映射为短名称
-export const getCampaignProgress = async (areaId, catalogMapObj) => {
-  if (!areaId) return { normal: "", hard: "" };
-  const intlOpenId = await getIntlOpenId();
-  try {
-    const payload = { nikke_area_id: parseInt(areaId) };
-    if (intlOpenId) payload.intl_open_id = intlOpenId;
-    const resp = await postJson(
-      "https://api.blablalink.com/api/game/proxy/Game/GetUserProfileBasicInfo",
-      payload
-    );
-    const info = resp?.data?.basic_info || {};
-    const normalId = info.progress_normal_campaign ?? info.progress_campaign_normal ?? info.progress_normal ?? 0;
-    const hardId   = info.progress_hard_campaign   ?? info.progress_campaign_hard   ?? info.progress_hard   ?? 0;
-    return {
-      normal: mapStageIdToShortName(catalogMapObj || {}, normalId),
-      hard: mapStageIdToShortName(catalogMapObj || {}, hardId),
-    };
-  } catch (e) {
-    console.warn("获取主线进度失败:", e);
-    return { normal: "", hard: "" };
-  }
 };
 
 // 获取角色详情和装备信息（逐个获取以避免API错误）
@@ -1262,17 +1193,6 @@ export const getCharacterDetailsWithAccount = async (account, areaId, nameCodes)
       cube_level: char.harmony_cube_lv || 0
     };
   });
-};
-
-// 保持兼容性的旧接口（已废弃，但保留以防其他地方调用）
-export const getPlayerNikkes = () => {
-  console.warn("getPlayerNikkes 接口已废弃，请使用 getCharacterDetails");
-  return Promise.resolve({ data: { nikkes: [] } });
-};
-
-export const getEquipments = () => {
-  console.warn("getEquipments 接口已废弃，请使用 getCharacterDetails");
-  return Promise.resolve({});
 };
 
 /* ========== 人物目录获取与缓存（管理页打开时自动执行） ========== */

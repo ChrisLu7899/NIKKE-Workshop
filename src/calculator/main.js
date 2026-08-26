@@ -645,7 +645,7 @@ import { summarizeEquipmentEffects } from "./equipmentEffectOverview.js";
         ? snapshotCollections
         : [{
             id: "owned",
-            name: "已获得",
+            name: "已同步",
             characterCodes: characters.map(character => String(character.nameCode || "")).filter(Boolean),
             allCharacters: true,
           }];

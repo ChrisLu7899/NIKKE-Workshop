@@ -2,7 +2,11 @@
 // ========== App Header 组件 ==========
 
 import { memo } from "react";
-import { AppBar, Box, Button, CircularProgress, Toolbar } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Toolbar from "@mui/material/Toolbar";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";

@@ -103,9 +103,3 @@ export const unregisterAllRules = async () => {
     registeredRuleIds = [];
   }
 };
-
-/**
- * 获取当前已注册的规则数量（调试用）
- * @returns {number}
- */
-export const getRegisteredRuleCount = () => registeredRuleIds.length;

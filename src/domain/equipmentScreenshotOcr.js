@@ -8,7 +8,6 @@ import {
   normalizeCharacterName,
 } from "./localCharacterRoster.js";
 import { tierValue } from "./equipmentAffixes.js";
-import { equipmentNamesBySlot } from "./equipmentIconCatalog.js";
 
 export const SCREENSHOT_EQUIPMENT_SLOTS = Object.freeze(["头部", "身躯", "臂部", "腿部"]);
 
@@ -109,15 +108,6 @@ export function classifyOcrLockStateFromRgba(pixels) {
   if (lockInk / opaque >= 0.02) return false;
   return null;
 }
-
-// 游戏中只有这 12 类装备会出现改造词条。装备名称比左上角的小号部位标签
-// 更容易识别，因此 OCR 优先按名称后缀确定部位，部位标签只作为回退依据。
-export const SCREENSHOT_EQUIPMENT_NAME_SLOTS = Object.freeze([
-  ["头部", equipmentNamesBySlot("头部")],
-  ["身躯", equipmentNamesBySlot("身躯")],
-  ["臂部", equipmentNamesBySlot("臂部")],
-  ["腿部", equipmentNamesBySlot("腿部")],
-]);
 
 const EQUIPMENT_NAME_SUFFIXES = Object.freeze([
   ["头部", ["金属面罩", "型头盔", "护目镜", "面罩", "头盔"]],

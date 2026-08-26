@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // 固定装备图标目录：12 个可出现改造词条的装备，以及名称、部位和本地图标样本。
 
-export const EQUIPMENT_ICON_CATALOG_VERSION = 1;
-
 export const EQUIPMENT_ICON_COMPARISON_MASK = Object.freeze({
   // 样本左侧依次叠加企业、类型和等级标识；图标匹配时不纳入相似度计算。
   ignoredNormalizedRegions: Object.freeze([
@@ -35,10 +33,6 @@ export const EQUIPMENT_ICON_CATALOG = Object.freeze([
   createRecord("code-arms", "代码XXX", "代码XXX手套", "臂部", "code-arms.png"),
   createRecord("code-legs", "代码XXX", "代码XXX鞋", "腿部", "code-legs.png"),
 ]);
-
-export const EQUIPMENT_ICON_BY_ID = Object.freeze(Object.fromEntries(
-  EQUIPMENT_ICON_CATALOG.map((record) => [record.id, record]),
-));
 
 export const EQUIPMENT_ICON_BY_NAME = Object.freeze(Object.fromEntries(
   EQUIPMENT_ICON_CATALOG.map((record) => [record.name.normalize("NFKC").toLowerCase(), record]),

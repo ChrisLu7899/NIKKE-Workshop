@@ -2,40 +2,29 @@
 // ========== NIKKE Workshop 主应用组件 ==========
 // 主要功能：账户管理、数据爬取和结果导出
 
-import { useEffect, useCallback } from "react";
-import {
-  Container,
-  Stack,
-  Paper,
-  Button,
-  Snackbar,
-  Alert,
-  Box,
-  Link,
-  Typography,
-} from "@mui/material";
+import { useCallback } from "react";
+import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Snackbar from "@mui/material/Snackbar";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DownloadIcon from "@mui/icons-material/Download";
 import TRANSLATIONS from "./i18n/translations.js";
-import { initializeLevelStats } from "./services/levelStats.js";
 import { createLogFilename, formatLogText } from "./utils/logExport.js";
-import {
-  useSettings,
-  useNotification,
-  useCrawler,
-  useBlablalinkLoginStatus,
-  AppHeader,
-  CrawlerTabContent,
-} from "./components/app";
+import { useSettings } from "./components/app/hooks/useSettings.js";
+import { useNotification } from "./components/app/hooks/useNotification.js";
+import { useSidePanelSession } from "./components/app/hooks/useSidePanelSession.js";
+import { useBlablalinkLoginStatus } from "./components/app/hooks/useBlablalinkLoginStatus.js";
+import AppHeader from "./components/app/AppHeader.jsx";
+import CrawlerTabContent from "./components/app/CrawlerTabContent.jsx";
 
 // ========== React 主组件 ==========
 export default function App() {
-  useEffect(() => {
-    initializeLevelStats().catch((error) => {
-      console.warn("共享等级曲线初始化失败:", error);
-    });
-  }, []);
-  
   // ========== 通知 ==========
   const { notification, showMessage, handleCloseNotification } = useNotification();
 
@@ -43,19 +32,14 @@ export default function App() {
   const settings = useSettings();
   
   // 翻译函数
-  const t = useCallback((k) => TRANSLATIONS[settings.lang][k] || k, [settings.lang]);
+  const t = useCallback((key) => TRANSLATIONS.zh[key] || key, []);
 
-  // ========== 数据爬取 ==========
-  const crawler = useCrawler({
-    t,
-    lang: settings.lang,
-    saveAsZip: settings.saveAsZip,
-    exportJson: settings.exportJson,
-    activateTab: settings.activateTab,
-    server: settings.server,
-    forceSimulatedStatsLevel400: settings.forceSimulatedStatsLevel400,
-    listenForExternalLogs: true,
-  });
+  const {
+    cookieLoading,
+    fullLogs,
+    handleSaveCookie,
+    logs,
+  } = useSidePanelSession({ t });
   const loginStatus = useBlablalinkLoginStatus();
 
   const handleOpenLogin = useCallback(async () => {
@@ -69,7 +53,7 @@ export default function App() {
   }, [loginStatus, showMessage, t]);
 
   const handleSaveOrUpdateCookie = useCallback(async () => {
-    const result = await crawler.handleSaveCookie();
+    const result = await handleSaveCookie();
     if (!result?.success) {
       showMessage(
         result?.reason === "not-logged-in" ? t("notLoginHelp") : t("cookieSaveFailed"),
@@ -83,9 +67,9 @@ export default function App() {
       result.updated ? t("cookieUpdatedSuccess") : t("cookieSavedSuccess"),
       "success",
     );
-  }, [crawler, loginStatus, showMessage, t]);
+  }, [handleSaveCookie, loginStatus, showMessage, t]);
 
-  const fullLogText = formatLogText(crawler.fullLogs);
+  const fullLogText = formatLogText(fullLogs);
   const hasFullLogs = Boolean(fullLogText);
 
   const handleCopyFullLogs = useCallback(async () => {
@@ -141,7 +125,7 @@ export default function App() {
         checking={loginStatus.checking}
         loggedIn={loginStatus.loggedIn}
         username={loginStatus.username}
-        cookieLoading={crawler.cookieLoading}
+        cookieLoading={cookieLoading}
         onOpenLogin={handleOpenLogin}
         onSaveCookie={handleSaveOrUpdateCookie}
       />
@@ -189,7 +173,7 @@ export default function App() {
               fontSize: 12,
             }}
           >
-            {crawler.logs.join("\n")}
+            {logs.join("\n")}
           </Paper>
 
           <Box

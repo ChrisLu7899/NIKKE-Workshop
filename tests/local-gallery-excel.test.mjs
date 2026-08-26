@@ -17,6 +17,20 @@ test("empty recorded list exports a role-card view and four import sheets", () =
   assert.equal(workbook.getWorksheet("角色").rowCount, 1);
 });
 
+test("current-list export can include synced records", () => {
+  const synced = saveLocalCharacterRecord([], {
+    catalogCharacter: catalog[0],
+    draft: { level: 500 },
+    source: "sync",
+    catalog,
+  }).records;
+  const defaultWorkbook = createLocalGalleryWorkbook(synced);
+  const currentListWorkbook = createLocalGalleryWorkbook(synced, { includeSynced: true });
+
+  assert.equal(defaultWorkbook.getWorksheet("角色").rowCount, 1);
+  assert.equal(currentListWorkbook.getWorksheet("角色").rowCount, 2);
+});
+
 test("local gallery round-trip preserves numeric values, physical slots, and lock state", async () => {
   const records = saveLocalCharacterRecord([], { catalogCharacter: catalog[0], catalog, draft: { level: 400, equipments: [[{ position: 3, functionType: "IncElementDmg", value: 23.56, level: 11, locked: true }], [], [], []] } }).records;
   let avatarFetches = 0;

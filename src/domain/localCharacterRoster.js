@@ -310,6 +310,18 @@ export function getRecordedLocalCharacters(records) {
   return (Array.isArray(records) ? records : []).filter(isRecordedLocalCharacter);
 }
 
+export function hasLocalCharacterData(record) {
+  const normalized = normalizeLocalCharacterRecord(record);
+  return [
+    normalized.level,
+    normalized.limitBreak.grade,
+    normalized.limitBreak.core,
+    normalized.combat,
+    normalized.affectionLevel,
+  ].some((value) => value !== null)
+    || normalized.equipments.some((slot) => slot.some((line) => Boolean(line.functionType)));
+}
+
 export function localCharacterKey(record) {
   return codeOf(record?.nameCode) || codeOf(record?.localId);
 }

@@ -3,14 +3,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  applyCharacterConfigShowStatsToAccountDicts,
   attachCalculatorCollections,
   buildCalculatorCollections,
   buildCharactersConfig,
   characterCodeSet,
   filterAccountDictsToOwned,
   mergeNikkesIntoCharacters,
-  getGalleryToolbarMode,
   isSystemCollectionSelectable,
 } from "../src/utils/characterCollections.js";
 
@@ -66,24 +64,6 @@ test("owned account filtering removes empty catalog placeholders and supports li
   assert.equal(scoped[0].elements.Electronic[0].name_code, "c2");
 });
 
-test("custom list output fields are applied per character", () => {
-  const accountDicts = [{
-    name: "账号",
-    elements: {
-      Fire: [{ name_code: "c1", equipments: {} }],
-      Electronic: [{ name_code: "c2", equipments: {} }],
-    },
-  }];
-  const characters = buildCharactersConfig(catalog);
-  characters.elements.Fire[0].showStats = ["skill_level", "equipments"];
-  characters.elements.Electronic[0].showStats = ["limit_break"];
-
-  const result = applyCharacterConfigShowStatsToAccountDicts(accountDicts, characters);
-  assert.deepEqual(result[0].elements.Fire[0].showStats, ["skill_level", "equipments"]);
-  assert.deepEqual(result[0].elements.Electronic[0].showStats, ["limit_break"]);
-  assert.equal(accountDicts[0].elements.Fire[0].showStats, undefined);
-});
-
 test("calculator snapshot receives owned and non-empty custom collections", () => {
   const snapshot = attachCalculatorCollections({
     version: 1,
@@ -101,6 +81,7 @@ test("calculator snapshot receives owned and non-empty custom collections", () =
 
   assert.equal(snapshot.defaultCollectionId, "owned");
   assert.deepEqual(snapshot.collections.map((item) => item.id), ["owned", "template:1"]);
+  assert.equal(snapshot.collections[0].name, "已同步");
   assert.deepEqual(snapshot.collections[1].characterCodes, ["c1"]);
 
   const preferred = attachCalculatorCollections(snapshot, [{
@@ -134,10 +115,9 @@ test("recorded calculator collection is separate from owned and owned is absent 
   assert.deepEqual(collections[0].characterCodes, ["manual:1"]);
 });
 
-test("recorded is always selectable and switches to the local-gallery toolbar", () => {
-  assert.equal(isSystemCollectionSelectable("recorded", { hasOwned: false }), true);
-  assert.equal(isSystemCollectionSelectable("owned", { hasOwned: false }), false);
-  assert.equal(isSystemCollectionSelectable("owned", { hasOwned: true }), true);
-  assert.equal(getGalleryToolbarMode("recorded"), "local-gallery");
-  assert.equal(getGalleryToolbarMode("catalog"), "account");
+test("recorded and synced remain selectable when their lists are empty", () => {
+  assert.equal(isSystemCollectionSelectable("recorded"), true);
+  assert.equal(isSystemCollectionSelectable("owned"), true);
+  assert.equal(isSystemCollectionSelectable("catalog"), true);
+  assert.equal(isSystemCollectionSelectable("unknown"), false);
 });

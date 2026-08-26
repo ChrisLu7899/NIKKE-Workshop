@@ -3,7 +3,6 @@
 import {
   BASIC_STAT_KEYS,
   SHOW_STATS_CONFIG_MARKER,
-  SIMULATED_STAT_KEYS,
   SIMULATED_STATS_CONFIG_MARKER,
 } from "../../utils/showStats.js";
 
@@ -24,19 +23,6 @@ export const equipStatKeys = [
 export const basicStatKeys = [
   ...BASIC_STAT_KEYS,
 ];
-
-// 模拟属性列：旧模板默认显示，首次操作后由独立标记持久化。
-export const simulatedStatKeys = [...SIMULATED_STAT_KEYS];
-
-// 妮姬列表开关列数量：AEL + 基础 + 模拟属性 + 装备词条
-export const NIKKE_TOGGLE_COL_COUNT =
-  1 + basicStatKeys.length + simulatedStatKeys.length + equipStatKeys.length;
-
-// 妮姬表格列宽：固定列 + 剩余空间均分给开关列
-export const NIKKE_NAME_MIN_WIDTH_PX = 240;
-export const NIKKE_PRIORITY_WIDTH_PX = 120;
-export const NIKKE_DRAG_HANDLE_WIDTH_PX = 36;
-export const NIKKE_TOGGLE_MIN_WIDTH_PX = 40;
 
 // showStats 配置标记：用于区分"旧数据默认基础列全开"与"用户已手动配置"。
 // 注意：该标记不代表任何列的显示，导出端会忽略它。
@@ -66,19 +52,4 @@ export const corporationTranslationKeys = {
   TETRA: "tetra",
   PILGRIM: "pilgrim",
   ABNORMAL: "abnormal"
-};
-
-// 默认角色数据结构
-export const defaultCharactersData = {
-  elements: {
-    Electronic: [],
-    Fire: [],
-    Wind: [],
-    Water: [],
-    Iron: [],
-    Utility: []
-  },
-  options: {
-    showEquipDetails: true
-  }
 };

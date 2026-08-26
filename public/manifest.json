@@ -56,18 +56,5 @@
   "background": {
     "service_worker": "background.js",
     "type": "module"
-  },
-
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "images/icon-16.png",
-        "images/icon-32.png",
-        "images/icon-48.png",
-        "images/icon-128.png",
-        "cubes.json"
-      ],
-      "matches": ["<all_urls>"]
-    }
-  ]
+  }
 }

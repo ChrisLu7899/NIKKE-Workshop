@@ -445,7 +445,12 @@ function numeric(value, { integer = false, min = null, max = null } = {}) {
   return result;
 }
 
-export function createLocalGalleryWorkbook(records = []) {
+const normalizeExportRecords = (records, { includeSynced = false } = {}) => (
+  (includeSynced ? (Array.isArray(records) ? records : []) : getRecordedLocalCharacters(records))
+    .map((record) => normalizeLocalCharacterRecord(record))
+);
+
+export function createLocalGalleryWorkbook(records = [], { includeSynced = false } = {}) {
   const workbook = new ExcelJS.Workbook();
   workbook.creator = "NIKKE Workshop";
   workbook.calcProperties.fullCalcOnLoad = true;
@@ -488,7 +493,7 @@ export function createLocalGalleryWorkbook(records = []) {
   lines.views = [{ state: "frozen", xSplit: 2, ySplit: 1, showGridLines: false }];
   lines.autoFilter = "A1:I1";
 
-  const normalizedRecords = getRecordedLocalCharacters(records).map((record) => normalizeLocalCharacterRecord(record));
+  const normalizedRecords = normalizeExportRecords(records, { includeSynced });
   const characterRows = new Map();
   const lineRowsByRecord = new Map();
   normalizedRecords.forEach((record) => {
@@ -553,11 +558,11 @@ export function createLocalGalleryWorkbook(records = []) {
   return workbook;
 }
 
-async function embedRoleCardAvatars(workbook, records, fetchImage) {
+async function embedRoleCardAvatars(workbook, records, fetchImage, { includeSynced = false } = {}) {
   const sheet = workbook.getWorksheet(LOCAL_GALLERY_SHEETS.cards);
   if (!sheet) return;
   const imageIds = new Map();
-  const normalizedRecords = getRecordedLocalCharacters(records).map((record) => normalizeLocalCharacterRecord(record));
+  const normalizedRecords = normalizeExportRecords(records, { includeSynced });
   await Promise.all(normalizedRecords.map(async (record, cardIndex) => {
     const avatarUrl = getNikkeAvatarUrl(record.base);
     if (!avatarUrl) return;
@@ -589,9 +594,12 @@ async function embedRoleCardAvatars(workbook, records, fetchImage) {
   }));
 }
 
-export async function exportLocalGalleryBuffer(records = [], { fetchImage = fetchAsArrayBuffer } = {}) {
-  const workbook = createLocalGalleryWorkbook(records);
-  await embedRoleCardAvatars(workbook, records, fetchImage);
+export async function exportLocalGalleryBuffer(records = [], {
+  fetchImage = fetchAsArrayBuffer,
+  includeSynced = false,
+} = {}) {
+  const workbook = createLocalGalleryWorkbook(records, { includeSynced });
+  await embedRoleCardAvatars(workbook, records, fetchImage, { includeSynced });
   return workbook.xlsx.writeBuffer();
 }
 

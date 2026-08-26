@@ -19,9 +19,3 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.runtime.onStartup.addListener(() => {
   ensureSidePanelEnabled().catch(() => undefined);
 });
-
-/* 处理工具栏图标点击事件 → 打开侧栏 */
-chrome.action.onClicked.addListener(async (tab) => {
-  if (!tab?.id) return;
-  await chrome.sidePanel.open({ tabId: tab.id });
-});

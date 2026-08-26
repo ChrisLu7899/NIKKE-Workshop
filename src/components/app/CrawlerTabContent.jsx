@@ -2,14 +2,12 @@
 // ========== 爬取标签页内容组件 ==========
 
 import { memo, useState } from "react";
-import {
-  Button,
-  Select,
-  MenuItem,
-  Box,
-  Typography,
-  TextField,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { parseManualAreaId } from "../../utils/areaId.js";
 

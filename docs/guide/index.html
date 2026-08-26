@@ -181,7 +181,7 @@
         <div>
           <h3>确认同步完成</h3>
           <p>出现 <span class="em">“妮姬数据获取完成”</span> 提示后，同步即告完成。页面会自动进入我们预设好的 <span class="em">“常用”</span> 角色列表，方便直接查看常用角色。</p>
-          <p><span class="em">这里显示“常用”不代表只同步了常用角色。</span>账号中全部已经拥有的妮姬数据都已保存，可在主列表下拉框中切换到“已获得”查看。</p>
+          <p><span class="em">这里显示“常用”不代表只同步了常用角色。</span>账号中全部已经拥有的妮姬数据都已保存，可在主列表下拉框中切换到“已同步”查看。</p>
           <div class="success"><span class="success-icon">✓</span><div><strong>同步数据会保存在本地</strong>正常情况下不必每次打开扩展都重新同步。角色等级、突破或装备词条发生变化，需要读取最新数据时再同步即可。</div></div>
           <div class="shots single"><figure class="shot"><img src="assets-redacted/09-sync-complete.png" alt="账号数据同步完成后显示的常用角色列表"><figcaption>同步完成后默认显示预设的“常用”列表，底部会出现获取完成提示。</figcaption></figure></div>
         </div>
@@ -190,14 +190,15 @@
       <section class="step">
         <span class="step-number" aria-hidden="true"></span>
         <div>
-          <h3>切换全图鉴、已获得和常用</h3>
-          <p>点击页面左上方的主列表下拉框，可以在三个基础视图以及之后建立的自选列表之间切换。</p>
+          <h3>切换全图鉴、已同步、已录入和常用</h3>
+          <p>点击页面左上方的主列表下拉框，可以在四个基础视图以及之后建立的自选列表之间切换。菜单用分隔线依次区分全图鉴、个人数据列表以及常用／自建列表。</p>
           <ul class="key-list">
             <li><strong>全图鉴：</strong>显示扩展当前收录的全部妮姬，包括账号尚未拥有的角色，适合查询角色和使用筛选功能。</li>
-            <li><strong>已获得：</strong>显示刚刚从账号同步到本地的全部已拥有妮姬，并显示对应等级和突破信息。</li>
-            <li><strong>常用：</strong>由扩展预设的一组常用角色，便于快速下载数据或进入洗词条计算。</li>
+            <li><strong>已同步：</strong>显示刚刚从账号同步到本地的全部已拥有妮姬，并显示对应等级和突破信息。</li>
+            <li><strong>已录入：</strong>显示通过手动、截图识别、阿卡或本地 Excel 保存的数据。</li>
+            <li><strong>常用：</strong>由扩展预设的一组常用角色，便于快速整理和进入洗词条计算。</li>
           </ul>
-          <div class="shots single"><figure class="shot"><img src="assets-redacted/10-list-menu.png" alt="妮姬页面主列表下拉框中的全图鉴、已获得和常用选项"><figcaption>同步完成后可随时把“常用”切换为“已获得”或“全图鉴”。</figcaption></figure></div>
+          <div class="shots single"><figure class="shot"><img src="assets-redacted/10-list-menu.png" alt="妮姬页面主列表下拉框中的全图鉴、已同步、已录入和常用选项"><figcaption>同步完成后可随时把“常用”切换为“已同步”或“全图鉴”。</figcaption></figure></div>
         </div>
       </section>
     </div>
@@ -214,7 +215,7 @@
         <div>
           <h3>搜索、排序和筛选妮姬</h3>
           <p>使用搜索框查找角色；使用 <span class="kbd">Ⅰ</span>、<span class="kbd">Ⅱ</span>、<span class="kbd">Ⅲ</span> 快速筛选爆裂阶段。点击排序按钮可调整正倒序，点击齿轮旁的筛选按钮可设置职业、属性、武器和企业等条件。</p>
-          <p>齿轮中的 <span class="em">“400级属性”</span> 仅控制下载数据中的模拟生命、攻击和防御是否统一按 400 级计算，不会修改账号实际同步到的等级。</p>
+          <p>齿轮中的 <span class="em">“400级属性”</span> 仅控制同步数据中的模拟生命、攻击和防御是否统一按 400 级计算，不会修改账号实际同步到的等级。</p>
           <div class="shots">
             <figure class="shot"><img src="assets-redacted/14-filter-panel.png" alt="妮姬图鉴的排序和筛选面板"><figcaption>筛选面板支持排序、职业、属性、武器和企业等条件。</figcaption></figure>
             <figure class="shot"><img src="assets-redacted/15-level-setting.png" alt="妮姬图鉴设置中的 400 级属性选项"><figcaption>400级属性只影响模拟字段，实际同步等级不会改变。</figcaption></figure>
@@ -236,10 +237,10 @@
         <span class="step-number" aria-hidden="true"></span>
         <div>
           <h3>创建和使用自选列表</h3>
-          <p>切换到 <span class="em">“已获得”</span> 后，点击右侧的 <span class="em">“自选列表”</span> 进入多选状态。勾选需要的妮姬后，可在底部把角色加入已有列表，或点击 <span class="em">“新建列表”</span> 并填写名称。</p>
+          <p>切换到 <span class="em">“已同步”</span> 后，点击右侧的 <span class="em">“自选列表”</span> 进入多选状态。勾选需要的妮姬后，可在底部把角色加入已有列表，或点击 <span class="em">“新建列表”</span> 并填写名称。</p>
           <p>自选列表只能加入账号已经获得的妮姬。保存后，新列表会出现在主列表下拉框中；列表旁的编辑、复制和删除按钮可用于后续管理。</p>
           <div class="shots">
-            <figure class="shot"><img src="assets-redacted/12-custom-list-create.png" alt="妮姬多选状态下的新建列表窗口"><figcaption>在“已获得”中多选妮姬，再新建列表或加入已有列表。</figcaption></figure>
+            <figure class="shot"><img src="assets-redacted/12-custom-list-create.png" alt="妮姬多选状态下的新建列表窗口"><figcaption>在“已同步”中多选妮姬，再新建列表或加入已有列表。</figcaption></figure>
             <figure class="shot"><img src="assets-redacted/13-custom-list-saved.png" alt="新建完成后只显示所选角色的自选列表"><figcaption>保存后可从主列表下拉框打开自选列表。</figcaption></figure>
           </div>
         </div>
@@ -255,20 +256,20 @@
           <div class="shots single"><figure class="shot"><img src="assets-redacted/14b-manual-custom-entry.png" alt="从妮姬图鉴新建自定义角色的录入抽屉"><figcaption>自定义角色需要先填写完整的基础资料，再按相同格式录入账号数据和四件装备词条。</figcaption></figure></div>
           <p>点击标题旁的 <span class="em">“图片识别”</span>，选择安装目录中的 <code>screenshots</code> 文件夹，可以按角色子文件夹批量读取装备详情截图。扩展会先用固定界面模板定位白色装备详情面板，再根据装备图标、装备名称、词条名称、合法档位数值和锁定图标进行受约束匹配。</p>
           <p>点击标题旁的 <span class="em">“阿卡数据”</span>，可以填写在阿卡机器人中通过 <code>#ApiKey</code> 获取的 Key，选择国服或外服后读取角色突破与装备词条。首次使用时浏览器会单独请求阿卡接口访问权限；Key 只保留在当前弹窗内，关闭弹窗后清空，不保存、不导出也不写入日志。</p>
+          <p>点击标题旁的 <span class="em">“本地数据”</span>，可以直接选择此前导出的本地图鉴 Excel。四个录入入口固定排列为“自定义角色／图片识别／阿卡数据／本地数据”。</p>
           <div class="notice"><strong>本地截图识别：</strong>图片、OCR 模型和识别结果都只在当前浏览器本地处理，不会上传服务器。识别支持满级与未满级装备详情界面；保存前请快速核对装备部位、三条词条、档位和锁定状态。</div>
-          <p>切换到“已录入”后，底部工具栏会改为 <span class="em">“导入图鉴 / 导出图鉴”</span>。即使当前列表为空，也可以导出带说明和表头的 Excel 模板；导入和导出都只在扩展本地处理，不会上传服务器。</p>
-          <div class="notice"><strong>同步覆盖规则：</strong>完整同步成功后，标准图鉴角色的手动账号数据会被同步数据覆盖；同步没有发现的标准角色会保留并标记，自定义角色不会被覆盖。同步失败或中断不会修改已有手动数据。</div>
+          <p>任意列表底部都固定显示 <span class="em">“同步账号数据 / 导出图鉴”</span>。导出范围是当前列表，并且只包含确实带有等级、突破、战斗力、好感度或装备词条数据的角色；当前列表没有这类数据时，导出按钮会保持灰色。导入和导出都只在扩展本地处理，不会上传服务器。</p>
+          <div class="notice"><strong>后一次成功操作优先：</strong>先本地录入再同步时，同步数据成为当前值；先同步再通过手动、截图、阿卡或 Excel 导入时，后录入的数据成为当前值。同步失败或中断不会修改已有数据，自定义角色不会被同步覆盖。</div>
         </div>
       </section>
 
       <section class="step">
         <span class="step-number" aria-hidden="true"></span>
         <div>
-          <h3>下载当前列表的数据</h3>
-          <p>点击底部的 <span class="em">“输出设置”</span>，选择 Excel 中需要包含的同步器、技能、装备词条和模拟属性字段，然后点击 <span class="em">“下载数据”</span>。</p>
-          <div class="notice"><strong>下载范围按当前列表计算：</strong>下载的是当前列表中的全部已获得妮姬，而不是临时勾选的几名角色。“全图鉴”不能直接下载；如果只想下载部分角色，请先建立一个自选列表。</div>
-          <div class="shots single"><figure class="shot"><img src="assets-redacted/16-output-setting.png" alt="下载角色数据前的输出设置面板"><figcaption>输出设置用于选择下载文件中需要保留的字段。</figcaption></figure></div>
-          <div class="shots single"><figure class="shot"><img src="assets-redacted/17-downloaded-excel-redacted.png" alt="下载后打开的角色数据 Excel 文件，账号信息已隐藏"><figcaption>下载完成后可在 Excel 中查看角色等级、技能和四件装备词条。示例账号信息已脱敏。</figcaption></figure></div>
+          <h3>导出当前列表的图鉴</h3>
+          <p>点击底部的 <span class="em">“导出图鉴”</span>，即可把当前列表中已有数据的角色导出为角色卡式 Excel。全图鉴、已同步、已录入、常用、推荐方案和自建列表使用同一套导出规则。</p>
+          <div class="notice"><strong>导出范围按当前列表计算：</strong>角色仅有内置名称、属性或头像不算已经录入数据；至少需要有等级、突破、战斗力、好感度或一条装备词条。没有任何合格角色时，按钮会禁用。</div>
+          <div class="shots single"><figure class="shot"><img src="assets-redacted/17-downloaded-excel-redacted.png" alt="导出后打开的角色卡式图鉴 Excel 文件，账号信息已隐藏"><figcaption>导出文件按角色卡展示基础资料、装备效果总览和四个装备部位明细。</figcaption></figure></div>
         </div>
       </section>
     </div>
@@ -286,7 +287,7 @@
             <span class="step-number" aria-hidden="true"></span>
             <div>
               <h3>选择计算对象</h3>
-              <p>打开主页面顶部的 <span class="em">“洗词条计算器”</span> 标签。第一个下拉框可以选择 <span class="em">单装备模拟</span>、<span class="em">四装备全局模拟</span>、<span class="em">已获得</span> 或自选列表；推荐方案单独位于第二个下拉框。选择列表或方案后，再从第三个下拉框选择具体妮姬。</p>
+              <p>打开主页面顶部的 <span class="em">“洗词条计算器”</span> 标签。第一个下拉框可以选择 <span class="em">单装备模拟</span>、<span class="em">四装备全局模拟</span>、<span class="em">已同步</span> 或自选列表；推荐方案单独位于第二个下拉框。选择列表或方案后，再从第三个下拉框选择具体妮姬。</p>
               <p>选择具体妮姬后，如果攻略数据中存在培养建议，页面右侧会显示摘要；点击后可查看备注、装备、词条、技能、魔方和珍藏品建议。</p>
               <div class="shots single"><figure class="shot"><img src="assets-redacted/18-calculator-single-overview.png" alt="洗词条计算器的单装备模拟完整页面"><figcaption>单装备模式左侧填写当前盘面和目标池，右侧运行有限状态 MDP 并查看结果。</figcaption></figure></div>
             </div>
@@ -388,7 +389,7 @@
             <span class="step-number" aria-hidden="true"></span>
             <div>
               <h3>选择四装备来源并检查盘面</h3>
-              <p>从 <span class="em">已获得</span>、自选列表或推荐方案中选择具体妮姬后，计算器会自动导入头部、身躯、臂部和腿部的当前词条。请先核对同步结果；不想参与本次计算的装备可勾选右上角 <span class="em">“不跑”</span>，其成本不会计入总计。</p>
+              <p>从 <span class="em">已同步</span>、自选列表或推荐方案中选择具体妮姬后，计算器会自动导入头部、身躯、臂部和腿部的当前词条。请先核对同步结果；不想参与本次计算的装备可勾选右上角 <span class="em">“不跑”</span>，其成本不会计入总计。</p>
               <p>没有同步账号数据时，也可在第一个下拉框选择 <span class="em">“四装备全局模拟”</span>，手动填写四件装备的词条、档位和已锁状态，再使用相同的全局条件求解。该临时盘面不绑定妮姬，也不会写入角色汇总。</p>
               <p>单角色模式默认进入 <span class="em">“全局”</span>。右上角的模式下拉框可以在 <span class="em">全局</span> 与 <span class="em">独立</span> 之间切换；四件装备中至少要保留一件参与计算。</p>
             </div>
