@@ -26,7 +26,10 @@ import {
   setSettings,
 } from "./services/storage.js";
 import { parseManualAreaId } from "./utils/areaId.js";
-import { getNikkeAvatarUrl as buildNikkeAvatarUrl } from "./utils/nikkeAvatar.js";
+import {
+  getNikkeArtworkCandidates as buildNikkeArtworkCandidates,
+  getNikkeAvatarUrl as buildNikkeAvatarUrl,
+} from "./utils/nikkeAvatar.js";
 import { withChinaExclusiveCharacters } from "./data/chinaExclusiveCharacters.js";
 import ManagementHeader from "./components/management/ManagementHeader.jsx";
 import CharacterGalleryTabContent from "./components/management/CharacterGalleryTabContent.jsx";
@@ -44,7 +47,11 @@ import {
   extractSyncedCalculatorSnapshot,
   isVerifiedCalculatorSnapshot,
 } from "./utils/calculatorSnapshot.js";
-import { getLocalCharacterRoster, setLocalCharacterRoster } from "./services/localCharacterRoster.js";
+import {
+  LOCAL_CHARACTER_ROSTER_STORAGE_KEY,
+  getLocalCharacterRoster,
+  setLocalCharacterRoster,
+} from "./services/localCharacterRoster.js";
 import {
   deleteLocalCharacterRecord,
   localRecordToCatalogCharacter,
@@ -168,6 +175,10 @@ const ManagementPage = () => {
 
   const getNikkeAvatarUrl = useCallback((nikke) => {
     return buildNikkeAvatarUrl(nikke, nikkeResourceIdMap);
+  }, [nikkeResourceIdMap]);
+
+  const getNikkeArtworkCandidates = useCallback((nikke) => {
+    return buildNikkeArtworkCandidates(nikke, nikkeResourceIdMap);
   }, [nikkeResourceIdMap]);
 
   const galleryNikkeList = useMemo(() => {
@@ -377,6 +388,19 @@ const ManagementPage = () => {
   }, []);
 
   useEffect(() => {
+    if (!globalThis.chrome?.storage?.onChanged) return undefined;
+    const handleRosterChange = (changes, areaName) => {
+      if (areaName !== "local" || !changes[LOCAL_CHARACTER_ROSTER_STORAGE_KEY]) return;
+      getLocalCharacterRoster().then((roster) => {
+        setLocalRosterState(roster);
+        setLocalRosterLoaded(true);
+      }).catch((error) => console.warn("刷新本地图鉴失败:", error));
+    };
+    chrome.storage.onChanged.addListener(handleRosterChange);
+    return () => chrome.storage.onChanged.removeListener(handleRosterChange);
+  }, []);
+
+  useEffect(() => {
     if (!localRosterLoaded) return;
     const unified = attachCalculatorCollections(
       buildUnifiedCalculatorSnapshot(ownedSnapshot, localRoster.records),
@@ -536,6 +560,7 @@ const ManagementPage = () => {
             getCorporationName={getCorporationName}
             getBurstStageName={getBurstStageName}
             getNikkeAvatarUrl={getNikkeAvatarUrl}
+            getNikkeArtworkCandidates={getNikkeArtworkCandidates}
             getDisplayName={getDisplayName}
             ownedSnapshot={ownedSnapshot}
             fetchLoading={crawler.loading}

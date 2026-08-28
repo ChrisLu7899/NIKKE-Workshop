@@ -560,6 +560,31 @@
       line-height: 1.35;
     }
 
+    .equipment-slot-actions {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .equipment-sync-button {
+      min-height: 30px;
+      border: 0;
+      border-radius: var(--control-radius);
+      padding: 0 10px;
+      background: var(--primary);
+      color: #fff;
+      font: inherit;
+      font-size: 0.76rem;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background-color 180ms ease-out, transform 180ms ease-out;
+    }
+
+    .equipment-sync-button:hover { background: var(--primary-hover); }
+    .equipment-sync-button:active { transform: translateY(1px); }
+
     .equipment-skip-label {
       display: inline-flex;
       align-items: center;

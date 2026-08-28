@@ -10,6 +10,7 @@ import {
   hasLocalCharacterData,
   reconcileLocalCharactersAfterSync,
   saveLocalCharacterRecord,
+  updateLocalCharacterEquipmentSlot,
   normalizeCharacterName,
 } from "../src/domain/localCharacterRoster.js";
 import { getLocalCharacterRoster, setLocalCharacterRoster } from "../src/services/localCharacterRoster.js";
@@ -120,4 +121,60 @@ test("recorded characters enter the unified calculator with all equipment positi
   const snapshot = buildUnifiedCalculatorSnapshot(null, records);
   assert.equal(snapshot.accounts[0].source, "local");
   assert.equal(snapshot.accounts[0].characters[0].equipments[0][0].position, 1);
+});
+
+test("a local edit overlays the matching synced character in the calculator snapshot", () => {
+  const records = saveLocalCharacterRecord([], {
+    catalogCharacter: catalog[0],
+    draft: { level: 600, equipments: equipment },
+    catalog,
+  }).records;
+  const snapshot = buildUnifiedCalculatorSnapshot({
+    accounts: [{
+      accountName: "同步账号",
+      source: "sync",
+      characters: [{ nameCode: "c1", level: 500, equipments: [[], [], [], []] }],
+    }],
+  }, records);
+
+  assert.equal(snapshot.accounts.length, 1);
+  assert.equal(snapshot.accounts[0].source, "sync");
+  assert.equal(snapshot.accounts[0].characters[0].level, 600);
+  assert.equal(snapshot.accounts[0].characters[0].equipments[0][0].value, 11.81);
+});
+
+test("manual equipment validation rejects mismatched tier values", () => {
+  const result = saveLocalCharacterRecord([], {
+    catalogCharacter: catalog[0],
+    draft: { equipments: [[{ position: 1, functionType: "StatAtk", value: 14.63, level: 11 }], [], [], []] },
+    catalog,
+  });
+  assert.match(result.errors.join("；"), /档位与数值不匹配/);
+});
+
+test("calculator sync updates only one equipment slot and makes synced data locally recorded", () => {
+  const synced = reconcileLocalCharactersAfterSync([], {
+    accounts: [{ source: "sync", characters: [{
+      nameCode: "c1",
+      equipments: [equipment[0], [{ position: 1, functionType: "StatDef", value: 11.81, level: 11 }], [], []],
+    }] }],
+  }, catalog, 1);
+  const result = updateLocalCharacterEquipmentSlot(synced.records, {
+    nameCode: "c1",
+    slotIndex: 0,
+    lines: [
+      { position: 1, functionType: "IncElementDmg", value: 24.96, level: 12, locked: true },
+      { position: 2, functionType: "", value: null, level: null, locked: null },
+      { position: 3, functionType: "StatAmmoLoad", value: 36.06, level: 3, locked: false },
+    ],
+    now: 2,
+  });
+
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.record.source, LOCAL_CHARACTER_SOURCES.manual);
+  assert.equal(result.record.equipments[0][0].functionType, "IncElementDmg");
+  assert.equal(result.record.equipments[0][0].locked, true);
+  assert.equal(result.record.equipments[0][1].functionType, "");
+  assert.equal(result.record.equipments[0][2].value, 36.06);
+  assert.equal(result.record.equipments[1][0].functionType, "StatDef");
 });

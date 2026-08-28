@@ -142,3 +142,17 @@ test("Scarlet output tiers preserve the source image's 红级 terminology", () =
     }
   }
 });
+
+test("China-exclusive characters expose their supplied cultivation advice without adding selectable presets", () => {
+  const huapi = listRecommendationAdvice("cn-exclusive-huapi");
+  assert.equal(huapi.length, 1);
+  assert.equal(huapi[0].note, "1.5红级");
+  assert.equal(huapi[0].lines, "4攻4优，2+装弹");
+  assert.equal(huapi[0].skills, "7/7/7，10/10/7");
+  assert.equal(huapi[0].cube, "战术/遗迹巨熊");
+
+  const yingning = listRecommendationAdvice("cn-exclusive-yingning");
+  assert.equal(yingning.length, 1);
+  assert.equal(yingning[0].skills, "5/5/5 或 7/7/7");
+  assert.equal(RECOMMENDATION_PRESETS.some((preset) => preset.id === "cn-exclusive-cultivation"), false);
+});

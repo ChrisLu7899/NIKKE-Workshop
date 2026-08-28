@@ -1,0 +1,2669 @@
+{
+  "schemaVersion": 1,
+  "revision": "2026-08-28",
+  "source": "NIKKE DB Live2D Visualiser",
+  "characterCount": 199,
+  "artworkCount": 377,
+  "characters": {
+    "100": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c100",
+        "url": "/ui-assets/nikke/character-artwork/c100.webp"
+      }
+    ],
+    "101": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c101",
+        "url": "/ui-assets/nikke/character-artwork/c101.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "反派赛车手",
+        "assetId": "c101_01",
+        "url": "/ui-assets/nikke/character-artwork/c101_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "反派专属女仆",
+        "assetId": "c101_02",
+        "url": "/ui-assets/nikke/character-artwork/c101_02.webp"
+      }
+    ],
+    "102": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c102",
+        "url": "/ui-assets/nikke/character-artwork/c102.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "机械白",
+        "assetId": "c102_01",
+        "url": "/ui-assets/nikke/character-artwork/c102_01.webp"
+      }
+    ],
+    "103": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c103",
+        "url": "/ui-assets/nikke/character-artwork/c103.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "原型英雄",
+        "assetId": "c103_01",
+        "url": "/ui-assets/nikke/character-artwork/c103_01.webp"
+      }
+    ],
+    "105": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c105",
+        "url": "/ui-assets/nikke/character-artwork/c105.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "首席研究员",
+        "assetId": "c105_01",
+        "url": "/ui-assets/nikke/character-artwork/c105_01.webp"
+      }
+    ],
+    "110": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c110",
+        "url": "/ui-assets/nikke/character-artwork/c110.webp"
+      }
+    ],
+    "111": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c111",
+        "url": "/ui-assets/nikke/character-artwork/c111.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "獠牙同窗",
+        "assetId": "c111_01",
+        "url": "/ui-assets/nikke/character-artwork/c111_01.webp"
+      }
+    ],
+    "112": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c112",
+        "url": "/ui-assets/nikke/character-artwork/c112.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "毒兔",
+        "assetId": "c112_01",
+        "url": "/ui-assets/nikke/character-artwork/c112_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "爱情光芒",
+        "assetId": "c112_02",
+        "url": "/ui-assets/nikke/character-artwork/c112_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "街头朋克",
+        "assetId": "c112_03",
+        "url": "/ui-assets/nikke/character-artwork/c112_03.webp"
+      }
+    ],
+    "113": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c113",
+        "url": "/ui-assets/nikke/character-artwork/c113.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "极道先锋",
+        "assetId": "c113_01",
+        "url": "/ui-assets/nikke/character-artwork/c113_01.webp"
+      }
+    ],
+    "120": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c120",
+        "url": "/ui-assets/nikke/character-artwork/c120.webp"
+      }
+    ],
+    "121": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c121",
+        "url": "/ui-assets/nikke/character-artwork/c121.webp"
+      }
+    ],
+    "130": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c130",
+        "url": "/ui-assets/nikke/character-artwork/c130.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "医疗兔",
+        "assetId": "c130_01",
+        "url": "/ui-assets/nikke/character-artwork/c130_01.webp"
+      }
+    ],
+    "131": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c131",
+        "url": "/ui-assets/nikke/character-artwork/c131.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "海洋维他命",
+        "assetId": "c131_01",
+        "url": "/ui-assets/nikke/character-artwork/c131_01.webp"
+      }
+    ],
+    "132": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c132",
+        "url": "/ui-assets/nikke/character-artwork/c132.webp"
+      }
+    ],
+    "140": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c140",
+        "url": "/ui-assets/nikke/character-artwork/c140.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "叫我冷硬派",
+        "assetId": "c140_01",
+        "url": "/ui-assets/nikke/character-artwork/c140_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "狂野后花园",
+        "assetId": "c140_02",
+        "url": "/ui-assets/nikke/character-artwork/c140_02.webp"
+      }
+    ],
+    "141": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c141",
+        "url": "/ui-assets/nikke/character-artwork/c141.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "极限战士",
+        "assetId": "c141_01",
+        "url": "/ui-assets/nikke/character-artwork/c141_01.webp"
+      }
+    ],
+    "142": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c142",
+        "url": "/ui-assets/nikke/character-artwork/c142.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "慵懒海滩",
+        "assetId": "c142_01",
+        "url": "/ui-assets/nikke/character-artwork/c142_01.webp"
+      }
+    ],
+    "143": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c143",
+        "url": "/ui-assets/nikke/character-artwork/c143.webp"
+      }
+    ],
+    "150": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c150",
+        "url": "/ui-assets/nikke/character-artwork/c150.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "温柔夜曲",
+        "assetId": "c150_01",
+        "url": "/ui-assets/nikke/character-artwork/c150_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "夏日浪漫",
+        "assetId": "c150_02",
+        "url": "/ui-assets/nikke/character-artwork/c150_02.webp"
+      }
+    ],
+    "160": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c160",
+        "url": "/ui-assets/nikke/character-artwork/c160.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "可爱粉色",
+        "assetId": "c160_01",
+        "url": "/ui-assets/nikke/character-artwork/c160_01.webp"
+      }
+    ],
+    "161": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c161",
+        "url": "/ui-assets/nikke/character-artwork/c161.webp"
+      }
+    ],
+    "162": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c162",
+        "url": "/ui-assets/nikke/character-artwork/c162.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "痛苦吞食者",
+        "assetId": "c162_01",
+        "url": "/ui-assets/nikke/character-artwork/c162_01.webp"
+      }
+    ],
+    "170": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c170",
+        "url": "/ui-assets/nikke/character-artwork/c170.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "行政正装",
+        "assetId": "c170_01",
+        "url": "/ui-assets/nikke/character-artwork/c170_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "宴会公主",
+        "assetId": "c170_02",
+        "url": "/ui-assets/nikke/character-artwork/c170_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "青之羁绊",
+        "assetId": "c170_03",
+        "url": "/ui-assets/nikke/character-artwork/c170_03.webp"
+      },
+      {
+        "id": "skin-4",
+        "label": "严厉教诲",
+        "assetId": "c170_04",
+        "url": "/ui-assets/nikke/character-artwork/c170_04.webp"
+      }
+    ],
+    "171": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c171",
+        "url": "/ui-assets/nikke/character-artwork/c171.webp"
+      }
+    ],
+    "172": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c172",
+        "url": "/ui-assets/nikke/character-artwork/c172.webp"
+      }
+    ],
+    "180": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c180",
+        "url": "/ui-assets/nikke/character-artwork/c180.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "黑暗追踪者",
+        "assetId": "c180_01",
+        "url": "/ui-assets/nikke/character-artwork/c180_01.webp"
+      }
+    ],
+    "181": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c181",
+        "url": "/ui-assets/nikke/character-artwork/c181.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "秘密护士",
+        "assetId": "c181_01",
+        "url": "/ui-assets/nikke/character-artwork/c181_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "艳阳之下",
+        "assetId": "c181_02",
+        "url": "/ui-assets/nikke/character-artwork/c181_02.webp"
+      }
+    ],
+    "182": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c182",
+        "url": "/ui-assets/nikke/character-artwork/c182.webp"
+      }
+    ],
+    "183": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c183",
+        "url": "/ui-assets/nikke/character-artwork/c183.webp"
+      }
+    ],
+    "190": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c190",
+        "url": "/ui-assets/nikke/character-artwork/c190.webp"
+      }
+    ],
+    "191": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c191",
+        "url": "/ui-assets/nikke/character-artwork/c191.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "甜蜜之家",
+        "assetId": "c191_01",
+        "url": "/ui-assets/nikke/character-artwork/c191_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "童话幻梦",
+        "assetId": "c191_02",
+        "url": "/ui-assets/nikke/character-artwork/c191_02.webp"
+      }
+    ],
+    "192": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c192",
+        "url": "/ui-assets/nikke/character-artwork/c192.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "我爱棒球",
+        "assetId": "c192_01",
+        "url": "/ui-assets/nikke/character-artwork/c192_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "烈阳",
+        "assetId": "c192_02",
+        "url": "/ui-assets/nikke/character-artwork/c192_02.webp"
+      }
+    ],
+    "193": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c193",
+        "url": "/ui-assets/nikke/character-artwork/c193.webp"
+      }
+    ],
+    "194": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c194",
+        "url": "/ui-assets/nikke/character-artwork/c194.webp"
+      }
+    ],
+    "195": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c195",
+        "url": "/ui-assets/nikke/character-artwork/c195.webp"
+      }
+    ],
+    "200": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c200",
+        "url": "/ui-assets/nikke/character-artwork/c200.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "奢侈兔",
+        "assetId": "c200_01",
+        "url": "/ui-assets/nikke/character-artwork/c200_01.webp"
+      }
+    ],
+    "201": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c201",
+        "url": "/ui-assets/nikke/character-artwork/c201.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "黎明超市",
+        "assetId": "c201_01",
+        "url": "/ui-assets/nikke/character-artwork/c201_01.webp"
+      }
+    ],
+    "202": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c202",
+        "url": "/ui-assets/nikke/character-artwork/c202.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "黑玫瑰",
+        "assetId": "c202_01",
+        "url": "/ui-assets/nikke/character-artwork/c202_01.webp"
+      }
+    ],
+    "203": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c203",
+        "url": "/ui-assets/nikke/character-artwork/c203.webp"
+      }
+    ],
+    "210": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c210",
+        "url": "/ui-assets/nikke/character-artwork/c210.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "书呆子日快乐",
+        "assetId": "c210_01",
+        "url": "/ui-assets/nikke/character-artwork/c210_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "游戏玩家",
+        "assetId": "c210_02",
+        "url": "/ui-assets/nikke/character-artwork/c210_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "黑客兔",
+        "assetId": "c210_03",
+        "url": "/ui-assets/nikke/character-artwork/c210_03.webp"
+      }
+    ],
+    "212": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c212",
+        "url": "/ui-assets/nikke/character-artwork/c212.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "企鹅福尔摩斯",
+        "assetId": "c212_01",
+        "url": "/ui-assets/nikke/character-artwork/c212_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "侦探护士",
+        "assetId": "c212_02",
+        "url": "/ui-assets/nikke/character-artwork/c212_02.webp"
+      }
+    ],
+    "220": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c220",
+        "url": "/ui-assets/nikke/character-artwork/c220.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "白色骑士",
+        "assetId": "c220_01",
+        "url": "/ui-assets/nikke/character-artwork/c220_01.webp"
+      }
+    ],
+    "221": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c221",
+        "url": "/ui-assets/nikke/character-artwork/c221.webp"
+      }
+    ],
+    "222": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c222",
+        "url": "/ui-assets/nikke/character-artwork/c222.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "狂飙车手",
+        "assetId": "c222_01",
+        "url": "/ui-assets/nikke/character-artwork/c222_01.webp"
+      }
+    ],
+    "223": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c223",
+        "url": "/ui-assets/nikke/character-artwork/c223.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "无为",
+        "assetId": "c223_01",
+        "url": "/ui-assets/nikke/character-artwork/c223_01.webp"
+      }
+    ],
+    "224": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c224",
+        "url": "/ui-assets/nikke/character-artwork/c224.webp"
+      }
+    ],
+    "225": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c225",
+        "url": "/ui-assets/nikke/character-artwork/c225.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "莲花",
+        "assetId": "c225_01",
+        "url": "/ui-assets/nikke/character-artwork/c225_01.webp"
+      }
+    ],
+    "226": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c226",
+        "url": "/ui-assets/nikke/character-artwork/c226.webp"
+      }
+    ],
+    "230": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c230",
+        "url": "/ui-assets/nikke/character-artwork/c230.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "宴会的魔女",
+        "assetId": "c230_01",
+        "url": "/ui-assets/nikke/character-artwork/c230_01.webp"
+      }
+    ],
+    "231": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c231",
+        "url": "/ui-assets/nikke/character-artwork/c231.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "蜜月派对",
+        "assetId": "c231_01",
+        "url": "/ui-assets/nikke/character-artwork/c231_01.webp"
+      }
+    ],
+    "232": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c232",
+        "url": "/ui-assets/nikke/character-artwork/c232.webp"
+      }
+    ],
+    "233": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c233",
+        "url": "/ui-assets/nikke/character-artwork/c233.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "怀旧",
+        "assetId": "c233_01",
+        "url": "/ui-assets/nikke/character-artwork/c233_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "月光",
+        "assetId": "c233_02",
+        "url": "/ui-assets/nikke/character-artwork/c233_02.webp"
+      }
+    ],
+    "234": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c234",
+        "url": "/ui-assets/nikke/character-artwork/c234.webp"
+      }
+    ],
+    "240": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c240",
+        "url": "/ui-assets/nikke/character-artwork/c240.webp"
+      }
+    ],
+    "241": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c241",
+        "url": "/ui-assets/nikke/character-artwork/c241.webp"
+      }
+    ],
+    "242": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c242",
+        "url": "/ui-assets/nikke/character-artwork/c242.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "湿润兔",
+        "assetId": "c242_01",
+        "url": "/ui-assets/nikke/character-artwork/c242_01.webp"
+      }
+    ],
+    "260": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c260",
+        "url": "/ui-assets/nikke/character-artwork/c260.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "初次的爱恋",
+        "assetId": "c260_01",
+        "url": "/ui-assets/nikke/character-artwork/c260_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "第二种情感",
+        "assetId": "c260_02",
+        "url": "/ui-assets/nikke/character-artwork/c260_02.webp"
+      }
+    ],
+    "261": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c261",
+        "url": "/ui-assets/nikke/character-artwork/c261.webp"
+      }
+    ],
+    "262": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c262",
+        "url": "/ui-assets/nikke/character-artwork/c262.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "梦境湖",
+        "assetId": "c262_01",
+        "url": "/ui-assets/nikke/character-artwork/c262_01.webp"
+      }
+    ],
+    "270": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c270",
+        "url": "/ui-assets/nikke/character-artwork/c270.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "白兔",
+        "assetId": "c270_01",
+        "url": "/ui-assets/nikke/character-artwork/c270_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "77号击球员",
+        "assetId": "c270_02",
+        "url": "/ui-assets/nikke/character-artwork/c270_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "幸运特快车",
+        "assetId": "c270_03",
+        "url": "/ui-assets/nikke/character-artwork/c270_03.webp"
+      }
+    ],
+    "271": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c271",
+        "url": "/ui-assets/nikke/character-artwork/c271.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "黑兔",
+        "assetId": "c271_01",
+        "url": "/ui-assets/nikke/character-artwork/c271_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "棒球啦啦队",
+        "assetId": "c271_02",
+        "url": "/ui-assets/nikke/character-artwork/c271_02.webp"
+      }
+    ],
+    "272": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c272",
+        "url": "/ui-assets/nikke/character-artwork/c272.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "倒霉兔",
+        "assetId": "c272_01",
+        "url": "/ui-assets/nikke/character-artwork/c272_01.webp"
+      }
+    ],
+    "280": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c280",
+        "url": "/ui-assets/nikke/character-artwork/c280.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "危险小姐",
+        "assetId": "c280_01",
+        "url": "/ui-assets/nikke/character-artwork/c280_01.webp"
+      }
+    ],
+    "281": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c281",
+        "url": "/ui-assets/nikke/character-artwork/c281.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "休假女王",
+        "assetId": "c281_01",
+        "url": "/ui-assets/nikke/character-artwork/c281_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "百花之王",
+        "assetId": "c281_02",
+        "url": "/ui-assets/nikke/character-artwork/c281_02.webp"
+      }
+    ],
+    "282": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c282",
+        "url": "/ui-assets/nikke/character-artwork/c282.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "黑夜潜行",
+        "assetId": "c282_01",
+        "url": "/ui-assets/nikke/character-artwork/c282_01.webp"
+      }
+    ],
+    "283": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c283",
+        "url": "/ui-assets/nikke/character-artwork/c283.webp"
+      }
+    ],
+    "284": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c284",
+        "url": "/ui-assets/nikke/character-artwork/c284.webp"
+      }
+    ],
+    "290": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c290",
+        "url": "/ui-assets/nikke/character-artwork/c290.webp"
+      }
+    ],
+    "291": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c291",
+        "url": "/ui-assets/nikke/character-artwork/c291.webp"
+      }
+    ],
+    "300": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c300",
+        "url": "/ui-assets/nikke/character-artwork/c300.webp"
+      }
+    ],
+    "301": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c301",
+        "url": "/ui-assets/nikke/character-artwork/c301.webp"
+      }
+    ],
+    "302": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c302",
+        "url": "/ui-assets/nikke/character-artwork/c302.webp"
+      }
+    ],
+    "303": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c303",
+        "url": "/ui-assets/nikke/character-artwork/c303.webp"
+      }
+    ],
+    "304": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c304",
+        "url": "/ui-assets/nikke/character-artwork/c304.webp"
+      }
+    ],
+    "305": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c305",
+        "url": "/ui-assets/nikke/character-artwork/c305.webp"
+      }
+    ],
+    "306": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c306",
+        "url": "/ui-assets/nikke/character-artwork/c306.webp"
+      }
+    ],
+    "307": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c307",
+        "url": "/ui-assets/nikke/character-artwork/c307.webp"
+      }
+    ],
+    "308": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c308",
+        "url": "/ui-assets/nikke/character-artwork/c308.webp"
+      }
+    ],
+    "310": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c310",
+        "url": "/ui-assets/nikke/character-artwork/c310.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "春日之作",
+        "assetId": "c310_01",
+        "url": "/ui-assets/nikke/character-artwork/c310_01.webp"
+      }
+    ],
+    "311": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c311",
+        "url": "/ui-assets/nikke/character-artwork/c311.webp"
+      }
+    ],
+    "312": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c312",
+        "url": "/ui-assets/nikke/character-artwork/c312.webp"
+      }
+    ],
+    "313": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c313",
+        "url": "/ui-assets/nikke/character-artwork/c313.webp"
+      }
+    ],
+    "314": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c314",
+        "url": "/ui-assets/nikke/character-artwork/c314.webp"
+      }
+    ],
+    "315": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c315",
+        "url": "/ui-assets/nikke/character-artwork/c315.webp"
+      }
+    ],
+    "316": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c316",
+        "url": "/ui-assets/nikke/character-artwork/c316.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "魅惑兔",
+        "assetId": "c316_01",
+        "url": "/ui-assets/nikke/character-artwork/c316_01.webp"
+      }
+    ],
+    "321": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c321",
+        "url": "/ui-assets/nikke/character-artwork/c321.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "学生时代",
+        "assetId": "c321_01",
+        "url": "/ui-assets/nikke/character-artwork/c321_01.webp"
+      }
+    ],
+    "322": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c322",
+        "url": "/ui-assets/nikke/character-artwork/c322.webp"
+      }
+    ],
+    "330": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c330",
+        "url": "/ui-assets/nikke/character-artwork/c330.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "国王的新衣",
+        "assetId": "c330_01",
+        "url": "/ui-assets/nikke/character-artwork/c330_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "荣耀之花",
+        "assetId": "c330_02",
+        "url": "/ui-assets/nikke/character-artwork/c330_02.webp"
+      }
+    ],
+    "331": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c331",
+        "url": "/ui-assets/nikke/character-artwork/c331.webp"
+      }
+    ],
+    "350": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c350",
+        "url": "/ui-assets/nikke/character-artwork/c350.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "海盗之心",
+        "assetId": "c350_01",
+        "url": "/ui-assets/nikke/character-artwork/c350_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "潜水员马斯特",
+        "assetId": "c350_02",
+        "url": "/ui-assets/nikke/character-artwork/c350_02.webp"
+      }
+    ],
+    "351": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c351",
+        "url": "/ui-assets/nikke/character-artwork/c351.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "潜水员安克",
+        "assetId": "c351_01",
+        "url": "/ui-assets/nikke/character-artwork/c351_01.webp"
+      }
+    ],
+    "352": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c352",
+        "url": "/ui-assets/nikke/character-artwork/c352.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "水晶派对",
+        "assetId": "c352_01",
+        "url": "/ui-assets/nikke/character-artwork/c352_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "浴后",
+        "assetId": "c352_02",
+        "url": "/ui-assets/nikke/character-artwork/c352_02.webp"
+      }
+    ],
+    "353": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c353",
+        "url": "/ui-assets/nikke/character-artwork/c353.webp"
+      }
+    ],
+    "354": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c354",
+        "url": "/ui-assets/nikke/character-artwork/c354.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "茶饮服务",
+        "assetId": "c354_01",
+        "url": "/ui-assets/nikke/character-artwork/c354_01.webp"
+      }
+    ],
+    "355": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c355",
+        "url": "/ui-assets/nikke/character-artwork/c355.webp"
+      }
+    ],
+    "361": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c361",
+        "url": "/ui-assets/nikke/character-artwork/c361.webp"
+      }
+    ],
+    "380": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c380",
+        "url": "/ui-assets/nikke/character-artwork/c380.webp"
+      }
+    ],
+    "381": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c381",
+        "url": "/ui-assets/nikke/character-artwork/c381.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "春日幼犬",
+        "assetId": "c381_01",
+        "url": "/ui-assets/nikke/character-artwork/c381_01.webp"
+      }
+    ],
+    "382": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c382",
+        "url": "/ui-assets/nikke/character-artwork/c382.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "动物饲养员",
+        "assetId": "c382_01",
+        "url": "/ui-assets/nikke/character-artwork/c382_01.webp"
+      }
+    ],
+    "390": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c390",
+        "url": "/ui-assets/nikke/character-artwork/c390.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "第一次庆典",
+        "assetId": "c390_01",
+        "url": "/ui-assets/nikke/character-artwork/c390_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "春日漫步",
+        "assetId": "c390_02",
+        "url": "/ui-assets/nikke/character-artwork/c390_02.webp"
+      }
+    ],
+    "391": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c391",
+        "url": "/ui-assets/nikke/character-artwork/c391.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "手作庆典",
+        "assetId": "c391_01",
+        "url": "/ui-assets/nikke/character-artwork/c391_01.webp"
+      }
+    ],
+    "392": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c392",
+        "url": "/ui-assets/nikke/character-artwork/c392.webp"
+      }
+    ],
+    "400": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c400",
+        "url": "/ui-assets/nikke/character-artwork/c400.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "多疑浪潮",
+        "assetId": "c400_01",
+        "url": "/ui-assets/nikke/character-artwork/c400_01.webp"
+      }
+    ],
+    "401": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c401",
+        "url": "/ui-assets/nikke/character-artwork/c401.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "后街的梦想",
+        "assetId": "c401_01",
+        "url": "/ui-assets/nikke/character-artwork/c401_01.webp"
+      }
+    ],
+    "402": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c402",
+        "url": "/ui-assets/nikke/character-artwork/c402.webp"
+      }
+    ],
+    "403": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c403",
+        "url": "/ui-assets/nikke/character-artwork/c403.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "变装天鹅",
+        "assetId": "c403_01",
+        "url": "/ui-assets/nikke/character-artwork/c403_01.webp"
+      }
+    ],
+    "411": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c411",
+        "url": "/ui-assets/nikke/character-artwork/c411.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "妖精兔",
+        "assetId": "c411_01",
+        "url": "/ui-assets/nikke/character-artwork/c411_01.webp"
+      }
+    ],
+    "412": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c412",
+        "url": "/ui-assets/nikke/character-artwork/c412.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "纯粹洁白",
+        "assetId": "c412_01",
+        "url": "/ui-assets/nikke/character-artwork/c412_01.webp"
+      }
+    ],
+    "430": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c430",
+        "url": "/ui-assets/nikke/character-artwork/c430.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "樱花舞台",
+        "assetId": "c430_01",
+        "url": "/ui-assets/nikke/character-artwork/c430_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "经典天后",
+        "assetId": "c430_02",
+        "url": "/ui-assets/nikke/character-artwork/c430_02.webp"
+      }
+    ],
+    "431": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c431",
+        "url": "/ui-assets/nikke/character-artwork/c431.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "抢跑",
+        "assetId": "c431_01",
+        "url": "/ui-assets/nikke/character-artwork/c431_01.webp"
+      }
+    ],
+    "432": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c432",
+        "url": "/ui-assets/nikke/character-artwork/c432.webp"
+      }
+    ],
+    "441": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c441",
+        "url": "/ui-assets/nikke/character-artwork/c441.webp"
+      }
+    ],
+    "450": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c450",
+        "url": "/ui-assets/nikke/character-artwork/c450.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "优雅约会",
+        "assetId": "c450_01",
+        "url": "/ui-assets/nikke/character-artwork/c450_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "最后的少女时代",
+        "assetId": "c450_02",
+        "url": "/ui-assets/nikke/character-artwork/c450_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "金环恋曲",
+        "assetId": "c450_03",
+        "url": "/ui-assets/nikke/character-artwork/c450_03.webp"
+      }
+    ],
+    "451": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c451",
+        "url": "/ui-assets/nikke/character-artwork/c451.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "美妙约会",
+        "assetId": "c451_01",
+        "url": "/ui-assets/nikke/character-artwork/c451_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "甜美主厨",
+        "assetId": "c451_02",
+        "url": "/ui-assets/nikke/character-artwork/c451_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "海岸甜心",
+        "assetId": "c451_03",
+        "url": "/ui-assets/nikke/character-artwork/c451_03.webp"
+      }
+    ],
+    "470": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c470",
+        "url": "/ui-assets/nikke/character-artwork/c470.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "荒诞红",
+        "assetId": "c470_01",
+        "url": "/ui-assets/nikke/character-artwork/c470_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "怀旧时光",
+        "assetId": "c470_02",
+        "url": "/ui-assets/nikke/character-artwork/c470_02.webp"
+      }
+    ],
+    "471": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c471",
+        "url": "/ui-assets/nikke/character-artwork/c471.webp"
+      }
+    ],
+    "500": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c500",
+        "url": "/ui-assets/nikke/character-artwork/c500.webp"
+      }
+    ],
+    "501": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c501",
+        "url": "/ui-assets/nikke/character-artwork/c501.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "甜蜜舞步",
+        "assetId": "c501_01",
+        "url": "/ui-assets/nikke/character-artwork/c501_01.webp"
+      }
+    ],
+    "502": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c502",
+        "url": "/ui-assets/nikke/character-artwork/c502.webp"
+      }
+    ],
+    "511": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c511",
+        "url": "/ui-assets/nikke/character-artwork/c511.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "水晶公主",
+        "assetId": "c511_01",
+        "url": "/ui-assets/nikke/character-artwork/c511_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "美丽的我",
+        "assetId": "c511_02",
+        "url": "/ui-assets/nikke/character-artwork/c511_02.webp"
+      }
+    ],
+    "513": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c513",
+        "url": "/ui-assets/nikke/character-artwork/c513.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "深渊之花",
+        "assetId": "c513_01",
+        "url": "/ui-assets/nikke/character-artwork/c513_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "绚丽泡泡",
+        "assetId": "c513_02",
+        "url": "/ui-assets/nikke/character-artwork/c513_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "珍珠贝公主",
+        "assetId": "c513_03",
+        "url": "/ui-assets/nikke/character-artwork/c513_03.webp"
+      }
+    ],
+    "514": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c514",
+        "url": "/ui-assets/nikke/character-artwork/c514.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "美丽的你",
+        "assetId": "c514_01",
+        "url": "/ui-assets/nikke/character-artwork/c514_01.webp"
+      }
+    ],
+    "515": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c515",
+        "url": "/ui-assets/nikke/character-artwork/c515.webp"
+      }
+    ],
+    "520": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c520",
+        "url": "/ui-assets/nikke/character-artwork/c520.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "糖霜咬咬",
+        "assetId": "c520_01",
+        "url": "/ui-assets/nikke/character-artwork/c520_01.webp"
+      }
+    ],
+    "521": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c521",
+        "url": "/ui-assets/nikke/character-artwork/c521.webp"
+      }
+    ],
+    "532": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c532",
+        "url": "/ui-assets/nikke/character-artwork/c532.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "春日飞行",
+        "assetId": "c532_01",
+        "url": "/ui-assets/nikke/character-artwork/c532_01.webp"
+      }
+    ],
+    "550": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c550",
+        "url": "/ui-assets/nikke/character-artwork/c550.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "闪耀兔",
+        "assetId": "c550_01",
+        "url": "/ui-assets/nikke/character-artwork/c550_01.webp"
+      }
+    ],
+    "551": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c551",
+        "url": "/ui-assets/nikke/character-artwork/c551.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "啦啦队训练服",
+        "assetId": "c551_01",
+        "url": "/ui-assets/nikke/character-artwork/c551_01.webp"
+      }
+    ],
+    "570": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c570",
+        "url": "/ui-assets/nikke/character-artwork/c570.webp"
+      }
+    ],
+    "580": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c580",
+        "url": "/ui-assets/nikke/character-artwork/c580.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "圣洁怪盗",
+        "assetId": "c580_01",
+        "url": "/ui-assets/nikke/character-artwork/c580_01.webp"
+      }
+    ],
+    "581": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c581",
+        "url": "/ui-assets/nikke/character-artwork/c581.webp"
+      }
+    ],
+    "582": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c582",
+        "url": "/ui-assets/nikke/character-artwork/c582.webp"
+      }
+    ],
+    "583": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c583",
+        "url": "/ui-assets/nikke/character-artwork/c583.webp"
+      }
+    ],
+    "590": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c590",
+        "url": "/ui-assets/nikke/character-artwork/c590.webp"
+      }
+    ],
+    "600": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c600",
+        "url": "/ui-assets/nikke/character-artwork/c600.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "清新薄荷",
+        "assetId": "c600_01",
+        "url": "/ui-assets/nikke/character-artwork/c600_01.webp"
+      }
+    ],
+    "601": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c601",
+        "url": "/ui-assets/nikke/character-artwork/c601.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "酷冷辣椒",
+        "assetId": "c601_01",
+        "url": "/ui-assets/nikke/character-artwork/c601_01.webp"
+      }
+    ],
+    "620": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c620",
+        "url": "/ui-assets/nikke/character-artwork/c620.webp"
+      }
+    ],
+    "800": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c800",
+        "url": "/ui-assets/nikke/character-artwork/c800.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "脱下外套",
+        "assetId": "c800_01",
+        "url": "/ui-assets/nikke/character-artwork/c800_01.webp"
+      }
+    ],
+    "801": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c801",
+        "url": "/ui-assets/nikke/character-artwork/c801.webp"
+      }
+    ],
+    "802": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c802",
+        "url": "/ui-assets/nikke/character-artwork/c802.webp"
+      }
+    ],
+    "810": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c810",
+        "url": "/ui-assets/nikke/character-artwork/c810.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "战损状态",
+        "assetId": "c810_01",
+        "url": "/ui-assets/nikke/character-artwork/c810_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "寄叶制服1",
+        "assetId": "c810_02",
+        "url": "/ui-assets/nikke/character-artwork/c810_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "寄叶非官方水上活动服1",
+        "assetId": "c810_03",
+        "url": "/ui-assets/nikke/character-artwork/c810_03.webp"
+      }
+    ],
+    "811": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c811",
+        "url": "/ui-assets/nikke/character-artwork/c811.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "战损状态",
+        "assetId": "c811_01",
+        "url": "/ui-assets/nikke/character-artwork/c811_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "寄叶制服原型",
+        "assetId": "c811_02",
+        "url": "/ui-assets/nikke/character-artwork/c811_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "寄叶非官方水上活动服原型",
+        "assetId": "c811_03",
+        "url": "/ui-assets/nikke/character-artwork/c811_03.webp"
+      }
+    ],
+    "812": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c812",
+        "url": "/ui-assets/nikke/character-artwork/c812.webp"
+      }
+    ],
+    "820": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c820",
+        "url": "/ui-assets/nikke/character-artwork/c820.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "俐落女仆",
+        "assetId": "c820_01",
+        "url": "/ui-assets/nikke/character-artwork/c820_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "纯净之花",
+        "assetId": "c820_02",
+        "url": "/ui-assets/nikke/character-artwork/c820_02.webp"
+      }
+    ],
+    "821": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c821",
+        "url": "/ui-assets/nikke/character-artwork/c821.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "生涩女仆",
+        "assetId": "c821_01",
+        "url": "/ui-assets/nikke/character-artwork/c821_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "春日微风",
+        "assetId": "c821_02",
+        "url": "/ui-assets/nikke/character-artwork/c821_02.webp"
+      }
+    ],
+    "822": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c822",
+        "url": "/ui-assets/nikke/character-artwork/c822.webp"
+      }
+    ],
+    "830": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c830",
+        "url": "/ui-assets/nikke/character-artwork/c830.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "明日香的校服",
+        "assetId": "c830_01",
+        "url": "/ui-assets/nikke/character-artwork/c830_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "自私街",
+        "assetId": "c830_02",
+        "url": "/ui-assets/nikke/character-artwork/c830_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "测试用作战服",
+        "assetId": "c830_03",
+        "url": "/ui-assets/nikke/character-artwork/c830_03.webp"
+      }
+    ],
+    "831": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c831",
+        "url": "/ui-assets/nikke/character-artwork/c831.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "零的校服",
+        "assetId": "c831_01",
+        "url": "/ui-assets/nikke/character-artwork/c831_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "宁静渡假",
+        "assetId": "c831_02",
+        "url": "/ui-assets/nikke/character-artwork/c831_02.webp"
+      }
+    ],
+    "832": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c832",
+        "url": "/ui-assets/nikke/character-artwork/c832.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "真理的校服",
+        "assetId": "c832_01",
+        "url": "/ui-assets/nikke/character-artwork/c832_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "休闲之旅",
+        "assetId": "c832_02",
+        "url": "/ui-assets/nikke/character-artwork/c832_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "最终决战：真理",
+        "assetId": "c832_03",
+        "url": "/ui-assets/nikke/character-artwork/c832_03.webp"
+      },
+      {
+        "id": "skin-4",
+        "label": "神秘缪斯",
+        "assetId": "c832_04",
+        "url": "/ui-assets/nikke/character-artwork/c832_04.webp"
+      }
+    ],
+    "833": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c833",
+        "url": "/ui-assets/nikke/character-artwork/c833.webp"
+      }
+    ],
+    "834": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c834",
+        "url": "/ui-assets/nikke/character-artwork/c834.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "第三村的长得像小姐",
+        "assetId": "c834_01",
+        "url": "/ui-assets/nikke/character-artwork/c834_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "灵魂连接",
+        "assetId": "c834_02",
+        "url": "/ui-assets/nikke/character-artwork/c834_02.webp"
+      }
+    ],
+    "835": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c835",
+        "url": "/ui-assets/nikke/character-artwork/c835.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "最终决战：明日香",
+        "assetId": "c835_01",
+        "url": "/ui-assets/nikke/character-artwork/c835_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "孤海乐章",
+        "assetId": "c835_02",
+        "url": "/ui-assets/nikke/character-artwork/c835_02.webp"
+      }
+    ],
+    "836": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c836",
+        "url": "/ui-assets/nikke/character-artwork/c836.webp"
+      }
+    ],
+    "840": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c840",
+        "url": "/ui-assets/nikke/character-artwork/c840.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "SEPARATE WAYS",
+        "assetId": "c840_01",
+        "url": "/ui-assets/nikke/character-artwork/c840_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "DRESS",
+        "assetId": "c840_02",
+        "url": "/ui-assets/nikke/character-artwork/c840_02.webp"
+      }
+    ],
+    "841": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c841",
+        "url": "/ui-assets/nikke/character-artwork/c841.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "CLASSIC",
+        "assetId": "c841_01",
+        "url": "/ui-assets/nikke/character-artwork/c841_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "BATTLE SUIT",
+        "assetId": "c841_02",
+        "url": "/ui-assets/nikke/character-artwork/c841_02.webp"
+      }
+    ],
+    "842": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c842",
+        "url": "/ui-assets/nikke/character-artwork/c842.webp"
+      }
+    ],
+    "850": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c850",
+        "url": "/ui-assets/nikke/character-artwork/c850.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "镂空裙装",
+        "assetId": "c850_01",
+        "url": "/ui-assets/nikke/character-artwork/c850_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "神经元链接套装",
+        "assetId": "c850_02",
+        "url": "/ui-assets/nikke/character-artwork/c850_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "活肤紧身服",
+        "assetId": "c850_03",
+        "url": "/ui-assets/nikke/character-artwork/c850_03.webp"
+      }
+    ],
+    "851": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c851",
+        "url": "/ui-assets/nikke/character-artwork/c851.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "星球空降服（第6小队）第2版",
+        "assetId": "c851_01",
+        "url": "/ui-assets/nikke/character-artwork/c851_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "盛夏爱丽丝",
+        "assetId": "c851_02",
+        "url": "/ui-assets/nikke/character-artwork/c851_02.webp"
+      }
+    ],
+    "852": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c852",
+        "url": "/ui-assets/nikke/character-artwork/c852.webp"
+      }
+    ],
+    "860": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c860",
+        "url": "/ui-assets/nikke/character-artwork/c860.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "DA训练服（第一套）",
+        "assetId": "c860_01",
+        "url": "/ui-assets/nikke/character-artwork/c860_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "赤红火花吉他",
+        "assetId": "c860_02",
+        "url": "/ui-assets/nikke/character-artwork/c860_02.webp"
+      }
+    ],
+    "861": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c861",
+        "url": "/ui-assets/nikke/character-artwork/c861.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "DA训练服（第二套）",
+        "assetId": "c861_01",
+        "url": "/ui-assets/nikke/character-artwork/c861_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "湛蓝律动贝斯",
+        "assetId": "c861_02",
+        "url": "/ui-assets/nikke/character-artwork/c861_02.webp"
+      }
+    ],
+    "862": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c862",
+        "url": "/ui-assets/nikke/character-artwork/c862.webp"
+      }
+    ],
+    "870": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c870",
+        "url": "/ui-assets/nikke/character-artwork/c870.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "秀尽学园学生会长",
+        "assetId": "c870_01",
+        "url": "/ui-assets/nikke/character-artwork/c870_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "女王睡衣（Ver. NIKKE Collabo）",
+        "assetId": "c870_02",
+        "url": "/ui-assets/nikke/character-artwork/c870_02.webp"
+      }
+    ],
+    "871": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c871",
+        "url": "/ui-assets/nikke/character-artwork/c871.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "天城屋旅馆和服",
+        "assetId": "c871_01",
+        "url": "/ui-assets/nikke/character-artwork/c871_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "冬日雅居（Ver. NIKKE Collabo）",
+        "assetId": "c871_02",
+        "url": "/ui-assets/nikke/character-artwork/c871_02.webp"
+      }
+    ],
+    "872": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c872",
+        "url": "/ui-assets/nikke/character-artwork/c872.webp"
+      }
+    ],
+    "010": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c010",
+        "url": "/ui-assets/nikke/character-artwork/c010.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "白色诺言",
+        "assetId": "c010_02",
+        "url": "/ui-assets/nikke/character-artwork/c010_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "经典假期",
+        "assetId": "c010_03",
+        "url": "/ui-assets/nikke/character-artwork/c010_03.webp"
+      }
+    ],
+    "011": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c011",
+        "url": "/ui-assets/nikke/character-artwork/c011.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "闪亮子弹",
+        "assetId": "c011_01",
+        "url": "/ui-assets/nikke/character-artwork/c011_01.webp"
+      }
+    ],
+    "012": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c012",
+        "url": "/ui-assets/nikke/character-artwork/c012.webp"
+      }
+    ],
+    "014": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c014",
+        "url": "/ui-assets/nikke/character-artwork/c014.webp"
+      }
+    ],
+    "015": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c015",
+        "url": "/ui-assets/nikke/character-artwork/c015.webp"
+      }
+    ],
+    "016": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c016",
+        "url": "/ui-assets/nikke/character-artwork/c016.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "红色风情",
+        "assetId": "c016_01",
+        "url": "/ui-assets/nikke/character-artwork/c016_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "挚爱之红",
+        "assetId": "c016_02",
+        "url": "/ui-assets/nikke/character-artwork/c016_02.webp"
+      },
+      {
+        "id": "skin-3",
+        "label": "耀光",
+        "assetId": "c016_03",
+        "url": "/ui-assets/nikke/character-artwork/c016_03.webp"
+      }
+    ],
+    "017": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c017",
+        "url": "/ui-assets/nikke/character-artwork/c017.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "星光",
+        "assetId": "c017_01",
+        "url": "/ui-assets/nikke/character-artwork/c017_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "T.T. STAR",
+        "assetId": "c017_02",
+        "url": "/ui-assets/nikke/character-artwork/c017_02.webp"
+      }
+    ],
+    "018": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c018",
+        "url": "/ui-assets/nikke/character-artwork/c018.webp"
+      }
+    ],
+    "020": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c020",
+        "url": "/ui-assets/nikke/character-artwork/c020.webp"
+      }
+    ],
+    "022": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c022",
+        "url": "/ui-assets/nikke/character-artwork/c022.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "甜蜜宅配员",
+        "assetId": "c022_01",
+        "url": "/ui-assets/nikke/character-artwork/c022_01.webp"
+      }
+    ],
+    "023": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c023",
+        "url": "/ui-assets/nikke/character-artwork/c023.webp"
+      }
+    ],
+    "030": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c030",
+        "url": "/ui-assets/nikke/character-artwork/c030.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "甜美控",
+        "assetId": "c030_01",
+        "url": "/ui-assets/nikke/character-artwork/c030_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "警察加油",
+        "assetId": "c030_02",
+        "url": "/ui-assets/nikke/character-artwork/c030_02.webp"
+      }
+    ],
+    "032": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c032",
+        "url": "/ui-assets/nikke/character-artwork/c032.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "正义怪盗",
+        "assetId": "c032_01",
+        "url": "/ui-assets/nikke/character-artwork/c032_01.webp"
+      }
+    ],
+    "033": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c033",
+        "url": "/ui-assets/nikke/character-artwork/c033.webp"
+      }
+    ],
+    "040": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c040",
+        "url": "/ui-assets/nikke/character-artwork/c040.webp"
+      }
+    ],
+    "041": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c041",
+        "url": "/ui-assets/nikke/character-artwork/c041.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "秘密行动",
+        "assetId": "c041_01",
+        "url": "/ui-assets/nikke/character-artwork/c041_01.webp"
+      }
+    ],
+    "043": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c043",
+        "url": "/ui-assets/nikke/character-artwork/c043.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "秘密派对清洁工",
+        "assetId": "c043_01",
+        "url": "/ui-assets/nikke/character-artwork/c043_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "秘密警探",
+        "assetId": "c043_02",
+        "url": "/ui-assets/nikke/character-artwork/c043_02.webp"
+      }
+    ],
+    "060": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c060",
+        "url": "/ui-assets/nikke/character-artwork/c060.webp"
+      }
+    ],
+    "061": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c061",
+        "url": "/ui-assets/nikke/character-artwork/c061.webp"
+      }
+    ],
+    "062": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c062",
+        "url": "/ui-assets/nikke/character-artwork/c062.webp"
+      }
+    ],
+    "070": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c070",
+        "url": "/ui-assets/nikke/character-artwork/c070.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "古典工作服",
+        "assetId": "c070_01",
+        "url": "/ui-assets/nikke/character-artwork/c070_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "黑月",
+        "assetId": "c070_02",
+        "url": "/ui-assets/nikke/character-artwork/c070_02.webp"
+      }
+    ],
+    "071": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c071",
+        "url": "/ui-assets/nikke/character-artwork/c071.webp"
+      }
+    ],
+    "072": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c072",
+        "url": "/ui-assets/nikke/character-artwork/c072.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "黑色假日",
+        "assetId": "c072_01",
+        "url": "/ui-assets/nikke/character-artwork/c072_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "草莓花朵",
+        "assetId": "c072_02",
+        "url": "/ui-assets/nikke/character-artwork/c072_02.webp"
+      },
+      {
+        "id": "skin-4",
+        "label": "午夜草莓",
+        "assetId": "c072_04",
+        "url": "/ui-assets/nikke/character-artwork/c072_04.webp"
+      }
+    ],
+    "073": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c073",
+        "url": "/ui-assets/nikke/character-artwork/c073.webp"
+      }
+    ],
+    "074": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c074",
+        "url": "/ui-assets/nikke/character-artwork/c074.webp"
+      }
+    ],
+    "075": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c075",
+        "url": "/ui-assets/nikke/character-artwork/c075.webp"
+      }
+    ],
+    "080": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c080",
+        "url": "/ui-assets/nikke/character-artwork/c080.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "非凡假日",
+        "assetId": "c080_01",
+        "url": "/ui-assets/nikke/character-artwork/c080_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "海洋维修",
+        "assetId": "c080_02",
+        "url": "/ui-assets/nikke/character-artwork/c080_02.webp"
+      }
+    ],
+    "082": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c082",
+        "url": "/ui-assets/nikke/character-artwork/c082.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "菲什加德",
+        "assetId": "c082_01",
+        "url": "/ui-assets/nikke/character-artwork/c082_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "可爱向日葵",
+        "assetId": "c082_02",
+        "url": "/ui-assets/nikke/character-artwork/c082_02.webp"
+      }
+    ],
+    "090": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c090",
+        "url": "/ui-assets/nikke/character-artwork/c090.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "宝贝红",
+        "assetId": "c090_01",
+        "url": "/ui-assets/nikke/character-artwork/c090_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "办公室疗法",
+        "assetId": "c090_02",
+        "url": "/ui-assets/nikke/character-artwork/c090_02.webp"
+      }
+    ],
+    "091": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c091",
+        "url": "/ui-assets/nikke/character-artwork/c091.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "方舟魔法师",
+        "assetId": "c091_01",
+        "url": "/ui-assets/nikke/character-artwork/c091_01.webp"
+      }
+    ],
+    "092": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c092",
+        "url": "/ui-assets/nikke/character-artwork/c092.webp"
+      }
+    ],
+    "093": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c093",
+        "url": "/ui-assets/nikke/character-artwork/c093.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "秘密疗法",
+        "assetId": "c093_01",
+        "url": "/ui-assets/nikke/character-artwork/c093_01.webp"
+      }
+    ],
+    "094": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c094",
+        "url": "/ui-assets/nikke/character-artwork/c094.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "青涩新生",
+        "assetId": "c094_01",
+        "url": "/ui-assets/nikke/character-artwork/c094_01.webp"
+      }
+    ],
+    "095": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c095",
+        "url": "/ui-assets/nikke/character-artwork/c095.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "休假日",
+        "assetId": "c095_01",
+        "url": "/ui-assets/nikke/character-artwork/c095_01.webp"
+      }
+    ]
+  }
+}

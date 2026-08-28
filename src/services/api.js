@@ -1242,6 +1242,14 @@ export const fetchAndCacheNikkeDirectory = async () => {
         corporation: tw?.corporation,
         weapon_type: tw?.shot_id?.element?.weapon_type,
         original_rare: tw?.original_rare,
+        character_costume_list: Array.isArray(tw?.character_costume_list)
+          ? tw.character_costume_list.map((costume) => ({
+              resource_id: costume?.resource_id,
+              costume_index: costume?.costume_index,
+              costume_name: costume?.costume_name_locale,
+              is_hidden: Boolean(costume?.is_hidden),
+            }))
+          : [],
       });
     }
 

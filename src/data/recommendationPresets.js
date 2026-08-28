@@ -136,6 +136,14 @@ export const getRecommendationItem = (preset, nameCode) => {
 
 const CULTIVATION_FIELDS = ["equipment", "lines", "skills", "cube", "collectible"];
 const UNAVAILABLE_CULTIVATION_VALUE = "原图未提供";
+const CHINA_EXCLUSIVE_CULTIVATION_ADVICE = Object.freeze({
+  "cn-exclusive-huapi": item(
+    "cn-exclusive-huapi", "画皮", "1.5红级", "", "4攻4优，2+装弹", "7/7/7，10/10/7", "战术/遗迹巨熊", "",
+  ),
+  "cn-exclusive-yingning": item(
+    "cn-exclusive-yingning", "婴宁", "低配", "", "", "5/5/5 或 7/7/7", "", "",
+  ),
+});
 
 export const listRecommendationAdvice = (nameCode, preferredCollectionId = "") => {
   const code = String(nameCode ?? "").trim();
@@ -161,6 +169,16 @@ export const listRecommendationAdvice = (nameCode, preferredCollectionId = "") =
       ...entry,
     });
   });
+
+  const exclusiveEntry = CHINA_EXCLUSIVE_CULTIVATION_ADVICE[code];
+  if (exclusiveEntry) {
+    matches.push({
+      presetId: "cn-exclusive-cultivation",
+      presetName: "国服独占角色",
+      presetIndex: RECOMMENDATION_PRESETS.length,
+      ...exclusiveEntry,
+    });
+  }
 
   return matches.sort((left, right) => {
     const leftPreferred = left.presetId === preferredPresetId ? 1 : 0;

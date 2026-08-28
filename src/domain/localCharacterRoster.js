@@ -2,6 +2,7 @@
 // 手动录入、自定义角色与本地图鉴导入共用的纯领域模型。
 
 import { resolveSimplifiedChineseCharacterName } from "../data/characterNameOverrides.js";
+import { tierValue } from "./equipmentAffixes.js";
 
 export const LOCAL_CHARACTER_SCHEMA_VERSION = 2;
 export const LOCAL_CHARACTER_SOURCES = Object.freeze({
@@ -215,6 +216,12 @@ export function validateEquipmentInput(equipments) {
       usedTypes.add(line.functionType);
       if (line.value === null) errors.push(`装备${slotIndex + 1}词条${lineIndex + 1}缺少数值`);
       if (line.level === null) errors.push(`装备${slotIndex + 1}词条${lineIndex + 1}缺少档位`);
+      if (line.value !== null && line.level !== null) {
+        const expectedValue = tierValue(line.functionType, line.level);
+        if (expectedValue === null || Math.abs(expectedValue - line.value) > 0.005) {
+          errors.push(`装备${slotIndex + 1}词条${lineIndex + 1}的档位与数值不匹配`);
+        }
+      }
     });
   });
   return errors;
@@ -300,6 +307,58 @@ export function saveLocalCharacterRecord(records, {
 
 export function deleteLocalCharacterRecord(records, localId) {
   return (Array.isArray(records) ? records : []).filter((record) => record.localId !== localId);
+}
+
+export function updateLocalCharacterEquipmentSlot(records, {
+  localId = "",
+  nameCode = "",
+  slotIndex,
+  lines = [],
+  now = Date.now(),
+} = {}) {
+  const currentRecords = (Array.isArray(records) ? records : [])
+    .map((record) => normalizeLocalCharacterRecord(record));
+  const normalizedLocalId = codeOf(localId);
+  const normalizedNameCode = codeOf(nameCode);
+  const existing = currentRecords.find((record) => (
+    (normalizedLocalId && record.localId === normalizedLocalId)
+    || (normalizedNameCode && (record.nameCode === normalizedNameCode || record.localId === normalizedNameCode))
+  )) || null;
+  const normalizedSlotIndex = Number(slotIndex);
+
+  if (!existing) {
+    return { records: currentRecords, record: null, errors: ["未找到该角色的本地图鉴记录"] };
+  }
+  if (!Number.isInteger(normalizedSlotIndex) || normalizedSlotIndex < 0 || normalizedSlotIndex >= EQUIPMENT_SLOT_COUNT) {
+    return { records: currentRecords, record: null, errors: ["装备部位无效"] };
+  }
+
+  const slotPayload = Array.from({ length: EQUIPMENT_SLOT_COUNT }, (_, index) => (
+    index === normalizedSlotIndex ? lines : []
+  ));
+  const normalizedSlot = normalizeEquipments(slotPayload)[normalizedSlotIndex];
+  const errors = validateEquipmentInput(slotPayload);
+  if (errors.length) return { records: currentRecords, record: null, errors };
+
+  const equipments = normalizeEquipments(existing.equipments);
+  equipments[normalizedSlotIndex] = normalizedSlot;
+  const supplementPrefix = `equipments.${normalizedSlotIndex}`;
+  const manualSupplementFields = [
+    ...existing.manualSupplementFields.filter((field) => !field.startsWith(supplementPrefix)),
+    ...normalizedSlot
+      .filter((line) => line.functionType)
+      .map((line) => `${supplementPrefix}.${line.position - 1}`),
+  ];
+  const next = normalizeLocalCharacterRecord({
+    ...existing,
+    source: existing.custom ? LOCAL_CHARACTER_SOURCES.custom : LOCAL_CHARACTER_SOURCES.manual,
+    equipments,
+    updatedAt: now,
+    syncMissing: false,
+    manualSupplementFields,
+  }, now);
+  const nextRecords = currentRecords.map((record) => record.localId === existing.localId ? next : record);
+  return { records: nextRecords, record: next, errors: [] };
 }
 
 export function isRecordedLocalCharacter(record) {

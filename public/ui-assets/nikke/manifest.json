@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "revision": "2026-08-28",
+  "basePath": "/ui-assets/nikke",
+  "assets": {
+    "manufacturer": {
+      "Elysion": "metadata/manufacturer/elysion.png",
+      "Missilis": "metadata/manufacturer/missilis.png",
+      "Tetra": "metadata/manufacturer/tetra.png",
+      "Pilgrim": "metadata/manufacturer/pilgrim.png",
+      "Abnormal": "metadata/manufacturer/abnormal.png"
+    },
+    "class": {
+      "Attacker": "metadata/class/attacker.png",
+      "Defender": "metadata/class/defender.png",
+      "Supporter": "metadata/class/supporter.png"
+    },
+    "element": {
+      "Fire": "metadata/element/fire.png",
+      "Water": "metadata/element/water.png",
+      "Wind": "metadata/element/wind.png",
+      "Electronic": "metadata/element/electric.png",
+      "Iron": "metadata/element/iron.png"
+    },
+    "weapon": {
+      "AR": "metadata/weapon/ar.png",
+      "MG": "metadata/weapon/mg.png",
+      "RL": "metadata/weapon/rl.png",
+      "SG": "metadata/weapon/sg.png",
+      "SMG": "metadata/weapon/smg.png",
+      "SR": "metadata/weapon/sr.png"
+    },
+    "burst": {
+      "1": "metadata/burst/burst-1.png",
+      "2": "metadata/burst/burst-2.png",
+      "3": "metadata/burst/burst-3.png",
+      "all": "metadata/burst/burst-all.png"
+    },
+    "characterCard": {
+      "raritySsr": "character-card/rarity-ssr.png",
+      "starFilled": "character-card/star-filled.png",
+      "starEmpty": "character-card/star-empty.png",
+      "coreFrame": "character-card/core-frame.webp",
+      "overloadBadgeSource": "character-card/overload-badge-source.png"
+    },
+    "characterArtwork": {
+      "catalog": "character-artwork/catalog.json",
+      "directory": "character-artwork/",
+      "format": "webp"
+    },
+    "equipmentSlots": {
+      "head": "equipment/slots/head.png",
+      "body": "equipment/slots/body.png",
+      "arms": "equipment/slots/arms.png",
+      "legs": "equipment/slots/legs.png"
+    },
+    "stats": {
+      "attack": "stats/attack.png",
+      "defense": "stats/defense.png",
+      "hp": "stats/hp.png",
+      "ammo": "stats/ammo.png",
+      "reload": "stats/reload.png"
+    },
+    "overloadEquipment": {
+      "vmetal": {
+        "head": "equipment/overload/vmetal-head.png",
+        "body": "equipment/overload/vmetal-body.png",
+        "arms": "equipment/overload/vmetal-arms.png",
+        "legs": "equipment/overload/vmetal-legs.png"
+      },
+      "99": {
+        "head": "equipment/overload/99-head.png",
+        "body": "equipment/overload/99-body.png",
+        "arms": "equipment/overload/99-arms.png",
+        "legs": "equipment/overload/99-legs.png"
+      },
+      "code": {
+        "head": "equipment/overload/code-head.png",
+        "body": "equipment/overload/code-body.png",
+        "arms": "equipment/overload/code-arms.png",
+        "legs": "equipment/overload/code-legs.png"
+      }
+    }
+  }
+}

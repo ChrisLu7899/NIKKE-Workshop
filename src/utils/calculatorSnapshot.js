@@ -79,17 +79,29 @@ export function extractSyncedCalculatorSnapshot(snapshot) {
 
 export function buildUnifiedCalculatorSnapshot(syncSnapshot, localRecords) {
   const synced = extractSyncedCalculatorSnapshot(syncSnapshot || {});
-  const syncedCodes = new Set(synced.accounts.flatMap((account) => account.characters || []).map((character) => character.nameCode));
   const localCharacters = getRecordedLocalCharacters(localRecords)
-    .map(localRecordToCalculatorCharacter)
+    .map(localRecordToCalculatorCharacter);
+  const localByCode = new Map(localCharacters
+    .filter((character) => character.nameCode)
+    .map((character) => [character.nameCode, character]));
+  const effectiveSyncedAccounts = synced.accounts.map((account) => ({
+    ...account,
+    characters: (account.characters || []).map((character) => (
+      localByCode.get(character.nameCode) || character
+    )),
+  }));
+  const syncedCodes = new Set(effectiveSyncedAccounts
+    .flatMap((account) => account.characters || [])
+    .map((character) => character.nameCode));
+  const localOnlyCharacters = localCharacters
     .filter((character) => !syncedCodes.has(character.nameCode));
   return {
     version: CALCULATOR_SNAPSHOT_VERSION,
     ownershipSource: CALCULATOR_UNIFIED_SOURCE,
     updatedAt: Date.now(),
     accounts: [
-      ...synced.accounts,
-      ...(localCharacters.length ? [{ accountName: "已录入", source: "local", characters: localCharacters }] : []),
+      ...effectiveSyncedAccounts,
+      ...(localOnlyCharacters.length ? [{ accountName: "已录入", source: "local", characters: localOnlyCharacters }] : []),
     ],
   };
 }

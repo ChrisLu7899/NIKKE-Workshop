@@ -14,7 +14,6 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
-  Drawer,
   IconButton,
   InputAdornment,
   ListSubheader,
@@ -30,7 +29,6 @@ import AddIcon from "@mui/icons-material/Add";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import CheckIcon from "@mui/icons-material/Check";
-import CloseIcon from "@mui/icons-material/Close";
 import CloudDownloadOutlinedIcon from "@mui/icons-material/CloudDownloadOutlined";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -42,16 +40,15 @@ import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import SearchIcon from "@mui/icons-material/Search";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import SyncIcon from "@mui/icons-material/Sync";
-import TuneIcon from "@mui/icons-material/Tune";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import AkaDataImportDialog from "./AkaDataImportDialog.jsx";
+import CharacterWorkspaceDrawer from "./CharacterWorkspaceDrawer.jsx";
 import LocalCharacterEntryDrawer from "./LocalCharacterEntryDrawer.jsx";
 import ScreenshotOcrImportDialog from "./ScreenshotOcrImportDialog.jsx";
 import DocumentScannerOutlinedIcon from "@mui/icons-material/DocumentScannerOutlined";
 import { prewarmLocalScreenshotOcr } from "../../services/localScreenshotOcr.js";
 import { summarizeTopEquipmentAffixes } from "../../domain/equipmentAffixSummary.js";
 import {
-  EQUIPMENT_FUNCTION_LABELS,
   getRecordedLocalCharacters,
   hasLocalCharacterData,
   localCharacterKey,
@@ -71,8 +68,6 @@ import {
   isSystemCollectionSelectable,
 } from "../../utils/characterCollections.js";
 import { isCommonCharacterTemplate } from "../../data/commonCharacterList.js";
-
-const STAT_TYPE_NAMES = EQUIPMENT_FUNCTION_LABELS;
 
 const FALLBACK_COPY = {
   zh: {
@@ -269,6 +264,7 @@ const CharacterGalleryTabContent = ({
   getCorporationName,
   getBurstStageName,
   getNikkeAvatarUrl,
+  getNikkeArtworkCandidates,
   getDisplayName,
   ownedSnapshot,
   fetchLoading,
@@ -286,7 +282,6 @@ const CharacterGalleryTabContent = ({
   const [sortDirection, setSortDirection] = useState("desc");
   const [filterAnchorEl, setFilterAnchorEl] = useState(null);
   const [detailNikke, setDetailNikke] = useState(null);
-  const [entryNikke, setEntryNikke] = useState(null);
   const [createCustomOpen, setCreateCustomOpen] = useState(false);
   const [screenshotOcrOpen, setScreenshotOcrOpen] = useState(false);
   const [akaDataOpen, setAkaDataOpen] = useState(false);
@@ -499,9 +494,7 @@ const CharacterGalleryTabContent = ({
   const handleCardClick = (nikke) => {
     const code = normalizeCode(nikke?.name_code);
     if (!multiSelectMode) {
-      const localRecord = localRecordMap.get(nikke?._localRecordId) || localRecordMap.get(code);
-      if (!ownedCodes.has(code) || localRecord?.custom) setEntryNikke(nikke);
-      else setDetailNikke(nikke);
+      setDetailNikke(nikke);
       return;
     }
     if (!ownedCodes.has(code)) return;
@@ -545,15 +538,11 @@ const CharacterGalleryTabContent = ({
     setSelectedCodes(new Set());
   };
 
-  const selectedDetail = detailNikke
-    ? (
-        localRecordMap.get(detailNikke?._localRecordId)
-        || localRecordMap.get(normalizeCode(detailNikke?.name_code))
-        || ownedCharacterMap.get(normalizeCode(detailNikke?.name_code))
-      )
+  const selectedLocalRecord = detailNikke
+    ? (localRecordMap.get(detailNikke?._localRecordId) || localRecordMap.get(normalizeCode(detailNikke?.name_code)) || null)
     : null;
-  const entryRecord = entryNikke
-    ? (localRecordMap.get(entryNikke?._localRecordId) || localRecordMap.get(normalizeCode(entryNikke?.name_code)) || null)
+  const selectedDetail = detailNikke
+    ? (selectedLocalRecord || ownedCharacterMap.get(normalizeCode(detailNikke?.name_code)) || null)
     : null;
   const catalogOptions = useMemo(() => {
     const unique = (key) => [...new Set((standardCatalog || []).map((character) => character?.[key]).filter(Boolean))];
@@ -921,96 +910,29 @@ const CharacterGalleryTabContent = ({
         </Box>
       )}
 
-      <Drawer anchor="right" open={Boolean(detailNikke)} onClose={() => setDetailNikke(null)} PaperProps={{ sx: { width: { xs: "min(94vw, 440px)", sm: 440 }, p: 2.5 } }}>
-        {detailNikke ? (
-          <>
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <Typography variant="h6">{copy.details}</Typography>
-              <IconButton onClick={() => setDetailNikke(null)} aria-label={copy.cancel}><CloseIcon /></IconButton>
-            </Box>
-            <Divider sx={{ my: 2 }} />
-            <Box sx={{ display: "grid", gridTemplateColumns: "112px 1fr", gap: 2 }}>
-              <Box sx={{ width: 112, height: 140, borderRadius: 1.5, bgcolor: "common.white", overflow: "hidden" }}>
-                {getNikkeAvatarUrl(detailNikke) ? (
-                  <Box
-                    component="img"
-                    src={getNikkeAvatarUrl(detailNikke)}
-                    alt=""
-                    width={112}
-                    height={140}
-                    sx={{ display: "block", width: 112, height: 140, objectFit: "cover" }}
-                    onError={(event) => { event.currentTarget.style.display = "none"; }}
-                  />
-                ) : null}
-              </Box>
-              <Box sx={{ minWidth: 0 }}>
-                <Stack direction="row" spacing={1} alignItems="flex-start" justifyContent="space-between">
-                  <Typography variant="h5" sx={{ minWidth: 0, fontWeight: 600, textWrap: "balance" }}>{getDisplayName(detailNikke)}</Typography>
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    startIcon={<TuneIcon />}
-                    onClick={() => {
-                      const characterCode = normalizeCode(detailNikke?.name_code);
-                      setDetailNikke(null);
-                      onOpenCharacterCalculator?.({
-                        characterCode,
-                        collectionId: activeCollectionId,
-                      });
-                    }}
-                    sx={{ flexShrink: 0, whiteSpace: "nowrap" }}
-                  >
-                    {copy.calculateCharacter}
-                  </Button>
-                </Stack>
-                <Stack direction="row" spacing={0.75} useFlexGap flexWrap="wrap" sx={{ mt: 1.5 }}>
-                  <Chip size="small" label={getElementName(detailNikke.element)} />
-                  <Chip size="small" label={getClassName(detailNikke.class)} />
-                  <Chip size="small" label={getBurstStageName(detailNikke.use_burst_skill)} />
-                  <Chip size="small" label={getCorporationName(detailNikke.corporation)} />
-                  {detailNikke.weapon_type ? <Chip size="small" label={detailNikke.weapon_type} /> : null}
-                </Stack>
-                {selectedDetail ? (
-                  <Stack spacing={0.25} sx={{ mt: 2 }}>
-                    <Typography variant="body2" color="text.secondary">{`Lv. ${selectedDetail.level ?? "—"} · ${formatLimitBreak(selectedDetail)}`}</Typography>
-                    <Typography variant="body2" color="text.secondary">{`${copy.sortCombat} ${selectedDetail.combat ?? "—"} · ${copy.sortAffection} ${selectedDetail.affectionLevel ?? "—"}`}</Typography>
-                  </Stack>
-                ) : <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>{copy.notOwned}</Typography>}
-              </Box>
-            </Box>
-            {selectedDetail ? (
-              <Stack spacing={1.5} sx={{ mt: 3 }}>
-                {(Array.isArray(selectedDetail.equipments) ? selectedDetail.equipments : []).map((equipment, slotIndex) => (
-                  <Box key={slotIndex} sx={{ p: 1.5, bgcolor: "#f6f8fb", borderRadius: 1.5 }}>
-                    <Typography variant="subtitle2">{copy.equipment.replace("{slot}", String(slotIndex + 1))}</Typography>
-                    {(Array.isArray(equipment) ? equipment : []).length ? (equipment.map((line, lineIndex) => (
-                      <Typography key={`${line?.functionType}:${lineIndex}`} variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
-                        {STAT_TYPE_NAMES[line?.functionType] || line?.functionType || "未知词条"} · {Number(line?.value || 0).toFixed(2)}% · {Number(line?.level || 0) > 0 ? `${line.level}档` : "档位未知"}
-                      </Typography>
-                    ))) : <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>{copy.noEquipmentLines}</Typography>}
-                  </Box>
-                ))}
-              </Stack>
-            ) : <Alert severity="info" sx={{ mt: 3 }}>{copy.noOwnedData}</Alert>}
-          </>
-        ) : null}
-      </Drawer>
-
-      {entryNikke ? <LocalCharacterEntryDrawer
-        key={entryRecord?.localId || normalizeCode(entryNikke?.name_code)}
-        open={Boolean(entryNikke)} onClose={() => setEntryNikke(null)}
-        catalogCharacter={entryNikke?._isCustom ? null : entryNikke}
-        record={entryRecord} custom={Boolean(entryNikke?._isCustom)} catalogOptions={catalogOptions} optionLabels={catalogOptionLabels}
-        onSave={(draft) => onSaveLocalCharacter({ catalogCharacter: entryNikke?._isCustom ? null : entryNikke, draft, custom: Boolean(entryNikke?._isCustom), existingLocalId: entryRecord?.localId || "" })}
-        onDelete={async () => { await onDeleteLocalCharacter(entryRecord.localId); setEntryNikke(null); }}
-        onOpenCalculator={entryRecord ? () => {
-          const characterCode = localCharacterKey(entryRecord);
-          setEntryNikke(null);
-          onOpenCharacterCalculator?.({
-            characterCode,
-            collectionId: SYSTEM_COLLECTION_IDS.recorded,
-          });
-        } : undefined}
+      {detailNikke ? <CharacterWorkspaceDrawer
+        key={normalizeCode(detailNikke?._localRecordId || detailNikke?.name_code)}
+        open={Boolean(detailNikke)}
+        onClose={() => setDetailNikke(null)}
+        characterCode={normalizeCode(detailNikke?._localRecordId || detailNikke?.name_code)}
+        catalogCharacter={detailNikke}
+        characterData={selectedDetail}
+        localRecord={selectedLocalRecord}
+        artworkCandidates={getNikkeArtworkCandidates(detailNikke)}
+        catalogOptions={catalogOptions}
+        optionLabels={catalogOptionLabels}
+        onSave={(draft) => onSaveLocalCharacter({
+          catalogCharacter: detailNikke?._isCustom ? null : detailNikke,
+          draft,
+          custom: Boolean(detailNikke?._isCustom),
+          existingLocalId: selectedLocalRecord?.localId || "",
+        })}
+        onDelete={selectedLocalRecord ? async () => { await onDeleteLocalCharacter(selectedLocalRecord.localId); } : undefined}
+        onOpenCalculator={() => {
+          const characterCode = normalizeCode(detailNikke?._localRecordId || detailNikke?.name_code);
+          setDetailNikke(null);
+          onOpenCharacterCalculator?.({ characterCode, collectionId: activeCollectionId });
+        }}
       /> : null}
       {createCustomOpen ? <LocalCharacterEntryDrawer
         key="new-custom-character"

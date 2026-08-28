@@ -1,0 +1,167 @@
+.nikke-character-card {
+  position: relative;
+  width: 736px;
+  height: 1096px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f8fafb 0 58%, #eef2f4 76%, #f5f7f8 100%);
+  color: #24282c;
+  isolation: isolate;
+}
+
+.nikke-card-character-art,
+.nikke-card-art-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nikke-card-character-art {
+  object-fit: cover;
+  filter: saturate(.96) contrast(1.01) drop-shadow(0 9px 7px rgb(36 40 48 / 16%));
+  transition: transform 160ms cubic-bezier(.22, 1, .36, 1), object-position 160ms cubic-bezier(.22, 1, .36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nikke-card-character-art { transition: none; }
+}
+
+.nikke-card-art-placeholder {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #edf1f4, #f9fafb 50%, #e3e8ec);
+}
+
+.nikke-card-art-placeholder span { color: #899198; font-size: 15px; font-weight: 700; }
+
+.nikke-card-identity {
+  position: absolute;
+  z-index: 3;
+  inset: 24px 20px auto auto;
+  display: grid;
+  width: 360px;
+  gap: 7px;
+  justify-items: end;
+}
+
+.nikke-card-rarity-row {
+  display: flex;
+  width: 248px;
+  min-height: 42px;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 6px;
+  padding-inline: 8px 3px;
+}
+
+.nikke-card-rarity { width: 92px; height: 30px; object-fit: contain; filter: drop-shadow(0 2px 1px rgb(126 72 0 / 16%)); }
+.nikke-card-breakthrough { display: flex; align-items: center; }
+.nikke-card-stars { display: flex; height: 23px; align-items: center; filter: drop-shadow(0 1px 1px rgb(0 0 0 / 16%)); }
+.nikke-card-stars img { display: block; width: 28px; height: 23px; object-fit: contain; }
+.nikke-card-stars img + img { margin-left: -5px; }
+.nikke-card-core { position: relative; display: grid; width: 38px; height: 38px; margin-left: -4px; place-items: center; filter: drop-shadow(0 2px 2px rgb(56 20 62 / 25%)); }
+.nikke-card-core img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.nikke-card-core strong { position: relative; z-index: 1; color: #fff; font-family: Bahnschrift, "Arial Narrow", sans-serif; font-size: 16px; line-height: 1; text-shadow: 0 1px 1px #16181a; }
+
+.nikke-card-level-name {
+  box-sizing: border-box;
+  display: grid;
+  width: fit-content;
+  min-width: 248px;
+  max-width: 100%;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: center;
+  column-gap: 12px;
+  min-height: 50px;
+  padding: 2px 12px 3px;
+  border-radius: 8px;
+  background: #34373a;
+  box-shadow: 0 4px 5px rgb(26 30 34 / 24%);
+  color: #fff;
+}
+
+.nikke-card-level { color: #d9dde0; font-family: Bahnschrift, "Arial Narrow", sans-serif; font-size: 24px; font-weight: 700; line-height: 1; white-space: nowrap; }
+.nikke-card-level strong { color: #ffc445; font-size: 32px; }
+.nikke-card-level-name h2 { min-width: 0; margin: 0; overflow: hidden; font: 700 22px/1.1 "Microsoft YaHei", system-ui, sans-serif; letter-spacing: -.02em; text-align: center; text-overflow: clip; white-space: nowrap; }
+.nikke-card-level-name.long-name h2 { font-size: 19px; }
+
+.nikke-card-affection {
+  box-sizing: border-box;
+  display: grid;
+  width: 174px;
+  min-height: 31px;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  margin-right: 3px;
+  padding: 4px 6px 4px 9px;
+  border: 1.5px solid #ef3848;
+  border-radius: 5px;
+  background: rgb(255 255 255 / 78%);
+  color: #f0444d;
+}
+
+.nikke-card-affection span { display: flex; height: 21px; align-items: center; font: 600 10px/1 Bahnschrift, "Arial Narrow", sans-serif; letter-spacing: .075em; white-space: nowrap; }
+.nikke-card-affection span b { margin-right: 4px; font-size: 12px; }
+.nikke-card-affection strong { font: 400 14px/21px Bahnschrift, "Arial Narrow", sans-serif; }
+.nikke-card-affection em { height: 21px; font: normal 700 16px/21px Bahnschrift, "Arial Narrow", sans-serif; }
+
+.nikke-card-combat { display: grid; width: max-content; justify-items: start; row-gap: 2px; padding: 5px 7px 6px; border-radius: 2px; background: rgb(255 255 255 / 91%); box-shadow: 0 2px 3px rgb(28 33 39 / 11%); }
+.nikke-card-combat span { margin-left: 2px; font-size: 13px; font-weight: 800; line-height: 1; }
+.nikke-card-combat strong { font: 700 41px/1 Bahnschrift, "Arial Narrow", sans-serif; letter-spacing: -.025em; }
+.nikke-card-combat b { justify-self: center; padding-left: .24em; color: #34383c; font: 800 11px/1 Bahnschrift, sans-serif; letter-spacing: .24em; }
+
+.nikke-card-meta-stack { display: grid; gap: 4px; justify-items: end; }
+.nikke-card-meta { position: relative; display: grid; width: 50px; min-height: 58px; place-items: center; }
+.nikke-card-meta > img,
+.nikke-card-meta > span { position: relative; z-index: 1; }
+.nikke-card-meta.native > img { width: 46px; height: 53px; object-fit: contain; filter: drop-shadow(0 1px 0 rgb(75 82 89 / 18%)) drop-shadow(0 4px 2px rgb(28 33 39 / 25%)); }
+.nikke-card-meta.element > img { filter: drop-shadow(1px 0 #292d31) drop-shadow(-1px 0 #292d31) drop-shadow(0 1px #292d31) drop-shadow(0 -1px #292d31) drop-shadow(0 4px 2px rgb(28 33 39 / 25%)); }
+.nikke-card-meta.glyph::before,
+.nikke-card-meta.glyph::after { content: ""; position: absolute; width: 46px; height: 53px; clip-path: polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); }
+.nikke-card-meta.glyph::before { background: #cfd3d7; filter: drop-shadow(0 1px 0 rgb(75 82 89 / 18%)) drop-shadow(0 4px 2px rgb(28 33 39 / 25%)); }
+.nikke-card-meta.glyph::after { width: 44px; height: 51px; background: rgb(255 255 255 / 98%); }
+.nikke-card-meta.weapon::before { background: #35393d; }
+.nikke-card-meta.weapon::after { width: 42px; height: 49px; }
+.nikke-card-meta.glyph img { filter: brightness(0) saturate(0); object-fit: contain; }
+.nikke-card-meta.weapon img { width: 23px; height: 23px; }
+.nikke-card-meta.class img { width: 29.5px; height: 29.5px; }
+.nikke-card-meta.manufacturer img { width: 27px; height: 27px; }
+
+.nikke-card-equipment-panel { position: absolute; z-index: 3; inset: auto 22px 22px auto; width: 316px; transform: scale(1.2); transform-origin: right bottom; }
+.nikke-card-affix-summary { box-sizing: border-box; display: grid; width: 236px; gap: 2px; margin: 0 0 12px auto; padding: 4px; border-radius: 5px; background: rgb(255 255 255 / 94%); box-shadow: 0 2px 4px rgb(27 33 40 / 15%); }
+.nikke-card-affix-summary > div { display: grid; width: 228px; min-height: 18px; grid-template-columns: 100px minmax(0,1fr); align-items: center; gap: 2px; padding: 0 4px; border-radius: 3px; background: rgb(245 247 248 / 82%); color: #34393e; }
+.nikke-card-affix-summary > div > span:first-child { overflow: hidden; font: 700 11.5px/1 "Microsoft YaHei", system-ui, sans-serif; text-overflow: ellipsis; white-space: nowrap; }
+.nikke-card-affix-summary > div > span:last-child { display: grid; grid-template-columns: max-content minmax(0,1fr); align-items: baseline; font: 700 11px/1 "Microsoft YaHei", system-ui, sans-serif; white-space: nowrap; }
+.nikke-card-affix-summary strong { min-width: 45px; font: 700 13px/1 Bahnschrift, sans-serif; text-align: right; }
+.nikke-card-equipment-grid { display: grid; grid-template-rows: repeat(4, minmax(76px,1fr)); gap: 7px; }
+.nikke-card-equipment { display: grid; grid-template-columns: 64px 228px; justify-content: end; gap: 8px; min-height: 76px; padding: 3px 4px 3px 5px; border-radius: 5px; background: rgb(255 255 255 / 92%); box-shadow: 0 2px 4px rgb(25 31 38 / 12%); }
+.nikke-card-equipment-icon { position: relative; align-self: center; width: 64px; height: 64px; border: 1px solid #e9819d; border-radius: 6px; background: radial-gradient(circle, rgb(132 144 154 / 13%) 0 .5px, transparent .65px), rgb(245 247 248 / 82%); background-size: 4px 4px; box-shadow: 0 3px 3px rgb(18 20 24 / 44%), inset 0 0 0 1px rgb(255 255 255 / 66%), inset 0 0 6px rgb(255 68 126 / 18%); isolation: isolate; }
+.nikke-card-equipment-icon::before { content: ""; position: absolute; z-index: 3; inset: 1px; border: 1px solid rgb(255 181 201 / 46%); border-radius: 4px; }
+.nikke-card-equipment-art { position: absolute; z-index: 1; inset: 1px; width: 62px; height: 62px; object-fit: contain; }
+.nikke-card-equipment-badges { position: absolute; z-index: 4; top: -6px; left: -6px; display: grid; width: 19px; justify-items: center; }
+.nikke-card-overload-badge,
+.nikke-card-class-badge { position: relative; display: grid; width: 19px; height: 22px; place-items: center; filter: drop-shadow(0 1px 1px rgb(26 20 29 / 38%)); }
+.nikke-card-overload-badge { overflow: hidden; clip-path: polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); }
+.nikke-card-overload-badge > img { position: absolute; top: -4.47px; left: -8.2px; width: 87.1px; max-width: none; }
+.nikke-card-class-badge { margin-top: -2.4px; }
+.nikke-card-class-badge::before,
+.nikke-card-class-badge::after,
+.nikke-card-class-badge i { content: ""; position: absolute; clip-path: polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); }
+.nikke-card-class-badge::before { inset: 0; background: #151719; }
+.nikke-card-class-badge::after { inset: .8px; background: #e9edef; }
+.nikke-card-class-badge i { z-index: 1; inset: 1.6px; background: linear-gradient(145deg,#55595c,#303336 52%,#17191b); }
+.nikke-card-class-badge img { position: relative; z-index: 2; width: 10.3px; height: 13.5px; object-fit: contain; }
+.nikke-card-affix-lines { display: grid; width: 228px; grid-template-rows: repeat(3,minmax(0,1fr)); gap: 2px; }
+.nikke-card-affix-line { display: grid; min-width: 0; grid-template-columns: 100px minmax(0,1fr); align-items: center; gap: 2px; padding: 0 4px; overflow: hidden; border-radius: 3px; background: rgb(245 247 248 / 82%); color: #34393e; }
+.nikke-card-affix-name { overflow: hidden; font: 700 11.8px/1 "Microsoft YaHei", system-ui, sans-serif; text-overflow: ellipsis; white-space: nowrap; }
+.nikke-card-affix-values { display: grid; min-width: 0; grid-template-columns: max-content minmax(0,1fr); align-items: center; font: 700 11px/1 "Microsoft YaHei", system-ui, sans-serif; white-space: nowrap; }
+.nikke-card-affix-values strong { font: 700 13.5px/1 Bahnschrift, sans-serif; text-align: right; }
+.nikke-card-affix-line.tier-blue .nikke-card-affix-values { color: #009de0; }
+.nikke-card-affix-line.tier-15 { background: #242424; color: #08ace6; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nikke-character-card * { scroll-behavior: auto !important; }
+}

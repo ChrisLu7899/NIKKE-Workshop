@@ -43,6 +43,15 @@ import {
 import { createPolicyBranchStage } from "./policyTree.js";
 import { unavailableStatsForRow } from "./statOptions.js";
 import { summarizeEquipmentEffects } from "./equipmentEffectOverview.js";
+import {
+  EQUIPMENT_FUNCTION_LABELS,
+  updateLocalCharacterEquipmentSlot,
+} from "../domain/localCharacterRoster.js";
+import { tierValue } from "../domain/equipmentAffixes.js";
+import {
+  getLocalCharacterRoster,
+  setLocalCharacterRoster,
+} from "../services/localCharacterRoster.js";
 
 "use strict";
 
@@ -77,6 +86,9 @@ import { summarizeEquipmentEffects } from "./equipmentEffectOverview.js";
     };
 
     const EQUIPMENT_SLOT_NAMES = ["头部", "身躯", "臂部", "腿部"];
+    const EQUIPMENT_FUNCTION_TYPES_BY_LABEL = Object.fromEntries(
+      Object.entries(EQUIPMENT_FUNCTION_LABELS).map(([type, label]) => [label, type]),
+    );
     const TARGET_PRESETS = {
       "superior-attack": ["优越代码伤害增加", "攻击力增加"],
       superior: ["优越代码伤害增加"],
@@ -751,12 +763,16 @@ import { summarizeEquipmentEffects } from "./equipmentEffectOverview.js";
     }
 
     function applyCalculatorSnapshot(snapshot) {
+      const currentCharacterCode = selectedCharacter()?.nameCode || "";
       const characters = calculatorSnapshotToCharacters(snapshot);
       if (!characters.length) {
         populateUnsyncedSelectors();
         return false;
       }
-      populateCharacterSelect(characters, snapshot);
+      populateCharacterSelect(characters, {
+        ...snapshot,
+        defaultCharacterCode: snapshot?.defaultCharacterCode || currentCharacterCode,
+      });
       return true;
     }
 
@@ -870,14 +886,18 @@ import { summarizeEquipmentEffects } from "./equipmentEffectOverview.js";
     }
 
     function renderCharacterEquipment(character) {
+      const canSyncToGallery = !character.transient && Boolean(character.nameCode);
       characterEquipmentMode.innerHTML = character.equipments.map((equipment, index) => `
         <section class="character-equipment-slot" data-equipment-index="${index}">
           <div class="equipment-slot-heading">
             <h3>${escapeHtml(equipment.label)}</h3>
-            <label class="equipment-skip-label">
-              <input class="equipment-skip-input" type="checkbox">
-              不跑
-            </label>
+            <div class="equipment-slot-actions">
+              ${canSyncToGallery ? `<button class="equipment-sync-button" type="button">同步至图鉴</button>` : ""}
+              <label class="equipment-skip-label">
+                <input class="equipment-skip-input" type="checkbox">
+                不跑
+              </label>
+            </div>
           </div>
           <div class="equipment-editor-block">
             <h4 class="equipment-block-title">当前词条</h4>
@@ -905,6 +925,36 @@ import { summarizeEquipmentEffects } from "./equipmentEffectOverview.js";
         createRows(currentRows, 3, "initial");
         createRows(equipmentTargetRows, 5, "target");
         fillRows(currentRows, equipment.lines);
+        const syncButton = section.querySelector(".equipment-sync-button");
+        syncButton?.addEventListener("click", async () => {
+          syncButton.disabled = true;
+          try {
+            const roster = await getLocalCharacterRoster();
+            const lines = readRows(currentRows).map((line, lineIndex) => {
+              const functionType = EQUIPMENT_FUNCTION_TYPES_BY_LABEL[line.stat] || "";
+              return {
+                position: lineIndex + 1,
+                functionType,
+                value: functionType ? tierValue(functionType, line.tier) : null,
+                level: functionType ? line.tier : null,
+                locked: functionType ? Boolean(line.flagged) : null,
+              };
+            });
+            const update = updateLocalCharacterEquipmentSlot(roster.records, {
+              localId: character.localId,
+              nameCode: character.nameCode,
+              slotIndex: index,
+              lines,
+            });
+            if (update.errors.length) throw new Error(update.errors.join("；"));
+            await setLocalCharacterRoster({ schemaVersion: roster.schemaVersion, records: update.records });
+            showMessage(`${character.name}的${equipment.label}词条已同步至图鉴。`, "success");
+          } catch (error) {
+            showMessage(`同步失败：${error?.message || "无法写入本地图鉴"}`, "error");
+          } finally {
+            syncButton.disabled = false;
+          }
+        });
         const skipInput = section.querySelector(".equipment-skip-input");
         skipInput.addEventListener("change", () => {
           setEquipmentSkipped(section, skipInput.checked);
@@ -1292,9 +1342,13 @@ import { summarizeEquipmentEffects } from "./equipmentEffectOverview.js";
       }
     }
 
-    function showMessage(text, isError = false) {
+    function showMessage(text, tone = "default") {
       message.textContent = text;
-      message.style.color = isError ? "var(--error)" : "var(--muted)";
+      message.style.color = tone === true || tone === "error"
+        ? "var(--error)"
+        : tone === "success"
+          ? "var(--success)"
+          : "var(--muted)";
     }
 
     function setResult(text, isEmpty = false) {

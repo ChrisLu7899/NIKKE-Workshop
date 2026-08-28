@@ -51,7 +51,9 @@ export function adaptCalculatorSnapshot(snapshot, { equipmentSlotNames, findTier
       });
       characters.push({
         key: `${accountIndex}::${accountName}::${String(character?.nameCode || baseName)}`,
+        localId: String(character?.id || ""),
         nameCode: String(character?.nameCode || ""),
+        source: String(account?.source || "sync"),
         name: showAccountName ? `${baseName} · ${accountName}` : baseName,
         column: characters.length + 1,
         equipments,
