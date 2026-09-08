@@ -235,7 +235,7 @@ const baseInput = {
 test("research mapping is order-independent, preserves zero, and nulls hidden/missing levels", () => {
   const mapped = mapResearchLevels([
     { tid: 1205, lv: -1 },
-    { tid: 1102, lv: 0 },
+    { tid: 1102, lv: "0" },
     { tid: 1001, lv: 380 },
     { tid: 1201, lv: null },
     { tid: 9999, lv: 12 },

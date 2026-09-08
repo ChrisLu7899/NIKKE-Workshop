@@ -1,0 +1,19 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><title>五类图标验收</title>
+<style>body{margin:12px;background:#dce1e6;font-family:system-ui}.samples{display:flex;flex-wrap:wrap;gap:12px}.sample{width:368px}.frame{width:368px;height:548px}button{padding:8px;margin:0 8px 8px 0}</style></head>
+<body><h1>五类图标验收（隔离测试数据）</h1><div id="root"></div>
+<script type="module">
+import React,{useRef,useState} from 'react';import {createRoot} from 'react-dom/client';
+import CharacterCard from '../src/components/management/CharacterCard.jsx';
+import {downloadCharacterCardPng} from '../src/utils/characterCardDownload.js';
+const e=React.createElement;
+const classes=['Attacker','Defender','Supporter'],elements=['Fire','Water','Wind','Electronic','Iron'],weapons=['AR','MG','RL','SG','SMG','SR'],corps=['Elysion','Missilis','Tetra','Pilgrim','Abnormal'],bursts=['Step1','Step2','Step3','AllStep'];
+function Sample({i}){const ref=useRef(null),[visible,setVisible]=useState(true);const known=i<6;
+return e('section',{className:'sample'},e('h2',null,known?`${i+1}. ${corps[i%5]} / ${weapons[i]}`:'未知、缺失'),
+e('button',{onClick:()=>setVisible(!visible)},'切换元数据'),e('button',{onClick:()=>downloadCharacterCardPng(ref.current,'metadata')},'下载'),
+e('div',{className:'frame'},e(CharacterCard,{
+catalogCharacter:known?{name_cn:'测试妮姬',original_rare:'SSR',class:classes[i%3],element:elements[i%5],weapon_type:weapons[i],corporation:corps[i%5],use_burst_skill:bursts[i%4]}:{name_cn:'未知元数据'},
+characterData:known?{level:618,combat:123456,affectionLevel:40,limitBreak:{grade:3,core:3},classLevel:i===0?0:202,corporationLevel:186,skill1Level:10,skill2Level:10,burstSkillLevel:10}:{},
+artworkUrl:i===5?'/ui-assets/nikke/character-artwork/lobby_burst_c330_01.webp':'/ui-assets/nikke/character-artwork/c511.webp',containArtwork:i===5,cardRef:ref,
+visibleModules:{metadata:visible,skills:false,equipments:known,affixSummary:false}})))}
+createRoot(document.getElementById('root')).render(e('div',{className:'samples'},...Array.from({length:7},(_,i)=>e(Sample,{key:i,i}))));
+</script></body></html>

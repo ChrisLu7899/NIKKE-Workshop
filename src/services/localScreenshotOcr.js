@@ -17,12 +17,14 @@ import {
   locateLargestEquipmentPanel,
   locateOverloadLogoFromRgba,
   projectEquipmentPanelFromOverload,
+  shouldPreferEquipmentScreenshot,
 } from "../domain/equipmentScreenshotTemplate.js";
 import { matchEquipmentIcon } from "./equipmentIconMatcher.js";
 import { matchEquipmentValueTemplate } from "./equipmentValueTemplateMatcher.js";
+import { recognizeTrainingScreenshot } from "./trainingScreenshotOcr.js";
+import { isTrainingScreenshotResult } from "../domain/trainingScreenshotOcr.js";
+import { checkOcrSignal, createOcrWorkerPool, runOcrTask, runScreenshotBatch } from "./ocrTask.js";
 
-let cachedWorkers = null;
-let workerInitialization = null;
 let progressListener = null;
 
 const extensionUrl = (path) => (
@@ -141,6 +143,7 @@ function locateEquipmentPanel(bitmap) {
   };
 }
 
+
 function locateEffectRowCenters(bitmap, panel) {
   // 三个物理位置（包括“未获得效果”）都有固定的横向底边。先扫描整个
   // 词条宽带，定位三条等距短横边；锁图标只作为旧截图的保守回退。
@@ -253,51 +256,26 @@ function reportWorkerProgress(message) {
   }
 }
 
-async function createLocalWorkers() {
-  const common = {
-    workerPath: extensionUrl("ocr/worker.min.js"),
-    corePath: extensionUrl("ocr/core"),
-    langPath: extensionUrl("ocr/lang"),
-    workerBlobURL: false,
-    logger: reportWorkerProgress,
-  };
-  // 数值只允许匹配档位表中的游戏字体模板，不再加载英文数字 OCR 模型。
-  // 这样既缩短首次初始化，也避免错误数字被“最近合法档位”放大成确定结果。
-  const textWorker = await createWorker("chi_sim", 1, common);
-  await textWorker.setParameters({
-    tessedit_pageseg_mode: PSM.SINGLE_LINE,
-    preserve_interword_spaces: "1",
+const workerPool = createOcrWorkerPool(async (language) => {
+  const worker = await createWorker(language, 1, {
+    workerPath: extensionUrl("ocr/worker.min.js"), corePath: extensionUrl("ocr/core"),
+    langPath: extensionUrl("ocr/lang"), workerBlobURL: false, logger: reportWorkerProgress,
   });
-  return { textWorker };
-}
+  try {
+    await worker.setParameters({ tessedit_pageseg_mode: PSM.SINGLE_LINE, preserve_interword_spaces: "1" });
+    return worker;
+  } catch (error) { await worker.terminate(); throw error; }
+});
+const workers = { getTextWorker: () => workerPool.get("chi_sim"), getNumericWorker: () => workerPool.get("eng") };
+let batchRunning = false;
 
-async function getLocalWorkers(onProgress) {
-  progressListener = onProgress || null;
-  if (cachedWorkers) return cachedWorkers;
-  if (!workerInitialization) {
-    workerInitialization = createLocalWorkers()
-      .then((workers) => {
-        cachedWorkers = workers;
-        return workers;
-      })
-      .catch((error) => {
-        workerInitialization = null;
-        cachedWorkers = null;
-        throw error;
-      });
-  }
-  return workerInitialization;
-}
+// Optional explicit warmup; merely opening the gallery no longer loads OCR models.
+export async function prewarmLocalScreenshotOcr() { await workers.getTextWorker(); }
 
-// 管理页空闲时调用；识别时会复用同一个初始化 Promise 和常驻 Worker。
-export async function prewarmLocalScreenshotOcr({ onProgress } = {}) {
-  await getLocalWorkers(onProgress);
-}
-
-async function recognizeImage(file, workers, { characterName, onProgress }) {
-  const bitmap = await createImageBitmap(file);
+async function recognizeImage(file, workers, { characterName, onProgress, bitmap, panelDetection, signal }) {
+  checkOcrSignal(signal);
+  const textWorker = await workers.getTextWorker();
   onProgress?.({ phase: "locating", fileName: file.name });
-  const panelDetection = locateEquipmentPanel(bitmap);
   const effectRowCenters = locateEffectRowCenters(bitmap, panelDetection.bounds);
   const regions = createEquipmentRecognitionRegions(panelDetection.bounds, { effectRowCenters });
   const slotCanvas = canvasCrop(bitmap, {
@@ -314,12 +292,13 @@ async function recognizeImage(file, workers, { characterName, onProgress }) {
     mode: "raw",
   });
   const [slotResult, equipmentNameResult, equipmentIconMatch] = await Promise.all([
-    workers.textWorker.recognize(slotCanvas, {}, { text: true }),
-    workers.textWorker.recognize(equipmentNameCanvas, {}, { text: true }),
+    textWorker.recognize(slotCanvas, {}, { text: true }),
+    textWorker.recognize(equipmentNameCanvas, {}, { text: true }),
     matchEquipmentIcon(equipmentIconCanvas),
   ]);
   const lines = [];
   for (let index = 0; index < 3; index += 1) {
+    checkOcrSignal(signal);
     onProgress?.({ phase: "recognizing", fileName: file.name, line: index + 1 });
     const effectRow = regions.effectRows[index];
     const darkRow = isDarkEffectRow(bitmap, effectRow.full);
@@ -331,7 +310,7 @@ async function recognizeImage(file, workers, { characterName, onProgress }) {
     const rowCanvas = canvasCrop(bitmap, { ...labelRect, mode: labelMode, threshold: darkRow ? 128 : 180 });
     const locked = detectLockState(bitmap, effectRow.lock);
     const valueStyle = detectValueStyle(bitmap, effectRow.value, { darkBackground: darkRow });
-    const rowResult = await workers.textWorker.recognize(rowCanvas, {}, { text: true });
+    const rowResult = await textWorker.recognize(rowCanvas, {}, { text: true });
     const rawLabel = rowResult.data.text.trim();
     let previewLine = createOcrLabelPreviewLine(index + 1, {
       rawLabel,
@@ -346,7 +325,7 @@ async function recognizeImage(file, workers, { characterName, onProgress }) {
         mode: darkRow ? "threshold" : "lightText",
         threshold: darkRow ? 180 : 150,
       });
-      const alternateLabelResult = await workers.textWorker.recognize(alternateLabelCanvas, {}, { text: true });
+      const alternateLabelResult = await textWorker.recognize(alternateLabelCanvas, {}, { text: true });
       previewLine = createOcrLabelPreviewLine(index + 1, {
         rawLabel,
         alternateLabel: alternateLabelResult.data.text.trim(),
@@ -366,7 +345,7 @@ async function recognizeImage(file, workers, { characterName, onProgress }) {
           ...previewLine,
           value: templateMatch.value,
           level: templateMatch.level,
-          confidence: "high",
+          confidence: templateMatch.confidence,
           valueTemplateMatch: templateMatch,
           warnings: (previewLine.warnings || []).filter((warning) => (
             !/数值模板待匹配/.test(warning)
@@ -406,8 +385,10 @@ async function recognizeImage(file, workers, { characterName, onProgress }) {
     slotFromLabel,
     conflict: slotConflict,
   } = slotResolution;
+  checkOcrSignal(signal);
   const result = {
     id: `${characterName}:${file.name}:${file.lastModified}`,
+    type: "equipment",
     characterName,
     fileName: file.name,
     previewUrl: URL.createObjectURL(file),
@@ -446,24 +427,37 @@ async function recognizeImage(file, workers, { characterName, onProgress }) {
       ...lines.flatMap((line) => line.warnings || []),
     ],
   };
-  bitmap.close();
   return result;
 }
 
-export async function recognizeScreenshotGroups(groups, { onProgress } = {}) {
-  const workers = await getLocalWorkers(onProgress);
-  const results = [];
+export async function recognizeScreenshotGroups(groups, { onProgress, onResult, mode = "auto", signal, timeoutMs = 60000 } = {}) {
+  if (batchRunning) throw new Error("已有识别任务正在运行，请先完成或取消。");
+  batchRunning = true;
+  progressListener = onProgress || null;
   try {
-    const files = (groups || []).flatMap((group) => group.images.map((file) => ({ characterName: group.characterName, file })));
-    for (let index = 0; index < files.length; index += 1) {
-      const item = files[index];
-      onProgress?.({ phase: "image", current: index + 1, total: files.length, fileName: item.file.name });
-      results.push(await recognizeImage(item.file, workers, { characterName: item.characterName, onProgress }));
-    }
-  } finally {
-    progressListener = null;
-  }
-  return results;
+    return await runScreenshotBatch(groups, (item, batchSignal) => runOcrTask(async (taskSignal) => {
+      if (item.file.size > 40 * 1024 * 1024) throw new Error("图片超过 40MB，请压缩后重试。");
+      const bitmap = await createImageBitmap(item.file);
+      try {
+        checkOcrSignal(taskSignal);
+        if (bitmap.width * bitmap.height > 24000000) throw new Error("图片超过 2400 万像素，请裁剪后重试。");
+        const options = { characterName: item.characterName, onProgress: (event) => {
+          if (!taskSignal.aborted) onProgress?.(event);
+        }, bitmap, signal: taskSignal };
+        if (mode === "training") return await recognizeTrainingScreenshot(item.file, workers, options);
+        const panel = locateEquipmentPanel(bitmap);
+        if (mode === "equipment" || shouldPreferEquipmentScreenshot(panel)) {
+          return await recognizeImage(item.file, workers, { ...options, panelDetection: panel });
+        }
+        onProgress?.({ phase: "classifying", fileName: item.file.name });
+        const training = await recognizeTrainingScreenshot(item.file, workers, options);
+        if (isTrainingScreenshotResult(training)) return training;
+        // Unknown is a real result, not permission to force an equipment template.
+        return { ...training, type: "unknown", excluded: true,
+          error: "无法可靠确认截图类型。可切换为练度或装备单图重试，或跳过此图。" };
+      } finally { bitmap.close(); }
+    }, { signal: batchSignal, timeoutMs, onStop: () => workerPool.reset() }), { signal, onResult, onProgress });
+  } finally { progressListener = null; batchRunning = false; }
 }
 
 export function releaseOcrPreviewUrls(results) {

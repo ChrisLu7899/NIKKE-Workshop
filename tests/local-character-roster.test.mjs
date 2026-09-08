@@ -11,7 +11,10 @@ import {
   reconcileLocalCharactersAfterSync,
   saveLocalCharacterRecord,
   updateLocalCharacterEquipmentSlot,
+  limitBreakToTotalLevel,
   normalizeCharacterName,
+  normalizeLocalCharacterRecord,
+  totalLevelToLimitBreak,
 } from "../src/domain/localCharacterRoster.js";
 import { getLocalCharacterRoster, setLocalCharacterRoster } from "../src/services/localCharacterRoster.js";
 import { buildUnifiedCalculatorSnapshot } from "../src/utils/calculatorSnapshot.js";
@@ -21,6 +24,16 @@ const equipment = [[{ position: 1, functionType: "StatAtk", value: 11.81, level:
 
 test("name matching normalization trims spaces, normalizes full-width spaces, and ignores English case", () => {
   assert.equal(normalizeCharacterName("  New　HERO  "), normalizeCharacterName("new hero"));
+});
+
+test("limit break editor uses exactly eleven canonical states", () => {
+  assert.deepEqual(Array.from({ length: 11 }, (_, total) => totalLevelToLimitBreak(total)), [
+    { grade: 0, core: 0 }, { grade: 1, core: 0 }, { grade: 2, core: 0 },
+    { grade: 3, core: 0 }, { grade: 3, core: 1 }, { grade: 3, core: 2 },
+    { grade: 3, core: 3 }, { grade: 3, core: 4 }, { grade: 3, core: 5 },
+    { grade: 3, core: 6 }, { grade: 3, core: 7 },
+  ]);
+  assert.equal(limitBreakToTotalLevel({ grade: 3, core: 7 }), 10);
 });
 
 function fakeStorage() {
@@ -55,10 +68,17 @@ test("custom characters support create, edit, delete and reject built-in duplica
 test("successful sync overwrites standard manual data, retains custom, and marks missing manual entries", () => {
   const manual = saveLocalCharacterRecord([], { catalogCharacter: catalog[0], draft: { level: 1, equipments: equipment }, catalog, now: 1 }).records;
   const custom = saveLocalCharacterRecord(manual, { draft: { base: { name: "原创角色", element: "Water", class: "Supporter", burstStage: "Step2", corporation: "Tetra", weaponType: "SR", rarity: "SSR" }, level: 10, equipments: [[], [], [], []] }, custom: true, catalog, idFactory: () => "x", now: 1 }).records;
-  const result = reconcileLocalCharactersAfterSync(custom, { accounts: [{ source: "sync", characters: [{ nameCode: "c1", nameCn: "标准角色", level: 500, equipments: [[], [], [], []] }] }] }, catalog, 2);
+  const result = reconcileLocalCharactersAfterSync(custom, { accounts: [{ source: "sync", characters: [{ nameCode: "c1", nameCn: "标准角色", level: 500, favoriteItemRarity: "SSR", favoriteItemLevel: 2, classLevel: 202, corporationLevel: 186, skill1Level: 10, skill2Level: 9, burstSkillLevel: 8, equipments: [[], [], [], []] }] }] }, catalog, 2);
   const standard = result.records.find((record) => record.nameCode === "c1");
   assert.equal(standard.source, "sync");
   assert.equal(standard.level, 500);
+  assert.equal(standard.favoriteItemRarity, "SSR");
+  assert.equal(standard.favoriteItemLevel, 2);
+  assert.equal(standard.classLevel, 202);
+  assert.equal(standard.corporationLevel, 186);
+  assert.equal(standard.skill1Level, 10);
+  assert.equal(standard.skill2Level, 9);
+  assert.equal(standard.burstSkillLevel, 8);
   assert.equal(result.summary.overwrittenStandardCount, 1);
   assert.equal(result.records.find((record) => record.custom).level, 10);
   assert.equal(getRecordedLocalCharacters(result.records).length, 1);
@@ -101,11 +121,39 @@ test("a later local import replaces the synced source and data", () => {
 test("export eligibility requires account fields or equipment data", () => {
   const blank = saveLocalCharacterRecord([], { catalogCharacter: catalog[0], draft: {}, catalog }).record;
   const zeroCombat = saveLocalCharacterRecord([], { catalogCharacter: catalog[0], draft: { combat: 0 }, catalog }).record;
+  const favoriteItemOnly = saveLocalCharacterRecord([], { catalogCharacter: catalog[0], draft: { favoriteItemRarity: "SR", favoriteItemLevel: 0 }, catalog }).record;
   const equipped = saveLocalCharacterRecord([], { catalogCharacter: catalog[0], draft: { equipments: equipment }, catalog }).record;
 
   assert.equal(hasLocalCharacterData(blank), false);
   assert.equal(hasLocalCharacterData(zeroCombat), true);
+  assert.equal(hasLocalCharacterData(favoriteItemOnly), true);
   assert.equal(hasLocalCharacterData(equipped), true);
+});
+
+test("favorite item data distinguishes synced levels from screenshot stars", () => {
+  const synced = normalizeLocalCharacterRecord({
+    favoriteItemRarity: "SR",
+    item_level: 3,
+  });
+  const screenshotSr = normalizeLocalCharacterRecord({
+    favoriteItemRarity: "SR",
+    item_level: 3,
+    favoriteItemStars: 3,
+  });
+  const screenshotSsr = normalizeLocalCharacterRecord({
+    favoriteItemRarity: "SSR",
+    favoriteItemStars: 3,
+  });
+  const legacySsr = normalizeLocalCharacterRecord({
+    favoriteItemRarity: "SSR",
+    favoriteItemLevel: 3,
+  });
+
+  assert.equal(synced.favoriteItemLevel, 3);
+  assert.equal(screenshotSr.favoriteItemLevel, 15);
+  assert.equal(screenshotSsr.favoriteItemLevel, 2);
+  assert.equal(legacySsr.favoriteItemLevel, 2);
+  assert.equal("favoriteItemStars" in screenshotSr, false);
 });
 
 test("failed sync leaves manual data unchanged when reconciliation is not committed", () => {
@@ -133,13 +181,15 @@ test("a local edit overlays the matching synced character in the calculator snap
     accounts: [{
       accountName: "同步账号",
       source: "sync",
-      characters: [{ nameCode: "c1", level: 500, equipments: [[], [], [], []] }],
+      characters: [{ nameCode: "c1", level: 500, classLevel: 202, corporationLevel: 186, equipments: [[], [], [], []] }],
     }],
   }, records);
 
   assert.equal(snapshot.accounts.length, 1);
   assert.equal(snapshot.accounts[0].source, "sync");
   assert.equal(snapshot.accounts[0].characters[0].level, 600);
+  assert.equal(snapshot.accounts[0].characters[0].classLevel, 202);
+  assert.equal(snapshot.accounts[0].characters[0].corporationLevel, 186);
   assert.equal(snapshot.accounts[0].characters[0].equipments[0][0].value, 11.81);
 });
 

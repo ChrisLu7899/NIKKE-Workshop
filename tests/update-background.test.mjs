@@ -1,0 +1,26 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+const storage = {};
+let response, calls = 0;
+const listener = () => ({ addListener() {} });
+globalThis.chrome = { storage: { local: { get: async key => ({ [key]: storage[key] }), set: async value => Object.assign(storage, value) } }, runtime: { onMessage: listener(), onInstalled: listener(), onStartup: listener() }, alarms: { onAlarm: listener(), create() {} } };
+globalThis.fetch = async () => { calls++; return response; };
+const { checkUpdate } = await import('../public/update-background.js');
+const key = 'workshop.update.v1';
+test('daily cache, coalescing, manual cooldown, rate limit and offline retention', async () => {
+  const release = { tag_name: 'v1.0.11', html_url: 'https://github.com/ChrisLu7899/NIKKE-Workshop/releases/tag/v1.0.11', assets: [] };
+  response = { ok: true, json: async () => release };
+  await Promise.all([checkUpdate(), checkUpdate(), checkUpdate(true)]);
+  assert.equal(calls, 1); assert.equal(storage[key].release.version, '1.0.11');
+  await checkUpdate(true); assert.equal(calls, 1);
+  storage[key].checkedAt = Date.now() - 120000;
+  await checkUpdate(); assert.equal(calls, 1);
+  await checkUpdate(true); assert.equal(calls, 2);
+  storage[key].checkedAt = 0;
+  response = { ok: false, status: 429, headers: { get: () => null } };
+  await checkUpdate(); assert.ok(storage[key].retryAt > Date.now()); assert.match(storage[key].error, /受限/);
+  await checkUpdate(true); assert.equal(calls, 3);
+  storage[key].retryAt = 0; storage[key].checkedAt = 0;
+  globalThis.fetch = async () => { throw new Error('offline'); };
+  await checkUpdate(); assert.equal(storage[key].release.version, '1.0.11'); assert.equal(storage[key].error, 'offline');
+});

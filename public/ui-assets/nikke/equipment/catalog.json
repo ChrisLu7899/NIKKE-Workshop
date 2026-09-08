@@ -1,0 +1,1195 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "id": 3100901,
+      "name_localkey": "-",
+      "resource_id": "icn_equipment_head_attacker_t9_3",
+      "item_sub_type": "Module_A",
+      "class": "All",
+      "item_rare": "T9",
+      "grow_grade": 0
+    },
+    {
+      "id": 3110101,
+      "name_localkey": "凱夫拉爾面罩",
+      "resource_id": "icn_equipment_head_attacker_t1",
+      "item_sub_type": "Module_A",
+      "class": "Attacker",
+      "item_rare": "T1",
+      "grow_grade": 0
+    },
+    {
+      "id": 3110201,
+      "name_localkey": "精密陶瓷面罩",
+      "resource_id": "icn_equipment_head_attacker_t1",
+      "item_sub_type": "Module_A",
+      "class": "Attacker",
+      "item_rare": "T2",
+      "grow_grade": 0
+    },
+    {
+      "id": 3110301,
+      "name_localkey": "稀有金屬面罩",
+      "resource_id": "icn_equipment_head_attacker_t3",
+      "item_sub_type": "Module_A",
+      "class": "Attacker",
+      "item_rare": "T3",
+      "grow_grade": 0
+    },
+    {
+      "id": 3110401,
+      "name_localkey": "稀有金屬面罩+",
+      "resource_id": "icn_equipment_head_attacker_t3",
+      "item_sub_type": "Module_A",
+      "class": "Attacker",
+      "item_rare": "T4",
+      "grow_grade": 0
+    },
+    {
+      "id": 3110501,
+      "name_localkey": "神鎘面罩",
+      "resource_id": "icn_equipment_head_attacker_t5",
+      "item_sub_type": "Module_A",
+      "class": "Attacker",
+      "item_rare": "T5",
+      "grow_grade": 0
+    },
+    {
+      "id": 3110601,
+      "name_localkey": "神鎘面罩+",
+      "resource_id": "icn_equipment_head_attacker_t5",
+      "item_sub_type": "Module_A",
+      "class": "Attacker",
+      "item_rare": "T6",
+      "grow_grade": 0
+    },
+    {
+      "id": 3110701,
+      "name_localkey": "鈦金屬面罩",
+      "resource_id": "icn_equipment_head_attacker_t7",
+      "item_sub_type": "Module_A",
+      "class": "Attacker",
+      "item_rare": "T7",
+      "grow_grade": 0
+    },
+    {
+      "id": 3110801,
+      "name_localkey": "鈦金屬面罩+",
+      "resource_id": "icn_equipment_head_attacker_t7",
+      "item_sub_type": "Module_A",
+      "class": "Attacker",
+      "item_rare": "T8",
+      "grow_grade": 0
+    },
+    {
+      "id": 3110901,
+      "name_localkey": "材料類型：α面罩",
+      "resource_id": "icn_equipment_head_attacker_t9_1",
+      "item_sub_type": "Module_A",
+      "class": "Attacker",
+      "item_rare": "T9",
+      "grow_grade": 3111001
+    },
+    {
+      "id": 3111001,
+      "name_localkey": "ν金屬面罩",
+      "resource_id": "icn_equipment_head_attacker_t9_3",
+      "item_sub_type": "Module_A",
+      "class": "Attacker",
+      "item_rare": "T10",
+      "grow_grade": 0
+    },
+    {
+      "id": 3120101,
+      "name_localkey": "凱夫拉爾頭盔",
+      "resource_id": "icn_equipment_head_defender_t1",
+      "item_sub_type": "Module_A",
+      "class": "Defender",
+      "item_rare": "T1",
+      "grow_grade": 0
+    },
+    {
+      "id": 3120201,
+      "name_localkey": "精密陶瓷頭盔",
+      "resource_id": "icn_equipment_head_defender_t1",
+      "item_sub_type": "Module_A",
+      "class": "Defender",
+      "item_rare": "T2",
+      "grow_grade": 0
+    },
+    {
+      "id": 3120301,
+      "name_localkey": "稀有金屬頭盔",
+      "resource_id": "icn_equipment_head_defender_t3",
+      "item_sub_type": "Module_A",
+      "class": "Defender",
+      "item_rare": "T3",
+      "grow_grade": 0
+    },
+    {
+      "id": 3120401,
+      "name_localkey": "稀有金屬頭盔+",
+      "resource_id": "icn_equipment_head_defender_t3",
+      "item_sub_type": "Module_A",
+      "class": "Defender",
+      "item_rare": "T4",
+      "grow_grade": 0
+    },
+    {
+      "id": 3120501,
+      "name_localkey": "神鎘頭盔",
+      "resource_id": "icn_equipment_head_defender_t5",
+      "item_sub_type": "Module_A",
+      "class": "Defender",
+      "item_rare": "T5",
+      "grow_grade": 0
+    },
+    {
+      "id": 3120601,
+      "name_localkey": "神鎘頭盔+",
+      "resource_id": "icn_equipment_head_defender_t5",
+      "item_sub_type": "Module_A",
+      "class": "Defender",
+      "item_rare": "T6",
+      "grow_grade": 0
+    },
+    {
+      "id": 3120701,
+      "name_localkey": "阿特拉斯頭盔",
+      "resource_id": "icn_equipment_head_defender_t7",
+      "item_sub_type": "Module_A",
+      "class": "Defender",
+      "item_rare": "T7",
+      "grow_grade": 0
+    },
+    {
+      "id": 3120801,
+      "name_localkey": "阿特拉斯頭盔+",
+      "resource_id": "icn_equipment_head_defender_t7",
+      "item_sub_type": "Module_A",
+      "class": "Defender",
+      "item_rare": "T8",
+      "grow_grade": 0
+    },
+    {
+      "id": 3120901,
+      "name_localkey": "模式系列：31頭盔",
+      "resource_id": "icn_equipment_head_defender_t9_1",
+      "item_sub_type": "Module_A",
+      "class": "Defender",
+      "item_rare": "T9",
+      "grow_grade": 3121001
+    },
+    {
+      "id": 3121001,
+      "name_localkey": "99型頭盔",
+      "resource_id": "icn_equipment_head_defender_t9_3",
+      "item_sub_type": "Module_A",
+      "class": "Defender",
+      "item_rare": "T10",
+      "grow_grade": 0
+    },
+    {
+      "id": 3130101,
+      "name_localkey": "凱夫拉爾護目鏡",
+      "resource_id": "icn_equipment_head_supporter_t1",
+      "item_sub_type": "Module_A",
+      "class": "Supporter",
+      "item_rare": "T1",
+      "grow_grade": 0
+    },
+    {
+      "id": 3130201,
+      "name_localkey": "精密陶瓷護目鏡",
+      "resource_id": "icn_equipment_head_supporter_t1",
+      "item_sub_type": "Module_A",
+      "class": "Supporter",
+      "item_rare": "T2",
+      "grow_grade": 0
+    },
+    {
+      "id": 3130301,
+      "name_localkey": "稀有金屬護目鏡",
+      "resource_id": "icn_equipment_head_supporter_t3",
+      "item_sub_type": "Module_A",
+      "class": "Supporter",
+      "item_rare": "T3",
+      "grow_grade": 0
+    },
+    {
+      "id": 3130401,
+      "name_localkey": "稀有金屬護目鏡+",
+      "resource_id": "icn_equipment_head_supporter_t3",
+      "item_sub_type": "Module_A",
+      "class": "Supporter",
+      "item_rare": "T4",
+      "grow_grade": 0
+    },
+    {
+      "id": 3130501,
+      "name_localkey": "神鎘護目鏡",
+      "resource_id": "icn_equipment_head_supporter_t5",
+      "item_sub_type": "Module_A",
+      "class": "Supporter",
+      "item_rare": "T5",
+      "grow_grade": 0
+    },
+    {
+      "id": 3130601,
+      "name_localkey": "神鎘護目鏡+",
+      "resource_id": "icn_equipment_head_supporter_t5",
+      "item_sub_type": "Module_A",
+      "class": "Supporter",
+      "item_rare": "T6",
+      "grow_grade": 0
+    },
+    {
+      "id": 3130701,
+      "name_localkey": "諾恩代碼護目鏡",
+      "resource_id": "icn_equipment_head_supporter_t7",
+      "item_sub_type": "Module_A",
+      "class": "Supporter",
+      "item_rare": "T7",
+      "grow_grade": 0
+    },
+    {
+      "id": 3130801,
+      "name_localkey": "諾恩代碼護目鏡+",
+      "resource_id": "icn_equipment_head_supporter_t7",
+      "item_sub_type": "Module_A",
+      "class": "Supporter",
+      "item_rare": "T8",
+      "grow_grade": 0
+    },
+    {
+      "id": 3130901,
+      "name_localkey": "代碼：IX護目鏡",
+      "resource_id": "icn_equipment_head_supporter_t9_1",
+      "item_sub_type": "Module_A",
+      "class": "Supporter",
+      "item_rare": "T9",
+      "grow_grade": 3131001
+    },
+    {
+      "id": 3131001,
+      "name_localkey": "代碼XXX護目鏡",
+      "resource_id": "icn_equipment_head_supporter_t9_3",
+      "item_sub_type": "Module_A",
+      "class": "Supporter",
+      "item_rare": "T10",
+      "grow_grade": 0
+    },
+    {
+      "id": 3200901,
+      "name_localkey": "-",
+      "resource_id": "icn_equipment_body_attacker_t9_3",
+      "item_sub_type": "Module_B",
+      "class": "All",
+      "item_rare": "T9",
+      "grow_grade": 0
+    },
+    {
+      "id": 3210101,
+      "name_localkey": "凱夫拉爾背心",
+      "resource_id": "icn_equipment_body_attacker_t1",
+      "item_sub_type": "Module_B",
+      "class": "Attacker",
+      "item_rare": "T1",
+      "grow_grade": 0
+    },
+    {
+      "id": 3210201,
+      "name_localkey": "精密陶瓷背心",
+      "resource_id": "icn_equipment_body_attacker_t1",
+      "item_sub_type": "Module_B",
+      "class": "Attacker",
+      "item_rare": "T2",
+      "grow_grade": 0
+    },
+    {
+      "id": 3210301,
+      "name_localkey": "稀有金屬背心",
+      "resource_id": "icn_equipment_body_attacker_t3",
+      "item_sub_type": "Module_B",
+      "class": "Attacker",
+      "item_rare": "T3",
+      "grow_grade": 0
+    },
+    {
+      "id": 3210401,
+      "name_localkey": "稀有金屬背心+",
+      "resource_id": "icn_equipment_body_attacker_t3",
+      "item_sub_type": "Module_B",
+      "class": "Attacker",
+      "item_rare": "T4",
+      "grow_grade": 0
+    },
+    {
+      "id": 3210501,
+      "name_localkey": "神鎘背心",
+      "resource_id": "icn_equipment_body_attacker_t5",
+      "item_sub_type": "Module_B",
+      "class": "Attacker",
+      "item_rare": "T5",
+      "grow_grade": 0
+    },
+    {
+      "id": 3210601,
+      "name_localkey": "神鎘背心+",
+      "resource_id": "icn_equipment_body_attacker_t5",
+      "item_sub_type": "Module_B",
+      "class": "Attacker",
+      "item_rare": "T6",
+      "grow_grade": 0
+    },
+    {
+      "id": 3210701,
+      "name_localkey": "鈦金屬背心",
+      "resource_id": "icn_equipment_body_attacker_t7",
+      "item_sub_type": "Module_B",
+      "class": "Attacker",
+      "item_rare": "T7",
+      "grow_grade": 0
+    },
+    {
+      "id": 3210801,
+      "name_localkey": "鈦金屬背心+",
+      "resource_id": "icn_equipment_body_attacker_t7",
+      "item_sub_type": "Module_B",
+      "class": "Attacker",
+      "item_rare": "T8",
+      "grow_grade": 0
+    },
+    {
+      "id": 3210901,
+      "name_localkey": "材料類型：α背心",
+      "resource_id": "icn_equipment_body_attacker_t9_1",
+      "item_sub_type": "Module_B",
+      "class": "Attacker",
+      "item_rare": "T9",
+      "grow_grade": 3211001
+    },
+    {
+      "id": 3211001,
+      "name_localkey": "ν金屬背心",
+      "resource_id": "icn_equipment_body_attacker_t9_3",
+      "item_sub_type": "Module_B",
+      "class": "Attacker",
+      "item_rare": "T10",
+      "grow_grade": 0
+    },
+    {
+      "id": 3220101,
+      "name_localkey": "凱夫拉爾防護服",
+      "resource_id": "icn_equipment_body_defender_t1",
+      "item_sub_type": "Module_B",
+      "class": "Defender",
+      "item_rare": "T1",
+      "grow_grade": 0
+    },
+    {
+      "id": 3220201,
+      "name_localkey": "精密陶瓷防護服",
+      "resource_id": "icn_equipment_body_defender_t1",
+      "item_sub_type": "Module_B",
+      "class": "Defender",
+      "item_rare": "T2",
+      "grow_grade": 0
+    },
+    {
+      "id": 3220301,
+      "name_localkey": "稀有金屬防護服",
+      "resource_id": "icn_equipment_body_defender_t3",
+      "item_sub_type": "Module_B",
+      "class": "Defender",
+      "item_rare": "T3",
+      "grow_grade": 0
+    },
+    {
+      "id": 3220401,
+      "name_localkey": "稀有金屬防護服+",
+      "resource_id": "icn_equipment_body_defender_t3",
+      "item_sub_type": "Module_B",
+      "class": "Defender",
+      "item_rare": "T4",
+      "grow_grade": 0
+    },
+    {
+      "id": 3220501,
+      "name_localkey": "神鎘防護服",
+      "resource_id": "icn_equipment_body_defender_t5",
+      "item_sub_type": "Module_B",
+      "class": "Defender",
+      "item_rare": "T5",
+      "grow_grade": 0
+    },
+    {
+      "id": 3220601,
+      "name_localkey": "神鎘防護服+",
+      "resource_id": "icn_equipment_body_defender_t5",
+      "item_sub_type": "Module_B",
+      "class": "Defender",
+      "item_rare": "T6",
+      "grow_grade": 0
+    },
+    {
+      "id": 3220701,
+      "name_localkey": "阿特拉斯防護服",
+      "resource_id": "icn_equipment_body_defender_t7",
+      "item_sub_type": "Module_B",
+      "class": "Defender",
+      "item_rare": "T7",
+      "grow_grade": 0
+    },
+    {
+      "id": 3220801,
+      "name_localkey": "阿特拉斯防護服+",
+      "resource_id": "icn_equipment_body_defender_t7",
+      "item_sub_type": "Module_B",
+      "class": "Defender",
+      "item_rare": "T8",
+      "grow_grade": 0
+    },
+    {
+      "id": 3220901,
+      "name_localkey": "模式系列：31防護服",
+      "resource_id": "icn_equipment_body_defender_t9_1",
+      "item_sub_type": "Module_B",
+      "class": "Defender",
+      "item_rare": "T9",
+      "grow_grade": 3221001
+    },
+    {
+      "id": 3221001,
+      "name_localkey": "99型防護服",
+      "resource_id": "icn_equipment_body_defender_t9_3",
+      "item_sub_type": "Module_B",
+      "class": "Defender",
+      "item_rare": "T10",
+      "grow_grade": 0
+    },
+    {
+      "id": 3230101,
+      "name_localkey": "凱夫拉爾夾克",
+      "resource_id": "icn_equipment_body_supporter_t1",
+      "item_sub_type": "Module_B",
+      "class": "Supporter",
+      "item_rare": "T1",
+      "grow_grade": 0
+    },
+    {
+      "id": 3230201,
+      "name_localkey": "精密陶瓷夾克",
+      "resource_id": "icn_equipment_body_supporter_t1",
+      "item_sub_type": "Module_B",
+      "class": "Supporter",
+      "item_rare": "T2",
+      "grow_grade": 0
+    },
+    {
+      "id": 3230301,
+      "name_localkey": "稀有金屬夾克",
+      "resource_id": "icn_equipment_body_supporter_t3",
+      "item_sub_type": "Module_B",
+      "class": "Supporter",
+      "item_rare": "T3",
+      "grow_grade": 0
+    },
+    {
+      "id": 3230401,
+      "name_localkey": "稀有金屬夾克+",
+      "resource_id": "icn_equipment_body_supporter_t3",
+      "item_sub_type": "Module_B",
+      "class": "Supporter",
+      "item_rare": "T4",
+      "grow_grade": 0
+    },
+    {
+      "id": 3230501,
+      "name_localkey": "神鎘夾克",
+      "resource_id": "icn_equipment_body_supporter_t5",
+      "item_sub_type": "Module_B",
+      "class": "Supporter",
+      "item_rare": "T5",
+      "grow_grade": 0
+    },
+    {
+      "id": 3230601,
+      "name_localkey": "神鎘夾克+",
+      "resource_id": "icn_equipment_body_supporter_t5",
+      "item_sub_type": "Module_B",
+      "class": "Supporter",
+      "item_rare": "T6",
+      "grow_grade": 0
+    },
+    {
+      "id": 3230701,
+      "name_localkey": "諾恩代碼夾克",
+      "resource_id": "icn_equipment_body_supporter_t7",
+      "item_sub_type": "Module_B",
+      "class": "Supporter",
+      "item_rare": "T7",
+      "grow_grade": 0
+    },
+    {
+      "id": 3230801,
+      "name_localkey": "諾恩代碼夾克+",
+      "resource_id": "icn_equipment_body_supporter_t7",
+      "item_sub_type": "Module_B",
+      "class": "Supporter",
+      "item_rare": "T8",
+      "grow_grade": 0
+    },
+    {
+      "id": 3230901,
+      "name_localkey": "代碼：IX夾克",
+      "resource_id": "icn_equipment_body_supporter_t9_1",
+      "item_sub_type": "Module_B",
+      "class": "Supporter",
+      "item_rare": "T9",
+      "grow_grade": 3231001
+    },
+    {
+      "id": 3231001,
+      "name_localkey": "代碼XXX夾克",
+      "resource_id": "icn_equipment_body_supporter_t9_3",
+      "item_sub_type": "Module_B",
+      "class": "Supporter",
+      "item_rare": "T10",
+      "grow_grade": 0
+    },
+    {
+      "id": 3300901,
+      "name_localkey": "-",
+      "resource_id": "icn_equipment_arm_attacker_t9_3",
+      "item_sub_type": "Module_C",
+      "class": "All",
+      "item_rare": "T9",
+      "grow_grade": 0
+    },
+    {
+      "id": 3310101,
+      "name_localkey": "凱夫拉爾護臂",
+      "resource_id": "icn_equipment_arm_attacker_t1",
+      "item_sub_type": "Module_C",
+      "class": "Attacker",
+      "item_rare": "T1",
+      "grow_grade": 0
+    },
+    {
+      "id": 3310201,
+      "name_localkey": "精密陶瓷護臂",
+      "resource_id": "icn_equipment_arm_attacker_t1",
+      "item_sub_type": "Module_C",
+      "class": "Attacker",
+      "item_rare": "T2",
+      "grow_grade": 0
+    },
+    {
+      "id": 3310301,
+      "name_localkey": "稀有金屬護臂",
+      "resource_id": "icn_equipment_arm_attacker_t3",
+      "item_sub_type": "Module_C",
+      "class": "Attacker",
+      "item_rare": "T3",
+      "grow_grade": 0
+    },
+    {
+      "id": 3310401,
+      "name_localkey": "稀有金屬護臂+",
+      "resource_id": "icn_equipment_arm_attacker_t3",
+      "item_sub_type": "Module_C",
+      "class": "Attacker",
+      "item_rare": "T4",
+      "grow_grade": 0
+    },
+    {
+      "id": 3310501,
+      "name_localkey": "神鎘護臂",
+      "resource_id": "icn_equipment_arm_attacker_t5",
+      "item_sub_type": "Module_C",
+      "class": "Attacker",
+      "item_rare": "T5",
+      "grow_grade": 0
+    },
+    {
+      "id": 3310601,
+      "name_localkey": "神鎘護臂+",
+      "resource_id": "icn_equipment_arm_attacker_t5",
+      "item_sub_type": "Module_C",
+      "class": "Attacker",
+      "item_rare": "T6",
+      "grow_grade": 0
+    },
+    {
+      "id": 3310701,
+      "name_localkey": "鈦金屬護臂",
+      "resource_id": "icn_equipment_arm_attacker_t7",
+      "item_sub_type": "Module_C",
+      "class": "Attacker",
+      "item_rare": "T7",
+      "grow_grade": 0
+    },
+    {
+      "id": 3310801,
+      "name_localkey": "鈦金屬護臂+",
+      "resource_id": "icn_equipment_arm_attacker_t7",
+      "item_sub_type": "Module_C",
+      "class": "Attacker",
+      "item_rare": "T8",
+      "grow_grade": 0
+    },
+    {
+      "id": 3310901,
+      "name_localkey": "材料類型：α護臂",
+      "resource_id": "icn_equipment_arm_attacker_t9_1",
+      "item_sub_type": "Module_C",
+      "class": "Attacker",
+      "item_rare": "T9",
+      "grow_grade": 3311001
+    },
+    {
+      "id": 3311001,
+      "name_localkey": "ν金屬護臂",
+      "resource_id": "icn_equipment_arm_attacker_t9_3",
+      "item_sub_type": "Module_C",
+      "class": "Attacker",
+      "item_rare": "T10",
+      "grow_grade": 0
+    },
+    {
+      "id": 3320101,
+      "name_localkey": "凱夫拉爾臂鎧",
+      "resource_id": "icn_equipment_arm_defender_t1",
+      "item_sub_type": "Module_C",
+      "class": "Defender",
+      "item_rare": "T1",
+      "grow_grade": 0
+    },
+    {
+      "id": 3320201,
+      "name_localkey": "精密陶瓷臂鎧",
+      "resource_id": "icn_equipment_arm_defender_t1",
+      "item_sub_type": "Module_C",
+      "class": "Defender",
+      "item_rare": "T2",
+      "grow_grade": 0
+    },
+    {
+      "id": 3320301,
+      "name_localkey": "稀有金屬臂鎧",
+      "resource_id": "icn_equipment_arm_defender_t3",
+      "item_sub_type": "Module_C",
+      "class": "Defender",
+      "item_rare": "T3",
+      "grow_grade": 0
+    },
+    {
+      "id": 3320401,
+      "name_localkey": "稀有金屬臂鎧+",
+      "resource_id": "icn_equipment_arm_defender_t3",
+      "item_sub_type": "Module_C",
+      "class": "Defender",
+      "item_rare": "T4",
+      "grow_grade": 0
+    },
+    {
+      "id": 3320501,
+      "name_localkey": "神鎘臂鎧",
+      "resource_id": "icn_equipment_arm_defender_t5",
+      "item_sub_type": "Module_C",
+      "class": "Defender",
+      "item_rare": "T5",
+      "grow_grade": 0
+    },
+    {
+      "id": 3320601,
+      "name_localkey": "神鎘臂鎧+",
+      "resource_id": "icn_equipment_arm_defender_t5",
+      "item_sub_type": "Module_C",
+      "class": "Defender",
+      "item_rare": "T6",
+      "grow_grade": 0
+    },
+    {
+      "id": 3320701,
+      "name_localkey": "阿特拉斯臂鎧",
+      "resource_id": "icn_equipment_arm_defender_t7",
+      "item_sub_type": "Module_C",
+      "class": "Defender",
+      "item_rare": "T7",
+      "grow_grade": 0
+    },
+    {
+      "id": 3320801,
+      "name_localkey": "阿特拉斯臂鎧+",
+      "resource_id": "icn_equipment_arm_defender_t7",
+      "item_sub_type": "Module_C",
+      "class": "Defender",
+      "item_rare": "T8",
+      "grow_grade": 0
+    },
+    {
+      "id": 3320901,
+      "name_localkey": "模式系列：31臂鎧",
+      "resource_id": "icn_equipment_arm_defender_t9_1",
+      "item_sub_type": "Module_C",
+      "class": "Defender",
+      "item_rare": "T9",
+      "grow_grade": 3321001
+    },
+    {
+      "id": 3321001,
+      "name_localkey": "99型臂鎧",
+      "resource_id": "icn_equipment_arm_defender_t9_3",
+      "item_sub_type": "Module_C",
+      "class": "Defender",
+      "item_rare": "T10",
+      "grow_grade": 0
+    },
+    {
+      "id": 3330101,
+      "name_localkey": "凱夫拉爾手套",
+      "resource_id": "icn_equipment_arm_supporter_t1",
+      "item_sub_type": "Module_C",
+      "class": "Supporter",
+      "item_rare": "T1",
+      "grow_grade": 0
+    },
+    {
+      "id": 3330201,
+      "name_localkey": "精密陶瓷手套",
+      "resource_id": "icn_equipment_arm_supporter_t1",
+      "item_sub_type": "Module_C",
+      "class": "Supporter",
+      "item_rare": "T2",
+      "grow_grade": 0
+    },
+    {
+      "id": 3330301,
+      "name_localkey": "稀有金屬手套",
+      "resource_id": "icn_equipment_arm_supporter_t3",
+      "item_sub_type": "Module_C",
+      "class": "Supporter",
+      "item_rare": "T3",
+      "grow_grade": 0
+    },
+    {
+      "id": 3330401,
+      "name_localkey": "稀有金屬手套+",
+      "resource_id": "icn_equipment_arm_supporter_t3",
+      "item_sub_type": "Module_C",
+      "class": "Supporter",
+      "item_rare": "T4",
+      "grow_grade": 0
+    },
+    {
+      "id": 3330501,
+      "name_localkey": "神鎘手套",
+      "resource_id": "icn_equipment_arm_supporter_t5",
+      "item_sub_type": "Module_C",
+      "class": "Supporter",
+      "item_rare": "T5",
+      "grow_grade": 0
+    },
+    {
+      "id": 3330601,
+      "name_localkey": "神鎘手套+",
+      "resource_id": "icn_equipment_arm_supporter_t5",
+      "item_sub_type": "Module_C",
+      "class": "Supporter",
+      "item_rare": "T6",
+      "grow_grade": 0
+    },
+    {
+      "id": 3330701,
+      "name_localkey": "諾恩代碼手套",
+      "resource_id": "icn_equipment_arm_supporter_t7",
+      "item_sub_type": "Module_C",
+      "class": "Supporter",
+      "item_rare": "T7",
+      "grow_grade": 0
+    },
+    {
+      "id": 3330801,
+      "name_localkey": "諾恩代碼手套+",
+      "resource_id": "icn_equipment_arm_supporter_t7",
+      "item_sub_type": "Module_C",
+      "class": "Supporter",
+      "item_rare": "T8",
+      "grow_grade": 0
+    },
+    {
+      "id": 3330901,
+      "name_localkey": "代碼：IX手套",
+      "resource_id": "icn_equipment_arm_supporter_t9_1",
+      "item_sub_type": "Module_C",
+      "class": "Supporter",
+      "item_rare": "T9",
+      "grow_grade": 3331001
+    },
+    {
+      "id": 3331001,
+      "name_localkey": "代碼XXX手套",
+      "resource_id": "icn_equipment_arm_supporter_t9_3",
+      "item_sub_type": "Module_C",
+      "class": "Supporter",
+      "item_rare": "T10",
+      "grow_grade": 0
+    },
+    {
+      "id": 3400901,
+      "name_localkey": "-",
+      "resource_id": "icn_equipment_leg_attacker_t9_3",
+      "item_sub_type": "Module_D",
+      "class": "All",
+      "item_rare": "T9",
+      "grow_grade": 0
+    },
+    {
+      "id": 3410101,
+      "name_localkey": "凱夫拉爾靴子",
+      "resource_id": "icn_equipment_leg_attacker_t1",
+      "item_sub_type": "Module_D",
+      "class": "Attacker",
+      "item_rare": "T1",
+      "grow_grade": 0
+    },
+    {
+      "id": 3410201,
+      "name_localkey": "精密陶瓷靴子",
+      "resource_id": "icn_equipment_leg_attacker_t1",
+      "item_sub_type": "Module_D",
+      "class": "Attacker",
+      "item_rare": "T2",
+      "grow_grade": 0
+    },
+    {
+      "id": 3410301,
+      "name_localkey": "稀有金屬靴子",
+      "resource_id": "icn_equipment_leg_attacker_t3",
+      "item_sub_type": "Module_D",
+      "class": "Attacker",
+      "item_rare": "T3",
+      "grow_grade": 0
+    },
+    {
+      "id": 3410401,
+      "name_localkey": "稀有金屬靴子+",
+      "resource_id": "icn_equipment_leg_attacker_t3",
+      "item_sub_type": "Module_D",
+      "class": "Attacker",
+      "item_rare": "T4",
+      "grow_grade": 0
+    },
+    {
+      "id": 3410501,
+      "name_localkey": "神鎘靴子",
+      "resource_id": "icn_equipment_leg_attacker_t5",
+      "item_sub_type": "Module_D",
+      "class": "Attacker",
+      "item_rare": "T5",
+      "grow_grade": 0
+    },
+    {
+      "id": 3410601,
+      "name_localkey": "神鎘靴子+",
+      "resource_id": "icn_equipment_leg_attacker_t5",
+      "item_sub_type": "Module_D",
+      "class": "Attacker",
+      "item_rare": "T6",
+      "grow_grade": 0
+    },
+    {
+      "id": 3410701,
+      "name_localkey": "鈦金屬靴子",
+      "resource_id": "icn_equipment_leg_attacker_t7",
+      "item_sub_type": "Module_D",
+      "class": "Attacker",
+      "item_rare": "T7",
+      "grow_grade": 0
+    },
+    {
+      "id": 3410801,
+      "name_localkey": "鈦金屬靴子+",
+      "resource_id": "icn_equipment_leg_attacker_t7",
+      "item_sub_type": "Module_D",
+      "class": "Attacker",
+      "item_rare": "T8",
+      "grow_grade": 0
+    },
+    {
+      "id": 3410901,
+      "name_localkey": "材料類型：α靴子",
+      "resource_id": "icn_equipment_leg_attacker_t9_1",
+      "item_sub_type": "Module_D",
+      "class": "Attacker",
+      "item_rare": "T9",
+      "grow_grade": 3411001
+    },
+    {
+      "id": 3411001,
+      "name_localkey": "ν金屬靴子",
+      "resource_id": "icn_equipment_leg_attacker_t9_3",
+      "item_sub_type": "Module_D",
+      "class": "Attacker",
+      "item_rare": "T10",
+      "grow_grade": 0
+    },
+    {
+      "id": 3420101,
+      "name_localkey": "凱夫拉爾護腿",
+      "resource_id": "icn_equipment_leg_defender_t1",
+      "item_sub_type": "Module_D",
+      "class": "Defender",
+      "item_rare": "T1",
+      "grow_grade": 0
+    },
+    {
+      "id": 3420201,
+      "name_localkey": "精密陶瓷護腿",
+      "resource_id": "icn_equipment_leg_defender_t1",
+      "item_sub_type": "Module_D",
+      "class": "Defender",
+      "item_rare": "T2",
+      "grow_grade": 0
+    },
+    {
+      "id": 3420301,
+      "name_localkey": "稀有金屬護腿",
+      "resource_id": "icn_equipment_leg_defender_t3",
+      "item_sub_type": "Module_D",
+      "class": "Defender",
+      "item_rare": "T3",
+      "grow_grade": 0
+    },
+    {
+      "id": 3420401,
+      "name_localkey": "稀有金屬護腿+",
+      "resource_id": "icn_equipment_leg_defender_t3",
+      "item_sub_type": "Module_D",
+      "class": "Defender",
+      "item_rare": "T4",
+      "grow_grade": 0
+    },
+    {
+      "id": 3420501,
+      "name_localkey": "神鎘護腿",
+      "resource_id": "icn_equipment_leg_defender_t5",
+      "item_sub_type": "Module_D",
+      "class": "Defender",
+      "item_rare": "T5",
+      "grow_grade": 0
+    },
+    {
+      "id": 3420601,
+      "name_localkey": "神鎘護腿+",
+      "resource_id": "icn_equipment_leg_defender_t5",
+      "item_sub_type": "Module_D",
+      "class": "Defender",
+      "item_rare": "T6",
+      "grow_grade": 0
+    },
+    {
+      "id": 3420701,
+      "name_localkey": "阿特拉斯護腿",
+      "resource_id": "icn_equipment_leg_defender_t7",
+      "item_sub_type": "Module_D",
+      "class": "Defender",
+      "item_rare": "T7",
+      "grow_grade": 0
+    },
+    {
+      "id": 3420801,
+      "name_localkey": "阿特拉斯護腿+",
+      "resource_id": "icn_equipment_leg_defender_t7",
+      "item_sub_type": "Module_D",
+      "class": "Defender",
+      "item_rare": "T8",
+      "grow_grade": 0
+    },
+    {
+      "id": 3420901,
+      "name_localkey": "模式系列：31護腿",
+      "resource_id": "icn_equipment_leg_defender_t9_1",
+      "item_sub_type": "Module_D",
+      "class": "Defender",
+      "item_rare": "T9",
+      "grow_grade": 3421001
+    },
+    {
+      "id": 3421001,
+      "name_localkey": "99型護腿",
+      "resource_id": "icn_equipment_leg_defender_t9_3",
+      "item_sub_type": "Module_D",
+      "class": "Defender",
+      "item_rare": "T10",
+      "grow_grade": 0
+    },
+    {
+      "id": 3430101,
+      "name_localkey": "凱夫拉爾鞋",
+      "resource_id": "icn_equipment_leg_supporter_t1",
+      "item_sub_type": "Module_D",
+      "class": "Supporter",
+      "item_rare": "T1",
+      "grow_grade": 0
+    },
+    {
+      "id": 3430201,
+      "name_localkey": "精密陶瓷鞋",
+      "resource_id": "icn_equipment_leg_supporter_t1",
+      "item_sub_type": "Module_D",
+      "class": "Supporter",
+      "item_rare": "T2",
+      "grow_grade": 0
+    },
+    {
+      "id": 3430301,
+      "name_localkey": "稀有金屬鞋",
+      "resource_id": "icn_equipment_leg_supporter_t3",
+      "item_sub_type": "Module_D",
+      "class": "Supporter",
+      "item_rare": "T3",
+      "grow_grade": 0
+    },
+    {
+      "id": 3430401,
+      "name_localkey": "稀有金屬鞋+",
+      "resource_id": "icn_equipment_leg_supporter_t3",
+      "item_sub_type": "Module_D",
+      "class": "Supporter",
+      "item_rare": "T4",
+      "grow_grade": 0
+    },
+    {
+      "id": 3430501,
+      "name_localkey": "神鎘鞋",
+      "resource_id": "icn_equipment_leg_supporter_t5",
+      "item_sub_type": "Module_D",
+      "class": "Supporter",
+      "item_rare": "T5",
+      "grow_grade": 0
+    },
+    {
+      "id": 3430601,
+      "name_localkey": "神鎘鞋+",
+      "resource_id": "icn_equipment_leg_supporter_t5",
+      "item_sub_type": "Module_D",
+      "class": "Supporter",
+      "item_rare": "T6",
+      "grow_grade": 0
+    },
+    {
+      "id": 3430701,
+      "name_localkey": "諾恩代碼鞋",
+      "resource_id": "icn_equipment_leg_supporter_t7",
+      "item_sub_type": "Module_D",
+      "class": "Supporter",
+      "item_rare": "T7",
+      "grow_grade": 0
+    },
+    {
+      "id": 3430801,
+      "name_localkey": "諾恩代碼鞋+",
+      "resource_id": "icn_equipment_leg_supporter_t7",
+      "item_sub_type": "Module_D",
+      "class": "Supporter",
+      "item_rare": "T8",
+      "grow_grade": 0
+    },
+    {
+      "id": 3430901,
+      "name_localkey": "代碼：IX鞋",
+      "resource_id": "icn_equipment_leg_supporter_t9_1",
+      "item_sub_type": "Module_D",
+      "class": "Supporter",
+      "item_rare": "T9",
+      "grow_grade": 3431001
+    },
+    {
+      "id": 3431001,
+      "name_localkey": "代碼XXX鞋",
+      "resource_id": "icn_equipment_leg_supporter_t9_3",
+      "item_sub_type": "Module_D",
+      "class": "Supporter",
+      "item_rare": "T10",
+      "grow_grade": 0
+    }
+  ],
+  "icons": {
+    "icn_equipment_arm_attacker_t1": "equipment/standard/icn_equipment_arm_attacker_t1.png",
+    "icn_equipment_arm_attacker_t3": "equipment/standard/icn_equipment_arm_attacker_t3.png",
+    "icn_equipment_arm_attacker_t5": "equipment/standard/icn_equipment_arm_attacker_t5.png",
+    "icn_equipment_arm_attacker_t7": "equipment/standard/icn_equipment_arm_attacker_t7.png",
+    "icn_equipment_arm_attacker_t9_1": "equipment/standard/icn_equipment_arm_attacker_t9_1.png",
+    "icn_equipment_arm_defender_t1": "equipment/standard/icn_equipment_arm_defender_t1.png",
+    "icn_equipment_arm_defender_t3": "equipment/standard/icn_equipment_arm_defender_t3.png",
+    "icn_equipment_arm_defender_t5": "equipment/standard/icn_equipment_arm_defender_t5.png",
+    "icn_equipment_arm_defender_t7": "equipment/standard/icn_equipment_arm_defender_t7.png",
+    "icn_equipment_arm_defender_t9_1": "equipment/standard/icn_equipment_arm_defender_t9_1.png",
+    "icn_equipment_arm_supporter_t1": "equipment/standard/icn_equipment_arm_supporter_t1.png",
+    "icn_equipment_arm_supporter_t3": "equipment/standard/icn_equipment_arm_supporter_t3.png",
+    "icn_equipment_arm_supporter_t5": "equipment/standard/icn_equipment_arm_supporter_t5.png",
+    "icn_equipment_arm_supporter_t7": "equipment/standard/icn_equipment_arm_supporter_t7.png",
+    "icn_equipment_arm_supporter_t9_1": "equipment/standard/icn_equipment_arm_supporter_t9_1.png",
+    "icn_equipment_body_attacker_t1": "equipment/standard/icn_equipment_body_attacker_t1.png",
+    "icn_equipment_body_attacker_t3": "equipment/standard/icn_equipment_body_attacker_t3.png",
+    "icn_equipment_body_attacker_t5": "equipment/standard/icn_equipment_body_attacker_t5.png",
+    "icn_equipment_body_attacker_t7": "equipment/standard/icn_equipment_body_attacker_t7.png",
+    "icn_equipment_body_attacker_t9_1": "equipment/standard/icn_equipment_body_attacker_t9_1.png",
+    "icn_equipment_body_defender_t1": "equipment/standard/icn_equipment_body_defender_t1.png",
+    "icn_equipment_body_defender_t3": "equipment/standard/icn_equipment_body_defender_t3.png",
+    "icn_equipment_body_defender_t5": "equipment/standard/icn_equipment_body_defender_t5.png",
+    "icn_equipment_body_defender_t7": "equipment/standard/icn_equipment_body_defender_t7.png",
+    "icn_equipment_body_defender_t9_1": "equipment/standard/icn_equipment_body_defender_t9_1.png",
+    "icn_equipment_body_supporter_t1": "equipment/standard/icn_equipment_body_supporter_t1.png",
+    "icn_equipment_body_supporter_t3": "equipment/standard/icn_equipment_body_supporter_t3.png",
+    "icn_equipment_body_supporter_t5": "equipment/standard/icn_equipment_body_supporter_t5.png",
+    "icn_equipment_body_supporter_t7": "equipment/standard/icn_equipment_body_supporter_t7.png",
+    "icn_equipment_body_supporter_t9_1": "equipment/standard/icn_equipment_body_supporter_t9_1.png",
+    "icn_equipment_head_attacker_t1": "equipment/standard/icn_equipment_head_attacker_t1.png",
+    "icn_equipment_head_attacker_t3": "equipment/standard/icn_equipment_head_attacker_t3.png",
+    "icn_equipment_head_attacker_t5": "equipment/standard/icn_equipment_head_attacker_t5.png",
+    "icn_equipment_head_attacker_t7": "equipment/standard/icn_equipment_head_attacker_t7.png",
+    "icn_equipment_head_attacker_t9_1": "equipment/standard/icn_equipment_head_attacker_t9_1.png",
+    "icn_equipment_head_defender_t1": "equipment/standard/icn_equipment_head_defender_t1.png",
+    "icn_equipment_head_defender_t3": "equipment/standard/icn_equipment_head_defender_t3.png",
+    "icn_equipment_head_defender_t5": "equipment/standard/icn_equipment_head_defender_t5.png",
+    "icn_equipment_head_defender_t7": "equipment/standard/icn_equipment_head_defender_t7.png",
+    "icn_equipment_head_defender_t9_1": "equipment/standard/icn_equipment_head_defender_t9_1.png",
+    "icn_equipment_head_supporter_t1": "equipment/standard/icn_equipment_head_supporter_t1.png",
+    "icn_equipment_head_supporter_t3": "equipment/standard/icn_equipment_head_supporter_t3.png",
+    "icn_equipment_head_supporter_t5": "equipment/standard/icn_equipment_head_supporter_t5.png",
+    "icn_equipment_head_supporter_t7": "equipment/standard/icn_equipment_head_supporter_t7.png",
+    "icn_equipment_head_supporter_t9_1": "equipment/standard/icn_equipment_head_supporter_t9_1.png",
+    "icn_equipment_leg_attacker_t1": "equipment/standard/icn_equipment_leg_attacker_t1.png",
+    "icn_equipment_leg_attacker_t3": "equipment/standard/icn_equipment_leg_attacker_t3.png",
+    "icn_equipment_leg_attacker_t5": "equipment/standard/icn_equipment_leg_attacker_t5.png",
+    "icn_equipment_leg_attacker_t7": "equipment/standard/icn_equipment_leg_attacker_t7.png",
+    "icn_equipment_leg_attacker_t9_1": "equipment/standard/icn_equipment_leg_attacker_t9_1.png",
+    "icn_equipment_leg_defender_t1": "equipment/standard/icn_equipment_leg_defender_t1.png",
+    "icn_equipment_leg_defender_t3": "equipment/standard/icn_equipment_leg_defender_t3.png",
+    "icn_equipment_leg_defender_t5": "equipment/standard/icn_equipment_leg_defender_t5.png",
+    "icn_equipment_leg_defender_t7": "equipment/standard/icn_equipment_leg_defender_t7.png",
+    "icn_equipment_leg_defender_t9_1": "equipment/standard/icn_equipment_leg_defender_t9_1.png",
+    "icn_equipment_leg_supporter_t1": "equipment/standard/icn_equipment_leg_supporter_t1.png",
+    "icn_equipment_leg_supporter_t3": "equipment/standard/icn_equipment_leg_supporter_t3.png",
+    "icn_equipment_leg_supporter_t5": "equipment/standard/icn_equipment_leg_supporter_t5.png",
+    "icn_equipment_leg_supporter_t7": "equipment/standard/icn_equipment_leg_supporter_t7.png",
+    "icn_equipment_leg_supporter_t9_1": "equipment/standard/icn_equipment_leg_supporter_t9_1.png",
+    "icn_equipment_arm_attacker_t9_3": "equipment/overload/vmetal-arms.png",
+    "icn_equipment_arm_defender_t9_3": "equipment/overload/99-arms.png",
+    "icn_equipment_arm_supporter_t9_3": "equipment/overload/code-arms.png",
+    "icn_equipment_body_attacker_t9_3": "equipment/overload/vmetal-body.png",
+    "icn_equipment_body_defender_t9_3": "equipment/overload/99-body.png",
+    "icn_equipment_body_supporter_t9_3": "equipment/overload/code-body.png",
+    "icn_equipment_head_attacker_t9_3": "equipment/overload/vmetal-head.png",
+    "icn_equipment_head_defender_t9_3": "equipment/overload/99-head.png",
+    "icn_equipment_head_supporter_t9_3": "equipment/overload/code-head.png",
+    "icn_equipment_leg_attacker_t9_3": "equipment/overload/vmetal-legs.png",
+    "icn_equipment_leg_defender_t9_3": "equipment/overload/99-legs.png",
+    "icn_equipment_leg_supporter_t9_3": "equipment/overload/code-legs.png"
+  }
+}

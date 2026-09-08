@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // ========== NIKKE Workshop Chrome 扩展后台脚本 ==========
 // 管理扩展的生命周期和用户交互事件
+import './update-background.js';
 
 // 扩展安装/启动时初始化侧栏
 const ensureSidePanelEnabled = async () => {

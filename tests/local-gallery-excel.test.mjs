@@ -31,8 +31,8 @@ test("current-list export can include synced records", () => {
   assert.equal(currentListWorkbook.getWorksheet("角色").rowCount, 2);
 });
 
-test("local gallery round-trip preserves numeric values, physical slots, and lock state", async () => {
-  const records = saveLocalCharacterRecord([], { catalogCharacter: catalog[0], catalog, draft: { level: 400, equipments: [[{ position: 3, functionType: "IncElementDmg", value: 23.56, level: 11, locked: true }], [], [], []] } }).records;
+test("local gallery round-trip preserves numeric values, research levels, physical slots, and lock state", async () => {
+  const records = saveLocalCharacterRecord([], { catalogCharacter: catalog[0], catalog, draft: { level: 400, classLevel: 202, corporationLevel: 186, skill1Level: 10, skill2Level: 9, burstSkillLevel: 8, equipments: [[{ position: 3, functionType: "IncElementDmg", value: 23.56, level: 11, locked: true }], [], [], []] } }).records;
   let avatarFetches = 0;
   const buffer = await exportLocalGalleryBuffer(records, {
     fetchImage: async (url) => {
@@ -59,6 +59,11 @@ test("local gallery round-trip preserves numeric values, physical slots, and loc
   assert.equal(imported.summary.matched, 1);
   assert.equal(imported.summary.created, 1);
   assert.equal(imported.records[0].nameCode, "c1");
+  assert.equal(imported.records[0].classLevel, 202);
+  assert.equal(imported.records[0].corporationLevel, 186);
+  assert.equal(imported.records[0].skill1Level, 10);
+  assert.equal(imported.records[0].skill2Level, 9);
+  assert.equal(imported.records[0].burstSkillLevel, 8);
   assert.equal(imported.records[0].equipments[0][2].value, 23.56);
   assert.equal(imported.records[0].equipments[0][2].locked, true);
 });

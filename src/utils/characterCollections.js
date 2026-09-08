@@ -43,6 +43,8 @@ export function createCharacterListEntry(nikke, showStats = DEFAULT_CHARACTER_SH
     resource_id: nikke?.resource_id,
     name_cn: nikke?.name_cn,
     name_en: nikke?.name_en,
+    class: nikke?.class,
+    corporation: nikke?.corporation,
     priority: "yellow",
     showStats: [...showStats],
   };

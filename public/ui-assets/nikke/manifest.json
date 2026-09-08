@@ -1,52 +1,109 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-08-28",
+  "revision": "2026-09-02",
   "basePath": "/ui-assets/nikke",
   "assets": {
     "manufacturer": {
-      "Elysion": "metadata/manufacturer/elysion.png",
-      "Missilis": "metadata/manufacturer/missilis.png",
-      "Tetra": "metadata/manufacturer/tetra.png",
-      "Pilgrim": "metadata/manufacturer/pilgrim.png",
-      "Abnormal": "metadata/manufacturer/abnormal.png"
+      "Elysion": "metadata/native/manufacturer/elysion.png",
+      "Missilis": "metadata/native/manufacturer/missilis.png",
+      "Tetra": "metadata/native/manufacturer/tetra.png",
+      "Pilgrim": "metadata/native/manufacturer/pilgrim.png",
+      "Abnormal": "metadata/native/manufacturer/abnormal.png"
     },
     "class": {
-      "Attacker": "metadata/class/attacker.png",
-      "Defender": "metadata/class/defender.png",
-      "Supporter": "metadata/class/supporter.png"
+      "Attacker": "metadata/native/class/attacker.png",
+      "Defender": "metadata/native/class/defender.png",
+      "Supporter": "metadata/native/class/supporter.png"
     },
     "element": {
-      "Fire": "metadata/element/fire.png",
-      "Water": "metadata/element/water.png",
-      "Wind": "metadata/element/wind.png",
-      "Electronic": "metadata/element/electric.png",
-      "Iron": "metadata/element/iron.png"
+      "Fire": "metadata/native/element/fire.png",
+      "Water": "metadata/native/element/water.png",
+      "Wind": "metadata/native/element/wind.png",
+      "Electronic": "metadata/native/element/electric.png",
+      "Iron": "metadata/native/element/iron.png"
     },
     "weapon": {
-      "AR": "metadata/weapon/ar.png",
-      "MG": "metadata/weapon/mg.png",
-      "RL": "metadata/weapon/rl.png",
-      "SG": "metadata/weapon/sg.png",
-      "SMG": "metadata/weapon/smg.png",
-      "SR": "metadata/weapon/sr.png"
+      "AR": "metadata/native/weapon/ar.png",
+      "MG": "metadata/native/weapon/mg.png",
+      "RL": "metadata/native/weapon/rl.png",
+      "SG": "metadata/native/weapon/sg.png",
+      "SMG": "metadata/native/weapon/smg.png",
+      "SR": "metadata/native/weapon/sr.png"
     },
     "burst": {
-      "1": "metadata/burst/burst-1.png",
-      "2": "metadata/burst/burst-2.png",
-      "3": "metadata/burst/burst-3.png",
-      "all": "metadata/burst/burst-all.png"
+      "1": "metadata/native/burst/burst-1.png",
+      "2": "metadata/native/burst/burst-2.png",
+      "3": "metadata/native/burst/burst-3.png",
+      "all": "metadata/native/burst/burst-all.png"
     },
     "characterCard": {
-      "raritySsr": "character-card/rarity-ssr.png",
-      "starFilled": "character-card/star-filled.png",
-      "starEmpty": "character-card/star-empty.png",
-      "coreFrame": "character-card/core-frame.webp",
-      "overloadBadgeSource": "character-card/overload-badge-source.png"
+      "raritySsr": "metadata/rarity/ssr.png",
+      "starFilled": "metadata/breakthrough/star-filled.png",
+      "starEmpty": "metadata/breakthrough/star-empty.png",
+      "coreFrame": "metadata/breakthrough/core-frame.png",
+      "collectibleDolls": {
+        "AR": "character-card/collectible-ar-cooking.png",
+        "MG": "character-card/collectible-mg-shopping.png",
+        "RL": "character-card/collectible-rl-exercising.png",
+        "SG": "character-card/collectible-sg-battling.png",
+        "SMG": "character-card/collectible-smg-coffee.png",
+        "SR": "character-card/collectible-sr-napping.png"
+      },
+      "favoriteItems": {
+        "100": "character-card/favorite-items/c100.png",
+        "101": "character-card/favorite-items/c101.png",
+        "112": "character-card/favorite-items/c112.png",
+        "140": "character-card/favorite-items/c140.png",
+        "141": "character-card/favorite-items/c141.png",
+        "142": "character-card/favorite-items/c142.png",
+        "150": "character-card/favorite-items/c150.png",
+        "170": "character-card/favorite-items/c170.png",
+        "192": "character-card/favorite-items/c192.png",
+        "210": "character-card/favorite-items/c210.png",
+        "280": "character-card/favorite-items/c280.png",
+        "281": "character-card/favorite-items/c281.png",
+        "352": "character-card/favorite-items/c352.png",
+        "390": "character-card/favorite-items/c390.png",
+        "411": "character-card/favorite-items/c411.png",
+        "550": "character-card/favorite-items/c550.png",
+        "580": "character-card/favorite-items/c580.png",
+        "030": "character-card/favorite-items/c030.png",
+        "032": "character-card/favorite-items/c032.png",
+        "072": "character-card/favorite-items/c072.png",
+        "080": "character-card/favorite-items/c080.png"
+      },
+      "overloadBadgeSource": "equipment/overload-badge.png"
     },
     "characterArtwork": {
       "catalog": "character-artwork/catalog.json",
+      "extractedProvenance": "character-artwork/extracted-sources.json",
+      "chinaExclusiveProvenance": "character-artwork/china-exclusive-sources.json",
+      "chinaExclusiveDefaults": {
+        "cn-exclusive-huapi": "character-artwork/cn-exclusive-huapi.webp",
+        "cn-exclusive-yingning": "character-artwork/cn-exclusive-yingning.webp"
+      },
       "directory": "character-artwork/",
-      "format": "webp"
+      "format": "webp",
+      "favoriteItemId": "favorite-item",
+      "lobbyBurst": {
+        "assetPrefix": "lobby_burst_c",
+        "count": 215,
+        "nativeWidth": 900,
+        "nativeHeight": 1600,
+        "dimensionsFrom": "character-artwork/extracted-sources.json"
+      },
+      "regionalCostumes": {
+        "233": "character-artwork/c233_80.webp",
+        "260": "character-artwork/c260_80.webp",
+        "082": "character-artwork/c082_80.webp"
+      }
+    },
+    "skillIcons": {
+      "catalog": "skill-icons/catalog.json",
+      "genericDirectory": "skill-icons/generic/",
+      "burstDirectory": "skill-icons/burst/",
+      "format": "png",
+      "dimensionsFrom": "objects/extracted-sources.json"
     },
     "equipmentSlots": {
       "head": "equipment/slots/head.png",
@@ -62,17 +119,17 @@
       "reload": "stats/reload.png"
     },
     "overloadEquipment": {
-      "vmetal": {
-        "head": "equipment/overload/vmetal-head.png",
-        "body": "equipment/overload/vmetal-body.png",
-        "arms": "equipment/overload/vmetal-arms.png",
-        "legs": "equipment/overload/vmetal-legs.png"
-      },
       "99": {
         "head": "equipment/overload/99-head.png",
         "body": "equipment/overload/99-body.png",
         "arms": "equipment/overload/99-arms.png",
         "legs": "equipment/overload/99-legs.png"
+      },
+      "vmetal": {
+        "head": "equipment/overload/vmetal-head.png",
+        "body": "equipment/overload/vmetal-body.png",
+        "arms": "equipment/overload/vmetal-arms.png",
+        "legs": "equipment/overload/vmetal-legs.png"
       },
       "code": {
         "head": "equipment/overload/code-head.png",
@@ -80,6 +137,42 @@
         "arms": "equipment/overload/code-arms.png",
         "legs": "equipment/overload/code-legs.png"
       }
-    }
+    },
+    "rarity": {
+      "R": "metadata/rarity/r.png",
+      "SR": "metadata/rarity/sr.png",
+      "SSR": "metadata/rarity/ssr.png"
+    },
+    "breakthrough": {
+      "star-empty": "metadata/breakthrough/star-empty.png",
+      "star-filled": "metadata/breakthrough/star-filled.png",
+      "core-frame": "metadata/breakthrough/core-frame.png"
+    },
+    "decorations": {
+      "heart": "metadata/decorations/heart.png",
+      "affection-frame": "metadata/decorations/affection-frame.png",
+      "skill-frame": "metadata/decorations/skill-frame.png",
+      "level-badge": "metadata/decorations/level-badge.png"
+    },
+    "cubes": {
+      "10001": "cubes/ie_10001.png",
+      "10002": "cubes/ie_10002.png",
+      "10003": "cubes/ie_10003.png",
+      "10004": "cubes/ie_10004.png",
+      "10005": "cubes/ie_10005.png",
+      "10006": "cubes/ie_10006.png",
+      "10007": "cubes/ie_10007.png",
+      "10008": "cubes/ie_10008.png",
+      "10009": "cubes/ie_10009.png",
+      "10010": "cubes/ie_10010.png",
+      "10012": "cubes/ie_10012.png",
+      "10013": "cubes/ie_10013.png",
+      "11001": "cubes/ie_11001.png",
+      "12001": "cubes/ie_12001.png",
+      "12002": "cubes/ie_12002.png",
+      "13001": "cubes/ie_13001.png",
+      "13002": "cubes/ie_13002.png"
+    },
+    "equipmentCatalog": "equipment/catalog.json"
   }
 }

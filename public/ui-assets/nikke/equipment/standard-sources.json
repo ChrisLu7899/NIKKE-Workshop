@@ -1,0 +1,457 @@
+{
+  "schema": "workshop-equipment-catalog-v1",
+  "source": {
+    "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
+    "resource_key": "icons-equip(hd)_assets_all_21180e83e2d77f65679e38b648efc5d1.bundle",
+    "region": "dp",
+    "bundle_hash": "21180e83e2d77f65679e38b648efc5d1",
+    "bundle_sha256": "6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
+  },
+  "table_source": {
+    "url": "https://sg-tools-cdn.blablalink.com/md-16/02d7f979df58efa0aa8dbd18de91a916.json",
+    "sha256": "a52c8ab66632d71b8206462e13cdda4cb36f61a54f93ae86ec191b7bc452e333",
+    "file": "ItemEquipTable-zh-tw.json",
+    "record_count": 124,
+    "downloaded_date": "2026-09-07"
+  },
+  "formal_manifest_sha256": "14da54b8c1317f305fba4b50c6e7139d22d20f3a85f101d3059218353633d7cb",
+  "catalog_sha256": "7d447decaf905c58e812630332c8f10982a3c568838646ae5cfb4521f0017690",
+  "review_sha256": "dd7b75b6889e8414cff6eeec0c1945295b0ad2647ba89668df770c4f428cde92",
+  "producer_sha256": "cc557af6a5dea91f64f3cba950f4037bc0d0e5d3f22fc1287263565eec9544d0",
+  "importer_sha256": "c4d3722c109a2f1734b3caee29acd208f1d9a7d5ccd6fe7de298ce8d9fd5bb15",
+  "method": "Exact promoted PNG bytes; tiers use official item_rare, never sprite suffix. No runtime network.",
+  "items": [
+    {
+      "resource_id": "icn_equipment_arm_attacker_t1",
+      "path_id": "8486708360433615326",
+      "file": "equipment/standard/icn_equipment_arm_attacker_t1.png",
+      "png_sha256": "b12a277d2e1b80d392c7f17bb4a4aaffb96bc7efab54aff84d88ba1ff50a68cf"
+    },
+    {
+      "resource_id": "icn_equipment_arm_attacker_t3",
+      "path_id": "7488165301092977482",
+      "file": "equipment/standard/icn_equipment_arm_attacker_t3.png",
+      "png_sha256": "d4143f7129662b45c467808e592791e44510a98a19c1d1b6d9f55c3f54d02cca"
+    },
+    {
+      "resource_id": "icn_equipment_arm_attacker_t5",
+      "path_id": "-4058035854063839727",
+      "file": "equipment/standard/icn_equipment_arm_attacker_t5.png",
+      "png_sha256": "20bea9f16aec7e4788fc9ef7159d1cafce574a8d40d7ec6bb28e020851902028"
+    },
+    {
+      "resource_id": "icn_equipment_arm_attacker_t7",
+      "path_id": "4632244217462922046",
+      "file": "equipment/standard/icn_equipment_arm_attacker_t7.png",
+      "png_sha256": "4a1496c9f465587b1451f0bf0e3ad5034be081e4967b00fbf5dc57e6574bf266"
+    },
+    {
+      "resource_id": "icn_equipment_arm_attacker_t9_1",
+      "path_id": "1432954244474621170",
+      "file": "equipment/standard/icn_equipment_arm_attacker_t9_1.png",
+      "png_sha256": "582c4edf7ecab3a71f12c9c479e8e6eeee2aba09f60235d49dcef5b1cc662567"
+    },
+    {
+      "resource_id": "icn_equipment_arm_defender_t1",
+      "path_id": "189288872378768195",
+      "file": "equipment/standard/icn_equipment_arm_defender_t1.png",
+      "png_sha256": "37ad9f141d0f1748719f30a37f65df18998c8c1ac110d950dbdded5001343ac0"
+    },
+    {
+      "resource_id": "icn_equipment_arm_defender_t3",
+      "path_id": "2711146466390000776",
+      "file": "equipment/standard/icn_equipment_arm_defender_t3.png",
+      "png_sha256": "7df7fef47e350b20b04a595c925a8d3d06e31858c91dbc936c989a3866909131"
+    },
+    {
+      "resource_id": "icn_equipment_arm_defender_t5",
+      "path_id": "7109003529945406893",
+      "file": "equipment/standard/icn_equipment_arm_defender_t5.png",
+      "png_sha256": "53f708cf8462d6b3046f7a47934c38b81dd9d633d3710f1a232c14db789f40fb"
+    },
+    {
+      "resource_id": "icn_equipment_arm_defender_t7",
+      "path_id": "-8059439695455203302",
+      "file": "equipment/standard/icn_equipment_arm_defender_t7.png",
+      "png_sha256": "72c5ffb15934c7ff48b2d8da11ec755c57a2db8952862097d2f8e77dc75648f3"
+    },
+    {
+      "resource_id": "icn_equipment_arm_defender_t9_1",
+      "path_id": "-692480405027158190",
+      "file": "equipment/standard/icn_equipment_arm_defender_t9_1.png",
+      "png_sha256": "72ef4424eff9147d1cdf9581d67a586b08621858a70e1473bdc7f59823a48837"
+    },
+    {
+      "resource_id": "icn_equipment_arm_supporter_t1",
+      "path_id": "5278467601492472362",
+      "file": "equipment/standard/icn_equipment_arm_supporter_t1.png",
+      "png_sha256": "017f506bfce700d06558c8abd68ccb7777ada8d1b53db4c3accadd0a53d1e64f"
+    },
+    {
+      "resource_id": "icn_equipment_arm_supporter_t3",
+      "path_id": "3219459912221279753",
+      "file": "equipment/standard/icn_equipment_arm_supporter_t3.png",
+      "png_sha256": "988681e3ea773044210c016979881dfd325e17580c4de66e69aae247caf2dc11"
+    },
+    {
+      "resource_id": "icn_equipment_arm_supporter_t5",
+      "path_id": "6052520313507273655",
+      "file": "equipment/standard/icn_equipment_arm_supporter_t5.png",
+      "png_sha256": "93a1dcf34c737d6f90e31938cc500491fa9291ed898744f1760a1696d9df3ef9"
+    },
+    {
+      "resource_id": "icn_equipment_arm_supporter_t7",
+      "path_id": "4874575184772339689",
+      "file": "equipment/standard/icn_equipment_arm_supporter_t7.png",
+      "png_sha256": "137825233c523a1f19e21d3ca599e2bea40b1ef326dad3c0489287b2887809e6"
+    },
+    {
+      "resource_id": "icn_equipment_arm_supporter_t9_1",
+      "path_id": "5544830866597139071",
+      "file": "equipment/standard/icn_equipment_arm_supporter_t9_1.png",
+      "png_sha256": "940cbb6eab8abf2d19a26eebbf0ad5ca21d426157217745ccdfbb8b5c52c6210"
+    },
+    {
+      "resource_id": "icn_equipment_body_attacker_t1",
+      "path_id": "-420220638738310498",
+      "file": "equipment/standard/icn_equipment_body_attacker_t1.png",
+      "png_sha256": "e2b48bb99dd90cdbcd687159d95b5da0cbc3db5eda18c0e50cd307c9f6c5624b"
+    },
+    {
+      "resource_id": "icn_equipment_body_attacker_t3",
+      "path_id": "-3583860460910741894",
+      "file": "equipment/standard/icn_equipment_body_attacker_t3.png",
+      "png_sha256": "854e1be06b4567038f225968d1625025696417f9d63899e667275d71646ff23c"
+    },
+    {
+      "resource_id": "icn_equipment_body_attacker_t5",
+      "path_id": "-9122743395709606444",
+      "file": "equipment/standard/icn_equipment_body_attacker_t5.png",
+      "png_sha256": "03f6eabf882f183ffcb95080b203723a36920abba1b5fb74d2d324daba62cc94"
+    },
+    {
+      "resource_id": "icn_equipment_body_attacker_t7",
+      "path_id": "-1968001066060812468",
+      "file": "equipment/standard/icn_equipment_body_attacker_t7.png",
+      "png_sha256": "259ad6faacda9a3dfa430c2ccc689d0a6e1d676f597eea8761b32c8014552c98"
+    },
+    {
+      "resource_id": "icn_equipment_body_attacker_t9_1",
+      "path_id": "-5006138797180357705",
+      "file": "equipment/standard/icn_equipment_body_attacker_t9_1.png",
+      "png_sha256": "94d9c5dc0f67236dd1be7a676fb4e6db59105a293045fff1ab217bb9e4c41ee7"
+    },
+    {
+      "resource_id": "icn_equipment_body_defender_t1",
+      "path_id": "-8552022588222453006",
+      "file": "equipment/standard/icn_equipment_body_defender_t1.png",
+      "png_sha256": "b2ce12f625d814d7d5838d888851dd259dbac56b176c4331dc7d77fa31b7c82a"
+    },
+    {
+      "resource_id": "icn_equipment_body_defender_t3",
+      "path_id": "-3509676286215461438",
+      "file": "equipment/standard/icn_equipment_body_defender_t3.png",
+      "png_sha256": "0dc79c68e9a3387580b537b1f6d1c795112850230e5e3d5c7ba2a1db0222d380"
+    },
+    {
+      "resource_id": "icn_equipment_body_defender_t5",
+      "path_id": "-4701474221306539677",
+      "file": "equipment/standard/icn_equipment_body_defender_t5.png",
+      "png_sha256": "57992fc06dc81e9702581bd0a43f54141268dc150aca8fdc8f26835bbef377ac"
+    },
+    {
+      "resource_id": "icn_equipment_body_defender_t7",
+      "path_id": "4022927266671157068",
+      "file": "equipment/standard/icn_equipment_body_defender_t7.png",
+      "png_sha256": "55f9d975a86ebe5b5dcd4326ccc91a4e9041590ca2cb515d456113753a594cce"
+    },
+    {
+      "resource_id": "icn_equipment_body_defender_t9_1",
+      "path_id": "-1871418928672679427",
+      "file": "equipment/standard/icn_equipment_body_defender_t9_1.png",
+      "png_sha256": "c6dbe5023c52031aabeeaf8bceb84e263625714b7e7a760d945af716bc04c84f"
+    },
+    {
+      "resource_id": "icn_equipment_body_supporter_t1",
+      "path_id": "-9006523493413985054",
+      "file": "equipment/standard/icn_equipment_body_supporter_t1.png",
+      "png_sha256": "e6bcf77b0a54ad32fd2f7ef8f0cc57d872c3321dc2623b1e951f23aa204cb256"
+    },
+    {
+      "resource_id": "icn_equipment_body_supporter_t3",
+      "path_id": "-3227522992911462137",
+      "file": "equipment/standard/icn_equipment_body_supporter_t3.png",
+      "png_sha256": "fe2fa4dc73b4dd8e06954a5c0f266870173d680ef759290d4b72643df3986844"
+    },
+    {
+      "resource_id": "icn_equipment_body_supporter_t5",
+      "path_id": "-534734235570260367",
+      "file": "equipment/standard/icn_equipment_body_supporter_t5.png",
+      "png_sha256": "7e986e66318ea590ff168d783a42f19b8871520876f816bf3e29111b10289aa5"
+    },
+    {
+      "resource_id": "icn_equipment_body_supporter_t7",
+      "path_id": "130699249378589456",
+      "file": "equipment/standard/icn_equipment_body_supporter_t7.png",
+      "png_sha256": "7538b534e5d880f7dbbe30213e79aa4d11389ab96afae4a8abe923b238afa902"
+    },
+    {
+      "resource_id": "icn_equipment_body_supporter_t9_1",
+      "path_id": "7640393436776506053",
+      "file": "equipment/standard/icn_equipment_body_supporter_t9_1.png",
+      "png_sha256": "6a7d9eca339c2ef39c1bfc2bd1c02321b745840af5ff7d966dc771ae47332fcd"
+    },
+    {
+      "resource_id": "icn_equipment_head_attacker_t1",
+      "path_id": "-2965994929677150205",
+      "file": "equipment/standard/icn_equipment_head_attacker_t1.png",
+      "png_sha256": "92b6a844c4ed78ccb33d70436f32b4f3fe66dee316df7dd74c219da92ecb2e5e"
+    },
+    {
+      "resource_id": "icn_equipment_head_attacker_t3",
+      "path_id": "6164830918383612674",
+      "file": "equipment/standard/icn_equipment_head_attacker_t3.png",
+      "png_sha256": "6b7d2bead81c9431a1539e15333ec94b5332f169925134574af474cf1bc7f904"
+    },
+    {
+      "resource_id": "icn_equipment_head_attacker_t5",
+      "path_id": "5100152870223615157",
+      "file": "equipment/standard/icn_equipment_head_attacker_t5.png",
+      "png_sha256": "2c33cfe5d43ff865cce15f251de204f3d4c3e1b3455ba541e05d798618e2633f"
+    },
+    {
+      "resource_id": "icn_equipment_head_attacker_t7",
+      "path_id": "1294512226868961680",
+      "file": "equipment/standard/icn_equipment_head_attacker_t7.png",
+      "png_sha256": "0f10558f6d12e2e76be4451dea5e3d1f133096a5d4a34e60239f0b72055f0847"
+    },
+    {
+      "resource_id": "icn_equipment_head_attacker_t9_1",
+      "path_id": "-7992756299055848613",
+      "file": "equipment/standard/icn_equipment_head_attacker_t9_1.png",
+      "png_sha256": "26d3669a9b6175506604692365413dd1861353a3d4d18d14ae7ae769895877bc"
+    },
+    {
+      "resource_id": "icn_equipment_head_defender_t1",
+      "path_id": "-2354012986990333264",
+      "file": "equipment/standard/icn_equipment_head_defender_t1.png",
+      "png_sha256": "ad6979117f890fdb84669696615ca77ad93e7b2f3cff1a58b166244cf0d4e5ab"
+    },
+    {
+      "resource_id": "icn_equipment_head_defender_t3",
+      "path_id": "1607532467220704307",
+      "file": "equipment/standard/icn_equipment_head_defender_t3.png",
+      "png_sha256": "cccb68d10ad0bd4f7f3c7d176435d593126dd43e8153612fd31211a7064edabb"
+    },
+    {
+      "resource_id": "icn_equipment_head_defender_t5",
+      "path_id": "-80795301453661777",
+      "file": "equipment/standard/icn_equipment_head_defender_t5.png",
+      "png_sha256": "58c2cd4a05984588d897eac44cb9d95744000e4649d22a11fd532517e54ecf56"
+    },
+    {
+      "resource_id": "icn_equipment_head_defender_t7",
+      "path_id": "-3053174950807285782",
+      "file": "equipment/standard/icn_equipment_head_defender_t7.png",
+      "png_sha256": "2876c75541ced5f44996586eda88b42e098ec78c0c7166503986e7a52e30c3d3"
+    },
+    {
+      "resource_id": "icn_equipment_head_defender_t9_1",
+      "path_id": "62765237307662483",
+      "file": "equipment/standard/icn_equipment_head_defender_t9_1.png",
+      "png_sha256": "dc73be1fd48d51a87d5ac7350bf5a9e0c90a2c7d4261463a41427b0d0b19b2d7"
+    },
+    {
+      "resource_id": "icn_equipment_head_supporter_t1",
+      "path_id": "-1392887983026757070",
+      "file": "equipment/standard/icn_equipment_head_supporter_t1.png",
+      "png_sha256": "e0e743f1091173d12638d06baadfba12ecbcf341f86f090deabff770d22f0db1"
+    },
+    {
+      "resource_id": "icn_equipment_head_supporter_t3",
+      "path_id": "-4176601155491630669",
+      "file": "equipment/standard/icn_equipment_head_supporter_t3.png",
+      "png_sha256": "540a9450e1ed30b42ed71deeed797d448a73a713c717105d00ff77cc26ba79a8"
+    },
+    {
+      "resource_id": "icn_equipment_head_supporter_t5",
+      "path_id": "189355429889595754",
+      "file": "equipment/standard/icn_equipment_head_supporter_t5.png",
+      "png_sha256": "35a0487b4dd2b8c86e09fef7d4e8f2b0d23e5519d979599dbd5f3e3c98eb93a3"
+    },
+    {
+      "resource_id": "icn_equipment_head_supporter_t7",
+      "path_id": "-4714766232361432107",
+      "file": "equipment/standard/icn_equipment_head_supporter_t7.png",
+      "png_sha256": "53c96a14b7a116d28b7cfc205c5bbcfd793064f70cc5569dfe23a542ed9ff771"
+    },
+    {
+      "resource_id": "icn_equipment_head_supporter_t9_1",
+      "path_id": "4950168892639762136",
+      "file": "equipment/standard/icn_equipment_head_supporter_t9_1.png",
+      "png_sha256": "7d6b2aea117185fd34836e17f0cbce39d7806c880c60dc064ae083b7b5952db1"
+    },
+    {
+      "resource_id": "icn_equipment_leg_attacker_t1",
+      "path_id": "-6542883343957129119",
+      "file": "equipment/standard/icn_equipment_leg_attacker_t1.png",
+      "png_sha256": "a70797fca30af336ff45019e125e9e0a9e3191e7651e471f0962f7089d6a2adc"
+    },
+    {
+      "resource_id": "icn_equipment_leg_attacker_t3",
+      "path_id": "-1890337619736386187",
+      "file": "equipment/standard/icn_equipment_leg_attacker_t3.png",
+      "png_sha256": "d1f19f6c457cd05fe7e92a8c407fffa2f270c76105161a471318c0270eaf64d0"
+    },
+    {
+      "resource_id": "icn_equipment_leg_attacker_t5",
+      "path_id": "2636074361084045221",
+      "file": "equipment/standard/icn_equipment_leg_attacker_t5.png",
+      "png_sha256": "4404780f3818fb2fe9d3627f50925abce8d128833037ef8cd24ff654396da913"
+    },
+    {
+      "resource_id": "icn_equipment_leg_attacker_t7",
+      "path_id": "2946890696072248953",
+      "file": "equipment/standard/icn_equipment_leg_attacker_t7.png",
+      "png_sha256": "dacd647622f292fb68d0b6a5ba24a05e6e05b600445070ef4f0fade54b49f1de"
+    },
+    {
+      "resource_id": "icn_equipment_leg_attacker_t9_1",
+      "path_id": "-7156756016783559003",
+      "file": "equipment/standard/icn_equipment_leg_attacker_t9_1.png",
+      "png_sha256": "5cfcc20a728b0a713625beacadada410d88cfddac43ccf5f6cfd8c06af16c37e"
+    },
+    {
+      "resource_id": "icn_equipment_leg_defender_t1",
+      "path_id": "-4567936819847896298",
+      "file": "equipment/standard/icn_equipment_leg_defender_t1.png",
+      "png_sha256": "e9bbc5c3324f36d90aab6bee4459c18ae8fbf31eff59f48013e4242873201b89"
+    },
+    {
+      "resource_id": "icn_equipment_leg_defender_t3",
+      "path_id": "-7006348028051416781",
+      "file": "equipment/standard/icn_equipment_leg_defender_t3.png",
+      "png_sha256": "613555d604ee7e0d51102161b979921a1b6f4627f4c3bd956d70ea346a2cad63"
+    },
+    {
+      "resource_id": "icn_equipment_leg_defender_t5",
+      "path_id": "2235167541749837773",
+      "file": "equipment/standard/icn_equipment_leg_defender_t5.png",
+      "png_sha256": "5f8dc219389d00eb28ed2542957339805d47dbf59741f59ee08cfb8efbe40dc5"
+    },
+    {
+      "resource_id": "icn_equipment_leg_defender_t7",
+      "path_id": "-1801031151396005699",
+      "file": "equipment/standard/icn_equipment_leg_defender_t7.png",
+      "png_sha256": "115a75780e3fe0df8786dfafbb6aa6f4c891a06a7e6971c2915c675ebbdd9c3d"
+    },
+    {
+      "resource_id": "icn_equipment_leg_defender_t9_1",
+      "path_id": "4810147249115528281",
+      "file": "equipment/standard/icn_equipment_leg_defender_t9_1.png",
+      "png_sha256": "f8175f618cfb99fbb4c8e7def0af79466e84da87de585f559092dad467eb675e"
+    },
+    {
+      "resource_id": "icn_equipment_leg_supporter_t1",
+      "path_id": "-2544642362111988499",
+      "file": "equipment/standard/icn_equipment_leg_supporter_t1.png",
+      "png_sha256": "6506bfdcfa96d6bf1a52833e8d308e5ac8139d5d3f8bf7bcdfce44dde22130d0"
+    },
+    {
+      "resource_id": "icn_equipment_leg_supporter_t3",
+      "path_id": "-7653919957649123340",
+      "file": "equipment/standard/icn_equipment_leg_supporter_t3.png",
+      "png_sha256": "90911ee852f0f80dfe0bde5edaee4e642efb574cba922cb893dd58fa14855a0e"
+    },
+    {
+      "resource_id": "icn_equipment_leg_supporter_t5",
+      "path_id": "-8370314483528618070",
+      "file": "equipment/standard/icn_equipment_leg_supporter_t5.png",
+      "png_sha256": "0fa8dde5f924fcd19af4bbd9aad8dc4e444ccd179511c5536f6d3872cab4646e"
+    },
+    {
+      "resource_id": "icn_equipment_leg_supporter_t7",
+      "path_id": "-2513278027688127940",
+      "file": "equipment/standard/icn_equipment_leg_supporter_t7.png",
+      "png_sha256": "092659bc0041f41608ad16f68ccbbea73d964bbf425c192a00b7515f6e7f1cff"
+    },
+    {
+      "resource_id": "icn_equipment_leg_supporter_t9_1",
+      "path_id": "1635527964087186646",
+      "file": "equipment/standard/icn_equipment_leg_supporter_t9_1.png",
+      "png_sha256": "982b1d8bdbb3a6aa88013a6c904c5d66f2e03793848bccbd29790a94db5c2959"
+    },
+    {
+      "resource_id": "icn_equipment_arm_attacker_t9_3",
+      "path_id": "1974539666180700931",
+      "file": "equipment/overload/vmetal-arms.png",
+      "png_sha256": "b071521d99496a7d4a2c408b1ea910ed8d81ba78ac5420a9aad869c824cc63c0"
+    },
+    {
+      "resource_id": "icn_equipment_arm_defender_t9_3",
+      "path_id": "-5888049500836952013",
+      "file": "equipment/overload/99-arms.png",
+      "png_sha256": "ef7788e1a2ab6c624e2319b7514dac4c133d03fdf8e7cca618e52188ac561250"
+    },
+    {
+      "resource_id": "icn_equipment_arm_supporter_t9_3",
+      "path_id": "8624115766078258521",
+      "file": "equipment/overload/code-arms.png",
+      "png_sha256": "0aa10b1afca7da77f3e418c5ec985620b263753bb0f765c6e37cd5d49ffe7ad1"
+    },
+    {
+      "resource_id": "icn_equipment_body_attacker_t9_3",
+      "path_id": "-7958534369583495690",
+      "file": "equipment/overload/vmetal-body.png",
+      "png_sha256": "0a42a1f15713af16f34a184f58fcb671cd7c60b4c5aa11101104f0497500d892"
+    },
+    {
+      "resource_id": "icn_equipment_body_defender_t9_3",
+      "path_id": "-2245916088654931902",
+      "file": "equipment/overload/99-body.png",
+      "png_sha256": "600f5512c86fb7d5c7c196678808e900635706b48050d429ad7f29cf3ab4e17d"
+    },
+    {
+      "resource_id": "icn_equipment_body_supporter_t9_3",
+      "path_id": "1975621532967411022",
+      "file": "equipment/overload/code-body.png",
+      "png_sha256": "78b5166e9b1cb87ffc4cea08d6ebca710f4225b152dffcc9d0abc8742ab5532a"
+    },
+    {
+      "resource_id": "icn_equipment_head_attacker_t9_3",
+      "path_id": "134802387837238319",
+      "file": "equipment/overload/vmetal-head.png",
+      "png_sha256": "ecb18bb8287a2d2c7f9fd02ed015abedda22cf812e2fa54a7753b21bce3d9479"
+    },
+    {
+      "resource_id": "icn_equipment_head_defender_t9_3",
+      "path_id": "3216947929693736657",
+      "file": "equipment/overload/99-head.png",
+      "png_sha256": "d2390beffde6c562f23daa1ef53b3f037fb71d56165e9d942e71b847bbc5970f"
+    },
+    {
+      "resource_id": "icn_equipment_head_supporter_t9_3",
+      "path_id": "-6269528241924704844",
+      "file": "equipment/overload/code-head.png",
+      "png_sha256": "81d95db20f449e064d829c228e1c715282df68e9f382bc14378afc6dcfd711f7"
+    },
+    {
+      "resource_id": "icn_equipment_leg_attacker_t9_3",
+      "path_id": "-4636124762029685731",
+      "file": "equipment/overload/vmetal-legs.png",
+      "png_sha256": "a9b069b1dcf4711a459ddf0f84d36b09e3b32d2064af57b967ed02e009eb436b"
+    },
+    {
+      "resource_id": "icn_equipment_leg_defender_t9_3",
+      "path_id": "314002665389877270",
+      "file": "equipment/overload/99-legs.png",
+      "png_sha256": "d64ab22d41d0d5ba13e7686c4790308613bea3f777e6fe5e80f4387c676a8b55"
+    },
+    {
+      "resource_id": "icn_equipment_leg_supporter_t9_3",
+      "path_id": "-1335994857770807227",
+      "file": "equipment/overload/code-legs.png",
+      "png_sha256": "2c95cfb210e2b05ffc65ca8033da64735a5fecc673ed08c51f8bafbd4637b2a6"
+    }
+  ]
+}

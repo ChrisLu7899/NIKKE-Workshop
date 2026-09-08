@@ -1,0 +1,20 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><title>角色物件素材验收</title>
+<style>body{margin:12px;background:#dce1e6;font-family:system-ui}.samples{display:flex;flex-wrap:wrap;gap:12px}.sample{width:368px;max-width:100%}.frame{width:100%;height:548px}button,select{padding:8px;margin:0 8px 8px 0}</style></head>
+<body><h1>角色物件素材验收（隔离测试数据）</h1><div id="root"></div>
+<script type="module">
+import React,{useRef,useState} from 'react';import {createRoot} from 'react-dom/client';
+import CharacterCard from '../src/components/management/CharacterCard.jsx';
+import {downloadCharacterCardPng} from '../src/utils/characterCardDownload.js';
+import {CUBE_ICON_CATALOG} from '../src/domain/cubeIconCatalog.js';
+const e=React.createElement;
+const records=[{rid:352,name:'海伦',weapon:'AR',rarity:'SSR',level:2},{rid:104,name:'德雷克·终极反派',weapon:'SG',rarity:'SR',level:15},{rid:511,name:'灰姑娘',weapon:'RL',rarity:'R',level:5}];
+function Sample({i}){const ref=useRef(null),[visible,setVisible]=useState(true),[cube,setCube]=useState(1000304),[weapon,setWeapon]=useState(records[i].weapon);
+const r=records[i];
+return e('section',{className:'sample'},e('h2',null,r.name),e('button',{onClick:()=>setVisible(!visible)},'切换物件模块'),e('button',{onClick:()=>downloadCharacterCardPng(ref.current,'objects-'+r.rid)},'下载'),
+e('select',{'aria-label':'魔方',value:cube,onChange:x=>setCube(Number(x.target.value))},...CUBE_ICON_CATALOG.map(c=>e('option',{key:c.cubeId,value:c.cubeId},c.nameCn))),
+e('select',{'aria-label':'武器',value:weapon,onChange:x=>setWeapon(x.target.value)},...['AR','MG','RL','SG','SMG','SR'].map(w=>e('option',{key:w,value:w},w))),
+e('div',{className:'frame'},e(CharacterCard,{catalogCharacter:{name_cn:r.name,resource_id:r.rid,original_rare:'SSR',class:'Attacker',element:'Electronic',weapon_type:weapon,corporation:'Pilgrim',use_burst_skill:'Step3'},
+characterData:{level:616,combat:409238,affectionLevel:40,classLevel:202,corporationLevel:186,skill1Level:3,skill2Level:7,burstSkillLevel:10,limitBreak:{grade:3,core:3},favoriteItemRarity:r.rarity,favoriteItemLevel:r.level,cubeId:cube,cubeLevel:15,equipments:[]},
+artworkUrl:`/ui-assets/nikke/character-artwork/c${r.rid}.webp`,cardRef:ref,visibleModules:{favoriteItem:visible,skills:visible,cube:visible,equipments:false,affixSummary:false}})))}
+createRoot(document.getElementById('root')).render(e('div',{className:'samples'},...records.map((_,i)=>e(Sample,{key:i,i}))));
+</script></body></html>

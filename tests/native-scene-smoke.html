@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><title>技能动画素材验收（隔离数据）</title></head>
+<body>
+<div id="root"></div>
+<script type="module">
+  import React from 'react';
+  import { createRoot } from 'react-dom/client';
+  import { ThemeProvider, createTheme } from '@mui/material';
+  import CharacterWorkspaceDrawer from '../src/components/management/CharacterWorkspaceDrawer.jsx';
+  import { getNikkeArtworkCandidates } from '../src/utils/nikkeAvatar.js';
+  // Test-only fixture: no account, cookies, storage adapter or sync requests.
+  const e = React.createElement;
+  const id = Number(new URLSearchParams(location.search).get('id') || 352);
+  const names = {104:'德雷克：终极反派', 352:'海伦', 511:'灰姑娘', 513:'小美人鱼', 222:'红莲', 16:'拉毗·小红帽'};
+  const character = {resource_id:id, name_cn:names[id] || String(id), original_rare:'SSR'};
+  // Public directory identity, not account data (verified 2026-09-06).
+  if (id === 104) Object.assign(character, {
+    id:110401, name_code:5181, class:'Defender', element:'Wind',
+    use_burst_skill:'Step3', corporation:'MISSILIS', weapon_type:'SG'
+  });
+  createRoot(document.getElementById('root')).render(e(ThemeProvider,{theme:createTheme()},
+    e(CharacterWorkspaceDrawer,{
+      open:true,onClose:()=>{},characterCode:'native-scene-test-'+id,
+      catalogCharacter:character,characterData:{},artworkCandidates:getNikkeArtworkCandidates(character),
+      catalogOptions:[],optionLabels:{},onSave:()=>{},onDelete:()=>{},onOpenCalculator:()=>{}
+    })
+  ));
+</script>
+</body>
+</html>

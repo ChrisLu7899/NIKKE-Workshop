@@ -15,9 +15,8 @@ const copyLocalOcrAssets = () => ({
     const ocrRoot = resolve(output, 'ocr')
     await mkdir(resolve(ocrRoot, 'core'), { recursive: true })
     await mkdir(resolve(ocrRoot, 'lang'), { recursive: true })
-    // Older OCR builds bundled an English model for numeric guessing. Values are
-    // now matched against constrained local templates, so remove that stale asset.
-    await rm(resolve(ocrRoot, 'lang/eng.traineddata.gz'), { force: true })
+    // 装备数值继续使用固定档位模板；英文模型仅由练度模式按需加载，
+    // 用于等级和战斗力的严格数字格式识别。
     await cp(resolve('node_modules/tesseract.js/dist/worker.min.js'), resolve(ocrRoot, 'worker.min.js'))
     const coreFiles = [
       'tesseract-core-lstm.wasm.js', 'tesseract-core-lstm.wasm',
@@ -28,6 +27,7 @@ const copyLocalOcrAssets = () => ({
     // Tesseract.js 7 uses the regular 4.0.0 model. The legacy best_int model
     // emits unsupported-parameter warnings with the bundled v7 WASM core.
     await cp(resolve('node_modules/@tesseract.js-data/chi_sim/4.0.0/chi_sim.traineddata.gz'), resolve(ocrRoot, 'lang/chi_sim.traineddata.gz'))
+    await cp(resolve('node_modules/@tesseract.js-data/eng/4.0.0/eng.traineddata.gz'), resolve(ocrRoot, 'lang/eng.traineddata.gz'))
 
     const screenshotsRoot = resolve(output, 'screenshots')
     // The preset folders are intentionally empty. Recreate this generated tree

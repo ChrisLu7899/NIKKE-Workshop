@@ -1,9 +1,9 @@
 {
   "name": "NIKKE Workshop",
   "short_name": "【王国大学习】NIKKE 战术整备室",
-  "description": "【王国大学习】NIKKE战术整备室 1.0.9，集成角色数据获取与洗词条计算器。",
-  "version": "1.0.9",
-  "version_name": "NIKKE Workshop 1.0.9",
+  "description": "【王国大学习】NIKKE战术整备室 1.0.10，集成角色数据获取与洗词条计算器。",
+  "version": "1.0.10",
+  "version_name": "NIKKE Workshop 1.0.10",
   "manifest_version": 3,
 
   "content_security_policy": {
@@ -36,6 +36,7 @@
   },
 
   "permissions": [
+    "alarms",
     "cookies",
     "tabs",
     "storage",
@@ -46,6 +47,7 @@
     "declarativeNetRequestWithHostAccess"
   ],
   "host_permissions": [
+    "https://api.github.com/*",
     "*://*.blablalink.com/*",
     "https://nikke-db.github.io/*"
   ],

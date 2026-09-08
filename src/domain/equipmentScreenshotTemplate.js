@@ -20,6 +20,12 @@ export const OVERLOAD_PANEL_GEOMETRY = Object.freeze({
 
 const clamp = (value, minimum, maximum) => Math.min(maximum, Math.max(minimum, value));
 
+export function shouldPreferEquipmentScreenshot(detection) {
+  return detection?.source === "overload-geometry"
+    && detection?.confidence === "high"
+    && Number(detection?.coverage || 0) >= 0.94;
+}
+
 function normalizeBounds(bounds) {
   const left = Math.round(Number(bounds?.left) || 0);
   const top = Math.round(Number(bounds?.top) || 0);

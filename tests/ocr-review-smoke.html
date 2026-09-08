@@ -1,0 +1,16 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><title>OCR 隔离验收</title></head><body><div id="root"></div>
+<script type="module">
+import React from 'react';import{createRoot}from'react-dom/client';
+import ScreenshotOcrImportDialog from '../src/components/management/ScreenshotOcrImportDialog.jsx';
+import{runScreenshotBatch}from'../src/services/ocrTask.js';
+const sample=(field,value)=>({field,value,status:'recognized',confidence:.91,warnings:[]});
+window.saved=[];window.failSave=true;
+const recognize=(groups,options)=>runScreenshotBatch(groups,async({file,characterName})=>{
+ if(file.name==='bad.png')throw Error('测试图片损坏');
+ return {type:'training',characterName,fileName:file.name,fields:{characterLevel:sample('characterLevel',file.name==='b.png'?445:616),skill1Level:sample('skill1Level',7)}};
+},options);
+createRoot(document.getElementById('root')).render(React.createElement(ScreenshotOcrImportDialog,{
+ open:true,onClose:()=>{},standardCatalog:[{name_cn:'灰姑娘',resource_id:511,original_rare:'SSR'}],localRecords:[],recognize,
+ onSaveLocalCharacterBatch:async(items)=>{await new Promise(r=>setTimeout(r,150));if(window.failSave)throw Error('测试存储失败');window.saved=items;return{saved:items};}
+}));
+</script></body></html>

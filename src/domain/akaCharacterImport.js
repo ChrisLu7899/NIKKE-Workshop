@@ -7,6 +7,10 @@ import {
   normalizeEquipments,
   normalizeLocalCharacterRecord,
 } from "./localCharacterRoster.js";
+import {
+  mapAkaUserInfoResearchLevels,
+  resolveCharacterResearchLevels,
+} from "../utils/researchLevels.js";
 
 export const AKA_EQUIPMENT_FUNCTION_BY_STAT_NO = Object.freeze({
   0: "IncElementDmg",
@@ -110,6 +114,7 @@ export function buildAkaCharacterImportPreview({
   const items = [];
   const unmatched = [];
   const seenCodes = new Set();
+  const researchLevels = mapAkaUserInfoResearchLevels(userInfo);
 
   characters.forEach((character) => {
     const characterName = String(character?.characterName || "").trim();
@@ -125,6 +130,11 @@ export function buildAkaCharacterImportPreview({
 
     const existing = findExistingStandardRecord(localRecords, catalogCharacter, characterName);
     const normalized = existing ? normalizeLocalCharacterRecord(existing) : null;
+    const characterResearch = resolveCharacterResearchLevels(
+      researchLevels,
+      catalogCharacter?.class,
+      catalogCharacter?.corporation,
+    );
     const draft = {
       ...(normalized || {}),
       level: normalized?.level ?? "",
@@ -133,7 +143,9 @@ export function buildAkaCharacterImportPreview({
         normalized?.limitBreak || { grade: null, core: null },
       ),
       combat: normalized?.combat ?? "",
-      affectionLevel: normalized?.affectionLevel ?? "",
+      affectionLevel: finiteNumber(character?.attractiveLv) ?? normalized?.affectionLevel ?? "",
+      classLevel: characterResearch.classLevel ?? normalized?.classLevel ?? "",
+      corporationLevel: characterResearch.corporationLevel ?? normalized?.corporationLevel ?? "",
       equipments: akaEquipmentInfosToEquipments(
         character?.equipmentInfos,
         normalized?.equipments,

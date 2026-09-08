@@ -123,8 +123,11 @@ export const applyCharacterAccountData = ({
         };
       }
       target.equipments = detail.equipments;
+      target.raw_equipments = detail.raw_equipments;
 
       if (detail.cube_id && detail.cube_level) {
+        target.cube_id = detail.cube_id;
+        target.cube_level = detail.cube_level;
         const cube = (dict?.cubes || []).find(
           (entry) => entry.cube_id === detail.cube_id,
         );

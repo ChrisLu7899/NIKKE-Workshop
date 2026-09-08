@@ -8,24 +8,51 @@ import {
 import {
   EQUIPMENT_FUNCTION_LABELS,
   EQUIPMENT_FUNCTION_TYPES,
+  LIMIT_BREAK_TOTAL_LEVELS,
   catalogCharacterToBaseProfile,
   createEmptyEquipments,
+  limitBreakToTotalLevel,
   normalizeLocalCharacterRecord,
+  totalLevelToLimitBreak,
 } from "../../domain/localCharacterRoster.js";
 import { EQUIPMENT_TIER_VALUES } from "../../domain/equipmentAffixes.js";
+import { isNonOverloadEquipment } from "../../domain/equipmentCatalog.js";
+import {
+  favoriteItemStarCount,
+  favoriteItemSelectableStars,
+  favoriteItemStarsToLevel,
+} from "../../domain/favoriteItem.js";
+import { CUBE_ICON_CATALOG } from "../../domain/cubeIconCatalog.js";
 
 const SLOT_NAMES = ["头部", "身躯", "臂部", "腿部"];
+const SKILL_LEVELS = Array.from({ length: 10 }, (_, index) => index + 1);
+const CUBE_LEVELS = Array.from({ length: 15 }, (_, index) => index + 1);
+const SKILL_LEVEL_FIELDS = [
+  ["skill1Level", "技能 1 等级"],
+  ["skill2Level", "技能 2 等级"],
+  ["burstSkillLevel", "爆裂技能等级"],
+];
 const PROFILE_FIELDS = [
   ["element", "属性", "elements"], ["class", "职业", "classes"],
   ["burstStage", "爆裂阶段", "bursts"], ["corporation", "企业", "corporations"],
   ["weaponType", "武器类型", "weapons"], ["rarity", "稀有度", "rarities"],
 ];
 
+const limitBreakLabel = (level) => {
+  if (level <= 3) return `${level} 星`;
+  if (level >= 10) return "核心突破 MAX";
+  return `核心突破 ${level - 3}`;
+};
+
 const emptyDraft = (catalogCharacter, custom) => ({
   base: custom
     ? { name: "", nameCn: "", nameEn: "", element: "", class: "", burstStage: "", corporation: "", weaponType: "", rarity: "" }
     : catalogCharacterToBaseProfile(catalogCharacter),
-  level: "", limitBreak: { grade: "", core: "" }, combat: "", affectionLevel: "",
+  level: "", limitBreakTotal: 0, combat: "", affectionLevel: "",
+  favoriteItemRarity: "", favoriteItemLevel: "",
+  classLevel: "", corporationLevel: "",
+  skill1Level: "", skill2Level: "", burstSkillLevel: "",
+  cubeId: "", cubeResourceId: "", cubeNameCn: "", cubeNameEn: "", cubeLevel: "",
   equipments: createEmptyEquipments(),
 });
 
@@ -37,8 +64,15 @@ const characterToDraft = (character, catalogCharacter, custom) => {
   });
   return {
     base: { ...normalized.base }, level: normalized.level ?? "",
-    limitBreak: { grade: normalized.limitBreak.grade ?? "", core: normalized.limitBreak.core ?? "" },
+    limitBreakTotal: limitBreakToTotalLevel(normalized.limitBreak),
     combat: normalized.combat ?? "", affectionLevel: normalized.affectionLevel ?? "",
+    favoriteItemRarity: normalized.favoriteItemRarity,
+    favoriteItemLevel: normalized.favoriteItemLevel ?? "",
+    classLevel: normalized.classLevel ?? "", corporationLevel: normalized.corporationLevel ?? "",
+    skill1Level: normalized.skill1Level ?? "", skill2Level: normalized.skill2Level ?? "", burstSkillLevel: normalized.burstSkillLevel ?? "",
+    cubeId: normalized.cubeId ?? "", cubeResourceId: normalized.cubeResourceId ?? "",
+    cubeNameCn: normalized.cubeNameCn ?? "", cubeNameEn: normalized.cubeNameEn ?? "", cubeLevel: normalized.cubeLevel ?? "",
+    equipmentMetadata: normalized.equipmentMetadata,
     equipments: normalized.equipments.map((slot) => slot.map((line) => ({ ...line, value: line.value ?? "", level: line.level ?? "" }))),
   };
 };
@@ -80,7 +114,11 @@ export default function CharacterDataEditor({
   const save = async () => {
     setSaving(true);
     try {
-      const result = await onSave(draft);
+      const { limitBreakTotal, ...rest } = draft;
+      const result = await onSave({
+        ...rest,
+        limitBreak: totalLevelToLimitBreak(limitBreakTotal),
+      });
       if (result?.errors?.length) setErrors(result.errors);
       else {
         setErrors([]);
@@ -118,19 +156,79 @@ export default function CharacterDataEditor({
       <Box sx={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 1.5 }}>
         <TextField type="number" label="等级（可留空）" value={draft.level} onChange={(event) => setDraft((value) => ({ ...value, level: event.target.value }))} />
         <TextField type="number" label="战斗力（可留空）" value={draft.combat} onChange={(event) => setDraft((value) => ({ ...value, combat: event.target.value }))} />
-        <TextField type="number" label="突破（可留空）" value={draft.limitBreak.grade} onChange={(event) => setDraft((value) => ({ ...value, limitBreak: { ...value.limitBreak, grade: event.target.value } }))} />
-        <TextField type="number" label="核心突破（可留空）" value={draft.limitBreak.core} onChange={(event) => setDraft((value) => ({ ...value, limitBreak: { ...value.limitBreak, core: event.target.value } }))} />
+        <TextField select label="突破等级" value={draft.limitBreakTotal} onChange={(event) => setDraft((value) => ({ ...value, limitBreakTotal: Number(event.target.value) }))}>
+          {LIMIT_BREAK_TOTAL_LEVELS.map((level) => <MenuItem key={level} value={level}>{limitBreakLabel(level)}</MenuItem>)}
+        </TextField>
         <TextField type="number" label="好感度（可留空）" value={draft.affectionLevel} onChange={(event) => setDraft((value) => ({ ...value, affectionLevel: event.target.value }))} />
+        <TextField select label="收藏品" value={draft.favoriteItemRarity} onChange={(event) => setDraft((value) => {
+          const favoriteItemRarity = event.target.value;
+          if (!favoriteItemRarity) {
+            return { ...value, favoriteItemRarity: "", favoriteItemLevel: "" };
+          }
+          const stars = value.favoriteItemRarity
+            ? favoriteItemStarCount(value.favoriteItemRarity, value.favoriteItemLevel)
+            : 0;
+          return {
+            ...value,
+            favoriteItemRarity,
+            favoriteItemLevel: favoriteItemStarsToLevel(favoriteItemRarity, stars),
+          };
+        })}>
+          <MenuItem value="">无收藏品</MenuItem>
+          <MenuItem value="R">R 收藏品</MenuItem>
+          <MenuItem value="SR">SR 收藏品</MenuItem>
+          <MenuItem value="SSR">SSR 珍藏品</MenuItem>
+        </TextField>
+        <TextField
+          select
+          label="收藏品星级"
+          value={draft.favoriteItemRarity ? favoriteItemStarCount(draft.favoriteItemRarity, draft.favoriteItemLevel) : ""}
+          disabled={!draft.favoriteItemRarity}
+          onChange={(event) => setDraft((value) => ({
+            ...value,
+            favoriteItemLevel: favoriteItemStarsToLevel(value.favoriteItemRarity, event.target.value),
+          }))}
+        >
+          {favoriteItemSelectableStars(draft.favoriteItemRarity).map((stars) => <MenuItem key={stars} value={stars}>{stars} 星</MenuItem>)}
+        </TextField>
+        <TextField type="number" label="职业等级（可留空）" value={draft.classLevel} onChange={(event) => setDraft((value) => ({ ...value, classLevel: event.target.value }))} />
+        <TextField type="number" label="企业等级（可留空）" value={draft.corporationLevel} onChange={(event) => setDraft((value) => ({ ...value, corporationLevel: event.target.value }))} />
+        <TextField select label="魔方" value={draft.cubeId} onChange={(event) => setDraft((value) => {
+          const cube = CUBE_ICON_CATALOG.find((item) => item.cubeId === Number(event.target.value));
+          if (!cube) return { ...value, cubeId: "", cubeResourceId: "", cubeNameCn: "", cubeNameEn: "", cubeLevel: "" };
+          return {
+            ...value,
+            cubeId: cube.cubeId,
+            cubeResourceId: cube.resourceId,
+            cubeNameCn: cube.nameCn,
+            cubeNameEn: cube.nameEn,
+            cubeLevel: value.cubeLevel || 1,
+          };
+        })}>
+          <MenuItem value="">未录入</MenuItem>
+          {CUBE_ICON_CATALOG.map((cube) => <MenuItem key={cube.cubeId} value={cube.cubeId}>{cube.nameCn}</MenuItem>)}
+        </TextField>
+        <TextField select label="魔方等级" value={draft.cubeLevel} disabled={!draft.cubeId} onChange={(event) => setDraft((value) => ({ ...value, cubeLevel: event.target.value }))}>
+          <MenuItem value="">未录入</MenuItem>
+          {CUBE_LEVELS.map((level) => <MenuItem key={level} value={level}>LV. {level}</MenuItem>)}
+        </TextField>
+        {SKILL_LEVEL_FIELDS.map(([field, label]) => (
+          <TextField key={field} select label={label} value={draft[field]} onChange={(event) => setDraft((value) => ({ ...value, [field]: event.target.value }))}>
+            <MenuItem value="">未录入</MenuItem>
+            {SKILL_LEVELS.map((level) => <MenuItem key={level} value={level}>LV. {level}</MenuItem>)}
+          </TextField>
+        ))}
       </Box>
       <Typography variant="subtitle1" sx={{ mt: 3, mb: 1, fontWeight: 600 }}>四件装备</Typography>
       <Stack spacing={2}>
         {draft.equipments.map((slot, slotIndex) => (
           <Box key={SLOT_NAMES[slotIndex]} sx={{ p: 1.5, border: "1px solid", borderColor: "divider", borderRadius: 1.5 }}>
             <Typography variant="subtitle2" sx={{ mb: 1 }}>{SLOT_NAMES[slotIndex]}</Typography>
+            {isNonOverloadEquipment(draft.equipmentMetadata?.[slotIndex]) ? <Typography variant="body2" color="text.secondary">当前部位没有 T10 改造词条；升级后请重新同步或导入 T10 截图。</Typography> : null}
             <Stack spacing={1}>{slot.map((line, lineIndex) => (
               <Box key={line.position} sx={{ display: "grid", gridTemplateColumns: "24px minmax(0, 240px) minmax(0, 170px) minmax(84px, max-content)", gap: 0.75, alignItems: "center" }}>
                 <Typography color="text.secondary">{lineIndex + 1}</Typography>
-                <TextField select size="small" label="词条" value={line.functionType} onChange={(event) => updateLineType(slotIndex, lineIndex, event.target.value)}>
+                <TextField select size="small" label="词条" value={line.functionType} disabled={isNonOverloadEquipment(draft.equipmentMetadata?.[slotIndex])} onChange={(event) => updateLineType(slotIndex, lineIndex, event.target.value)}>
                   <MenuItem value="">空词条</MenuItem>{EQUIPMENT_FUNCTION_TYPES.map((type) => <MenuItem key={type} value={type}>{EQUIPMENT_FUNCTION_LABELS[type]}</MenuItem>)}
                 </TextField>
                 <TextField select size="small" label="档位与数值" value={line.level || ""} disabled={!line.functionType} onChange={(event) => updateLineTier(slotIndex, lineIndex, line.functionType, event.target.value)}>

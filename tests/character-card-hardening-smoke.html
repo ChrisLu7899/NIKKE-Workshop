@@ -1,0 +1,35 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><title>角色卡边界回归（隔离数据）</title><style>body{margin:0}</style></head>
+<body><div id="root"></div><script type="module">
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {ThemeProvider,createTheme} from '@mui/material';
+import CharacterWorkspaceDrawer from '../src/components/management/CharacterWorkspaceDrawer.jsx';
+import {getNikkeArtworkCandidates} from '../src/utils/nikkeAvatar.js';
+import {renderCharacterCardPng} from '../src/utils/characterCardDownload.js';
+
+// No real account/storage/network adapter. This fixture only uses in-memory records.
+window.auditStore={};window.auditStorageFailure=false;window.auditStorageDelay=0;
+window.chrome={runtime:{},storage:{local:{
+  get(keys,callback){setTimeout(()=>{
+    chrome.runtime.lastError=window.auditStorageFailure?{message:'fixture failure'}:undefined;
+    callback(Object.fromEntries(keys.filter(k=>Object.hasOwn(window.auditStore,k)).map(k=>[k,structuredClone(window.auditStore[k])])));
+    delete chrome.runtime.lastError;
+  },window.auditStorageDelay)},
+  set(value,callback){setTimeout(()=>{
+    chrome.runtime.lastError=window.auditStorageFailure?{message:'fixture failure'}:undefined;
+    if(!window.auditStorageFailure)Object.assign(window.auditStore,structuredClone(value));
+    callback();delete chrome.runtime.lastError;
+  },window.auditStorageDelay)},
+}}};
+const root=createRoot(document.getElementById('root'));
+const character={resource_id:352,name_cn:'海伦',original_rare:'SSR',class:'Attacker',element:'Electronic',use_burst_skill:'Step3',weapon_type:'AR',corporation:'Elysion'};
+const data={level:616,combat:409238,affectionLevel:40,classLevel:202,corporationLevel:186,skill1Level:1,skill2Level:9,burstSkillLevel:10,cubeId:1000304,cubeLevel:15,favoriteItemRarity:'SSR',favoriteItemLevel:2,limitBreak:{grade:3,core:3},equipments:[
+  [{position:1,functionType:'StatAtk',level:12,value:12.52},{position:2,functionType:'IncElementDmg',level:15,value:29.16},{position:3,functionType:'StatAccuracyCircle',level:10,value:11.11}],[],[],[]
+]};
+window.renderAudit=(extra={})=>root.render(React.createElement(ThemeProvider,{theme:createTheme()},React.createElement(CharacterWorkspaceDrawer,{
+  key:extra.characterCode||'audit',open:true,onClose:()=>root.render(null),characterCode:'audit',catalogCharacter:character,characterData:data,
+  artworkCandidates:getNikkeArtworkCandidates(character),catalogOptions:[],optionLabels:{},onSave:()=>{},onDelete:()=>{},onOpenCalculator:()=>{},...extra,
+})));
+window.renderAuditPng=renderCharacterCardPng;
+window.renderAudit();
+</script></body></html>

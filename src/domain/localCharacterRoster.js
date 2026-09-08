@@ -3,8 +3,11 @@
 
 import { resolveSimplifiedChineseCharacterName } from "../data/characterNameOverrides.js";
 import { tierValue } from "./equipmentAffixes.js";
+import { favoriteItemStarsToLevel, normalizeFavoriteItemLevel } from "./favoriteItem.js";
+import { normalizeEquipmentMetadata, mergeEquipmentMetadata } from "./equipmentMetadata.js";
+import { isNonOverloadEquipment } from "./equipmentCatalog.js";
 
-export const LOCAL_CHARACTER_SCHEMA_VERSION = 2;
+export const LOCAL_CHARACTER_SCHEMA_VERSION = 5;
 export const LOCAL_CHARACTER_SOURCES = Object.freeze({
   manual: "manual",
   excel: "excel",
@@ -28,6 +31,7 @@ export const EQUIPMENT_FUNCTION_LABELS = Object.freeze({
   StatDef: "防御力增加",
 });
 export const EQUIPMENT_FUNCTION_TYPES = Object.freeze(Object.keys(EQUIPMENT_FUNCTION_LABELS));
+export const LIMIT_BREAK_TOTAL_LEVELS = Object.freeze(Array.from({ length: 11 }, (_, level) => level));
 
 const SOURCE_VALUES = new Set(Object.values(LOCAL_CHARACTER_SOURCES));
 
@@ -62,6 +66,17 @@ export function createEmptyEquipments() {
       locked: null,
     }))
   ));
+}
+
+export function totalLevelToLimitBreak(value) {
+  const total = Math.max(0, Math.min(10, Math.trunc(Number(value) || 0)));
+  return { grade: Math.min(3, total), core: Math.max(0, total - 3) };
+}
+
+export function limitBreakToTotalLevel(limitBreak) {
+  const grade = optionalNumber(limitBreak?.grade, { integer: true, min: 0 }) || 0;
+  const core = optionalNumber(limitBreak?.core, { integer: true, min: 0 }) || 0;
+  return Math.max(0, Math.min(10, grade + core));
 }
 
 function normalizeEquipmentLine(line, position) {
@@ -156,6 +171,26 @@ export function normalizeLocalCharacterRecord(record, now = Date.now()) {
     || (nameCode ? `standard:${nameCode}` : `custom:${now}`);
   const createdAt = optionalNumber(record?.createdAt, { min: 0 }) || now;
   const updatedAt = optionalNumber(record?.updatedAt, { min: 0 }) || createdAt;
+  const favoriteItemRarity = codeOf(
+    record?.favoriteItemRarity ?? record?.itemRarity ?? record?.item_rare,
+  ).toUpperCase();
+  const favoriteItemStars = optionalNumber(
+    record?.favoriteItemStars
+      ?? record?.favorite_item_stars
+      ?? record?.itemStars
+      ?? record?.item_stars
+      ?? record?.item_star,
+    { integer: true, min: 0, max: 3 },
+  );
+  const favoriteItemLevel = favoriteItemStars !== null
+    ? favoriteItemStarsToLevel(favoriteItemRarity, favoriteItemStars)
+    : (() => {
+      const value = optionalNumber(
+        record?.favoriteItemLevel ?? record?.itemLevel ?? record?.item_level,
+        { integer: true, min: 0 },
+      );
+      return value === null ? null : normalizeFavoriteItemLevel(favoriteItemRarity, value);
+    })();
   return {
     schemaVersion: LOCAL_CHARACTER_SCHEMA_VERSION,
     localId,
@@ -170,7 +205,25 @@ export function normalizeLocalCharacterRecord(record, now = Date.now()) {
     },
     combat: optionalNumber(record?.combat, { integer: true, min: 0 }),
     affectionLevel: optionalNumber(record?.affectionLevel ?? record?.affection_level, { integer: true, min: 0 }),
-    equipments: normalizeEquipments(record?.equipments),
+    favoriteItemRarity,
+    favoriteItemLevel,
+    favoriteItemObservation: record?.favoriteItemObservation?.rarity === favoriteItemRarity
+      && Number.isInteger(record.favoriteItemObservation.stars) && record.favoriteItemObservation.stars >= 0 && record.favoriteItemObservation.stars <= 3
+      ? { rarity: favoriteItemRarity, stars: record.favoriteItemObservation.stars, source: "screenshot" } : null,
+    classLevel: optionalNumber(record?.classLevel ?? record?.class_level, { integer: true, min: 0 }),
+    corporationLevel: optionalNumber(record?.corporationLevel ?? record?.corporation_level, { integer: true, min: 0 }),
+    skill1Level: optionalNumber(record?.skill1Level ?? record?.skill1_level ?? record?.skill1_lv, { integer: true, min: 1, max: 10 }),
+    skill2Level: optionalNumber(record?.skill2Level ?? record?.skill2_level ?? record?.skill2_lv, { integer: true, min: 1, max: 10 }),
+    burstSkillLevel: optionalNumber(record?.burstSkillLevel ?? record?.skill_burst_level ?? record?.ulti_skill_lv, { integer: true, min: 1, max: 10 }),
+    cubeId: optionalNumber(record?.cubeId ?? record?.cube_id, { integer: true, min: 0 }),
+    cubeResourceId: optionalNumber(record?.cubeResourceId ?? record?.cube_resource_id, { integer: true, min: 0 }),
+    cubeNameCn: codeOf(record?.cubeNameCn ?? record?.cube_name_cn),
+    cubeNameEn: codeOf(record?.cubeNameEn ?? record?.cube_name_en),
+    cubeLevel: optionalNumber(record?.cubeLevel ?? record?.cube_level, { integer: true, min: 1, max: 15 }),
+    equipments: normalizeEquipments(record?.equipments).map((lines, slot) =>
+      isNonOverloadEquipment(normalizeEquipmentMetadata(record?.equipmentMetadata ?? record?.raw_equipments)[slot])
+        ? normalizeEquipments([])[slot] : lines),
+    equipmentMetadata: normalizeEquipmentMetadata(record?.equipmentMetadata ?? record?.raw_equipments),
     createdAt,
     updatedAt,
     syncMissing: Boolean(record?.syncMissing),
@@ -282,6 +335,10 @@ export function saveLocalCharacterRecord(records, {
     ...(custom ? validateCustomProfile(base, { catalog, records: currentRecords, currentLocalId: existingLocalId }) : []),
     ...validateEquipmentInput(draft?.equipments),
   ];
+  const metadata = normalizeEquipmentMetadata(draft.equipmentMetadata ?? existing?.equipmentMetadata);
+  if (draft.equipments?.some((lines, slot) => isNonOverloadEquipment(metadata[slot]) && lines?.some(line => line.functionType))) {
+    errors.push("普通装备或未装备部位不能保存 T10 改造词条；请先同步最新装备或导入 T10 截图");
+  }
   if (!custom && !nameCode) errors.push("标准角色缺少 name_code");
   if (errors.length) return { records: currentRecords, record: null, errors };
 
@@ -338,6 +395,7 @@ export function updateLocalCharacterEquipmentSlot(records, {
   ));
   const normalizedSlot = normalizeEquipments(slotPayload)[normalizedSlotIndex];
   const errors = validateEquipmentInput(slotPayload);
+  if (isNonOverloadEquipment(existing.equipmentMetadata[normalizedSlotIndex])) errors.push("当前部位不是 T10 装备，不能写入改造词条；升级后请重新同步或导入 T10 截图");
   if (errors.length) return { records: currentRecords, record: null, errors };
 
   const equipments = normalizeEquipments(existing.equipments);
@@ -377,7 +435,17 @@ export function hasLocalCharacterData(record) {
     normalized.limitBreak.core,
     normalized.combat,
     normalized.affectionLevel,
+    normalized.favoriteItemLevel,
+    normalized.classLevel,
+    normalized.corporationLevel,
+    normalized.skill1Level,
+    normalized.skill2Level,
+    normalized.burstSkillLevel,
+    normalized.cubeId,
+    normalized.cubeLevel,
   ].some((value) => value !== null)
+    || Boolean(normalized.favoriteItemRarity)
+    || normalized.equipmentMetadata.some((item) => item?.tid > 0)
     || normalized.equipments.some((slot) => slot.some((line) => Boolean(line.functionType)));
 }
 
@@ -414,8 +482,22 @@ export function localRecordToCalculatorCharacter(record) {
     level: normalized.level,
     combat: normalized.combat,
     affectionLevel: normalized.affectionLevel,
+    favoriteItemRarity: normalized.favoriteItemRarity,
+    favoriteItemLevel: normalized.favoriteItemLevel,
+    favoriteItemObservation: normalized.favoriteItemObservation,
+    classLevel: normalized.classLevel,
+    corporationLevel: normalized.corporationLevel,
+    skill1Level: normalized.skill1Level,
+    skill2Level: normalized.skill2Level,
+    burstSkillLevel: normalized.burstSkillLevel,
+    cubeId: normalized.cubeId,
+    cubeResourceId: normalized.cubeResourceId,
+    cubeNameCn: normalized.cubeNameCn,
+    cubeNameEn: normalized.cubeNameEn,
+    cubeLevel: normalized.cubeLevel,
     limitBreak: normalized.limitBreak,
     source: "local",
+    equipmentMetadata: normalized.equipmentMetadata,
     equipments: normalized.equipments.map((slot) => slot
       .filter((line) => line.functionType)
       .map((line) => ({
@@ -466,9 +548,15 @@ export function reconcileLocalCharactersAfterSync(records, snapshot, catalog, no
     if (existing && existing.source !== LOCAL_CHARACTER_SOURCES.sync) overwrittenStandardCount += 1;
     const catalogCharacter = catalogByCode.get(nameCode);
     const supplementFields = [];
+    const incomingMetadata = normalizeEquipmentMetadata(character?.equipmentMetadata ?? character?.raw_equipments);
+    const equipmentMetadata = mergeEquipmentMetadata(incomingMetadata, existing?.equipmentMetadata);
     const syncedEquipments = normalizeEquipments(character?.equipments);
     const existingEquipments = normalizeEquipments(existing?.equipments);
     const equipments = syncedEquipments.map((slot, slotIndex) => {
+      const incoming = incomingMetadata[slotIndex];
+      if (isNonOverloadEquipment(incoming)) return createEmptyEquipments()[slotIndex];
+      // A confirmed replacement must not inherit affixes/locks from the previous item.
+      if (incoming && incoming.tid !== existing?.equipmentMetadata?.[slotIndex]?.tid) return slot;
       if (!hasEquipmentData(slot) && hasEquipmentData(existingEquipments[slotIndex])) {
         supplementFields.push(`equipments.${slotIndex}`);
         return existingEquipments[slotIndex];
@@ -510,6 +598,43 @@ export function reconcileLocalCharactersAfterSync(records, snapshot, catalog, no
         "affectionLevel",
         supplementFields,
       ),
+      favoriteItemRarity: character?.favoriteItemRarity ?? existing?.favoriteItemRarity,
+      favoriteItemLevel: character?.favoriteItemLevel ?? existing?.favoriteItemLevel,
+      classLevel: mergeOptionalSyncedField(
+        character?.classLevel,
+        existing?.classLevel,
+        "classLevel",
+        supplementFields,
+      ),
+      corporationLevel: mergeOptionalSyncedField(
+        character?.corporationLevel,
+        existing?.corporationLevel,
+        "corporationLevel",
+        supplementFields,
+      ),
+      skill1Level: mergeOptionalSyncedField(
+        character?.skill1Level,
+        existing?.skill1Level,
+        "skill1Level",
+        supplementFields,
+      ),
+      skill2Level: mergeOptionalSyncedField(
+        character?.skill2Level,
+        existing?.skill2Level,
+        "skill2Level",
+        supplementFields,
+      ),
+      burstSkillLevel: mergeOptionalSyncedField(
+        character?.burstSkillLevel,
+        existing?.burstSkillLevel,
+        "burstSkillLevel",
+        supplementFields,
+      ),
+      cubeId: mergeOptionalSyncedField(character?.cubeId, existing?.cubeId, "cubeId", supplementFields),
+      cubeResourceId: existing?.cubeResourceId,
+      cubeNameCn: existing?.cubeNameCn,
+      cubeNameEn: existing?.cubeNameEn,
+      cubeLevel: mergeOptionalSyncedField(character?.cubeLevel, existing?.cubeLevel, "cubeLevel", supplementFields),
       limitBreak: {
         grade: mergeOptionalSyncedField(
           syncedLimitBreak?.grade,
@@ -525,6 +650,7 @@ export function reconcileLocalCharactersAfterSync(records, snapshot, catalog, no
         ),
       },
       equipments,
+      equipmentMetadata,
       createdAt: existing?.createdAt || now,
       updatedAt: now,
       syncMissing: false,

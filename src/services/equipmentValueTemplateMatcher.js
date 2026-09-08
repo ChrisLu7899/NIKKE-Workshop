@@ -48,7 +48,7 @@ async function loadTemplateMask(functionType, level) {
       } finally {
         bitmap.close();
       }
-    })());
+    })().catch((error) => { templateCache.delete(key); throw error; }));
   }
   return templateCache.get(key);
 }
@@ -74,7 +74,7 @@ async function loadGlyphMask(valueStyle, character) {
       } finally {
         bitmap.close();
       }
-    })());
+    })().catch((error) => { glyphCache.delete(key); throw error; }));
   }
   return glyphCache.get(key);
 }

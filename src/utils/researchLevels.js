@@ -15,6 +15,16 @@ export const RESEARCH_LEVEL_DEFINITIONS = Object.freeze([
 export const createEmptyResearchLevels = () =>
   Object.fromEntries(RESEARCH_LEVEL_DEFINITIONS.map(({ key }) => [key, null]));
 
+const optionalResearchLevel = (value) => {
+  if (value === null || value === undefined || String(value).trim() === "") return null;
+  const level = Number(value);
+  return Number.isFinite(level) && level >= 0 ? Math.trunc(level) : null;
+};
+
+export const normalizeResearchLevels = (researchLevels) => Object.fromEntries(
+  RESEARCH_LEVEL_DEFINITIONS.map(({ key }) => [key, optionalResearchLevel(researchLevels?.[key])]),
+);
+
 export const mapResearchLevels = (researches) => {
   const result = createEmptyResearchLevels();
   const keyByTid = new Map(
@@ -25,8 +35,7 @@ export const mapResearchLevels = (researches) => {
   for (const research of researches) {
     const key = keyByTid.get(String(research?.tid ?? ""));
     if (!key) continue;
-    const level = research?.lv;
-    result[key] = Number.isFinite(level) && level >= 0 ? level : null;
+    result[key] = optionalResearchLevel(research?.lv);
   }
   return result;
 };
@@ -47,3 +56,23 @@ export const getResearchKeyForCorporation = (corporation) => {
     : null;
 };
 
+export const resolveCharacterResearchLevels = (researchLevels, className, corporation) => {
+  const normalized = normalizeResearchLevels(researchLevels);
+  const classKey = getResearchKeyForClass(className);
+  const corporationKey = getResearchKeyForCorporation(corporation);
+  return {
+    classLevel: classKey ? normalized[classKey] : null,
+    corporationLevel: corporationKey ? normalized[corporationKey] : null,
+  };
+};
+
+export const mapAkaUserInfoResearchLevels = (userInfo) => normalizeResearchLevels({
+  attacker: userInfo?.fireType,
+  defender: userInfo?.defenseType,
+  supporter: userInfo?.supportType,
+  elysion: userInfo?.elysionCorp,
+  missilis: userInfo?.missilisCorp,
+  tetra: userInfo?.tetraCorp,
+  pilgrim: userInfo?.pilgrimCorp,
+  abnormal: userInfo?.abnormalCorp,
+});

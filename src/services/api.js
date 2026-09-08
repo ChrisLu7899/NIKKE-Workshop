@@ -7,7 +7,7 @@ import {
   mapResearchLevels,
 } from "../utils/researchLevels.js";
 import { parseCookieValue } from "../domain/account.js";
-import { parseEquipmentOptionLines } from "../utils/equipmentOptions.js";
+import { parseEquipmentOptionLines, parseRawEquipments } from "../utils/equipmentOptions.js";
 import { withChinaExclusiveCharacters } from "../data/chinaExclusiveCharacters.js";
 
 // ========== 主线目录缓存键 ==========
@@ -791,6 +791,7 @@ export const getCharacterDetails = async (areaId, nameCodes) => {
       combat: char.combat || 0,
       limitBreak: limitBreak,
       equipments: equipments,
+      raw_equipments: parseRawEquipments(char),
       // 魔方信息
       cube_id: char.harmony_cube_tid || 0,
       cube_level: char.harmony_cube_lv || 0
@@ -1160,16 +1161,9 @@ export const getCharacterDetailsWithAccount = async (account, areaId, nameCodes)
     
     const equipments = {};
     const equipSlots = ['head', 'torso', 'arm', 'leg'];
-    const rawEquipments = [];
     
     equipSlots.forEach((slot, idx) => {
       equipments[idx] = parseEquipmentOptionLines(char, slot, effectsMap);
-      rawEquipments[idx] = {
-        tid: char[`${slot}_equip_tid`] ?? null,
-        level: char[`${slot}_equip_lv`] ?? null,
-        corporation_type:
-          char[`${slot}_equip_corporation_type`] ?? null,
-      };
     });
     
     return {
@@ -1188,7 +1182,7 @@ export const getCharacterDetailsWithAccount = async (account, areaId, nameCodes)
       combat: char.combat || 0,
       limitBreak: limitBreak,
       equipments: equipments,
-      raw_equipments: rawEquipments,
+      raw_equipments: parseRawEquipments(char),
       cube_id: char.harmony_cube_tid || 0,
       cube_level: char.harmony_cube_lv || 0
     };

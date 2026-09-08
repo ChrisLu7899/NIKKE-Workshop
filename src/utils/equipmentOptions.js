@@ -23,3 +23,11 @@ export function parseEquipmentOptionLines(character, slot, effectsMap) {
   }
   return details;
 }
+
+export function parseRawEquipments(character) {
+  return ['head', 'torso', 'arm', 'leg'].map((slot) => ({
+    tid: character?.[`${slot}_equip_tid`] ?? null,
+    level: character?.[`${slot}_equip_lv`] ?? null,
+    corporation_type: character?.[`${slot}_equip_corporation_type`] ?? null,
+  }));
+}

@@ -1,0 +1,52 @@
+{
+  "cubes": {
+    "10001": "cubes/ie_10001.png",
+    "10002": "cubes/ie_10002.png",
+    "10003": "cubes/ie_10003.png",
+    "10004": "cubes/ie_10004.png",
+    "10005": "cubes/ie_10005.png",
+    "10006": "cubes/ie_10006.png",
+    "10007": "cubes/ie_10007.png",
+    "10008": "cubes/ie_10008.png",
+    "10009": "cubes/ie_10009.png",
+    "10010": "cubes/ie_10010.png",
+    "10012": "cubes/ie_10012.png",
+    "10013": "cubes/ie_10013.png",
+    "11001": "cubes/ie_11001.png",
+    "12001": "cubes/ie_12001.png",
+    "12002": "cubes/ie_12002.png",
+    "13001": "cubes/ie_13001.png",
+    "13002": "cubes/ie_13002.png"
+  },
+  "dolls": {
+    "AR": "character-card/collectible-ar-cooking.png",
+    "MG": "character-card/collectible-mg-shopping.png",
+    "RL": "character-card/collectible-rl-exercising.png",
+    "SG": "character-card/collectible-sg-battling.png",
+    "SMG": "character-card/collectible-smg-coffee.png",
+    "SR": "character-card/collectible-sr-napping.png"
+  },
+  "favorites": {
+    "c030": "character-card/favorite-items/c030.png",
+    "c032": "character-card/favorite-items/c032.png",
+    "c072": "character-card/favorite-items/c072.png",
+    "c080": "character-card/favorite-items/c080.png",
+    "c100": "character-card/favorite-items/c100.png",
+    "c101": "character-card/favorite-items/c101.png",
+    "c112": "character-card/favorite-items/c112.png",
+    "c140": "character-card/favorite-items/c140.png",
+    "c141": "character-card/favorite-items/c141.png",
+    "c142": "character-card/favorite-items/c142.png",
+    "c150": "character-card/favorite-items/c150.png",
+    "c170": "character-card/favorite-items/c170.png",
+    "c192": "character-card/favorite-items/c192.png",
+    "c210": "character-card/favorite-items/c210.png",
+    "c280": "character-card/favorite-items/c280.png",
+    "c281": "character-card/favorite-items/c281.png",
+    "c352": "character-card/favorite-items/c352.png",
+    "c390": "character-card/favorite-items/c390.png",
+    "c411": "character-card/favorite-items/c411.png",
+    "c550": "character-card/favorite-items/c550.png",
+    "c580": "character-card/favorite-items/c580.png"
+  }
+}

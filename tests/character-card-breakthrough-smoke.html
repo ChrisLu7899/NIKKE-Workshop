@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><title>突破素材隔离验收</title>
+<style>body{margin:12px;background:#e5e7eb;font-family:system-ui}.samples{display:flex;gap:12px;flex-wrap:wrap}.sample{width:368px}.frame{width:368px;height:548px}button{padding:8px;margin:0 8px 10px 0}</style></head>
+<body><h1>突破素材隔离验收（测试数据）</h1><div id="root"></div>
+<script type="module">
+import React,{useRef,useState} from 'react';
+import {createRoot} from 'react-dom/client';
+import CharacterCard from '../src/components/management/CharacterCard.jsx';
+import {downloadCharacterCardPng} from '../src/utils/characterCardDownload.js';
+const e=React.createElement;
+function Sample({grade,core}) {
+  const cardRef=useRef(null);const [visible,setVisible]=useState(true);
+  return e('section',{className:'sample','data-grade':grade,'data-core':core},
+    e('h2',null,`${grade}星 / 核心 ${core}`),
+    e('button',{onClick:()=>setVisible(!visible)},'切换身份模块'),
+    e('button',{onClick:()=>downloadCharacterCardPng(cardRef.current,'breakthrough')},'下载测试卡'),
+    e('div',{className:'frame'},e(CharacterCard,{
+      catalogCharacter:{name_cn:'测试妮姬',original_rare:'SSR',class:'Defender',element:'Electronic',weapon_type:'RL',corporation:'Pilgrim',use_burst_skill:'Step3'},
+      characterData:{level:618,combat:123456,affectionLevel:40,limitBreak:{grade,core}},
+      artworkUrl:'/ui-assets/nikke/character-artwork/c511.webp',cardRef,
+      visibleModules:{rarity:visible,equipments:false,affixSummary:false}
+    })));
+}
+createRoot(document.getElementById('root')).render(e('div',{className:'samples'},
+  ...[[0,0],[1,0],[2,0],[3,0],...[1,2,3,4,5,6,7].map(n=>[3,n])].map(([grade,core])=>e(Sample,{key:`${grade}-${core}`,grade,core}))));
+</script></body></html>

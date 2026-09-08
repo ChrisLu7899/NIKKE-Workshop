@@ -1,0 +1,152 @@
+{
+  "schema": "character-decorations-derived-v1",
+  "recipe": {
+    "version": 1,
+    "surfaceRgb": [
+      50,
+      50,
+      50
+    ],
+    "affectionRgb": [
+      239,
+      56,
+      72
+    ],
+    "frame": {
+      "width": 348,
+      "height": 62,
+      "slice": 20
+    },
+    "skill": {
+      "size": 100
+    },
+    "badge": {
+      "size": 128,
+      "inner": 106
+    }
+  },
+  "producer_sha256": "e0a492a4aed43f26fd8afb114cc5cc694dbe3a728e0c3f565026cb547045aeec",
+  "sharp": "0.35.4",
+  "source": {
+    "schema": "character-card-ui-v1",
+    "status": "promoted",
+    "source": {
+      "resource_key": "view_assets_view-characterdetail2_cc6e69ec36ee58a75db916f3089b426c.bundle",
+      "region": "core",
+      "bundle_hash": "cc6e69ec36ee58a75db916f3089b426c",
+      "bundle_sha256": "7b406c6e97e0e7f67d8b4d832cf2b32c86ea03fa63c5b62d5ac40a47f281574a",
+      "cab": "CAB-b6725adfd4a86c994ce64f6e87df4d61",
+      "normalized_bundle": "view_assets_view-characterdetail2.bundle"
+    },
+    "method": "UnityPy Sprite.image RGBA PNG; no scaling or screenshot crop",
+    "atlas": {
+      "resource_key": "view_assets_view-characterdetail2_cc6e69ec36ee58a75db916f3089b426c.bundle",
+      "region": "core",
+      "bundle_hash": "cc6e69ec36ee58a75db916f3089b426c",
+      "bundle_sha256": "7b406c6e97e0e7f67d8b4d832cf2b32c86ea03fa63c5b62d5ac40a47f281574a"
+    },
+    "producer_sha256": "638858f5dd82d7f670cae64bc07d2ab4bb4ba860ca7329d7a1df2016fe398ea6",
+    "review_sha256": "433d7490c5f9e67d3ca5d948d25f471de4ff9474be4c409d55d7aad4a2823d40",
+    "items": [
+      {
+        "sprite_name": "ele_circle_line_4px_b138a841805f49e4b8f3062fdc04ad4b",
+        "path_id": "-585688308952550835",
+        "cab": "CAB-b6725adfd4a86c994ce64f6e87df4d61",
+        "size": [
+          100,
+          100
+        ],
+        "png_sha256": "c7e8feddfa51d6452ede4fdf50816ec838116768a155ef0de60637f177e0fa0b",
+        "atlas_cab": "CAB-b6725adfd4a86c994ce64f6e87df4d61",
+        "atlas_path_id": "228154077635212595",
+        "id": "skill-ring",
+        "review": "2026-09-07: individually inspected original Sprite and gray contact sheet; verified CharacterDetail2 board_active hierarchy (board_heart, img_bg_line, board_bg/img_bg, board_bg/img_stroke, board_lv). No baked numbers; border uses original 20px nine-slice. Cube badge reuse is Workshop presentation, not a claim of native cube-card badge.",
+        "file": "decorations/skill-ring.png",
+        "review_status": "visually_verified",
+        "rect": "Rectf(height=100.0, width=100.0, x=0.0, y=0.0)",
+        "pivot": "Vector2f(0.5, 0.5)",
+        "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+      },
+      {
+        "sprite_name": "ele_common_circle_e0ff848cb8d756544b8baa0dc4f8061e",
+        "path_id": "-3451105766064037754",
+        "cab": "CAB-b6725adfd4a86c994ce64f6e87df4d61",
+        "size": [
+          256,
+          256
+        ],
+        "png_sha256": "464413b907e845d6206c092001292ebc0af451f7c1cccb9dd38e517f82050e7c",
+        "atlas_cab": "CAB-b6725adfd4a86c994ce64f6e87df4d61",
+        "atlas_path_id": "228154077635212595",
+        "id": "circle",
+        "review": "2026-09-07: individually inspected original Sprite and gray contact sheet; verified CharacterDetail2 board_active hierarchy (board_heart, img_bg_line, board_bg/img_bg, board_bg/img_stroke, board_lv). No baked numbers; border uses original 20px nine-slice. Cube badge reuse is Workshop presentation, not a claim of native cube-card badge.",
+        "file": "decorations/circle.png",
+        "review_status": "visually_verified",
+        "rect": "Rectf(height=256.0, width=256.0, x=0.0, y=0.0)",
+        "pivot": "Vector2f(0.5, 0.5)",
+        "border": "Vector4f(128.0, 0.0, 128.0, 0.0)"
+      },
+      {
+        "sprite_name": "grd_14round_line_character_detail_3cf531818d8e5cc4e972673f07789134",
+        "path_id": "-4846685171567900969",
+        "cab": "CAB-b6725adfd4a86c994ce64f6e87df4d61",
+        "size": [
+          64,
+          64
+        ],
+        "png_sha256": "3d5b4eb325bb9bf7ad4a567aa57447a2462049aa3679efd798e6f12d1b5c0d3d",
+        "atlas_cab": "CAB-b6725adfd4a86c994ce64f6e87df4d61",
+        "atlas_path_id": "228154077635212595",
+        "id": "affection-border",
+        "review": "2026-09-07: individually inspected original Sprite and gray contact sheet; verified CharacterDetail2 board_active hierarchy (board_heart, img_bg_line, board_bg/img_bg, board_bg/img_stroke, board_lv). No baked numbers; border uses original 20px nine-slice. Cube badge reuse is Workshop presentation, not a claim of native cube-card badge.",
+        "file": "decorations/affection-border.png",
+        "review_status": "visually_verified",
+        "rect": "Rectf(height=64.0, width=64.0, x=0.0, y=0.0)",
+        "pivot": "Vector2f(0.5, 0.5)",
+        "border": "Vector4f(20.0, 20.0, 20.0, 20.0)"
+      },
+      {
+        "sprite_name": "icn_item_heart_character_detail_2d37b4c24acf60f4fb23e31489c21688",
+        "path_id": "5225466546490104222",
+        "cab": "CAB-b6725adfd4a86c994ce64f6e87df4d61",
+        "size": [
+          84,
+          80
+        ],
+        "png_sha256": "2a6eed55b8885702e599acaf286617c4830972e3274c249c529a91f69d5d62b2",
+        "atlas_cab": "CAB-b6725adfd4a86c994ce64f6e87df4d61",
+        "atlas_path_id": "228154077635212595",
+        "id": "heart",
+        "review": "2026-09-07: individually inspected original Sprite and gray contact sheet; verified CharacterDetail2 board_active hierarchy (board_heart, img_bg_line, board_bg/img_bg, board_bg/img_stroke, board_lv). No baked numbers; border uses original 20px nine-slice. Cube badge reuse is Workshop presentation, not a claim of native cube-card badge.",
+        "file": "decorations/heart.png",
+        "review_status": "visually_verified",
+        "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+        "pivot": "Vector2f(0.5, 0.5)",
+        "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+      }
+    ],
+    "formal_manifest_sha256": "4d7376c55a454e925db9f62c54bdaa0f72d6a8efa16a797aca202d32b0949c5f"
+  },
+  "items": [
+    {
+      "id": "heart",
+      "file": "/ui-assets/nikke/metadata/decorations/heart.png",
+      "png_sha256": "f090784a0247eaefabdb31889616c7e661a33ef3dcc2b2287fbc5ee6db663111"
+    },
+    {
+      "id": "affection-frame",
+      "file": "/ui-assets/nikke/metadata/decorations/affection-frame.png",
+      "png_sha256": "3edd022b8b9e9824b08ef940601987115e4699b4b3d2da375b84dc379c93c0eb"
+    },
+    {
+      "id": "skill-frame",
+      "file": "/ui-assets/nikke/metadata/decorations/skill-frame.png",
+      "png_sha256": "978b348e8b78fe019e28235449fc3955bf6ebdae56ceb9e34201d95cc8aa0622"
+    },
+    {
+      "id": "level-badge",
+      "file": "/ui-assets/nikke/metadata/decorations/level-badge.png",
+      "png_sha256": "24a067e70c60dc4ee2b4e2ddaeeb1fd5d2ff0a095df212ab43b6331983def187"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useMemo, useRef, useState } from "react";
 import {
   Alert,
   Badge,
@@ -46,7 +46,6 @@ import CharacterWorkspaceDrawer from "./CharacterWorkspaceDrawer.jsx";
 import LocalCharacterEntryDrawer from "./LocalCharacterEntryDrawer.jsx";
 import ScreenshotOcrImportDialog from "./ScreenshotOcrImportDialog.jsx";
 import DocumentScannerOutlinedIcon from "@mui/icons-material/DocumentScannerOutlined";
-import { prewarmLocalScreenshotOcr } from "../../services/localScreenshotOcr.js";
 import { summarizeTopEquipmentAffixes } from "../../domain/equipmentAffixSummary.js";
 import {
   getRecordedLocalCharacters,
@@ -300,19 +299,6 @@ const CharacterGalleryTabContent = ({
     weapons: [],
   });
 
-  useEffect(() => {
-    const warmUp = () => {
-      prewarmLocalScreenshotOcr().catch(() => {
-        // 预热失败不会阻断管理页；用户开始识别时会重新尝试并显示具体错误。
-      });
-    };
-    if (typeof globalThis.requestIdleCallback === "function") {
-      const idleId = globalThis.requestIdleCallback(warmUp, { timeout: 2000 });
-      return () => globalThis.cancelIdleCallback?.(idleId);
-    }
-    const timeoutId = globalThis.setTimeout(warmUp, 500);
-    return () => globalThis.clearTimeout(timeoutId);
-  }, []);
 
   const ownedCharacterMap = useMemo(() => {
     const map = new Map();

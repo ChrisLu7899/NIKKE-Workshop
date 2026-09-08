@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-08-28",
-  "source": "NIKKE DB Live2D Visualiser",
-  "characterCount": 199,
-  "artworkCount": 377,
+  "revision": "2026-09-06",
+  "source": "NIKKE_files validated extracted asset library",
+  "characterCount": 200,
+  "artworkCount": 621,
   "characters": {
     "100": [
       {
@@ -11,6 +11,18 @@
         "label": "默认",
         "assetId": "c100",
         "url": "/ui-assets/nikke/character-artwork/c100.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c100",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c100.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c100_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c100_00.webp"
       }
     ],
     "101": [
@@ -31,6 +43,24 @@
         "label": "反派专属女仆",
         "assetId": "c101_02",
         "url": "/ui-assets/nikke/character-artwork/c101_02.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c101",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c101.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c101_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c101_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 反派赛车手",
+        "assetId": "lobby_burst_c101_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c101_01.webp"
       }
     ],
     "102": [
@@ -45,6 +75,12 @@
         "label": "机械白",
         "assetId": "c102_01",
         "url": "/ui-assets/nikke/character-artwork/c102_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c102_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c102_00.webp"
       }
     ],
     "103": [
@@ -59,6 +95,26 @@
         "label": "原型英雄",
         "assetId": "c103_01",
         "url": "/ui-assets/nikke/character-artwork/c103_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c103_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c103_00.webp"
+      }
+    ],
+    "104": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c104",
+        "url": "/ui-assets/nikke/character-artwork/c104.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c104_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c104_00.webp"
       }
     ],
     "105": [
@@ -73,6 +129,12 @@
         "label": "首席研究员",
         "assetId": "c105_01",
         "url": "/ui-assets/nikke/character-artwork/c105_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c105_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c105_00.webp"
       }
     ],
     "110": [
@@ -81,6 +143,12 @@
         "label": "默认",
         "assetId": "c110",
         "url": "/ui-assets/nikke/character-artwork/c110.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c110_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c110_00.webp"
       }
     ],
     "111": [
@@ -95,6 +163,12 @@
         "label": "獠牙同窗",
         "assetId": "c111_01",
         "url": "/ui-assets/nikke/character-artwork/c111_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c111_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c111_00.webp"
       }
     ],
     "112": [
@@ -121,6 +195,24 @@
         "label": "街头朋克",
         "assetId": "c112_03",
         "url": "/ui-assets/nikke/character-artwork/c112_03.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c112",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c112.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c112_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c112_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-2",
+        "label": "技能动画 · 爱情光芒",
+        "assetId": "lobby_burst_c112_02",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c112_02.webp"
       }
     ],
     "113": [
@@ -135,6 +227,12 @@
         "label": "极道先锋",
         "assetId": "c113_01",
         "url": "/ui-assets/nikke/character-artwork/c113_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c113_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c113_00.webp"
       }
     ],
     "120": [
@@ -151,6 +249,12 @@
         "label": "默认",
         "assetId": "c121",
         "url": "/ui-assets/nikke/character-artwork/c121.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c121_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c121_00.webp"
       }
     ],
     "130": [
@@ -165,6 +269,12 @@
         "label": "医疗兔",
         "assetId": "c130_01",
         "url": "/ui-assets/nikke/character-artwork/c130_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c130_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c130_00.webp"
       }
     ],
     "131": [
@@ -179,6 +289,12 @@
         "label": "海洋维他命",
         "assetId": "c131_01",
         "url": "/ui-assets/nikke/character-artwork/c131_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c131_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c131_00.webp"
       }
     ],
     "132": [
@@ -187,6 +303,12 @@
         "label": "默认",
         "assetId": "c132",
         "url": "/ui-assets/nikke/character-artwork/c132.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c132_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c132_00.webp"
       }
     ],
     "140": [
@@ -207,6 +329,18 @@
         "label": "狂野后花园",
         "assetId": "c140_02",
         "url": "/ui-assets/nikke/character-artwork/c140_02.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c140",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c140.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c140_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c140_00.webp"
       }
     ],
     "141": [
@@ -221,6 +355,18 @@
         "label": "极限战士",
         "assetId": "c141_01",
         "url": "/ui-assets/nikke/character-artwork/c141_01.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c141",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c141.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c141_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c141_00.webp"
       }
     ],
     "142": [
@@ -235,6 +381,18 @@
         "label": "慵懒海滩",
         "assetId": "c142_01",
         "url": "/ui-assets/nikke/character-artwork/c142_01.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c142",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c142.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c142_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c142_00.webp"
       }
     ],
     "143": [
@@ -243,6 +401,12 @@
         "label": "默认",
         "assetId": "c143",
         "url": "/ui-assets/nikke/character-artwork/c143.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c143_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c143_00.webp"
       }
     ],
     "150": [
@@ -263,6 +427,18 @@
         "label": "夏日浪漫",
         "assetId": "c150_02",
         "url": "/ui-assets/nikke/character-artwork/c150_02.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c150",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c150.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c150_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c150_00.webp"
       }
     ],
     "160": [
@@ -277,6 +453,12 @@
         "label": "可爱粉色",
         "assetId": "c160_01",
         "url": "/ui-assets/nikke/character-artwork/c160_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c160_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c160_00.webp"
       }
     ],
     "161": [
@@ -299,6 +481,18 @@
         "label": "痛苦吞食者",
         "assetId": "c162_01",
         "url": "/ui-assets/nikke/character-artwork/c162_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c162_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c162_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 痛苦吞食者",
+        "assetId": "lobby_burst_c162_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c162_01.webp"
       }
     ],
     "170": [
@@ -331,6 +525,24 @@
         "label": "严厉教诲",
         "assetId": "c170_04",
         "url": "/ui-assets/nikke/character-artwork/c170_04.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c170",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c170.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c170_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c170_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-4",
+        "label": "技能动画 · 严厉教诲",
+        "assetId": "lobby_burst_c170_04",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c170_04.webp"
       }
     ],
     "171": [
@@ -339,6 +551,12 @@
         "label": "默认",
         "assetId": "c171",
         "url": "/ui-assets/nikke/character-artwork/c171.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c171_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c171_00.webp"
       }
     ],
     "172": [
@@ -347,6 +565,12 @@
         "label": "默认",
         "assetId": "c172",
         "url": "/ui-assets/nikke/character-artwork/c172.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c172_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c172_00.webp"
       }
     ],
     "180": [
@@ -361,6 +585,12 @@
         "label": "黑暗追踪者",
         "assetId": "c180_01",
         "url": "/ui-assets/nikke/character-artwork/c180_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c180_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c180_00.webp"
       }
     ],
     "181": [
@@ -381,6 +611,12 @@
         "label": "艳阳之下",
         "assetId": "c181_02",
         "url": "/ui-assets/nikke/character-artwork/c181_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c181_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c181_00.webp"
       }
     ],
     "182": [
@@ -389,6 +625,12 @@
         "label": "默认",
         "assetId": "c182",
         "url": "/ui-assets/nikke/character-artwork/c182.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c182_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c182_00.webp"
       }
     ],
     "183": [
@@ -397,6 +639,12 @@
         "label": "默认",
         "assetId": "c183",
         "url": "/ui-assets/nikke/character-artwork/c183.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c183_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c183_00.webp"
       }
     ],
     "190": [
@@ -405,6 +653,12 @@
         "label": "默认",
         "assetId": "c190",
         "url": "/ui-assets/nikke/character-artwork/c190.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c190_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c190_00.webp"
       }
     ],
     "191": [
@@ -425,6 +679,18 @@
         "label": "童话幻梦",
         "assetId": "c191_02",
         "url": "/ui-assets/nikke/character-artwork/c191_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c191_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c191_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-2",
+        "label": "技能动画 · 童话幻梦",
+        "assetId": "lobby_burst_c191_02",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c191_02.webp"
       }
     ],
     "192": [
@@ -445,6 +711,18 @@
         "label": "烈阳",
         "assetId": "c192_02",
         "url": "/ui-assets/nikke/character-artwork/c192_02.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c192",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c192.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c192_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c192_00.webp"
       }
     ],
     "193": [
@@ -461,6 +739,12 @@
         "label": "默认",
         "assetId": "c194",
         "url": "/ui-assets/nikke/character-artwork/c194.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c194_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c194_00.webp"
       }
     ],
     "195": [
@@ -469,6 +753,12 @@
         "label": "默认",
         "assetId": "c195",
         "url": "/ui-assets/nikke/character-artwork/c195.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c195_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c195_00.webp"
       }
     ],
     "200": [
@@ -483,6 +773,18 @@
         "label": "奢侈兔",
         "assetId": "c200_01",
         "url": "/ui-assets/nikke/character-artwork/c200_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c200_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c200_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 奢侈兔",
+        "assetId": "lobby_burst_c200_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c200_01.webp"
       }
     ],
     "201": [
@@ -497,6 +799,12 @@
         "label": "黎明超市",
         "assetId": "c201_01",
         "url": "/ui-assets/nikke/character-artwork/c201_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c201_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c201_00.webp"
       }
     ],
     "202": [
@@ -511,6 +819,12 @@
         "label": "黑玫瑰",
         "assetId": "c202_01",
         "url": "/ui-assets/nikke/character-artwork/c202_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c202_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c202_00.webp"
       }
     ],
     "203": [
@@ -519,6 +833,12 @@
         "label": "默认",
         "assetId": "c203",
         "url": "/ui-assets/nikke/character-artwork/c203.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c203_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c203_00.webp"
       }
     ],
     "210": [
@@ -545,6 +865,18 @@
         "label": "黑客兔",
         "assetId": "c210_03",
         "url": "/ui-assets/nikke/character-artwork/c210_03.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c210",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c210.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c210_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c210_00.webp"
       }
     ],
     "212": [
@@ -565,6 +897,12 @@
         "label": "侦探护士",
         "assetId": "c212_02",
         "url": "/ui-assets/nikke/character-artwork/c212_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c212_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c212_00.webp"
       }
     ],
     "220": [
@@ -579,6 +917,12 @@
         "label": "白色骑士",
         "assetId": "c220_01",
         "url": "/ui-assets/nikke/character-artwork/c220_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c220_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c220_00.webp"
       }
     ],
     "221": [
@@ -587,6 +931,12 @@
         "label": "默认",
         "assetId": "c221",
         "url": "/ui-assets/nikke/character-artwork/c221.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c221_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c221_00.webp"
       }
     ],
     "222": [
@@ -601,6 +951,18 @@
         "label": "狂飙车手",
         "assetId": "c222_01",
         "url": "/ui-assets/nikke/character-artwork/c222_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c222_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c222_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 狂飙车手",
+        "assetId": "lobby_burst_c222_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c222_01.webp"
       }
     ],
     "223": [
@@ -615,6 +977,18 @@
         "label": "无为",
         "assetId": "c223_01",
         "url": "/ui-assets/nikke/character-artwork/c223_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c223_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c223_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 无为",
+        "assetId": "lobby_burst_c223_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c223_01.webp"
       }
     ],
     "224": [
@@ -623,6 +997,12 @@
         "label": "默认",
         "assetId": "c224",
         "url": "/ui-assets/nikke/character-artwork/c224.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c224_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c224_00.webp"
       }
     ],
     "225": [
@@ -637,6 +1017,18 @@
         "label": "莲花",
         "assetId": "c225_01",
         "url": "/ui-assets/nikke/character-artwork/c225_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c225_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c225_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 莲花",
+        "assetId": "lobby_burst_c225_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c225_01.webp"
       }
     ],
     "226": [
@@ -645,6 +1037,12 @@
         "label": "默认",
         "assetId": "c226",
         "url": "/ui-assets/nikke/character-artwork/c226.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c226_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c226_00.webp"
       }
     ],
     "230": [
@@ -659,6 +1057,12 @@
         "label": "宴会的魔女",
         "assetId": "c230_01",
         "url": "/ui-assets/nikke/character-artwork/c230_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c230_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c230_00.webp"
       }
     ],
     "231": [
@@ -673,6 +1077,12 @@
         "label": "蜜月派对",
         "assetId": "c231_01",
         "url": "/ui-assets/nikke/character-artwork/c231_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c231_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c231_00.webp"
       }
     ],
     "232": [
@@ -681,6 +1091,12 @@
         "label": "默认",
         "assetId": "c232",
         "url": "/ui-assets/nikke/character-artwork/c232.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c232_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c232_00.webp"
       }
     ],
     "233": [
@@ -701,6 +1117,24 @@
         "label": "月光",
         "assetId": "c233_02",
         "url": "/ui-assets/nikke/character-artwork/c233_02.webp"
+      },
+      {
+        "id": "skin-80",
+        "label": "国服特供立绘",
+        "assetId": "c233_80",
+        "url": "/ui-assets/nikke/character-artwork/c233_80.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c233_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c233_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 怀旧",
+        "assetId": "lobby_burst_c233_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c233_01.webp"
       }
     ],
     "234": [
@@ -709,6 +1143,12 @@
         "label": "默认",
         "assetId": "c234",
         "url": "/ui-assets/nikke/character-artwork/c234.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c234_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c234_00.webp"
       }
     ],
     "240": [
@@ -717,6 +1157,12 @@
         "label": "默认",
         "assetId": "c240",
         "url": "/ui-assets/nikke/character-artwork/c240.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c240_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c240_00.webp"
       }
     ],
     "241": [
@@ -725,6 +1171,12 @@
         "label": "默认",
         "assetId": "c241",
         "url": "/ui-assets/nikke/character-artwork/c241.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c241_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c241_00.webp"
       }
     ],
     "242": [
@@ -739,6 +1191,12 @@
         "label": "湿润兔",
         "assetId": "c242_01",
         "url": "/ui-assets/nikke/character-artwork/c242_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c242_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c242_00.webp"
       }
     ],
     "260": [
@@ -759,6 +1217,30 @@
         "label": "第二种情感",
         "assetId": "c260_02",
         "url": "/ui-assets/nikke/character-artwork/c260_02.webp"
+      },
+      {
+        "id": "skin-80",
+        "label": "国服特供立绘",
+        "assetId": "c260_80",
+        "url": "/ui-assets/nikke/character-artwork/c260_80.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c260_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c260_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 初次的爱恋",
+        "assetId": "lobby_burst_c260_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c260_01.webp"
+      },
+      {
+        "id": "lobby-burst-skin-2",
+        "label": "技能动画 · 第二种情感",
+        "assetId": "lobby_burst_c260_02",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c260_02.webp"
       }
     ],
     "261": [
@@ -767,6 +1249,12 @@
         "label": "默认",
         "assetId": "c261",
         "url": "/ui-assets/nikke/character-artwork/c261.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c261_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c261_00.webp"
       }
     ],
     "262": [
@@ -781,6 +1269,18 @@
         "label": "梦境湖",
         "assetId": "c262_01",
         "url": "/ui-assets/nikke/character-artwork/c262_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c262_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c262_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 梦境湖",
+        "assetId": "lobby_burst_c262_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c262_01.webp"
       }
     ],
     "270": [
@@ -807,6 +1307,18 @@
         "label": "幸运特快车",
         "assetId": "c270_03",
         "url": "/ui-assets/nikke/character-artwork/c270_03.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c270_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c270_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-3",
+        "label": "技能动画 · 幸运特快车",
+        "assetId": "lobby_burst_c270_03",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c270_03.webp"
       }
     ],
     "271": [
@@ -827,6 +1339,12 @@
         "label": "棒球啦啦队",
         "assetId": "c271_02",
         "url": "/ui-assets/nikke/character-artwork/c271_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c271_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c271_00.webp"
       }
     ],
     "272": [
@@ -841,6 +1359,18 @@
         "label": "倒霉兔",
         "assetId": "c272_01",
         "url": "/ui-assets/nikke/character-artwork/c272_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c272_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c272_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 倒霉兔",
+        "assetId": "lobby_burst_c272_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c272_01.webp"
       }
     ],
     "280": [
@@ -855,6 +1385,18 @@
         "label": "危险小姐",
         "assetId": "c280_01",
         "url": "/ui-assets/nikke/character-artwork/c280_01.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c280",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c280.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c280_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c280_00.webp"
       }
     ],
     "281": [
@@ -875,6 +1417,24 @@
         "label": "百花之王",
         "assetId": "c281_02",
         "url": "/ui-assets/nikke/character-artwork/c281_02.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c281",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c281.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c281_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c281_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-2",
+        "label": "技能动画 · 百花之王",
+        "assetId": "lobby_burst_c281_02",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c281_02.webp"
       }
     ],
     "282": [
@@ -889,6 +1449,12 @@
         "label": "黑夜潜行",
         "assetId": "c282_01",
         "url": "/ui-assets/nikke/character-artwork/c282_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c282_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c282_00.webp"
       }
     ],
     "283": [
@@ -897,6 +1463,12 @@
         "label": "默认",
         "assetId": "c283",
         "url": "/ui-assets/nikke/character-artwork/c283.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c283_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c283_00.webp"
       }
     ],
     "284": [
@@ -905,6 +1477,12 @@
         "label": "默认",
         "assetId": "c284",
         "url": "/ui-assets/nikke/character-artwork/c284.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c284_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c284_00.webp"
       }
     ],
     "290": [
@@ -913,6 +1491,12 @@
         "label": "默认",
         "assetId": "c290",
         "url": "/ui-assets/nikke/character-artwork/c290.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c290_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c290_00.webp"
       }
     ],
     "291": [
@@ -1007,6 +1591,12 @@
         "label": "春日之作",
         "assetId": "c310_01",
         "url": "/ui-assets/nikke/character-artwork/c310_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c310_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c310_00.webp"
       }
     ],
     "311": [
@@ -1015,6 +1605,12 @@
         "label": "默认",
         "assetId": "c311",
         "url": "/ui-assets/nikke/character-artwork/c311.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c311_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c311_00.webp"
       }
     ],
     "312": [
@@ -1023,6 +1619,12 @@
         "label": "默认",
         "assetId": "c312",
         "url": "/ui-assets/nikke/character-artwork/c312.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c312_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c312_00.webp"
       }
     ],
     "313": [
@@ -1031,6 +1633,12 @@
         "label": "默认",
         "assetId": "c313",
         "url": "/ui-assets/nikke/character-artwork/c313.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c313_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c313_00.webp"
       }
     ],
     "314": [
@@ -1039,6 +1647,12 @@
         "label": "默认",
         "assetId": "c314",
         "url": "/ui-assets/nikke/character-artwork/c314.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c314_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c314_00.webp"
       }
     ],
     "315": [
@@ -1047,6 +1661,12 @@
         "label": "默认",
         "assetId": "c315",
         "url": "/ui-assets/nikke/character-artwork/c315.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c315_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c315_00.webp"
       }
     ],
     "316": [
@@ -1061,6 +1681,12 @@
         "label": "魅惑兔",
         "assetId": "c316_01",
         "url": "/ui-assets/nikke/character-artwork/c316_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c316_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c316_00.webp"
       }
     ],
     "321": [
@@ -1075,6 +1701,18 @@
         "label": "学生时代",
         "assetId": "c321_01",
         "url": "/ui-assets/nikke/character-artwork/c321_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c321_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c321_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 学生时代",
+        "assetId": "lobby_burst_c321_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c321_01.webp"
       }
     ],
     "322": [
@@ -1083,6 +1721,12 @@
         "label": "默认",
         "assetId": "c322",
         "url": "/ui-assets/nikke/character-artwork/c322.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c322_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c322_00.webp"
       }
     ],
     "330": [
@@ -1103,6 +1747,18 @@
         "label": "荣耀之花",
         "assetId": "c330_02",
         "url": "/ui-assets/nikke/character-artwork/c330_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c330_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c330_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 国王的新衣",
+        "assetId": "lobby_burst_c330_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c330_01.webp"
       }
     ],
     "331": [
@@ -1111,6 +1767,12 @@
         "label": "默认",
         "assetId": "c331",
         "url": "/ui-assets/nikke/character-artwork/c331.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c331_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c331_00.webp"
       }
     ],
     "350": [
@@ -1131,6 +1793,12 @@
         "label": "潜水员马斯特",
         "assetId": "c350_02",
         "url": "/ui-assets/nikke/character-artwork/c350_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c350_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c350_00.webp"
       }
     ],
     "351": [
@@ -1145,6 +1813,12 @@
         "label": "潜水员安克",
         "assetId": "c351_01",
         "url": "/ui-assets/nikke/character-artwork/c351_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c351_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c351_00.webp"
       }
     ],
     "352": [
@@ -1165,6 +1839,24 @@
         "label": "浴后",
         "assetId": "c352_02",
         "url": "/ui-assets/nikke/character-artwork/c352_02.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c352",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c352.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c352_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c352_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-2",
+        "label": "技能动画 · 浴后",
+        "assetId": "lobby_burst_c352_02",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c352_02.webp"
       }
     ],
     "353": [
@@ -1173,6 +1865,12 @@
         "label": "默认",
         "assetId": "c353",
         "url": "/ui-assets/nikke/character-artwork/c353.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c353_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c353_00.webp"
       }
     ],
     "354": [
@@ -1187,6 +1885,18 @@
         "label": "茶饮服务",
         "assetId": "c354_01",
         "url": "/ui-assets/nikke/character-artwork/c354_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c354_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c354_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 茶饮服务",
+        "assetId": "lobby_burst_c354_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c354_01.webp"
       }
     ],
     "355": [
@@ -1195,6 +1905,12 @@
         "label": "默认",
         "assetId": "c355",
         "url": "/ui-assets/nikke/character-artwork/c355.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c355_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c355_00.webp"
       }
     ],
     "361": [
@@ -1203,6 +1919,12 @@
         "label": "默认",
         "assetId": "c361",
         "url": "/ui-assets/nikke/character-artwork/c361.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c361_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c361_00.webp"
       }
     ],
     "380": [
@@ -1211,6 +1933,12 @@
         "label": "默认",
         "assetId": "c380",
         "url": "/ui-assets/nikke/character-artwork/c380.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c380_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c380_00.webp"
       }
     ],
     "381": [
@@ -1225,6 +1953,12 @@
         "label": "春日幼犬",
         "assetId": "c381_01",
         "url": "/ui-assets/nikke/character-artwork/c381_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c381_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c381_00.webp"
       }
     ],
     "382": [
@@ -1239,6 +1973,12 @@
         "label": "动物饲养员",
         "assetId": "c382_01",
         "url": "/ui-assets/nikke/character-artwork/c382_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c382_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c382_00.webp"
       }
     ],
     "390": [
@@ -1259,6 +1999,18 @@
         "label": "春日漫步",
         "assetId": "c390_02",
         "url": "/ui-assets/nikke/character-artwork/c390_02.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c390",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c390.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c390_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c390_00.webp"
       }
     ],
     "391": [
@@ -1273,6 +2025,12 @@
         "label": "手作庆典",
         "assetId": "c391_01",
         "url": "/ui-assets/nikke/character-artwork/c391_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c391_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c391_00.webp"
       }
     ],
     "392": [
@@ -1281,6 +2039,12 @@
         "label": "默认",
         "assetId": "c392",
         "url": "/ui-assets/nikke/character-artwork/c392.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c392_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c392_00.webp"
       }
     ],
     "400": [
@@ -1295,6 +2059,12 @@
         "label": "多疑浪潮",
         "assetId": "c400_01",
         "url": "/ui-assets/nikke/character-artwork/c400_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c400_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c400_00.webp"
       }
     ],
     "401": [
@@ -1309,6 +2079,12 @@
         "label": "后街的梦想",
         "assetId": "c401_01",
         "url": "/ui-assets/nikke/character-artwork/c401_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c401_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c401_00.webp"
       }
     ],
     "402": [
@@ -1317,6 +2093,12 @@
         "label": "默认",
         "assetId": "c402",
         "url": "/ui-assets/nikke/character-artwork/c402.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c402_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c402_00.webp"
       }
     ],
     "403": [
@@ -1331,6 +2113,12 @@
         "label": "变装天鹅",
         "assetId": "c403_01",
         "url": "/ui-assets/nikke/character-artwork/c403_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c403_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c403_00.webp"
       }
     ],
     "411": [
@@ -1345,6 +2133,18 @@
         "label": "妖精兔",
         "assetId": "c411_01",
         "url": "/ui-assets/nikke/character-artwork/c411_01.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c411",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c411.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c411_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c411_00.webp"
       }
     ],
     "412": [
@@ -1359,6 +2159,12 @@
         "label": "纯粹洁白",
         "assetId": "c412_01",
         "url": "/ui-assets/nikke/character-artwork/c412_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c412_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c412_00.webp"
       }
     ],
     "430": [
@@ -1379,6 +2185,18 @@
         "label": "经典天后",
         "assetId": "c430_02",
         "url": "/ui-assets/nikke/character-artwork/c430_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c430_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c430_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-2",
+        "label": "技能动画 · 经典天后",
+        "assetId": "lobby_burst_c430_02",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c430_02.webp"
       }
     ],
     "431": [
@@ -1393,6 +2211,12 @@
         "label": "抢跑",
         "assetId": "c431_01",
         "url": "/ui-assets/nikke/character-artwork/c431_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c431_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c431_00.webp"
       }
     ],
     "432": [
@@ -1401,6 +2225,12 @@
         "label": "默认",
         "assetId": "c432",
         "url": "/ui-assets/nikke/character-artwork/c432.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c432_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c432_00.webp"
       }
     ],
     "441": [
@@ -1409,6 +2239,12 @@
         "label": "默认",
         "assetId": "c441",
         "url": "/ui-assets/nikke/character-artwork/c441.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c441_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c441_00.webp"
       }
     ],
     "450": [
@@ -1435,6 +2271,18 @@
         "label": "金环恋曲",
         "assetId": "c450_03",
         "url": "/ui-assets/nikke/character-artwork/c450_03.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c450_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c450_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-2",
+        "label": "技能动画 · 最后的少女时代",
+        "assetId": "lobby_burst_c450_02",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c450_02.webp"
       }
     ],
     "451": [
@@ -1461,6 +2309,12 @@
         "label": "海岸甜心",
         "assetId": "c451_03",
         "url": "/ui-assets/nikke/character-artwork/c451_03.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c451_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c451_00.webp"
       }
     ],
     "470": [
@@ -1481,6 +2335,24 @@
         "label": "怀旧时光",
         "assetId": "c470_02",
         "url": "/ui-assets/nikke/character-artwork/c470_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c470_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c470_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 荒诞红",
+        "assetId": "lobby_burst_c470_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c470_01.webp"
+      },
+      {
+        "id": "lobby-burst-skin-2",
+        "label": "技能动画 · 怀旧时光",
+        "assetId": "lobby_burst_c470_02",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c470_02.webp"
       }
     ],
     "471": [
@@ -1489,6 +2361,12 @@
         "label": "默认",
         "assetId": "c471",
         "url": "/ui-assets/nikke/character-artwork/c471.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c471_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c471_00.webp"
       }
     ],
     "500": [
@@ -1497,6 +2375,12 @@
         "label": "默认",
         "assetId": "c500",
         "url": "/ui-assets/nikke/character-artwork/c500.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c500_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c500_00.webp"
       }
     ],
     "501": [
@@ -1511,6 +2395,12 @@
         "label": "甜蜜舞步",
         "assetId": "c501_01",
         "url": "/ui-assets/nikke/character-artwork/c501_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c501_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c501_00.webp"
       }
     ],
     "502": [
@@ -1519,6 +2409,12 @@
         "label": "默认",
         "assetId": "c502",
         "url": "/ui-assets/nikke/character-artwork/c502.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c502_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c502_00.webp"
       }
     ],
     "511": [
@@ -1539,6 +2435,18 @@
         "label": "美丽的我",
         "assetId": "c511_02",
         "url": "/ui-assets/nikke/character-artwork/c511_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c511_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c511_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 水晶公主",
+        "assetId": "lobby_burst_c511_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c511_01.webp"
       }
     ],
     "513": [
@@ -1565,6 +2473,24 @@
         "label": "珍珠贝公主",
         "assetId": "c513_03",
         "url": "/ui-assets/nikke/character-artwork/c513_03.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c513_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c513_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 深渊之花",
+        "assetId": "lobby_burst_c513_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c513_01.webp"
+      },
+      {
+        "id": "lobby-burst-skin-3",
+        "label": "技能动画 · 珍珠贝公主",
+        "assetId": "lobby_burst_c513_03",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c513_03.webp"
       }
     ],
     "514": [
@@ -1579,6 +2505,12 @@
         "label": "美丽的你",
         "assetId": "c514_01",
         "url": "/ui-assets/nikke/character-artwork/c514_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c514_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c514_00.webp"
       }
     ],
     "515": [
@@ -1587,6 +2519,12 @@
         "label": "默认",
         "assetId": "c515",
         "url": "/ui-assets/nikke/character-artwork/c515.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c515_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c515_00.webp"
       }
     ],
     "520": [
@@ -1601,6 +2539,12 @@
         "label": "糖霜咬咬",
         "assetId": "c520_01",
         "url": "/ui-assets/nikke/character-artwork/c520_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c520_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c520_00.webp"
       }
     ],
     "521": [
@@ -1609,6 +2553,12 @@
         "label": "默认",
         "assetId": "c521",
         "url": "/ui-assets/nikke/character-artwork/c521.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c521_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c521_00.webp"
       }
     ],
     "532": [
@@ -1623,6 +2573,12 @@
         "label": "春日飞行",
         "assetId": "c532_01",
         "url": "/ui-assets/nikke/character-artwork/c532_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c532_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c532_00.webp"
       }
     ],
     "550": [
@@ -1637,6 +2593,18 @@
         "label": "闪耀兔",
         "assetId": "c550_01",
         "url": "/ui-assets/nikke/character-artwork/c550_01.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c550",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c550.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c550_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c550_00.webp"
       }
     ],
     "551": [
@@ -1651,6 +2619,12 @@
         "label": "啦啦队训练服",
         "assetId": "c551_01",
         "url": "/ui-assets/nikke/character-artwork/c551_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c551_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c551_00.webp"
       }
     ],
     "570": [
@@ -1659,6 +2633,12 @@
         "label": "默认",
         "assetId": "c570",
         "url": "/ui-assets/nikke/character-artwork/c570.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c570_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c570_00.webp"
       }
     ],
     "580": [
@@ -1673,6 +2653,24 @@
         "label": "圣洁怪盗",
         "assetId": "c580_01",
         "url": "/ui-assets/nikke/character-artwork/c580_01.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c580",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c580.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c580_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c580_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 圣洁怪盗",
+        "assetId": "lobby_burst_c580_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c580_01.webp"
       }
     ],
     "581": [
@@ -1681,6 +2679,12 @@
         "label": "默认",
         "assetId": "c581",
         "url": "/ui-assets/nikke/character-artwork/c581.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c581_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c581_00.webp"
       }
     ],
     "582": [
@@ -1689,6 +2693,12 @@
         "label": "默认",
         "assetId": "c582",
         "url": "/ui-assets/nikke/character-artwork/c582.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c582_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c582_00.webp"
       }
     ],
     "583": [
@@ -1697,6 +2707,12 @@
         "label": "默认",
         "assetId": "c583",
         "url": "/ui-assets/nikke/character-artwork/c583.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c583_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c583_00.webp"
       }
     ],
     "590": [
@@ -1705,6 +2721,12 @@
         "label": "默认",
         "assetId": "c590",
         "url": "/ui-assets/nikke/character-artwork/c590.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c590_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c590_00.webp"
       }
     ],
     "600": [
@@ -1719,6 +2741,12 @@
         "label": "清新薄荷",
         "assetId": "c600_01",
         "url": "/ui-assets/nikke/character-artwork/c600_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c600_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c600_00.webp"
       }
     ],
     "601": [
@@ -1733,6 +2761,12 @@
         "label": "酷冷辣椒",
         "assetId": "c601_01",
         "url": "/ui-assets/nikke/character-artwork/c601_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c601_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c601_00.webp"
       }
     ],
     "620": [
@@ -1741,6 +2775,12 @@
         "label": "默认",
         "assetId": "c620",
         "url": "/ui-assets/nikke/character-artwork/c620.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c620_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c620_00.webp"
       }
     ],
     "800": [
@@ -1755,6 +2795,12 @@
         "label": "脱下外套",
         "assetId": "c800_01",
         "url": "/ui-assets/nikke/character-artwork/c800_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c800_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c800_00.webp"
       }
     ],
     "801": [
@@ -1763,6 +2809,12 @@
         "label": "默认",
         "assetId": "c801",
         "url": "/ui-assets/nikke/character-artwork/c801.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c801_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c801_00.webp"
       }
     ],
     "802": [
@@ -1771,6 +2823,12 @@
         "label": "默认",
         "assetId": "c802",
         "url": "/ui-assets/nikke/character-artwork/c802.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c802_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c802_00.webp"
       }
     ],
     "810": [
@@ -1797,6 +2855,18 @@
         "label": "寄叶非官方水上活动服1",
         "assetId": "c810_03",
         "url": "/ui-assets/nikke/character-artwork/c810_03.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c810_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c810_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-2",
+        "label": "技能动画 · 寄叶制服1",
+        "assetId": "lobby_burst_c810_02",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c810_02.webp"
       }
     ],
     "811": [
@@ -1823,6 +2893,12 @@
         "label": "寄叶非官方水上活动服原型",
         "assetId": "c811_03",
         "url": "/ui-assets/nikke/character-artwork/c811_03.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c811_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c811_00.webp"
       }
     ],
     "812": [
@@ -1831,6 +2907,12 @@
         "label": "默认",
         "assetId": "c812",
         "url": "/ui-assets/nikke/character-artwork/c812.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c812_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c812_00.webp"
       }
     ],
     "820": [
@@ -1851,6 +2933,12 @@
         "label": "纯净之花",
         "assetId": "c820_02",
         "url": "/ui-assets/nikke/character-artwork/c820_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c820_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c820_00.webp"
       }
     ],
     "821": [
@@ -1871,6 +2959,18 @@
         "label": "春日微风",
         "assetId": "c821_02",
         "url": "/ui-assets/nikke/character-artwork/c821_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c821_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c821_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 生涩女仆",
+        "assetId": "lobby_burst_c821_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c821_01.webp"
       }
     ],
     "822": [
@@ -1879,6 +2979,12 @@
         "label": "默认",
         "assetId": "c822",
         "url": "/ui-assets/nikke/character-artwork/c822.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c822_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c822_00.webp"
       }
     ],
     "830": [
@@ -1905,6 +3011,18 @@
         "label": "测试用作战服",
         "assetId": "c830_03",
         "url": "/ui-assets/nikke/character-artwork/c830_03.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c830_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c830_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-3",
+        "label": "技能动画 · 测试用作战服",
+        "assetId": "lobby_burst_c830_03",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c830_03.webp"
       }
     ],
     "831": [
@@ -1925,6 +3043,12 @@
         "label": "宁静渡假",
         "assetId": "c831_02",
         "url": "/ui-assets/nikke/character-artwork/c831_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c831_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c831_00.webp"
       }
     ],
     "832": [
@@ -1957,6 +3081,12 @@
         "label": "神秘缪斯",
         "assetId": "c832_04",
         "url": "/ui-assets/nikke/character-artwork/c832_04.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c832_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c832_00.webp"
       }
     ],
     "833": [
@@ -1965,6 +3095,12 @@
         "label": "默认",
         "assetId": "c833",
         "url": "/ui-assets/nikke/character-artwork/c833.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c833_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c833_00.webp"
       }
     ],
     "834": [
@@ -1985,6 +3121,12 @@
         "label": "灵魂连接",
         "assetId": "c834_02",
         "url": "/ui-assets/nikke/character-artwork/c834_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c834_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c834_00.webp"
       }
     ],
     "835": [
@@ -2005,6 +3147,12 @@
         "label": "孤海乐章",
         "assetId": "c835_02",
         "url": "/ui-assets/nikke/character-artwork/c835_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c835_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c835_00.webp"
       }
     ],
     "836": [
@@ -2013,6 +3161,12 @@
         "label": "默认",
         "assetId": "c836",
         "url": "/ui-assets/nikke/character-artwork/c836.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c836_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c836_00.webp"
       }
     ],
     "840": [
@@ -2033,6 +3187,12 @@
         "label": "DRESS",
         "assetId": "c840_02",
         "url": "/ui-assets/nikke/character-artwork/c840_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c840_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c840_00.webp"
       }
     ],
     "841": [
@@ -2053,6 +3213,12 @@
         "label": "BATTLE SUIT",
         "assetId": "c841_02",
         "url": "/ui-assets/nikke/character-artwork/c841_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c841_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c841_00.webp"
       }
     ],
     "842": [
@@ -2061,6 +3227,12 @@
         "label": "默认",
         "assetId": "c842",
         "url": "/ui-assets/nikke/character-artwork/c842.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c842_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c842_00.webp"
       }
     ],
     "850": [
@@ -2087,6 +3259,18 @@
         "label": "活肤紧身服",
         "assetId": "c850_03",
         "url": "/ui-assets/nikke/character-artwork/c850_03.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c850_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c850_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-3",
+        "label": "技能动画 · 活肤紧身服",
+        "assetId": "lobby_burst_c850_03",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c850_03.webp"
       }
     ],
     "851": [
@@ -2107,6 +3291,12 @@
         "label": "盛夏爱丽丝",
         "assetId": "c851_02",
         "url": "/ui-assets/nikke/character-artwork/c851_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c851_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c851_00.webp"
       }
     ],
     "852": [
@@ -2115,6 +3305,12 @@
         "label": "默认",
         "assetId": "c852",
         "url": "/ui-assets/nikke/character-artwork/c852.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c852_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c852_00.webp"
       }
     ],
     "860": [
@@ -2135,6 +3331,12 @@
         "label": "赤红火花吉他",
         "assetId": "c860_02",
         "url": "/ui-assets/nikke/character-artwork/c860_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c860_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c860_00.webp"
       }
     ],
     "861": [
@@ -2155,6 +3357,12 @@
         "label": "湛蓝律动贝斯",
         "assetId": "c861_02",
         "url": "/ui-assets/nikke/character-artwork/c861_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c861_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c861_00.webp"
       }
     ],
     "862": [
@@ -2163,6 +3371,12 @@
         "label": "默认",
         "assetId": "c862",
         "url": "/ui-assets/nikke/character-artwork/c862.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c862_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c862_00.webp"
       }
     ],
     "870": [
@@ -2183,6 +3397,12 @@
         "label": "女王睡衣（Ver. NIKKE Collabo）",
         "assetId": "c870_02",
         "url": "/ui-assets/nikke/character-artwork/c870_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c870_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c870_00.webp"
       }
     ],
     "871": [
@@ -2203,6 +3423,12 @@
         "label": "冬日雅居（Ver. NIKKE Collabo）",
         "assetId": "c871_02",
         "url": "/ui-assets/nikke/character-artwork/c871_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c871_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c871_00.webp"
       }
     ],
     "872": [
@@ -2211,6 +3437,12 @@
         "label": "默认",
         "assetId": "c872",
         "url": "/ui-assets/nikke/character-artwork/c872.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c872_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c872_00.webp"
       }
     ],
     "010": [
@@ -2227,10 +3459,10 @@
         "url": "/ui-assets/nikke/character-artwork/c010_02.webp"
       },
       {
-        "id": "skin-3",
-        "label": "经典假期",
-        "assetId": "c010_03",
-        "url": "/ui-assets/nikke/character-artwork/c010_03.webp"
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c010_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c010_00.webp"
       }
     ],
     "011": [
@@ -2245,6 +3477,12 @@
         "label": "闪亮子弹",
         "assetId": "c011_01",
         "url": "/ui-assets/nikke/character-artwork/c011_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c011_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c011_00.webp"
       }
     ],
     "012": [
@@ -2253,6 +3491,12 @@
         "label": "默认",
         "assetId": "c012",
         "url": "/ui-assets/nikke/character-artwork/c012.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c012_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c012_00.webp"
       }
     ],
     "014": [
@@ -2261,6 +3505,12 @@
         "label": "默认",
         "assetId": "c014",
         "url": "/ui-assets/nikke/character-artwork/c014.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c014_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c014_00.webp"
       }
     ],
     "015": [
@@ -2269,6 +3519,12 @@
         "label": "默认",
         "assetId": "c015",
         "url": "/ui-assets/nikke/character-artwork/c015.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c015_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c015_00.webp"
       }
     ],
     "016": [
@@ -2295,6 +3551,24 @@
         "label": "耀光",
         "assetId": "c016_03",
         "url": "/ui-assets/nikke/character-artwork/c016_03.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c016_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c016_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 红色风情",
+        "assetId": "lobby_burst_c016_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c016_01.webp"
+      },
+      {
+        "id": "lobby-burst-skin-2",
+        "label": "技能动画 · 挚爱之红",
+        "assetId": "lobby_burst_c016_02",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c016_02.webp"
       }
     ],
     "017": [
@@ -2315,6 +3589,18 @@
         "label": "T.T. STAR",
         "assetId": "c017_02",
         "url": "/ui-assets/nikke/character-artwork/c017_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c017_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c017_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-1",
+        "label": "技能动画 · 星光",
+        "assetId": "lobby_burst_c017_01",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c017_01.webp"
       }
     ],
     "018": [
@@ -2323,6 +3609,12 @@
         "label": "默认",
         "assetId": "c018",
         "url": "/ui-assets/nikke/character-artwork/c018.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c018_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c018_00.webp"
       }
     ],
     "020": [
@@ -2345,6 +3637,12 @@
         "label": "甜蜜宅配员",
         "assetId": "c022_01",
         "url": "/ui-assets/nikke/character-artwork/c022_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c022_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c022_00.webp"
       }
     ],
     "023": [
@@ -2353,6 +3651,12 @@
         "label": "默认",
         "assetId": "c023",
         "url": "/ui-assets/nikke/character-artwork/c023.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c023_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c023_00.webp"
       }
     ],
     "030": [
@@ -2373,6 +3677,18 @@
         "label": "警察加油",
         "assetId": "c030_02",
         "url": "/ui-assets/nikke/character-artwork/c030_02.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c030",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c030.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c030_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c030_00.webp"
       }
     ],
     "032": [
@@ -2387,6 +3703,18 @@
         "label": "正义怪盗",
         "assetId": "c032_01",
         "url": "/ui-assets/nikke/character-artwork/c032_01.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c032",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c032.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c032_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c032_00.webp"
       }
     ],
     "033": [
@@ -2395,6 +3723,12 @@
         "label": "默认",
         "assetId": "c033",
         "url": "/ui-assets/nikke/character-artwork/c033.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c033_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c033_00.webp"
       }
     ],
     "040": [
@@ -2403,6 +3737,12 @@
         "label": "默认",
         "assetId": "c040",
         "url": "/ui-assets/nikke/character-artwork/c040.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c040_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c040_00.webp"
       }
     ],
     "041": [
@@ -2417,6 +3757,12 @@
         "label": "秘密行动",
         "assetId": "c041_01",
         "url": "/ui-assets/nikke/character-artwork/c041_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c041_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c041_00.webp"
       }
     ],
     "043": [
@@ -2437,6 +3783,18 @@
         "label": "秘密警探",
         "assetId": "c043_02",
         "url": "/ui-assets/nikke/character-artwork/c043_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c043_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c043_00.webp"
+      },
+      {
+        "id": "lobby-burst-skin-2",
+        "label": "技能动画 · 秘密警探",
+        "assetId": "lobby_burst_c043_02",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c043_02.webp"
       }
     ],
     "060": [
@@ -2461,6 +3819,12 @@
         "label": "默认",
         "assetId": "c062",
         "url": "/ui-assets/nikke/character-artwork/c062.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c062_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c062_00.webp"
       }
     ],
     "070": [
@@ -2481,6 +3845,12 @@
         "label": "黑月",
         "assetId": "c070_02",
         "url": "/ui-assets/nikke/character-artwork/c070_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c070_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c070_00.webp"
       }
     ],
     "071": [
@@ -2489,6 +3859,12 @@
         "label": "默认",
         "assetId": "c071",
         "url": "/ui-assets/nikke/character-artwork/c071.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c071_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c071_00.webp"
       }
     ],
     "072": [
@@ -2515,6 +3891,18 @@
         "label": "午夜草莓",
         "assetId": "c072_04",
         "url": "/ui-assets/nikke/character-artwork/c072_04.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c072",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c072.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c072_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c072_00.webp"
       }
     ],
     "073": [
@@ -2523,6 +3911,12 @@
         "label": "默认",
         "assetId": "c073",
         "url": "/ui-assets/nikke/character-artwork/c073.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c073_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c073_00.webp"
       }
     ],
     "074": [
@@ -2531,6 +3925,12 @@
         "label": "默认",
         "assetId": "c074",
         "url": "/ui-assets/nikke/character-artwork/c074.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c074_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c074_00.webp"
       }
     ],
     "075": [
@@ -2539,6 +3939,12 @@
         "label": "默认",
         "assetId": "c075",
         "url": "/ui-assets/nikke/character-artwork/c075.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c075_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c075_00.webp"
       }
     ],
     "080": [
@@ -2559,6 +3965,18 @@
         "label": "海洋维修",
         "assetId": "c080_02",
         "url": "/ui-assets/nikke/character-artwork/c080_02.webp"
+      },
+      {
+        "id": "favorite-item",
+        "label": "珍藏品背景",
+        "assetId": "favorite_c080",
+        "url": "/ui-assets/nikke/character-artwork/favorite_c080.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c080_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c080_00.webp"
       }
     ],
     "082": [
@@ -2579,6 +3997,18 @@
         "label": "可爱向日葵",
         "assetId": "c082_02",
         "url": "/ui-assets/nikke/character-artwork/c082_02.webp"
+      },
+      {
+        "id": "skin-80",
+        "label": "国服特供立绘",
+        "assetId": "c082_80",
+        "url": "/ui-assets/nikke/character-artwork/c082_80.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c082_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c082_00.webp"
       }
     ],
     "090": [
@@ -2599,6 +4029,12 @@
         "label": "办公室疗法",
         "assetId": "c090_02",
         "url": "/ui-assets/nikke/character-artwork/c090_02.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c090_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c090_00.webp"
       }
     ],
     "091": [
@@ -2613,6 +4049,12 @@
         "label": "方舟魔法师",
         "assetId": "c091_01",
         "url": "/ui-assets/nikke/character-artwork/c091_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c091_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c091_00.webp"
       }
     ],
     "092": [
@@ -2621,6 +4063,12 @@
         "label": "默认",
         "assetId": "c092",
         "url": "/ui-assets/nikke/character-artwork/c092.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c092_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c092_00.webp"
       }
     ],
     "093": [
@@ -2635,6 +4083,12 @@
         "label": "秘密疗法",
         "assetId": "c093_01",
         "url": "/ui-assets/nikke/character-artwork/c093_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c093_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c093_00.webp"
       }
     ],
     "094": [
@@ -2649,6 +4103,12 @@
         "label": "青涩新生",
         "assetId": "c094_01",
         "url": "/ui-assets/nikke/character-artwork/c094_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c094_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c094_00.webp"
       }
     ],
     "095": [
@@ -2663,6 +4123,12 @@
         "label": "休假日",
         "assetId": "c095_01",
         "url": "/ui-assets/nikke/character-artwork/c095_01.webp"
+      },
+      {
+        "id": "lobby-burst-default",
+        "label": "技能动画 · 默认",
+        "assetId": "lobby_burst_c095_00",
+        "url": "/ui-assets/nikke/character-artwork/lobby_burst_c095_00.webp"
       }
     ]
   }

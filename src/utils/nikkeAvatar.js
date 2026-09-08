@@ -3,6 +3,7 @@
 
 import { SHOW_NIKKE_IMAGES } from "../config/displayPreferences.js";
 import characterArtworkCatalog from "../data/characterArtworkCatalog.json" with { type: "json" };
+import { favoriteItemDisplayAsset } from "../domain/characterObjectAssets.js";
 
 export const getNikkeResourceId = (nikke, resourceIdMap) => {
   if (!nikke) return undefined;
@@ -67,6 +68,17 @@ export const getNikkeArtworkCandidates = (nikke, resourceIdMap) => {
   return candidates.filter((candidate, index, array) => (
     candidate.url && array.findIndex((item) => item.id === candidate.id) === index
   ));
+};
+
+export const getNikkeFavoriteItemArtworkUrl = (nikke, resourceIdMap) => (
+  getNikkeArtworkCandidates(nikke, resourceIdMap)
+    .find((candidate) => candidate.id === "favorite-item")?.url || ""
+);
+
+export const getNikkeFavoriteItemIconUrl = (nikke, resourceIdMap) => {
+  if (!SHOW_NIKKE_IMAGES) return "";
+  const resourceNumber = normalizeNikkeResourceNumber(getNikkeResourceId(nikke, resourceIdMap));
+  return favoriteItemDisplayAsset(resourceNumber);
 };
 
 export const guessImageExtensionFromUrl = (url, fallback = "png") => {

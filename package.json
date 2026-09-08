@@ -1,7 +1,7 @@
 {
   "name": "nikke-workshop",
   "private": true,
-  "version": "1.0.9",
+  "version": "1.0.10",
   "license": "GPL-3.0-or-later",
   "type": "module",
   "scripts": {
@@ -11,6 +11,10 @@
     "preview": "vite preview",
     "test": "node --test tests/*.test.mjs",
     "sync:character-artwork": "node scripts/sync-character-artwork.mjs",
+    "check:character-artwork": "node scripts/sync-character-artwork.mjs --check",
+    "sync:character-objects": "node scripts/sync-character-objects.mjs",
+    "check:character-objects": "node scripts/sync-character-objects.mjs --check",
+    "sync:skill-icons": "node scripts/sync-character-objects.mjs",
     "sync:level-stats": "node scripts/sync-level-stats.mjs",
     "preversion": "node scripts/version-git.mjs pre && npm run lint && npm test",
     "version": "node scripts/sync-version.mjs && git add package.json package-lock.json public/manifest.json",
@@ -22,7 +26,9 @@
     "@mui/icons-material": "^7.3.7",
     "@mui/material": "^7.3.7",
     "@tesseract.js-data/chi_sim": "^1.0.0",
+    "@tesseract.js-data/eng": "^1.0.0",
     "exceljs": "^4.4.0",
+    "html-to-image": "^1.11.13",
     "opencc-js": "^1.0.5",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
@@ -37,7 +43,6 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.0",
     "globals": "^17.3.0",
-    "playwright-core": "^1.62.1",
     "sharp": "^0.35.4",
     "vite": "^7.3.1"
   }

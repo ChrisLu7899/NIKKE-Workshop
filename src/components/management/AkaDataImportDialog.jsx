@@ -214,7 +214,7 @@ export default function AkaDataImportDialog({
               </Box>
             ) : null}
             <Typography variant="body2" color="text.secondary" sx={{ mt: 1.5 }}>
-              确认导入后，标准角色的突破和装备词条将以阿卡数据为准；阿卡未提供的等级、战斗力和好感度会保留，自定义角色不受影响。
+              确认导入后，标准角色的突破、好感度、职业／企业等级和装备词条将以阿卡数据为准；阿卡未提供的角色等级和战斗力会保留，自定义角色不受影响。
             </Typography>
           </Box>
         ) : null}

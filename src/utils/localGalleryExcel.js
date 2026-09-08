@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import ExcelJS from "exceljs";
+import { normalizeEquipmentMetadata, normalizeEquipmentCorporation } from "../domain/equipmentMetadata.js";
 import {
   EQUIPMENT_FUNCTION_LABELS,
   EQUIPMENT_FUNCTION_TYPES,
@@ -90,6 +91,8 @@ const CHARACTER_COLUMNS = [
   ["简中名称", "nameCn"], ["英文名称", "nameEn"], ["图鉴ID", "catalogId"], ["资源ID", "resourceId"],
   ["同步未发现", "syncMissing"], ["手动补充字段", "manualSupplementFields"],
   ["创建时间", "createdAt"], ["更新时间", "updatedAt"],
+  ["职业等级", "classLevel"], ["企业等级", "corporationLevel"],
+  ["技能1等级", "skill1Level"], ["技能2等级", "skill2Level"], ["爆裂技能等级", "burstSkillLevel"],
 ];
 
 function styleHeader(row) {
@@ -463,6 +466,7 @@ export function createLocalGalleryWorkbook(records = [], { includeSynced = false
     ["文件仅在扩展本地生成和解析，不会上传服务器。请勿修改工作表名称或表头。"],
     ["百分比数值请填写真实数字，例如 22.15；不要填写 22.15%。"],
     ["锁定状态可填写“已锁”“未锁”或“待确认”；旧文件没有该列时按待确认处理。"],
+    ["装备表的装备编号、强化等级、装备企业类型用于保留普通装备。编号 0 表示未装备，空白表示未知；旧文件缺列时保留已有装备信息。"],
     ["角色卡头像会在导出时下载并嵌入工作簿；隐私模式下不请求头像，图片下载失败时保留文字占位。"],
     ["角色名称采用精确匹配：忽略首尾空格、全半角空格及英文大小写，不做模糊匹配。"],
   ].forEach((values) => readme.addRow(values));
@@ -478,11 +482,11 @@ export function createLocalGalleryWorkbook(records = [], { includeSynced = false
   characters.autoFilter = "A1:X1";
 
   const equipments = workbook.addWorksheet(LOCAL_GALLERY_SHEETS.equipments);
-  equipments.addRow(["本地ID", "角色名称", "装备序号", "装备名称"]);
+  equipments.addRow(["本地ID", "角色名称", "装备序号", "装备名称", "装备编号", "强化等级", "装备企业类型"]);
   styleHeader(equipments.getRow(1));
   equipments.columns.forEach((column) => { column.width = 22; });
   equipments.views = [{ state: "frozen", ySplit: 1, showGridLines: false }];
-  equipments.autoFilter = "A1:D1";
+  equipments.autoFilter = "A1:G1";
 
   const lines = workbook.addWorksheet(LOCAL_GALLERY_SHEETS.lines);
   lines.addRow(["本地ID", "角色名称", "装备序号", "词条位置", "词条类型代码", "词条名称", "数值", "档位", "锁定状态"]);
@@ -504,11 +508,14 @@ export function createLocalGalleryWorkbook(records = [], { includeSynced = false
       record.limitBreak.core, record.combat, record.affectionLevel,
       record.base.nameCn, record.base.nameEn, record.base.catalogId, record.base.resourceId,
       record.syncMissing, record.manualSupplementFields.join("|"), record.createdAt, record.updatedAt,
+      record.classLevel, record.corporationLevel,
+      record.skill1Level, record.skill2Level, record.burstSkillLevel,
     ]);
     characterRows.set(record.localId, characterRow.number);
     const lineRows = Array.from({ length: 4 }, () => Array(3).fill(null));
     record.equipments.forEach((equipment, slotIndex) => {
-      equipments.addRow([record.localId, record.base.name, slotIndex + 1, EQUIPMENT_NAMES[slotIndex]]);
+      const metadata = record.equipmentMetadata[slotIndex];
+      equipments.addRow([record.localId, record.base.name, slotIndex + 1, EQUIPMENT_NAMES[slotIndex], metadata?.tid ?? null, metadata?.level ?? null, metadata?.corporationType ?? null]);
       equipment.forEach((line, lineIndex) => {
         const row = lines.addRow([
           record.localId, record.base.name, slotIndex + 1, line.position,
@@ -611,6 +618,8 @@ export async function importLocalGalleryBuffer(buffer, { catalog = [], existingR
   if (!characterSheet || !lineSheet) throw new Error("缺少“角色”或“词条”工作表");
   const characterRows = worksheetRows(characterSheet);
   const lineRows = worksheetRows(lineSheet);
+  const equipmentSheet = workbook.getWorksheet(LOCAL_GALLERY_SHEETS.equipments);
+  const equipmentRows = equipmentSheet ? worksheetRows(equipmentSheet) : [];
   const groupedLines = new Map();
   lineRows.forEach((row) => {
     const id = String(row["本地ID"] || "").trim();
@@ -640,6 +649,19 @@ export async function importLocalGalleryBuffer(buffer, { catalog = [], existingR
     const key = localId || normalizedName;
     const equipments = Array.from({ length: 4 }, () => []);
     let invalid = false;
+    const metadataRows = equipmentRows.filter(r => (String(r["本地ID"] || "").trim() || normalizeCharacterName(r["角色名称"])) === key && Object.hasOwn(r, "装备编号"));
+    const metadata = Array(4).fill(null);
+    const metadataSlots = new Set();
+    for (const gear of metadataRows) {
+      const slot = Number(gear["装备序号"]);
+      const present = v => v !== null && v !== undefined && String(v).trim() !== "";
+      const validInteger = v => !present(v) || (["string", "number"].includes(typeof v) && Number.isSafeInteger(Number(v)) && Number(v) >= 0);
+      if (!Number.isInteger(slot) || slot < 1 || slot > 4 || metadataSlots.has(slot)
+        || !validInteger(gear["装备编号"]) || !validInteger(gear["强化等级"])
+        || (present(gear["装备企业类型"]) && normalizeEquipmentCorporation(gear["装备企业类型"]) === null)) { invalid = true; continue; }
+      metadataSlots.add(slot);
+      metadata[slot - 1] = present(gear["装备编号"]) ? { tid: gear["装备编号"], level: gear["强化等级"], corporationType: gear["装备企业类型"] } : null;
+    }
     (groupedLines.get(key) || groupedLines.get(normalizedName) || []).forEach((lineRow) => {
       const slot = numeric(lineRow["装备序号"], { integer: true, min: 1, max: 4 });
       const position = numeric(lineRow["词条位置"], { integer: true, min: 1, max: 3 });
@@ -662,12 +684,18 @@ export async function importLocalGalleryBuffer(buffer, { catalog = [], existingR
       limitBreak: { grade: numeric(row["突破"], { integer: true, min: 0 }), core: numeric(row["核心突破"], { integer: true, min: 0 }) },
       combat: numeric(row["战斗力"], { integer: true, min: 0 }),
       affectionLevel: numeric(row["好感度"], { integer: true, min: 0 }),
+      classLevel: numeric(row["职业等级"], { integer: true, min: 0 }),
+      corporationLevel: numeric(row["企业等级"], { integer: true, min: 0 }),
+      skill1Level: numeric(row["技能1等级"], { integer: true, min: 1, max: 10 }),
+      skill2Level: numeric(row["技能2等级"], { integer: true, min: 1, max: 10 }),
+      burstSkillLevel: numeric(row["爆裂技能等级"], { integer: true, min: 1, max: 10 }),
       equipments: normalizeEquipments(equipments),
+      ...(metadataRows.length ? { equipmentMetadata: normalizeEquipmentMetadata(metadata) } : {}),
       syncMissing: Boolean(row["同步未发现"]),
       manualSupplementFields: String(row["手动补充字段"] || "").split("|").map((value) => value.trim()).filter(Boolean),
       createdAt: numeric(row["创建时间"], { min: 0 }), updatedAt: numeric(row["更新时间"], { min: 0 }),
     };
-    if ([draft.level, draft.limitBreak.grade, draft.limitBreak.core, draft.combat, draft.affectionLevel, draft.createdAt, draft.updatedAt].some(Number.isNaN)) invalid = true;
+    if ([draft.level, draft.limitBreak.grade, draft.limitBreak.core, draft.combat, draft.affectionLevel, draft.classLevel, draft.corporationLevel, draft.skill1Level, draft.skill2Level, draft.burstSkillLevel, draft.createdAt, draft.updatedAt].some(Number.isNaN)) invalid = true;
     if (invalid) {
       summary.skipped += 1; summary.errors.push(`角色表第 ${row.__row} 行：包含无效字段`); continue;
     }

@@ -61,6 +61,10 @@ test("account roster and details merge into the stable export contract", () => {
   assert.equal(dict.elements.Fire[0].level, 400);
   assert.deepEqual(dict.elements.Fire[0].limit_break, { grade: 0, core: 0 });
   assert.equal(dict.elements.Fire[0].item_rare, "SSR");
+  assert.equal(dict.elements.Fire[0].cube_id, 7);
+  assert.equal(dict.elements.Fire[0].cube_level, 5);
+  assert.equal(dict.elements.Water[0].cube_id, 7);
+  assert.equal(dict.elements.Water[0].cube_level, 5);
   assert.equal(dict.elements.Fire[1].is_owned, false);
   assert.equal(dict.cubes[0].cube_level, 5);
 });

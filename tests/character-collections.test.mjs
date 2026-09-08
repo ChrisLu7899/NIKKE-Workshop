@@ -13,8 +13,8 @@ import {
 } from "../src/utils/characterCollections.js";
 
 const catalog = [
-  { id: 1, name_code: "c1", name_cn: "角色1", element: "Fire" },
-  { id: 2, name_code: "c2", name_cn: "角色2", element: "Electronic" },
+  { id: 1, name_code: "c1", name_cn: "角色1", element: "Fire", class: "Attacker", corporation: "Elysion" },
+  { id: 2, name_code: "c2", name_cn: "角色2", element: "Electronic", class: "Defender", corporation: "Missilis" },
 ];
 
 test("owned filtering does not treat a zero-grade catalog placeholder as owned", () => {
@@ -37,6 +37,8 @@ test("owned filtering does not treat a zero-grade catalog placeholder as owned",
 test("catalog characters are grouped and custom lists merge without duplicates", () => {
   const full = buildCharactersConfig(catalog);
   assert.equal(full.elements.Fire[0].name_code, "c1");
+  assert.equal(full.elements.Fire[0].class, "Attacker");
+  assert.equal(full.elements.Fire[0].corporation, "Elysion");
   assert.equal(full.elements.Electronic[0].name_code, "c2");
 
   const merged = mergeNikkesIntoCharacters(buildCharactersConfig([catalog[0]]), catalog);

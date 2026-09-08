@@ -1,0 +1,434 @@
+{
+  "schema": "character-equipment-derived-v1",
+  "recipe": {
+    "version": 1,
+    "equipment": "original PNG bytes; no crop, scaling, or recoloring",
+    "badge": {
+      "size": [
+        112,
+        124
+      ],
+      "purple": [
+        185,
+        0,
+        179
+      ],
+      "stroke": [
+        80,
+        92
+      ],
+      "glyph": [
+        46,
+        52
+      ],
+      "strokeRotation": 90
+    },
+    "note": "Workshop purple and aspect-preserving geometry; original Image references verified, not a claim of runtime shader/color reproduction."
+  },
+  "producer_sha256": "4fdca34a7186339e9260ce63f8ffa4359646597435b27d10258a4277f1277a26",
+  "sharp": "0.35.4",
+  "sources": {
+    "equipment": {
+      "schema": "character-card-ui-v1",
+      "status": "promoted",
+      "source": {
+        "resource_key": "icons-equip(hd)_assets_all_21180e83e2d77f65679e38b648efc5d1.bundle",
+        "region": "dp",
+        "bundle_hash": "21180e83e2d77f65679e38b648efc5d1",
+        "bundle_sha256": "6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041",
+        "cab": "CAB-26fd9477ea3b77159fcdd65ee264f7b5",
+        "normalized_bundle": "icons-equip(hd)_assets_all.bundle"
+      },
+      "method": "UnityPy Sprite.image RGBA PNG; no scaling or screenshot crop",
+      "atlas": {
+        "resource_key": "icons-equip(hd)_assets_all_21180e83e2d77f65679e38b648efc5d1.bundle",
+        "region": "dp",
+        "bundle_hash": "21180e83e2d77f65679e38b648efc5d1",
+        "bundle_sha256": "6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
+      },
+      "producer_sha256": "638858f5dd82d7f670cae64bc07d2ab4bb4ba860ca7329d7a1df2016fe398ea6",
+      "review_sha256": "fd52343c9c8ca92067a5116de22d321c7eae41a5827f9e516823c033cd09059f",
+      "items": [
+        {
+          "sprite_name": "icn_equipment_head_attacker_t9_3",
+          "path_id": "134802387837238319",
+          "size": [
+            128,
+            128
+          ],
+          "png_sha256": "ecb18bb8287a2d2c7f9fd02ed015abedda22cf812e2fa54a7753b21bce3d9479",
+          "id": "vmetal-head",
+          "review": "逐图复核：attacker/head 的 t9_3 原生透明图；与既有 vmetal-head 形状、配色、部位对应。无数字、底框和截图背景。",
+          "file": "equipment/vmetal-head.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        },
+        {
+          "sprite_name": "icn_equipment_body_attacker_t9_3",
+          "path_id": "-7958534369583495690",
+          "size": [
+            128,
+            128
+          ],
+          "png_sha256": "0a42a1f15713af16f34a184f58fcb671cd7c60b4c5aa11101104f0497500d892",
+          "id": "vmetal-body",
+          "review": "逐图复核：attacker/body 的 t9_3 原生透明图；与既有 vmetal-body 形状、配色、部位对应。无数字、底框和截图背景。",
+          "file": "equipment/vmetal-body.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        },
+        {
+          "sprite_name": "icn_equipment_arm_attacker_t9_3",
+          "path_id": "1974539666180700931",
+          "size": [
+            128,
+            128
+          ],
+          "png_sha256": "b071521d99496a7d4a2c408b1ea910ed8d81ba78ac5420a9aad869c824cc63c0",
+          "id": "vmetal-arms",
+          "review": "逐图复核：attacker/arm 的 t9_3 原生透明图；与既有 vmetal-arms 形状、配色、部位对应。无数字、底框和截图背景。",
+          "file": "equipment/vmetal-arms.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        },
+        {
+          "sprite_name": "icn_equipment_leg_attacker_t9_3",
+          "path_id": "-4636124762029685731",
+          "size": [
+            128,
+            128
+          ],
+          "png_sha256": "a9b069b1dcf4711a459ddf0f84d36b09e3b32d2064af57b967ed02e009eb436b",
+          "id": "vmetal-legs",
+          "review": "逐图复核：attacker/leg 的 t9_3 原生透明图；与既有 vmetal-legs 形状、配色、部位对应。无数字、底框和截图背景。",
+          "file": "equipment/vmetal-legs.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        },
+        {
+          "sprite_name": "icn_equipment_head_defender_t9_3",
+          "path_id": "3216947929693736657",
+          "size": [
+            128,
+            128
+          ],
+          "png_sha256": "d2390beffde6c562f23daa1ef53b3f037fb71d56165e9d942e71b847bbc5970f",
+          "id": "99-head",
+          "review": "逐图复核：defender/head 的 t9_3 原生透明图；与既有 99-head 形状、配色、部位对应。无数字、底框和截图背景。",
+          "file": "equipment/99-head.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        },
+        {
+          "sprite_name": "icn_equipment_body_defender_t9_3",
+          "path_id": "-2245916088654931902",
+          "size": [
+            128,
+            128
+          ],
+          "png_sha256": "600f5512c86fb7d5c7c196678808e900635706b48050d429ad7f29cf3ab4e17d",
+          "id": "99-body",
+          "review": "逐图复核：defender/body 的 t9_3 原生透明图；与既有 99-body 形状、配色、部位对应。无数字、底框和截图背景。",
+          "file": "equipment/99-body.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        },
+        {
+          "sprite_name": "icn_equipment_arm_defender_t9_3",
+          "path_id": "-5888049500836952013",
+          "size": [
+            128,
+            128
+          ],
+          "png_sha256": "ef7788e1a2ab6c624e2319b7514dac4c133d03fdf8e7cca618e52188ac561250",
+          "id": "99-arms",
+          "review": "逐图复核：defender/arm 的 t9_3 原生透明图；与既有 99-arms 形状、配色、部位对应。无数字、底框和截图背景。",
+          "file": "equipment/99-arms.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        },
+        {
+          "sprite_name": "icn_equipment_leg_defender_t9_3",
+          "path_id": "314002665389877270",
+          "size": [
+            128,
+            128
+          ],
+          "png_sha256": "d64ab22d41d0d5ba13e7686c4790308613bea3f777e6fe5e80f4387c676a8b55",
+          "id": "99-legs",
+          "review": "逐图复核：defender/leg 的 t9_3 原生透明图；与既有 99-legs 形状、配色、部位对应。无数字、底框和截图背景。",
+          "file": "equipment/99-legs.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        },
+        {
+          "sprite_name": "icn_equipment_head_supporter_t9_3",
+          "path_id": "-6269528241924704844",
+          "size": [
+            128,
+            128
+          ],
+          "png_sha256": "81d95db20f449e064d829c228e1c715282df68e9f382bc14378afc6dcfd711f7",
+          "id": "code-head",
+          "review": "逐图复核：supporter/head 的 t9_3 原生透明图；与既有 code-head 形状、配色、部位对应。无数字、底框和截图背景。",
+          "file": "equipment/code-head.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        },
+        {
+          "sprite_name": "icn_equipment_body_supporter_t9_3",
+          "path_id": "1975621532967411022",
+          "size": [
+            128,
+            128
+          ],
+          "png_sha256": "78b5166e9b1cb87ffc4cea08d6ebca710f4225b152dffcc9d0abc8742ab5532a",
+          "id": "code-body",
+          "review": "逐图复核：supporter/body 的 t9_3 原生透明图；与既有 code-body 形状、配色、部位对应。无数字、底框和截图背景。",
+          "file": "equipment/code-body.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        },
+        {
+          "sprite_name": "icn_equipment_arm_supporter_t9_3",
+          "path_id": "8624115766078258521",
+          "size": [
+            128,
+            128
+          ],
+          "png_sha256": "0aa10b1afca7da77f3e418c5ec985620b263753bb0f765c6e37cd5d49ffe7ad1",
+          "id": "code-arms",
+          "review": "逐图复核：supporter/arm 的 t9_3 原生透明图；与既有 code-arms 形状、配色、部位对应。无数字、底框和截图背景。",
+          "file": "equipment/code-arms.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        },
+        {
+          "sprite_name": "icn_equipment_leg_supporter_t9_3",
+          "path_id": "-1335994857770807227",
+          "size": [
+            128,
+            128
+          ],
+          "png_sha256": "2c95cfb210e2b05ffc65ca8033da64735a5fecc673ed08c51f8bafbd4637b2a6",
+          "id": "code-legs",
+          "review": "逐图复核：supporter/leg 的 t9_3 原生透明图；与既有 code-legs 形状、配色、部位对应。无数字、底框和截图背景。",
+          "file": "equipment/code-legs.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        }
+      ],
+      "formal_manifest_sha256": "6d082aab06cf61ac1b5341edc342800025ed7a7292291491180f8d4acfc251ce"
+    },
+    "overload-frame": {
+      "schema": "character-card-ui-v1",
+      "status": "promoted",
+      "source": {
+        "resource_key": "icon-atlased(hd)_assets_all_f86efaa8f533f840dc8b4b99c3d038e9.bundle",
+        "region": "core",
+        "bundle_hash": "f86efaa8f533f840dc8b4b99c3d038e9",
+        "bundle_sha256": "8b012a2b3b24ce51d0c74b7fe9c04198057a14e90899145330b94b9ac457bfd9",
+        "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+        "normalized_bundle": "icon-atlased(hd)_assets_all.bundle"
+      },
+      "method": "UnityPy Sprite.image RGBA PNG; no scaling or screenshot crop",
+      "atlas": {
+        "resource_key": "icon-spriteatlas(sd)_assets_atlas_common_class_916bb75e72a5a7902b3131805880a563.bundle",
+        "region": "core",
+        "bundle_hash": "916bb75e72a5a7902b3131805880a563",
+        "bundle_sha256": "e5bc3052e344275e6a8c62c0a6622f48b912ce857acd04336d41c09aa79e70c7"
+      },
+      "producer_sha256": "638858f5dd82d7f670cae64bc07d2ab4bb4ba860ca7329d7a1df2016fe398ea6",
+      "review_sha256": "468976d2c0ea9269b5545cc3cc16f2e55fd6f65504097a0b815c76d304796d9b",
+      "items": [
+        {
+          "sprite_name": "ele_hex_frame",
+          "path_id": "6845705384780490416",
+          "size": [
+            112,
+            124
+          ],
+          "png_sha256": "b3abd1a6aa14eae0a8088cec8debf05c64cb4238862fa5dafe6fec68b1baa287",
+          "id": "frame",
+          "review": "完整竖向白色六边形及阴影，保留透明边距。用于声明染色的前端派生图。",
+          "file": "overload-frame/frame.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        }
+      ],
+      "formal_manifest_sha256": "b4fd084b0ef0474513b6711be7633ddadac3c74be32452d1f9c6b436cb58c2c4"
+    },
+    "overload-glyph": {
+      "schema": "character-card-ui-v1",
+      "status": "promoted",
+      "source": {
+        "resource_key": "icon-atlased(hd)_assets_all_f86efaa8f533f840dc8b4b99c3d038e9.bundle",
+        "region": "core",
+        "bundle_hash": "f86efaa8f533f840dc8b4b99c3d038e9",
+        "bundle_sha256": "8b012a2b3b24ce51d0c74b7fe9c04198057a14e90899145330b94b9ac457bfd9",
+        "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+        "normalized_bundle": "icon-atlased(hd)_assets_all.bundle"
+      },
+      "method": "UnityPy Sprite.image RGBA PNG; no scaling or screenshot crop",
+      "atlas": {
+        "resource_key": "icon-spriteatlas(hd)_assets_atlas_icon_12f18a3cd939ea971f3c4e193726017d.bundle",
+        "region": "core",
+        "bundle_hash": "12f18a3cd939ea971f3c4e193726017d",
+        "bundle_sha256": "47d836c2eaf594c4d49abee78b8f3210f8360cd222635ac4dc03c54a2482da53"
+      },
+      "producer_sha256": "638858f5dd82d7f670cae64bc07d2ab4bb4ba860ca7329d7a1df2016fe398ea6",
+      "review_sha256": "2e0937d9141afbba72aa6fef26a922994c94c99f43faa9abce1d368273c72201",
+      "items": [
+        {
+          "sprite_name": "icn_core",
+          "path_id": "-1639128738351976996",
+          "size": [
+            50,
+            57
+          ],
+          "png_sha256": "aeb75b7683d5f6507fbf2011a092fd7a54aba6e34fe49bb7ae37659e1b232ded",
+          "id": "glyph",
+          "review": "原始白色核心立方体符号，保留 50×57 原始比例；actual lazy_overload/img_main_icon 引用已核对。",
+          "file": "overload-glyph/glyph.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=64.0, width=64.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        }
+      ],
+      "formal_manifest_sha256": "b6e297853e87bae204375ca44360dbfbc877603027e5b738465af8934526c474"
+    },
+    "overload-stroke": {
+      "schema": "character-card-ui-v1",
+      "status": "promoted",
+      "source": {
+        "resource_key": "view_assets_view-characterdetail2_cc6e69ec36ee58a75db916f3089b426c.bundle",
+        "region": "core",
+        "bundle_hash": "cc6e69ec36ee58a75db916f3089b426c",
+        "bundle_sha256": "7b406c6e97e0e7f67d8b4d832cf2b32c86ea03fa63c5b62d5ac40a47f281574a",
+        "cab": "CAB-b6725adfd4a86c994ce64f6e87df4d61",
+        "normalized_bundle": "view_assets_view-characterdetail2.bundle"
+      },
+      "method": "UnityPy Sprite.image RGBA PNG; no scaling or screenshot crop",
+      "atlas": {
+        "resource_key": "view_assets_view-characterdetail2_cc6e69ec36ee58a75db916f3089b426c.bundle",
+        "region": "core",
+        "bundle_hash": "cc6e69ec36ee58a75db916f3089b426c",
+        "bundle_sha256": "7b406c6e97e0e7f67d8b4d832cf2b32c86ea03fa63c5b62d5ac40a47f281574a"
+      },
+      "producer_sha256": "638858f5dd82d7f670cae64bc07d2ab4bb4ba860ca7329d7a1df2016fe398ea6",
+      "review_sha256": "e06de684a0266db0b45e9cd53ac6de0008ebd08c97815b5d41d3178b5357e67b",
+      "items": [
+        {
+          "sprite_name": "ele_hexgaon_stroke",
+          "path_id": "8334083016760810214",
+          "size": [
+            134,
+            117
+          ],
+          "png_sha256": "9ea3477a0c6d165613a33b0b58e76149f6e979a416f4ff28a265723f77611cdc",
+          "id": "stroke",
+          "review": "原生白色六边形内圈，134×117，需转为尖顶方向；实际 lazy_overload/img_line 的旋转及尺寸已取证。",
+          "file": "overload-stroke/stroke.png",
+          "review_status": "visually_verified",
+          "rect": "Rectf(height=136.0, width=136.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+        }
+      ],
+      "formal_manifest_sha256": "f0f565046df60e4399035776c80bf57b3c8a1d747c149b72a8f19dc030d5fab0"
+    }
+  },
+  "items": [
+    {
+      "file": "equipment/overload/vmetal-head.png",
+      "png_sha256": "ecb18bb8287a2d2c7f9fd02ed015abedda22cf812e2fa54a7753b21bce3d9479"
+    },
+    {
+      "file": "equipment/overload/vmetal-body.png",
+      "png_sha256": "0a42a1f15713af16f34a184f58fcb671cd7c60b4c5aa11101104f0497500d892"
+    },
+    {
+      "file": "equipment/overload/vmetal-arms.png",
+      "png_sha256": "b071521d99496a7d4a2c408b1ea910ed8d81ba78ac5420a9aad869c824cc63c0"
+    },
+    {
+      "file": "equipment/overload/vmetal-legs.png",
+      "png_sha256": "a9b069b1dcf4711a459ddf0f84d36b09e3b32d2064af57b967ed02e009eb436b"
+    },
+    {
+      "file": "equipment/overload/99-head.png",
+      "png_sha256": "d2390beffde6c562f23daa1ef53b3f037fb71d56165e9d942e71b847bbc5970f"
+    },
+    {
+      "file": "equipment/overload/99-body.png",
+      "png_sha256": "600f5512c86fb7d5c7c196678808e900635706b48050d429ad7f29cf3ab4e17d"
+    },
+    {
+      "file": "equipment/overload/99-arms.png",
+      "png_sha256": "ef7788e1a2ab6c624e2319b7514dac4c133d03fdf8e7cca618e52188ac561250"
+    },
+    {
+      "file": "equipment/overload/99-legs.png",
+      "png_sha256": "d64ab22d41d0d5ba13e7686c4790308613bea3f777e6fe5e80f4387c676a8b55"
+    },
+    {
+      "file": "equipment/overload/code-head.png",
+      "png_sha256": "81d95db20f449e064d829c228e1c715282df68e9f382bc14378afc6dcfd711f7"
+    },
+    {
+      "file": "equipment/overload/code-body.png",
+      "png_sha256": "78b5166e9b1cb87ffc4cea08d6ebca710f4225b152dffcc9d0abc8742ab5532a"
+    },
+    {
+      "file": "equipment/overload/code-arms.png",
+      "png_sha256": "0aa10b1afca7da77f3e418c5ec985620b263753bb0f765c6e37cd5d49ffe7ad1"
+    },
+    {
+      "file": "equipment/overload/code-legs.png",
+      "png_sha256": "2c95cfb210e2b05ffc65ca8033da64735a5fecc673ed08c51f8bafbd4637b2a6"
+    },
+    {
+      "file": "equipment/native/overload-frame.png",
+      "png_sha256": "b3abd1a6aa14eae0a8088cec8debf05c64cb4238862fa5dafe6fec68b1baa287"
+    },
+    {
+      "file": "equipment/native/overload-glyph.png",
+      "png_sha256": "aeb75b7683d5f6507fbf2011a092fd7a54aba6e34fe49bb7ae37659e1b232ded"
+    },
+    {
+      "file": "equipment/native/overload-stroke.png",
+      "png_sha256": "9ea3477a0c6d165613a33b0b58e76149f6e979a416f4ff28a265723f77611cdc"
+    },
+    {
+      "file": "equipment/overload-badge.png",
+      "png_sha256": "3d15bb4af81d25d15837dc369207f1dd4c1f1a7b9b71f84ac6c5ea380c9161bf"
+    }
+  ]
+}

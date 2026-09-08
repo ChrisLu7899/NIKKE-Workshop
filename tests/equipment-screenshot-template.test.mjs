@@ -9,6 +9,7 @@ import {
   locateLargestEquipmentPanel,
   locateOverloadLogoFromRgba,
   projectEquipmentPanelFromOverload,
+  shouldPreferEquipmentScreenshot,
 } from "../src/domain/equipmentScreenshotTemplate.js";
 
 function intersectionOverUnion(left, right) {
@@ -98,6 +99,29 @@ test("OVERLOAD detector does not mark a red word without panel structure as high
   paintOverloadWord(pixels, width, height, overload);
   const located = locateOverloadLogoFromRgba(pixels, width, height);
   assert.ok(!located || located.confidence === "medium");
+});
+
+test("automatic OCR prefers only a complete high-confidence OVERLOAD panel", () => {
+  assert.equal(shouldPreferEquipmentScreenshot({
+    source: "overload-geometry",
+    confidence: "high",
+    coverage: 1,
+  }), true);
+  assert.equal(shouldPreferEquipmentScreenshot({
+    source: "overload-geometry",
+    confidence: "medium",
+    coverage: 1,
+  }), false);
+  assert.equal(shouldPreferEquipmentScreenshot({
+    source: "overload-geometry",
+    confidence: "high",
+    coverage: 0.9,
+  }), false);
+  assert.equal(shouldPreferEquipmentScreenshot({
+    source: "bright-panel-fallback",
+    confidence: "high",
+    coverage: 1,
+  }), false);
 });
 
 test("OVERLOAD geometry projects the same panel for max-level and upgradable equipment", () => {

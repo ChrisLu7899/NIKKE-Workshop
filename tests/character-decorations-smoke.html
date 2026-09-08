@@ -1,0 +1,18 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><title>角色卡装饰验收</title>
+<style>body{margin:12px;background:#dce1e6;font-family:system-ui}.samples{display:flex;flex-wrap:wrap;gap:12px}.sample{width:368px}.frame{width:368px;height:548px}button{padding:8px;margin:0 8px 8px 0}</style></head>
+<body><h1>角色卡装饰验收（隔离测试数据）</h1><div id="root"></div>
+<script type="module">
+import React,{useRef,useState} from 'react';import {createRoot} from 'react-dom/client';
+import CharacterCard from '../src/components/management/CharacterCard.jsx';
+import {downloadCharacterCardPng} from '../src/utils/characterCardDownload.js';
+const e=React.createElement;
+function Sample({i}){const ref=useRef(null),[visible,setVisible]=useState(true);
+const values=[{affectionLevel:1,skill1Level:1,skill2Level:9,burstSkillLevel:10,cubeId:1000304,cubeLevel:15},{affectionLevel:40,skill1Level:10,skill2Level:1,burstSkillLevel:9,cubeId:1000303,cubeLevel:1},{affectionLevel:100,skill1Level:9,cubeId:1000304},{}][i];
+return e('section',{className:'sample'},e('h2',null,['1 / 9 / 10 与魔方 15','好感 40 / 魔方 1','三位好感与部分缺失','全部练度缺失'][i]),
+e('button',{onClick:()=>setVisible(!visible)},'切换模块'),e('button',{onClick:()=>downloadCharacterCardPng(ref.current,'decorations')},'下载'),
+e('div',{className:'frame'},e(CharacterCard,{
+catalogCharacter:{name_cn:'灰姑娘',resource_id:511,original_rare:'SSR',class:'Defender',element:'Electronic',weapon_type:'RL',corporation:'Pilgrim',use_burst_skill:'Step3'},
+characterData:values,artworkUrl:i===1?'/ui-assets/nikke/character-artwork/lobby_burst_c330_01.webp':i===3?'':'/ui-assets/nikke/character-artwork/c511.webp',containArtwork:i===1,cardRef:ref,
+visibleModules:{affection:visible,skills:visible,cube:visible,equipments:false,affixSummary:false}})))}
+createRoot(document.getElementById('root')).render(e('div',{className:'samples'},...Array.from({length:4},(_,i)=>e(Sample,{key:i,i}))));
+</script></body></html>

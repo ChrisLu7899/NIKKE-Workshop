@@ -1,0 +1,829 @@
+{
+  "schema": "character-metadata-derived-v1",
+  "recipe": {
+    "version": 1,
+    "frame": "hex-dark",
+    "burstHeight": 62,
+    "elementBox": [
+      68,
+      76
+    ],
+    "colors": {
+      "fire": [
+        254,
+        0,
+        10
+      ],
+      "water": [
+        0,
+        124,
+        254
+      ],
+      "wind": [
+        0,
+        255,
+        81
+      ],
+      "electric": [
+        254,
+        0,
+        251
+      ],
+      "iron": [
+        255,
+        146,
+        0
+      ]
+    }
+  },
+  "producer_sha256": "6b7ad3558f1bcb1822d66be6712cf7aaa2af5ab261982ffe1174ddd798de9b21",
+  "sharp_version": "0.35.4",
+  "inputs": {
+    "burst": {
+      "schema": "character-card-ui-v1",
+      "status": "promoted",
+      "source": {
+        "resource_key": "icon-atlased(hd)_assets_all_f86efaa8f533f840dc8b4b99c3d038e9.bundle",
+        "region": "core",
+        "bundle_hash": "f86efaa8f533f840dc8b4b99c3d038e9",
+        "bundle_sha256": "8b012a2b3b24ce51d0c74b7fe9c04198057a14e90899145330b94b9ac457bfd9",
+        "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+        "normalized_bundle": "icon-atlased(hd)_assets_all.bundle"
+      },
+      "method": "UnityPy Sprite.image RGBA PNG; no scaling or screenshot crop",
+      "atlas": {
+        "resource_key": "icon-spriteatlas(sd)_assets_atlas_common_class_916bb75e72a5a7902b3131805880a563.bundle",
+        "region": "core",
+        "bundle_hash": "916bb75e72a5a7902b3131805880a563",
+        "bundle_sha256": "e5bc3052e344275e6a8c62c0a6622f48b912ce857acd04336d41c09aa79e70c7"
+      },
+      "producer_sha256": "638858f5dd82d7f670cae64bc07d2ab4bb4ba860ca7329d7a1df2016fe398ea6",
+      "review_sha256": "6bebbf73667eceef391ddc24210e1486f6624fa11afee42d1842e9292891b821",
+      "items": [
+        {
+          "sprite_name": "icn_burst_01",
+          "path_id": "-3271461489909397128",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            37,
+            79
+          ],
+          "png_sha256": "8d6bc28a9ba99909c48b02532ea52b62f807952cb54b6182a751c8731155ba9b",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "burst-1",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "burst/burst-1.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_burst_02",
+          "path_id": "6353198419078782236",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            61,
+            79
+          ],
+          "png_sha256": "65c55e5b13ccf6c8a17427c042f0648925e38cce74b3d48129db3e0a9f59082b",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "burst-2",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "burst/burst-2.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_burst_03",
+          "path_id": "1535798034134259234",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            85,
+            79
+          ],
+          "png_sha256": "929057ae564f191a5ec53dd59bc55b3326fcfa5db5edf6ecf63f4a98e925b326",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "burst-3",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "burst/burst-3.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_burst_all",
+          "path_id": "6383894434758575661",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            83,
+            79
+          ],
+          "png_sha256": "00e4576fd415e553c329f95375ceee1e29c381d1b76a30fa8ad72612720ff2ad",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "burst-all",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "burst/burst-all.png",
+          "review_status": "visually_verified"
+        }
+      ],
+      "formal_manifest_sha256": "96c1531fee8a2745e71c35923445a298d2171fc9e9aada41282f818e3e21c66d"
+    },
+    "element": {
+      "schema": "character-card-ui-v1",
+      "status": "promoted",
+      "source": {
+        "resource_key": "icon-atlased(hd)_assets_all_f86efaa8f533f840dc8b4b99c3d038e9.bundle",
+        "region": "core",
+        "bundle_hash": "f86efaa8f533f840dc8b4b99c3d038e9",
+        "bundle_sha256": "8b012a2b3b24ce51d0c74b7fe9c04198057a14e90899145330b94b9ac457bfd9",
+        "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+        "normalized_bundle": "icon-atlased(hd)_assets_all.bundle"
+      },
+      "method": "UnityPy Sprite.image RGBA PNG; no scaling or screenshot crop",
+      "atlas": {
+        "resource_key": "icon-spriteatlas(sd)_assets_atlas_common_class_916bb75e72a5a7902b3131805880a563.bundle",
+        "region": "core",
+        "bundle_hash": "916bb75e72a5a7902b3131805880a563",
+        "bundle_sha256": "e5bc3052e344275e6a8c62c0a6622f48b912ce857acd04336d41c09aa79e70c7"
+      },
+      "producer_sha256": "638858f5dd82d7f670cae64bc07d2ab4bb4ba860ca7329d7a1df2016fe398ea6",
+      "review_sha256": "7d32abd4a5589e6b93cec2b70a55802528e7c585bf1d6dc66d32ba4a8bb203c4",
+      "items": [
+        {
+          "sprite_name": "icn_element_fire",
+          "path_id": "-1557396161898269177",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            136,
+            211
+          ],
+          "png_sha256": "5d84e72577cc99aefc4d16dcaa6b5910c0f8acc549106a2415352f26d19d8059",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=256.0, width=256.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "fire",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "element/fire.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_element_water",
+          "path_id": "-3948018199654874733",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            133,
+            151
+          ],
+          "png_sha256": "adf14f97b2bc184fe3ff620da3f99949045d15b12815b971b0144404dffbc4c5",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=256.0, width=256.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "water",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "element/water.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_element_wind",
+          "path_id": "-900935175786247283",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            188,
+            157
+          ],
+          "png_sha256": "35f88bbc88d9949b4751d53b00ec9c4b3f23584d44765449932fae1a9dbd6a64",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=256.0, width=256.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "wind",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "element/wind.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_element_elect",
+          "path_id": "9194472300276790937",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            112,
+            226
+          ],
+          "png_sha256": "95a0acb81e850e4717cdfdcf5638cd171ce72b26896b93329092ee8e78ebf3b0",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=256.0, width=256.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "electric",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "element/electric.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_element_iron",
+          "path_id": "-9135064175834680793",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            167,
+            167
+          ],
+          "png_sha256": "95f34ca4facc9951774fba3bf6e9a5fb62e0c50d51a9ffe5a5e2c692192fd95e",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=256.0, width=256.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "iron",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "element/iron.png",
+          "review_status": "visually_verified"
+        }
+      ],
+      "formal_manifest_sha256": "58df6bbc81fdf2cdcff2532207e01e48e856ce97f2adca33912fa98ce6056e57"
+    },
+    "weapon": {
+      "schema": "character-card-ui-v1",
+      "status": "promoted",
+      "source": {
+        "resource_key": "icon-atlased(hd)_assets_all_f86efaa8f533f840dc8b4b99c3d038e9.bundle",
+        "region": "core",
+        "bundle_hash": "f86efaa8f533f840dc8b4b99c3d038e9",
+        "bundle_sha256": "8b012a2b3b24ce51d0c74b7fe9c04198057a14e90899145330b94b9ac457bfd9",
+        "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+        "normalized_bundle": "icon-atlased(hd)_assets_all.bundle"
+      },
+      "method": "UnityPy Sprite.image RGBA PNG; no scaling or screenshot crop",
+      "atlas": {
+        "resource_key": "icon-spriteatlas(sd)_assets_atlas_common_class_916bb75e72a5a7902b3131805880a563.bundle",
+        "region": "core",
+        "bundle_hash": "916bb75e72a5a7902b3131805880a563",
+        "bundle_sha256": "e5bc3052e344275e6a8c62c0a6622f48b912ce857acd04336d41c09aa79e70c7"
+      },
+      "producer_sha256": "638858f5dd82d7f670cae64bc07d2ab4bb4ba860ca7329d7a1df2016fe398ea6",
+      "review_sha256": "cd7ea9f1b46d8c3239d3e8798f0ab6430bfb682859277498bb1e6f53283e8a35",
+      "items": [
+        {
+          "sprite_name": "icn_weapon_ar",
+          "path_id": "-2268064250881880673",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            213,
+            214
+          ],
+          "png_sha256": "62b014f23f0b3e9aa48774816f7b35da5ee98eae2ae9a5c7533b9d7d85849d09",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=256.0, width=256.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "ar",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "weapon/ar.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_weapon_mg",
+          "path_id": "-206860976037149775",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            88,
+            88
+          ],
+          "png_sha256": "342fbd80611f63de9c1e8f89471194abad89249079c1c30b69b31f4aa719eefa",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "mg",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "weapon/mg.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_weapon_rl",
+          "path_id": "-9156519318296594184",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            85,
+            65
+          ],
+          "png_sha256": "054e45fc4579fe46daf90409cb6f5ac35e864d3584902bb16b6482268075dc29",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "rl",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "weapon/rl.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_weapon_sg",
+          "path_id": "5423128436584300574",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            82,
+            82
+          ],
+          "png_sha256": "891220921c6588dcb096a90850d4cfc05b77107096d895dd7e13831c00fe1721",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "sg",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "weapon/sg.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_weapon_smg",
+          "path_id": "-8328292431230513263",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            74,
+            75
+          ],
+          "png_sha256": "ada715a99c29619a1a3770ba50ed6e48b1b4e63daa5426635e4de12f1bf1233f",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "smg",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "weapon/smg.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_weapon_sr",
+          "path_id": "7708133229774405294",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            112,
+            87
+          ],
+          "png_sha256": "ee9451fa1ce56d4975a212c606803bb5d3ca8846090c154c00fb4df63dfa7e0a",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "sr",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "weapon/sr.png",
+          "review_status": "visually_verified"
+        }
+      ],
+      "formal_manifest_sha256": "316d166a8c3433047aa5f5210a9f034daa8990b2c9eda4e1b950e61ba8e97770"
+    },
+    "class": {
+      "schema": "character-card-ui-v1",
+      "status": "promoted",
+      "source": {
+        "resource_key": "icon-atlased(hd)_assets_all_f86efaa8f533f840dc8b4b99c3d038e9.bundle",
+        "region": "core",
+        "bundle_hash": "f86efaa8f533f840dc8b4b99c3d038e9",
+        "bundle_sha256": "8b012a2b3b24ce51d0c74b7fe9c04198057a14e90899145330b94b9ac457bfd9",
+        "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+        "normalized_bundle": "icon-atlased(hd)_assets_all.bundle"
+      },
+      "method": "UnityPy Sprite.image RGBA PNG; no scaling or screenshot crop",
+      "atlas": {
+        "resource_key": "icon-spriteatlas(sd)_assets_atlas_common_class_916bb75e72a5a7902b3131805880a563.bundle",
+        "region": "core",
+        "bundle_hash": "916bb75e72a5a7902b3131805880a563",
+        "bundle_sha256": "e5bc3052e344275e6a8c62c0a6622f48b912ce857acd04336d41c09aa79e70c7"
+      },
+      "producer_sha256": "638858f5dd82d7f670cae64bc07d2ab4bb4ba860ca7329d7a1df2016fe398ea6",
+      "review_sha256": "66c004fad6f8fc95ffa9942ba9431edd99ad4b95775045dd99c62727d46a9f59",
+      "items": [
+        {
+          "sprite_name": "icn_class_attacker",
+          "path_id": "8638843767752395058",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            98,
+            107
+          ],
+          "png_sha256": "0ae1c9151b2e064f2696e60051c84534088bbb7513c23220c70454394a1b9b57",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "attacker",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "class/attacker.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_class_defender",
+          "path_id": "-8218527510110948209",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            80,
+            106
+          ],
+          "png_sha256": "a32a6ca36f34a2b7bab0a8afc9d12c7ea4e4f78baf02b5c10aa3f917e86ebc13",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "defender",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "class/defender.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_class_supporter",
+          "path_id": "-8218553041431093578",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            106,
+            106
+          ],
+          "png_sha256": "6a7b18d500184f3d1fdc9663fad52a139e9194dc7d67484c4badd7286327e86f",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "supporter",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "class/supporter.png",
+          "review_status": "visually_verified"
+        }
+      ],
+      "formal_manifest_sha256": "45fe4828c2e81886906c484221309a04a69525e6d805fc5089fd678aca5d095f"
+    },
+    "manufacturer": {
+      "schema": "character-card-ui-v1",
+      "status": "promoted",
+      "source": {
+        "resource_key": "icon-atlased(hd)_assets_all_f86efaa8f533f840dc8b4b99c3d038e9.bundle",
+        "region": "core",
+        "bundle_hash": "f86efaa8f533f840dc8b4b99c3d038e9",
+        "bundle_sha256": "8b012a2b3b24ce51d0c74b7fe9c04198057a14e90899145330b94b9ac457bfd9",
+        "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+        "normalized_bundle": "icon-atlased(hd)_assets_all.bundle"
+      },
+      "method": "UnityPy Sprite.image RGBA PNG; no scaling or screenshot crop",
+      "atlas": {
+        "resource_key": "icon-spriteatlas(sd)_assets_atlas_common_corp_a6050ffa1216321ef00e733fb83448e3.bundle",
+        "region": "core",
+        "bundle_hash": "a6050ffa1216321ef00e733fb83448e3",
+        "bundle_sha256": "604dcb2916467375e229a998919268e25ee84e10c216b6d4ff29ec4e1776b8da"
+      },
+      "producer_sha256": "638858f5dd82d7f670cae64bc07d2ab4bb4ba860ca7329d7a1df2016fe398ea6",
+      "review_sha256": "c6bcb57d43683d49ff5df270bb2306b64a6826464779b7daffb9088cf6d6d33a",
+      "items": [
+        {
+          "sprite_name": "icn_corp_01",
+          "path_id": "-6754657057122662951",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            94,
+            94
+          ],
+          "png_sha256": "2e55f84afa3ac7dc3eee6e08da241c90fb6da501b3155c287bb24b364dc97019",
+          "atlas_cab": "CAB-5553444676fd4357eb13fd14c624531c",
+          "atlas_path_id": "-737330062200199162",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "elysion",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. Corporate compact symbol, not full wordmark; compared with named corp logos.",
+          "file": "manufacturer/elysion.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_corp_02",
+          "path_id": "7064532885848189997",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            42,
+            99
+          ],
+          "png_sha256": "76626b9bebcc2f225379bc6abce4345672962a1f135b2715dece290dbb0887fa",
+          "atlas_cab": "CAB-5553444676fd4357eb13fd14c624531c",
+          "atlas_path_id": "-737330062200199162",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "missilis",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. Corporate compact symbol, not full wordmark; compared with named corp logos.",
+          "file": "manufacturer/missilis.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_corp_03",
+          "path_id": "-701313750835176747",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            74,
+            79
+          ],
+          "png_sha256": "3121c94b50b64ae85d72463d99eb656882ea6e5c22493486f1ab7bad215760a2",
+          "atlas_cab": "CAB-5553444676fd4357eb13fd14c624531c",
+          "atlas_path_id": "-737330062200199162",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "tetra",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. Corporate compact symbol, not full wordmark; compared with named corp logos.",
+          "file": "manufacturer/tetra.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_corp_04",
+          "path_id": "6765129855241287237",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            86,
+            104
+          ],
+          "png_sha256": "0cc1df13af24209e2fd5282c415195bbc5921bae87fcb8220a22a4721f5fa59f",
+          "atlas_cab": "CAB-5553444676fd4357eb13fd14c624531c",
+          "atlas_path_id": "-737330062200199162",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "pilgrim",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. Corporate compact symbol, not full wordmark; compared with named corp logos.",
+          "file": "manufacturer/pilgrim.png",
+          "review_status": "visually_verified"
+        },
+        {
+          "sprite_name": "icn_corp_05",
+          "path_id": "3080997519807683382",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            95,
+            92
+          ],
+          "png_sha256": "b653c9f42c6d341f65f87ce730ad3507b6a10f9014672e50df895d424309e8b2",
+          "atlas_cab": "CAB-5553444676fd4357eb13fd14c624531c",
+          "atlas_path_id": "-737330062200199162",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "abnormal",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. Corporate compact symbol, not full wordmark; compared with named corp logos.",
+          "file": "manufacturer/abnormal.png",
+          "review_status": "visually_verified"
+        }
+      ],
+      "formal_manifest_sha256": "037f902bfc9638562f1af1536e8a2a50d6c898835e4f9012225c791cfd472114"
+    },
+    "frames": {
+      "schema": "character-card-ui-v1",
+      "status": "promoted",
+      "source": {
+        "resource_key": "icon-atlased(hd)_assets_all_f86efaa8f533f840dc8b4b99c3d038e9.bundle",
+        "region": "core",
+        "bundle_hash": "f86efaa8f533f840dc8b4b99c3d038e9",
+        "bundle_sha256": "8b012a2b3b24ce51d0c74b7fe9c04198057a14e90899145330b94b9ac457bfd9",
+        "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+        "normalized_bundle": "icon-atlased(hd)_assets_all.bundle"
+      },
+      "method": "UnityPy Sprite.image RGBA PNG; no scaling or screenshot crop",
+      "atlas": {
+        "resource_key": "icon-spriteatlas(sd)_assets_atlas_common_class_916bb75e72a5a7902b3131805880a563.bundle",
+        "region": "core",
+        "bundle_hash": "916bb75e72a5a7902b3131805880a563",
+        "bundle_sha256": "e5bc3052e344275e6a8c62c0a6622f48b912ce857acd04336d41c09aa79e70c7"
+      },
+      "producer_sha256": "638858f5dd82d7f670cae64bc07d2ab4bb4ba860ca7329d7a1df2016fe398ea6",
+      "review_sha256": "a91538400aac661343158e517cd793e2f80c7800980a84fbc98d07712508c32b",
+      "items": [
+        {
+          "sprite_name": "ele_hex_frame_fly",
+          "path_id": "6573145499776424476",
+          "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+          "size": [
+            110,
+            122
+          ],
+          "png_sha256": "ac2df4f7cef3f3a9d10839c9c0b1b32d66218e8d5d62e7182b4c2f34296973e9",
+          "atlas_cab": "CAB-92efa9fe2bf45c78b279a73a588af85e",
+          "atlas_path_id": "-5500934339069552739",
+          "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+          "pivot": "Vector2f(0.5, 0.5)",
+          "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+          "id": "hex-dark",
+          "review": "2026-09-06 assistant visually inspected original Sprite; symbol matched to existing role-card meaning. No screenshot crop or AI repaint.",
+          "file": "frames/hex-dark.png",
+          "review_status": "visually_verified"
+        }
+      ],
+      "formal_manifest_sha256": "7b9ddcc92a56077c29f2026d5b81a6175b84e19986453ae77c5ea259c24804c4"
+    }
+  },
+  "items": [
+    {
+      "group": "burst",
+      "id": "burst-1",
+      "file": "metadata/native/burst/burst-1.png",
+      "source_png_sha256": "8d6bc28a9ba99909c48b02532ea52b62f807952cb54b6182a751c8731155ba9b",
+      "png_sha256": "d7fbf4e461007949affeffc7dbe7d19a1fdfac40cffa6c1f6d6e34adb6eaa1b0",
+      "method": "original frame + original glyph; deterministic resize/tint/composite"
+    },
+    {
+      "group": "burst",
+      "id": "burst-2",
+      "file": "metadata/native/burst/burst-2.png",
+      "source_png_sha256": "65c55e5b13ccf6c8a17427c042f0648925e38cce74b3d48129db3e0a9f59082b",
+      "png_sha256": "147f9c93f34e088eac00f2a0d56fbd76aee1b5f649ce3fa51e8fba5fdb933e17",
+      "method": "original frame + original glyph; deterministic resize/tint/composite"
+    },
+    {
+      "group": "burst",
+      "id": "burst-3",
+      "file": "metadata/native/burst/burst-3.png",
+      "source_png_sha256": "929057ae564f191a5ec53dd59bc55b3326fcfa5db5edf6ecf63f4a98e925b326",
+      "png_sha256": "5d9f9c99261800fe948c91f7bd8b1eb6d75a4e7e3b5571a221ecb4bd3972e92d",
+      "method": "original frame + original glyph; deterministic resize/tint/composite"
+    },
+    {
+      "group": "burst",
+      "id": "burst-all",
+      "file": "metadata/native/burst/burst-all.png",
+      "source_png_sha256": "00e4576fd415e553c329f95375ceee1e29c381d1b76a30fa8ad72612720ff2ad",
+      "png_sha256": "3421d0858bef1ec044dca4cd5a6bfcffd651bd44572cbf4062b1e71ba6d5c0b5",
+      "method": "original frame + original glyph; deterministic resize/tint/composite"
+    },
+    {
+      "group": "element",
+      "id": "fire",
+      "file": "metadata/native/element/fire.png",
+      "source_png_sha256": "5d84e72577cc99aefc4d16dcaa6b5910c0f8acc549106a2415352f26d19d8059",
+      "png_sha256": "2cb278bd0a46e127bb1ddbbf1098c65cc21ad54742e6bf0e546bf56ef6e2e23d",
+      "method": "original frame + original glyph; deterministic resize/tint/composite"
+    },
+    {
+      "group": "element",
+      "id": "water",
+      "file": "metadata/native/element/water.png",
+      "source_png_sha256": "adf14f97b2bc184fe3ff620da3f99949045d15b12815b971b0144404dffbc4c5",
+      "png_sha256": "e0f52a13f88fd2b34a006870ed6acdfe855b8d98bc57c2c94d386e78311c37da",
+      "method": "original frame + original glyph; deterministic resize/tint/composite"
+    },
+    {
+      "group": "element",
+      "id": "wind",
+      "file": "metadata/native/element/wind.png",
+      "source_png_sha256": "35f88bbc88d9949b4751d53b00ec9c4b3f23584d44765449932fae1a9dbd6a64",
+      "png_sha256": "ea0f550aac9af7dc3b1e6bcbea6db4543833d2916ad9e1f582e0380252f24618",
+      "method": "original frame + original glyph; deterministic resize/tint/composite"
+    },
+    {
+      "group": "element",
+      "id": "electric",
+      "file": "metadata/native/element/electric.png",
+      "source_png_sha256": "95a0acb81e850e4717cdfdcf5638cd171ce72b26896b93329092ee8e78ebf3b0",
+      "png_sha256": "e8d5f386e9961409edb3ccb165b637dec6fb7b4e34cd0728190500d4e4cff845",
+      "method": "original frame + original glyph; deterministic resize/tint/composite"
+    },
+    {
+      "group": "element",
+      "id": "iron",
+      "file": "metadata/native/element/iron.png",
+      "source_png_sha256": "95f34ca4facc9951774fba3bf6e9a5fb62e0c50d51a9ffe5a5e2c692192fd95e",
+      "png_sha256": "d3ded56522b086f61b6ecccc95c0c39e986a55363ec5440594552e6786a25697",
+      "method": "original frame + original glyph; deterministic resize/tint/composite"
+    },
+    {
+      "group": "weapon",
+      "id": "ar",
+      "file": "metadata/native/weapon/ar.png",
+      "source_png_sha256": "62b014f23f0b3e9aa48774816f7b35da5ee98eae2ae9a5c7533b9d7d85849d09",
+      "png_sha256": "62b014f23f0b3e9aa48774816f7b35da5ee98eae2ae9a5c7533b9d7d85849d09",
+      "method": "byte-identical original Sprite"
+    },
+    {
+      "group": "weapon",
+      "id": "mg",
+      "file": "metadata/native/weapon/mg.png",
+      "source_png_sha256": "342fbd80611f63de9c1e8f89471194abad89249079c1c30b69b31f4aa719eefa",
+      "png_sha256": "342fbd80611f63de9c1e8f89471194abad89249079c1c30b69b31f4aa719eefa",
+      "method": "byte-identical original Sprite"
+    },
+    {
+      "group": "weapon",
+      "id": "rl",
+      "file": "metadata/native/weapon/rl.png",
+      "source_png_sha256": "054e45fc4579fe46daf90409cb6f5ac35e864d3584902bb16b6482268075dc29",
+      "png_sha256": "054e45fc4579fe46daf90409cb6f5ac35e864d3584902bb16b6482268075dc29",
+      "method": "byte-identical original Sprite"
+    },
+    {
+      "group": "weapon",
+      "id": "sg",
+      "file": "metadata/native/weapon/sg.png",
+      "source_png_sha256": "891220921c6588dcb096a90850d4cfc05b77107096d895dd7e13831c00fe1721",
+      "png_sha256": "891220921c6588dcb096a90850d4cfc05b77107096d895dd7e13831c00fe1721",
+      "method": "byte-identical original Sprite"
+    },
+    {
+      "group": "weapon",
+      "id": "smg",
+      "file": "metadata/native/weapon/smg.png",
+      "source_png_sha256": "ada715a99c29619a1a3770ba50ed6e48b1b4e63daa5426635e4de12f1bf1233f",
+      "png_sha256": "ada715a99c29619a1a3770ba50ed6e48b1b4e63daa5426635e4de12f1bf1233f",
+      "method": "byte-identical original Sprite"
+    },
+    {
+      "group": "weapon",
+      "id": "sr",
+      "file": "metadata/native/weapon/sr.png",
+      "source_png_sha256": "ee9451fa1ce56d4975a212c606803bb5d3ca8846090c154c00fb4df63dfa7e0a",
+      "png_sha256": "ee9451fa1ce56d4975a212c606803bb5d3ca8846090c154c00fb4df63dfa7e0a",
+      "method": "byte-identical original Sprite"
+    },
+    {
+      "group": "class",
+      "id": "attacker",
+      "file": "metadata/native/class/attacker.png",
+      "source_png_sha256": "0ae1c9151b2e064f2696e60051c84534088bbb7513c23220c70454394a1b9b57",
+      "png_sha256": "0ae1c9151b2e064f2696e60051c84534088bbb7513c23220c70454394a1b9b57",
+      "method": "byte-identical original Sprite"
+    },
+    {
+      "group": "class",
+      "id": "defender",
+      "file": "metadata/native/class/defender.png",
+      "source_png_sha256": "a32a6ca36f34a2b7bab0a8afc9d12c7ea4e4f78baf02b5c10aa3f917e86ebc13",
+      "png_sha256": "a32a6ca36f34a2b7bab0a8afc9d12c7ea4e4f78baf02b5c10aa3f917e86ebc13",
+      "method": "byte-identical original Sprite"
+    },
+    {
+      "group": "class",
+      "id": "supporter",
+      "file": "metadata/native/class/supporter.png",
+      "source_png_sha256": "6a7b18d500184f3d1fdc9663fad52a139e9194dc7d67484c4badd7286327e86f",
+      "png_sha256": "6a7b18d500184f3d1fdc9663fad52a139e9194dc7d67484c4badd7286327e86f",
+      "method": "byte-identical original Sprite"
+    },
+    {
+      "group": "manufacturer",
+      "id": "elysion",
+      "file": "metadata/native/manufacturer/elysion.png",
+      "source_png_sha256": "2e55f84afa3ac7dc3eee6e08da241c90fb6da501b3155c287bb24b364dc97019",
+      "png_sha256": "2e55f84afa3ac7dc3eee6e08da241c90fb6da501b3155c287bb24b364dc97019",
+      "method": "byte-identical original Sprite"
+    },
+    {
+      "group": "manufacturer",
+      "id": "missilis",
+      "file": "metadata/native/manufacturer/missilis.png",
+      "source_png_sha256": "76626b9bebcc2f225379bc6abce4345672962a1f135b2715dece290dbb0887fa",
+      "png_sha256": "76626b9bebcc2f225379bc6abce4345672962a1f135b2715dece290dbb0887fa",
+      "method": "byte-identical original Sprite"
+    },
+    {
+      "group": "manufacturer",
+      "id": "tetra",
+      "file": "metadata/native/manufacturer/tetra.png",
+      "source_png_sha256": "3121c94b50b64ae85d72463d99eb656882ea6e5c22493486f1ab7bad215760a2",
+      "png_sha256": "3121c94b50b64ae85d72463d99eb656882ea6e5c22493486f1ab7bad215760a2",
+      "method": "byte-identical original Sprite"
+    },
+    {
+      "group": "manufacturer",
+      "id": "pilgrim",
+      "file": "metadata/native/manufacturer/pilgrim.png",
+      "source_png_sha256": "0cc1df13af24209e2fd5282c415195bbc5921bae87fcb8220a22a4721f5fa59f",
+      "png_sha256": "0cc1df13af24209e2fd5282c415195bbc5921bae87fcb8220a22a4721f5fa59f",
+      "method": "byte-identical original Sprite"
+    },
+    {
+      "group": "manufacturer",
+      "id": "abnormal",
+      "file": "metadata/native/manufacturer/abnormal.png",
+      "source_png_sha256": "b653c9f42c6d341f65f87ce730ad3507b6a10f9014672e50df895d424309e8b2",
+      "png_sha256": "b653c9f42c6d341f65f87ce730ad3507b6a10f9014672e50df895d424309e8b2",
+      "method": "byte-identical original Sprite"
+    }
+  ]
+}

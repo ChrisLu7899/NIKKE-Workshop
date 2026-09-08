@@ -1,0 +1,35 @@
+{
+  "burst": {
+    "burst-1": "metadata/native/burst/burst-1.png",
+    "burst-2": "metadata/native/burst/burst-2.png",
+    "burst-3": "metadata/native/burst/burst-3.png",
+    "burst-all": "metadata/native/burst/burst-all.png"
+  },
+  "element": {
+    "fire": "metadata/native/element/fire.png",
+    "water": "metadata/native/element/water.png",
+    "wind": "metadata/native/element/wind.png",
+    "electric": "metadata/native/element/electric.png",
+    "iron": "metadata/native/element/iron.png"
+  },
+  "weapon": {
+    "ar": "metadata/native/weapon/ar.png",
+    "mg": "metadata/native/weapon/mg.png",
+    "rl": "metadata/native/weapon/rl.png",
+    "sg": "metadata/native/weapon/sg.png",
+    "smg": "metadata/native/weapon/smg.png",
+    "sr": "metadata/native/weapon/sr.png"
+  },
+  "class": {
+    "attacker": "metadata/native/class/attacker.png",
+    "defender": "metadata/native/class/defender.png",
+    "supporter": "metadata/native/class/supporter.png"
+  },
+  "manufacturer": {
+    "elysion": "metadata/native/manufacturer/elysion.png",
+    "missilis": "metadata/native/manufacturer/missilis.png",
+    "tetra": "metadata/native/manufacturer/tetra.png",
+    "pilgrim": "metadata/native/manufacturer/pilgrim.png",
+    "abnormal": "metadata/native/manufacturer/abnormal.png"
+  }
+}

@@ -52,7 +52,7 @@ test("Aka mapper tolerates the zero-based index shown in the API documentation",
   assert.equal(equipments[0][2].functionType, "StatAmmoLoad");
 });
 
-test("Aka preview updates standard records, preserves unsupported manual fields, and ignores custom records", () => {
+test("Aka preview imports breakthrough and affection, preserves unsupported manual fields, and ignores custom records", () => {
   const manualEquipment = [[{
     position: 1,
     functionType: "StatDef",
@@ -87,10 +87,13 @@ test("Aka preview updates standard records, preserves unsupported manual fields,
     catalog,
     localRecords: custom,
     userInfo: {
+      fireType: 202,
+      pilgrimCorp: 186,
       characterList: [
         {
           characterName: "红莲：暗影",
           breakthroughLevel: 4,
+          attractiveLv: 40,
           equipmentInfos: [{
             slotNo: 0,
             statInfos: [{ index: 1, statNo: 3, statValue: 1463, statValueLevel: 15 }],
@@ -106,8 +109,42 @@ test("Aka preview updates standard records, preserves unsupported manual fields,
   assert.deepEqual(preview.unmatched, ["尚未进入图鉴的角色"]);
   assert.equal(preview.items[0].draft.level, 400);
   assert.equal(preview.items[0].draft.combat, 123456);
-  assert.equal(preview.items[0].draft.affectionLevel, 30);
+  assert.equal(preview.items[0].draft.affectionLevel, 40);
+  assert.equal(preview.items[0].draft.classLevel, 202);
+  assert.equal(preview.items[0].draft.corporationLevel, 186);
   assert.deepEqual(preview.items[0].draft.limitBreak, { grade: 3, core: 1 });
   assert.equal(preview.items[0].draft.equipments[0][0].functionType, "StatAtk");
   assert.equal(custom.find((record) => record.custom).base.name, "原创角色");
+
+  const saved = saveLocalCharacterRecord(custom, {
+    ...preview.items[0],
+    catalog,
+    now: 2,
+  });
+  assert.deepEqual(saved.record.limitBreak, { grade: 3, core: 1 });
+  assert.equal(saved.record.affectionLevel, 40);
+  assert.equal(saved.record.classLevel, 202);
+  assert.equal(saved.record.corporationLevel, 186);
+});
+
+test("Aka preview preserves existing affection when the API omits it", () => {
+  const existing = saveLocalCharacterRecord([], {
+    catalogCharacter: catalog[0],
+    catalog,
+    draft: { affectionLevel: 30, equipments: [[], [], [], []] },
+    now: 1,
+  }).records;
+  const preview = buildAkaCharacterImportPreview({
+    catalog,
+    localRecords: existing,
+    userInfo: {
+      characterList: [{
+        characterName: "红莲：暗影",
+        breakthroughLevel: 3,
+        equipmentInfos: [],
+      }],
+    },
+  });
+
+  assert.equal(preview.items[0].draft.affectionLevel, 30);
 });

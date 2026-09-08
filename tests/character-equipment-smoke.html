@@ -1,0 +1,17 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><title>装备素材验收</title>
+<style>body{margin:12px;background:#dce1e6;font-family:system-ui}.samples{display:flex;flex-wrap:wrap;gap:12px}.sample{width:368px;max-width:100%}.frame{width:100%;height:548px}button{padding:8px;margin:0 8px 8px 0}</style></head>
+<body><h1>装备素材验收（隔离测试数据）</h1><div id="root"></div>
+<script type="module">
+import React,{useRef,useState} from 'react';import {createRoot} from 'react-dom/client';
+import CharacterCard from '../src/components/management/CharacterCard.jsx';
+import {downloadCharacterCardPng} from '../src/utils/characterCardDownload.js';
+const e=React.createElement;
+function Sample({i}){const ref=useRef(null),[visible,setVisible]=useState(true);
+const cls=['Attacker','Defender','Supporter'][i],names=['V Matter / 攻击型','Pattern 99 / 防御型','Code XXX / 辅助型'];
+const equipments=Array.from({length:4},(_,slot)=>Array.from({length:3},(_,j)=>({position:j+1,functionType:['StatAtk','IncElementDmg','StatCritical'][j],level:12+slot,value:[12.52,29.16,5.71][j],locked:j===0})));
+return e('section',{className:'sample'},e('h2',null,names[i]),e('button',{onClick:()=>setVisible(!visible)},'切换装备'),e('button',{onClick:()=>downloadCharacterCardPng(ref.current,'equipment-'+cls)},'下载'),
+e('div',{className:'frame'},e(CharacterCard,{catalogCharacter:{name_cn:'灰姑娘',resource_id:511,original_rare:'SSR',class:cls,element:'Electronic',weapon_type:'RL',corporation:'Pilgrim',use_burst_skill:'Step3'},
+characterData:{level:616,combat:409238,affectionLevel:40,classLevel:202,corporationLevel:186,skill1Level:10,skill2Level:10,burstSkillLevel:10,limitBreak:{grade:3,core:3},equipments},
+artworkUrl:'/ui-assets/nikke/character-artwork/c511.webp',cardRef:ref,visibleModules:{equipments:visible,affixSummary:visible}})))}
+createRoot(document.getElementById('root')).render(e('div',{className:'samples'},...Array.from({length:3},(_,i)=>e(Sample,{key:i,i}))));
+</script></body></html>

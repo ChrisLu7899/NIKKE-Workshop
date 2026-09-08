@@ -216,11 +216,23 @@ export function resolveEquipmentSlot({ rawEquipmentName = "", rawSlot = "", equi
 }
 
 export function matchEquipmentFunctionType(rawText) {
+  const source = cleanOcrText(rawText);
+  if ((source.match(/[\u4e00-\u9fff]/g) || []).length < 3) return "";
   const options = EQUIPMENT_FUNCTION_TYPES.map((value) => ({
     value,
     aliases: [EQUIPMENT_FUNCTION_LABELS[value], ...(OCR_LABEL_ALIASES[value] || [])],
   }));
-  return fuzzyMatch(rawText, options, 3)?.value || "";
+  const ranked = options.map(({ value, aliases }) => ({
+    value,
+    score: Math.min(...aliases.map((alias) => {
+      const target = cleanOcrText(alias);
+      // Reject truncated generic fragments; exact known aliases remain valid.
+      if (source === target) return 0;
+      if (source.length < target.length * 0.7) return 1;
+      return levenshtein(source, target) / Math.max(source.length, target.length);
+    })),
+  })).sort((a, b) => a.score - b.score);
+  return ranked[0].score <= 0.28 && ranked[1].score - ranked[0].score >= 0.12 ? ranked[0].value : "";
 }
 
 export function isUnearnedEquipmentEffect(rawText) {
@@ -308,12 +320,15 @@ export function validateOcrPreview(entries) {
     (entry.lines || []).forEach((line) => {
       if (line.requiresConfirmation) errors.push(`${entry.characterName}${entry.equipmentSlot}词条${line.position}需要确认识别结果`);
       if (!line.functionType) return;
+      if (!EQUIPMENT_FUNCTION_TYPES.includes(line.functionType) || !Number.isInteger(Number(line.level)) || Number(line.level)<1 || Number(line.level)>15) {
+        errors.push(`${entry.characterName}${entry.equipmentSlot}词条${line.position}需要确认有效词条与档位`);
+      }
       if (used.has(line.functionType)) errors.push(`${entry.characterName}${entry.equipmentSlot}存在重复词条：${EQUIPMENT_FUNCTION_LABELS[line.functionType]}`);
       used.add(line.functionType);
       if (!hasFiniteOcrNumber(line.value) || !hasIntegerOcrTier(line.level)) errors.push(`${entry.characterName}${entry.equipmentSlot}词条${line.position}需要确认数值与档位`);
       else if (Math.abs(Number(line.value) - Number(tierValue(line.functionType, line.level))) > 0.001) errors.push(`${entry.characterName}${entry.equipmentSlot}词条${line.position}的数值与档位不一致`);
       else if (!isOcrValueStyleCompatible(line.level, line.valueStyle)) errors.push(`${entry.characterName}${entry.equipmentSlot}词条${line.position}的字色与档位不一致`);
-      if (line.locked === null) errors.push(`${entry.characterName}${entry.equipmentSlot}词条${line.position}需要确认锁定状态`);
+      if (typeof line.locked !== "boolean") errors.push(`${entry.characterName}${entry.equipmentSlot}词条${line.position}需要确认锁定状态`);
     });
   });
   return [...new Set(errors)];
@@ -326,7 +341,7 @@ export function mergeOcrEntriesIntoEquipments(existingEquipments, entries) {
   (entries || []).forEach((entry) => {
     const slotIndex = SCREENSHOT_EQUIPMENT_SLOTS.indexOf(entry.equipmentSlot);
     if (slotIndex < 0) return;
-    const target = createEmptyEquipments()[slotIndex];
+    const target = equipments[slotIndex].map((line) => ({ ...line }));
     (entry.lines || []).forEach((line) => {
       const index = Number(line.position) - 1;
       if (index < 0 || index >= 3) return;

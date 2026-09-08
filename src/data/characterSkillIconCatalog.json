@@ -1,0 +1,1002 @@
+{
+  "10": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_attention_01.png",
+    "burst": "burst/c010.png"
+  },
+  "11": {
+    "skill1": "generic/icn_skill_statcritical_01.png",
+    "skill2": "generic/icn_skill_statcritical_01.png",
+    "burst": "burst/c011.png"
+  },
+  "12": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_defup_01.png",
+    "burst": "burst/c012.png"
+  },
+  "14": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c014.png"
+  },
+  "15": {
+    "skill1": "generic/icn_skill_statreloadtime_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c015.png"
+  },
+  "16": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_stickyprojectile_01.png",
+    "burst": "burst/c016.png"
+  },
+  "17": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c017.png"
+  },
+  "18": {
+    "skill1": "generic/icn_skill_debuffimmune_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c018.png"
+  },
+  "20": {
+    "skill1": "generic/icn_skill_stathp_01.png",
+    "skill2": "generic/icn_skill_defup_01.png",
+    "burst": "burst/c020.png"
+  },
+  "22": {
+    "skill1": "generic/icn_skill_atkdown_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c022.png"
+  },
+  "23": {
+    "skill1": "generic/icn_skill_damagereductionup_01.png",
+    "skill2": "generic/icn_skill_barrier_01.png",
+    "burst": "burst/c023.png"
+  },
+  "30": {
+    "skill1": "generic/icn_skill_atkdown_01.png",
+    "skill2": "generic/icn_skill_defup_01.png",
+    "burst": "burst/c030.png"
+  },
+  "32": {
+    "skill1": "generic/icn_skill_stataccuracycircle_01.png",
+    "skill2": "generic/icn_skill_criticaldamage_01.png",
+    "burst": "burst/c032.png"
+  },
+  "33": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_stathp_01.png",
+    "burst": "burst/c033.png"
+  },
+  "40": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_burstgaugespeedup_01.png",
+    "burst": "burst/c040.png"
+  },
+  "41": {
+    "skill1": "generic/icn_skill_damage_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c041.png"
+  },
+  "43": {
+    "skill1": "generic/icn_skill_statpenetration_01.png",
+    "skill2": "generic/icn_skill_statreloadtime_01.png",
+    "burst": "burst/c043.png"
+  },
+  "60": {
+    "skill1": "generic/icn_skill_statexplosion_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c060.png"
+  },
+  "61": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_statammo_01.png",
+    "burst": "burst/c061.png"
+  },
+  "62": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_burstgaugespeedup_01.png",
+    "burst": "burst/c062.png"
+  },
+  "70": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c070.png"
+  },
+  "71": {
+    "skill1": "generic/icn_skill_rateoffire_01.png",
+    "skill2": "generic/icn_skill_statcritical_01.png",
+    "burst": "burst/c071.png"
+  },
+  "72": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_statammo_01.png",
+    "burst": "burst/c072.png"
+  },
+  "73": {
+    "skill1": "generic/icn_skill_damagereductionup_01.png",
+    "skill2": "generic/icn_skill_damagereductionup_01.png",
+    "burst": "burst/c073.png"
+  },
+  "74": {
+    "skill1": "generic/icn_skill_stathp_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c074.png"
+  },
+  "75": {
+    "skill1": "generic/icn_skill_criticaldamage_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c075.png"
+  },
+  "80": {
+    "skill1": "generic/icn_skill_statreloadtime_01.png",
+    "skill2": "generic/icn_skill_barrier_01.png",
+    "burst": "burst/c080.png"
+  },
+  "82": {
+    "skill1": "generic/icn_skill_statreloadtime_01.png",
+    "skill2": "generic/icn_skill_healcover_01.png",
+    "burst": "burst/c082.png"
+  },
+  "90": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c090.png"
+  },
+  "91": {
+    "skill1": "generic/icn_skill_statexplosion_01.png",
+    "skill2": "generic/icn_skill_criticaldamage_01.png",
+    "burst": "burst/c091.png"
+  },
+  "92": {
+    "skill1": "generic/icn_skill_statreloadtime_01.png",
+    "skill2": "generic/icn_skill_defdown_01.png",
+    "burst": "burst/c092.png"
+  },
+  "93": {
+    "skill1": "generic/icn_skill_damagereductionup_01.png",
+    "skill2": "generic/icn_skill_criticaldamage_01.png",
+    "burst": "burst/c093.png"
+  },
+  "94": {
+    "skill1": "generic/icn_skill_chargedamage_01.png",
+    "skill2": "generic/icn_skill_damage_01.png",
+    "burst": "burst/c094.png"
+  },
+  "95": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statcritical_01.png",
+    "burst": "burst/c095.png"
+  },
+  "100": {
+    "skill1": "generic/icn_skill_statexplosion_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c100.png"
+  },
+  "101": {
+    "skill1": "generic/icn_skill_stataccuracycircle_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c101.png"
+  },
+  "102": {
+    "skill1": "generic/icn_skill_statreloadtime_01.png",
+    "skill2": "generic/icn_skill_criticaldamage_01.png",
+    "burst": "burst/c102.png"
+  },
+  "103": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_stathp_01.png",
+    "burst": "burst/c103.png"
+  },
+  "104": {
+    "skill1": "generic/icn_skill_damage_01.png",
+    "skill2": "generic/icn_skill_stathp_01.png",
+    "burst": "burst/c104.png"
+  },
+  "105": {
+    "skill1": "generic/icn_skill_stathp_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c105.png"
+  },
+  "110": {
+    "skill1": "generic/icn_skill_atkdown_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c110.png"
+  },
+  "111": {
+    "skill1": "generic/icn_skill_atkdown_01.png",
+    "skill2": "generic/icn_skill_defup_01.png",
+    "burst": "burst/c111.png"
+  },
+  "112": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_stataccuracycircle_01.png",
+    "burst": "burst/c112.png"
+  },
+  "113": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c113.png"
+  },
+  "120": {
+    "skill1": "generic/icn_skill_statammo_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c120.png"
+  },
+  "121": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c121.png"
+  },
+  "130": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c130.png"
+  },
+  "131": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_atkdown_01.png",
+    "burst": "burst/c131.png"
+  },
+  "132": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c132.png"
+  },
+  "140": {
+    "skill1": "generic/icn_skill_statreloadtime_01.png",
+    "skill2": "generic/icn_skill_statcritical_01.png",
+    "burst": "burst/c140.png"
+  },
+  "141": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_criticaldamage_01.png",
+    "burst": "burst/c141.png"
+  },
+  "142": {
+    "skill1": "generic/icn_skill_defdown_01.png",
+    "skill2": "generic/icn_skill_stathp_01.png",
+    "burst": "burst/c142.png"
+  },
+  "143": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_penetrationdamage_01.png",
+    "burst": "burst/c143.png"
+  },
+  "150": {
+    "skill1": "generic/icn_skill_statcritical_01.png",
+    "skill2": "generic/icn_skill_criticaldamage_01.png",
+    "burst": "burst/c150.png"
+  },
+  "160": {
+    "skill1": "generic/icn_skill_statreloadtime_01.png",
+    "skill2": "generic/icn_skill_defup_01.png",
+    "burst": "burst/c160.png"
+  },
+  "161": {
+    "skill1": "generic/icn_skill_criticaldamage_01.png",
+    "skill2": "generic/icn_skill_statcritical_01.png",
+    "burst": "burst/c161.png"
+  },
+  "162": {
+    "skill1": "generic/icn_skill_damage_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c162.png"
+  },
+  "170": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c170.png"
+  },
+  "171": {
+    "skill1": "generic/icn_skill_statcritical_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c171.png"
+  },
+  "172": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_defup_01.png",
+    "burst": "burst/c172.png"
+  },
+  "180": {
+    "skill1": "generic/icn_skill_statcritical_01.png",
+    "skill2": "generic/icn_skill_criticaldamage_01.png",
+    "burst": "burst/c180.png"
+  },
+  "181": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_attention_01.png",
+    "burst": "burst/c181.png"
+  },
+  "182": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c182.png"
+  },
+  "183": {
+    "skill1": "generic/icn_skill_stathp_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c183.png"
+  },
+  "190": {
+    "skill1": "generic/icn_skill_atkdown_01.png",
+    "skill2": "generic/icn_skill_attention_01.png",
+    "burst": "burst/c190.png"
+  },
+  "191": {
+    "skill1": "generic/icn_skill_rateoffire_01.png",
+    "skill2": "generic/icn_skill_statpenetration_01.png",
+    "burst": "burst/c191.png"
+  },
+  "192": {
+    "skill1": "generic/icn_skill_statammo_01.png",
+    "skill2": "generic/icn_skill_rateoffire_01.png",
+    "burst": "burst/c192.png"
+  },
+  "193": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statpenetration_01.png",
+    "burst": "burst/c193.png"
+  },
+  "194": {
+    "skill1": "generic/icn_skill_damage_01.png",
+    "skill2": "generic/icn_skill_statcritical_01.png",
+    "burst": "burst/c194.png"
+  },
+  "195": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_statammo_01.png",
+    "burst": "burst/c195.png"
+  },
+  "200": {
+    "skill1": "generic/icn_skill_statcritical_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c200.png"
+  },
+  "201": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statcritical_01.png",
+    "burst": "burst/c201.png"
+  },
+  "202": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statreloadtime_01.png",
+    "burst": "burst/c202.png"
+  },
+  "203": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_defup_01.png",
+    "burst": "burst/c203.png"
+  },
+  "210": {
+    "skill1": "generic/icn_skill_atkdown_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c210.png"
+  },
+  "212": {
+    "skill1": "generic/icn_skill_defdown_01.png",
+    "skill2": "generic/icn_skill_defup_01.png",
+    "burst": "burst/c212.png"
+  },
+  "220": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statcritical_01.png",
+    "burst": "burst/c220.png"
+  },
+  "221": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_stathp_01.png",
+    "burst": "burst/c221.png"
+  },
+  "222": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c222.png"
+  },
+  "223": {
+    "skill1": "generic/icn_skill_coredamage_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c223.png"
+  },
+  "224": {
+    "skill1": "generic/icn_skill_statammo_01.png",
+    "skill2": "generic/icn_skill_damage_01.png",
+    "burst": "burst/c224.png"
+  },
+  "225": {
+    "skill1": "generic/icn_skill_damage_01.png",
+    "skill2": "generic/icn_skill_statammo_01.png",
+    "burst": "burst/c225.png"
+  },
+  "226": {
+    "skill1": "generic/icn_skill_barrier_01.png",
+    "skill2": "generic/icn_skill_healbarrier_01.png",
+    "burst": "burst/c226.png"
+  },
+  "230": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statpenetration_01.png",
+    "burst": "burst/c230.png"
+  },
+  "231": {
+    "skill1": "generic/icn_skill_criticaldamage_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c231.png"
+  },
+  "232": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_attention_01.png",
+    "burst": "burst/c232.png"
+  },
+  "233": {
+    "skill1": "generic/icn_skill_statreloadtime_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c233.png"
+  },
+  "234": {
+    "skill1": "generic/icn_skill_statpenetration_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c234.png"
+  },
+  "240": {
+    "skill1": "generic/icn_skill_stathp_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c240.png"
+  },
+  "241": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_criticaldamage_01.png",
+    "burst": "burst/c241.png"
+  },
+  "242": {
+    "skill1": "generic/icn_skill_barrier_01.png",
+    "skill2": "generic/icn_skill_attention_01.png",
+    "burst": "burst/c242.png"
+  },
+  "260": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_stataccuracycircle_01.png",
+    "burst": "burst/c260.png"
+  },
+  "261": {
+    "skill1": "generic/icn_skill_statexplosion_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c261.png"
+  },
+  "262": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c262.png"
+  },
+  "270": {
+    "skill1": "generic/icn_skill_barrier_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c270.png"
+  },
+  "271": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statammo_01.png",
+    "burst": "burst/c271.png"
+  },
+  "272": {
+    "skill1": "generic/icn_skill_stathp_01.png",
+    "skill2": "generic/icn_skill_stathp_01.png",
+    "burst": "burst/c272.png"
+  },
+  "280": {
+    "skill1": "generic/icn_skill_criticaldamage_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c280.png"
+  },
+  "281": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_stathp_01.png",
+    "burst": "burst/c281.png"
+  },
+  "282": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c282.png"
+  },
+  "283": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_damage_01.png",
+    "burst": "burst/c283.png"
+  },
+  "284": {
+    "skill1": "generic/icn_skill_durationvaluechange_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c284.png"
+  },
+  "290": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c290.png"
+  },
+  "291": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c291.png"
+  },
+  "300": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statammo_01.png",
+    "burst": "burst/c300.png"
+  },
+  "301": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c301.png"
+  },
+  "302": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_statcritical_01.png",
+    "burst": "burst/c302.png"
+  },
+  "303": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c303.png"
+  },
+  "304": {
+    "skill1": "generic/icn_skill_atkdown_01.png",
+    "skill2": "generic/icn_skill_atkdown_01.png",
+    "burst": "burst/c304.png"
+  },
+  "305": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c305.png"
+  },
+  "306": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_defup_01.png",
+    "burst": "burst/c306.png"
+  },
+  "307": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c307.png"
+  },
+  "308": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c308.png"
+  },
+  "310": {
+    "skill1": "generic/icn_skill_debuffimmune_01.png",
+    "skill2": "generic/icn_skill_stathp_01.png",
+    "burst": "burst/c310.png"
+  },
+  "311": {
+    "skill1": "generic/icn_skill_healcover_01.png",
+    "skill2": "generic/icn_skill_defup_01.png",
+    "burst": "burst/c311.png"
+  },
+  "312": {
+    "skill1": "generic/icn_skill_stathp_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c312.png"
+  },
+  "313": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statreloadtime_01.png",
+    "burst": "burst/c313.png"
+  },
+  "314": {
+    "skill1": "generic/icn_skill_criticaldamage_01.png",
+    "skill2": "generic/icn_skill_incburstduration_01.png",
+    "burst": "burst/c314.png"
+  },
+  "315": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statpenetration_01.png",
+    "burst": "burst/c315.png"
+  },
+  "316": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c316.png"
+  },
+  "321": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c321.png"
+  },
+  "322": {
+    "skill1": "generic/icn_skill_damage_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c322.png"
+  },
+  "330": {
+    "skill1": "generic/icn_skill_statreloadtime_01.png",
+    "skill2": "generic/icn_skill_attention_01.png",
+    "burst": "burst/c330.png"
+  },
+  "331": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c331.png"
+  },
+  "350": {
+    "skill1": "generic/icn_skill_criticaldamage_01.png",
+    "skill2": "generic/icn_skill_statcritical_01.png",
+    "burst": "burst/c350.png"
+  },
+  "351": {
+    "skill1": "generic/icn_skill_attention_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c351.png"
+  },
+  "352": {
+    "skill1": "generic/icn_skill_statcritical_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c352.png"
+  },
+  "353": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c353.png"
+  },
+  "354": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_sharedamageincrease.png",
+    "burst": "burst/c354.png"
+  },
+  "355": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c355.png"
+  },
+  "361": {
+    "skill1": "generic/icn_skill_barrier_01.png",
+    "skill2": "generic/icn_skill_healbarrier_01.png",
+    "burst": "burst/c361.png"
+  },
+  "380": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c380.png"
+  },
+  "381": {
+    "skill1": "generic/icn_skill_statcritical_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c381.png"
+  },
+  "382": {
+    "skill1": "generic/icn_skill_bonusrange_01.png",
+    "skill2": "generic/icn_skill_statshotcount_01.png",
+    "burst": "burst/c382.png"
+  },
+  "390": {
+    "skill1": "generic/icn_skill_penetrationdamage_01.png",
+    "skill2": "generic/icn_skill_healcover_01.png",
+    "burst": "burst/c390.png"
+  },
+  "391": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_damage_01.png",
+    "burst": "burst/c391.png"
+  },
+  "392": {
+    "skill1": "generic/icn_skill_burstgaugespeedup_01.png",
+    "skill2": "generic/icn_skill_defup_01.png",
+    "burst": "burst/c392.png"
+  },
+  "400": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c400.png"
+  },
+  "401": {
+    "skill1": "generic/icn_skill_attention_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c401.png"
+  },
+  "402": {
+    "skill1": "generic/icn_skill_stathp_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c402.png"
+  },
+  "403": {
+    "skill1": "generic/icn_skill_damageshareinstant.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c403.png"
+  },
+  "411": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_barrier_01.png",
+    "burst": "burst/c411.png"
+  },
+  "412": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c412.png"
+  },
+  "430": {
+    "skill1": "generic/icn_skill_defup_01.png",
+    "skill2": "generic/icn_skill_attention_01.png",
+    "burst": "burst/c430.png"
+  },
+  "431": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statreloadtime_01.png",
+    "burst": "burst/c431.png"
+  },
+  "432": {
+    "skill1": "generic/icn_skill_criticaldamage_01.png",
+    "skill2": "generic/icn_skill_statcritical_01.png",
+    "burst": "burst/c432.png"
+  },
+  "441": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c441.png"
+  },
+  "450": {
+    "skill1": "generic/icn_skill_healcover_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c450.png"
+  },
+  "451": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_attention_01.png",
+    "burst": "burst/c451.png"
+  },
+  "470": {
+    "skill1": "generic/icn_skill_chargedamage_01.png",
+    "skill2": "generic/icn_skill_statpenetration_01.png",
+    "burst": "burst/c470.png"
+  },
+  "471": {
+    "skill1": "generic/icn_skill_damagereductionup_01.png",
+    "skill2": "generic/icn_skill_statpenetration_01.png",
+    "burst": "burst/c471.png"
+  },
+  "500": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_burstgaugespeedup_01.png",
+    "burst": "burst/c500.png"
+  },
+  "501": {
+    "skill1": "generic/icn_skill_damageshareinstant.png",
+    "skill2": "generic/icn_skill_sharedamageincrease.png",
+    "burst": "burst/c501.png"
+  },
+  "502": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_damage_01.png",
+    "burst": "burst/c502.png"
+  },
+  "511": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_stathp_01.png",
+    "burst": "burst/c511.png"
+  },
+  "513": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_damagereductionup_01.png",
+    "burst": "burst/c513.png"
+  },
+  "514": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c514.png"
+  },
+  "515": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_coredamage_01.png",
+    "burst": "burst/c515.png"
+  },
+  "520": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_damage_01.png",
+    "burst": "burst/c520.png"
+  },
+  "521": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_debuffremove_01.png",
+    "burst": "burst/c521.png"
+  },
+  "532": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_overhealsave_01.png",
+    "burst": "burst/c532.png"
+  },
+  "550": {
+    "skill1": "generic/icn_skill_damageshare_01.png",
+    "skill2": "generic/icn_skill_healcover_01.png",
+    "burst": "burst/c550.png"
+  },
+  "551": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_debuffimmune_01.png",
+    "burst": "burst/c551.png"
+  },
+  "570": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_damage_01.png",
+    "burst": "burst/c570.png"
+  },
+  "580": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_sharedamageincrease.png",
+    "burst": "burst/c580.png"
+  },
+  "581": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c581.png"
+  },
+  "582": {
+    "skill1": "generic/icn_skill_barrier_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c582.png"
+  },
+  "583": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statshotcount_01.png",
+    "burst": "burst/c583.png"
+  },
+  "590": {
+    "skill1": "generic/icn_skill_barrier_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c590.png"
+  },
+  "600": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statcritical_01.png",
+    "burst": "burst/c600.png"
+  },
+  "601": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_stathp_01.png",
+    "burst": "burst/c601.png"
+  },
+  "620": {
+    "skill1": "generic/icn_skill_stathp_01.png",
+    "skill2": "generic/icn_skill_barrier_01.png",
+    "burst": "burst/c620.png"
+  },
+  "800": {
+    "skill1": "generic/icn_skill_statreloadtime_01.png",
+    "skill2": "generic/icn_skill_attention_01.png",
+    "burst": "burst/c800.png"
+  },
+  "801": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_statexplosion_01.png",
+    "burst": "burst/c801.png"
+  },
+  "802": {
+    "skill1": "generic/icn_skill_defdown_01.png",
+    "skill2": "generic/icn_skill_statammo_01.png",
+    "burst": "burst/c802.png"
+  },
+  "810": {
+    "skill1": "generic/icn_skill_stathp_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c810.png"
+  },
+  "811": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c811.png"
+  },
+  "812": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c812.png"
+  },
+  "820": {
+    "skill1": "generic/icn_skill_healshare_01.png",
+    "skill2": "generic/icn_skill_healshare_01.png",
+    "burst": "burst/c820.png"
+  },
+  "821": {
+    "skill1": "generic/icn_skill_chargedamage_01.png",
+    "skill2": "generic/icn_skill_damage_01.png",
+    "burst": "burst/c821.png"
+  },
+  "822": {
+    "skill1": "generic/icn_skill_atkdown_01.png",
+    "skill2": "generic/icn_skill_defup_01.png",
+    "burst": "burst/c822.png"
+  },
+  "830": {
+    "skill1": "generic/icn_skill_barrierdamage_01.png",
+    "skill2": "generic/icn_skill_coredamage_01.png",
+    "burst": "burst/c830.png"
+  },
+  "831": {
+    "skill1": "generic/icn_skill_damage_01.png",
+    "skill2": "generic/icn_skill_barrierdamage_01.png",
+    "burst": "burst/c831.png"
+  },
+  "832": {
+    "skill1": "generic/icn_skill_barrierdamage_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c832.png"
+  },
+  "833": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_barrierdamage_01.png",
+    "burst": "burst/c833.png"
+  },
+  "834": {
+    "skill1": "generic/icn_skill_damage_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c834.png"
+  },
+  "835": {
+    "skill1": "generic/icn_skill_damagereductionup_01.png",
+    "skill2": "generic/icn_skill_heal_01.png",
+    "burst": "burst/c835.png"
+  },
+  "836": {
+    "skill1": "generic/icn_skill_damagereductionup_01.png",
+    "skill2": "generic/icn_skill_damagereductiondown_01.png",
+    "burst": "burst/c836.png"
+  },
+  "840": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_damage_01.png",
+    "burst": "burst/c840.png"
+  },
+  "841": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_damage_01.png",
+    "burst": "burst/c841.png"
+  },
+  "842": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_barrier_01.png",
+    "burst": "burst/c842.png"
+  },
+  "850": {
+    "skill1": "generic/icn_skill_statcritical_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c850.png"
+  },
+  "851": {
+    "skill1": "generic/icn_skill_damage_01.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c851.png"
+  },
+  "852": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_healcover_01.png",
+    "burst": "burst/c852.png"
+  },
+  "860": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_damage_01.png",
+    "burst": "burst/c860.png"
+  },
+  "861": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_damagereductionup_01.png",
+    "burst": "burst/c861.png"
+  },
+  "862": {
+    "skill1": "generic/icn_skill_damage_01.png",
+    "skill2": "generic/icn_skill_damage_01.png",
+    "burst": "burst/c862.png"
+  },
+  "870": {
+    "skill1": "generic/icn_skill_damageshareinstant.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c870.png"
+  },
+  "871": {
+    "skill1": "generic/icn_skill_damageshareinstant.png",
+    "skill2": "generic/icn_skill_atkup_01.png",
+    "burst": "burst/c871.png"
+  },
+  "872": {
+    "skill1": "generic/icn_skill_atkup_01.png",
+    "skill2": "generic/icn_skill_defup_01.png",
+    "burst": "burst/c872.png"
+  }
+}

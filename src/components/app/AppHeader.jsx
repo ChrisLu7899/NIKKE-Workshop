@@ -10,6 +10,7 @@ import Toolbar from "@mui/material/Toolbar";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
+import UpdateNotice from './UpdateNotice.jsx';
 
 const AppHeader = ({
   t,
@@ -28,7 +29,7 @@ const AppHeader = ({
 
   return (
     <AppBar position="sticky">
-      <Toolbar variant="dense" sx={{ gap: 1 }}>
+      <Toolbar variant="dense" sx={{ gap: 1, flexWrap: 'wrap' }}>
         <Button
           color="inherit"
           size="small"
@@ -68,6 +69,7 @@ const AppHeader = ({
         >
           {t("saveOrUpdateCookie")}
         </Button>
+        <UpdateNotice />
       </Toolbar>
     </AppBar>
   );

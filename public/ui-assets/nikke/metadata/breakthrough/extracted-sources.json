@@ -1,0 +1,72 @@
+{
+  "schema": "character-card-ui-v1",
+  "status": "promoted",
+  "source": {
+    "resource_key": "icon-atlased(hd)_assets_all_f86efaa8f533f840dc8b4b99c3d038e9.bundle",
+    "region": "core",
+    "bundle_hash": "f86efaa8f533f840dc8b4b99c3d038e9",
+    "bundle_sha256": "8b012a2b3b24ce51d0c74b7fe9c04198057a14e90899145330b94b9ac457bfd9",
+    "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+    "normalized_bundle": "icon-atlased(hd)_assets_all.bundle"
+  },
+  "method": "UnityPy Sprite.image RGBA PNG; no scaling or screenshot crop",
+  "atlas": {
+    "resource_key": "icon-spriteatlas(sd)_assets_atlas_common_class_916bb75e72a5a7902b3131805880a563.bundle",
+    "region": "core",
+    "bundle_hash": "916bb75e72a5a7902b3131805880a563",
+    "bundle_sha256": "e5bc3052e344275e6a8c62c0a6622f48b912ce857acd04336d41c09aa79e70c7"
+  },
+  "producer_sha256": "638858f5dd82d7f670cae64bc07d2ab4bb4ba860ca7329d7a1df2016fe398ea6",
+  "review_sha256": "7d35a07efcbbcce71af34f43da43a75754cd2b058aad427735889ef7354a0c3f",
+  "items": [
+    {
+      "id": "star-empty",
+      "sprite_name": "ele_upgrade_S_off",
+      "path_id": "670890128790657803",
+      "size": [
+        91,
+        90
+      ],
+      "png_sha256": "08500f578e792f37f30a6e2ca11875c0b4d0d76293478a7075130d8e16fcff99",
+      "review": "灰色四角未突破星，完整透明边缘。不是五角稀有度星。",
+      "file": "breakthrough/star-empty.png",
+      "review_status": "visually_verified",
+      "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+      "pivot": "Vector2f(0.5, 0.5)",
+      "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+    },
+    {
+      "id": "star-filled",
+      "sprite_name": "ele_upgrade_S_on",
+      "path_id": "1621712863750290148",
+      "size": [
+        91,
+        90
+      ],
+      "png_sha256": "8dba35939afe6a3a4c851c0239967f6886a187b5919412234d39bee4e4cc9d58",
+      "review": "金色四角突破星，与未突破星同尺寸同轮廓。",
+      "file": "breakthrough/star-filled.png",
+      "review_status": "visually_verified",
+      "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+      "pivot": "Vector2f(0.5, 0.5)",
+      "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+    },
+    {
+      "id": "core-frame",
+      "sprite_name": "ele_coreupgrade_bg_S",
+      "path_id": "5540443725548682541",
+      "size": [
+        107,
+        107
+      ],
+      "png_sha256": "affc5b0c02f56ccadad89d034bf715ba33612af926f7d74545538e1c9840870b",
+      "review": "紫色四角外框、紫色圆环和深色圆心完整，无内嵌数字；01至06/MAX仍由角色数据叠加。",
+      "file": "breakthrough/core-frame.png",
+      "review_status": "visually_verified",
+      "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+      "pivot": "Vector2f(0.5, 0.5)",
+      "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+    }
+  ],
+  "formal_manifest_sha256": "7135fc44cafdc8bc61801ec49834182be4c727ef705ed7e2d1a9a666bd3945ec"
+}

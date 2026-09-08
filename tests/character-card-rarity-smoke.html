@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>角色卡稀有度验收（隔离数据）</title>
+<style>body{margin:16px;background:#e5e7eb;font-family:system-ui}#cards{display:flex;gap:16px;flex-wrap:wrap}.sample{width:368px}.frame{width:368px;height:548px}button{padding:8px;margin:0 8px 10px 0}</style></head>
+<body><h1>稀有度隔离验收</h1><div id="root"></div>
+<script type="module">
+import React, {useRef, useState} from 'react';
+import {createRoot} from 'react-dom/client';
+import CharacterCard from '../src/components/management/CharacterCard.jsx';
+import {downloadCharacterCardPng} from '../src/utils/characterCardDownload.js';
+const e=React.createElement;
+function Sample({rarity}) {
+  const cardRef=useRef(null);
+  const [visible,setVisible]=useState(true);
+  return e('section',{className:'sample'},e('h2',null,rarity||'未知稀有度'),
+    e('button',{onClick:()=>setVisible(!visible)},'切换稀有度模块'),
+    e('button',{onClick:()=>downloadCharacterCardPng(cardRef.current,rarity||'unknown')},'下载测试卡'),
+    e('div',{className:'frame'},e(CharacterCard,{
+      catalogCharacter:{name_cn:'测试妮姬',original_rare:rarity,class:'Defender',element:'Electronic',weapon_type:'RL',corporation:'Pilgrim',use_burst_skill:'Step3'},
+      characterData:{level:618,combat:123456,affectionLevel:40,limitBreak:{grade:3,core:3}},
+      artworkUrl:'/ui-assets/nikke/character-artwork/c511.webp',cardRef,
+      visibleModules:{rarity:visible,equipments:false,affixSummary:false}
+    })));
+}
+createRoot(document.getElementById('root')).render(e('div',{id:'cards'},
+  ...['R','SR','SSR',''].map(rarity=>e(Sample,{key:rarity,rarity}))));
+</script></body></html>

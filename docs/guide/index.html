@@ -57,7 +57,7 @@
     <section class="chapter-panel" id="chapter-install" role="tabpanel" aria-labelledby="tab-install">
     <section class="intro">
       <div><h2>安装扩展</h2><p>第一次使用只需完成以下五步。安装过程中不需要运行命令，也不需要安装 Node.js、Python 或其他环境。</p></div>
-        <span class="support">适用版本：1.0.9</span>
+        <span class="support">适用版本：1.0.10</span>
     </section>
 
     <div class="steps">
@@ -113,8 +113,9 @@
           <h3>选择扩展根目录</h3>
           <p>在文件夹选择窗口中，选中刚刚解压得到的 <span class="kbd">NIKKE-Workshop</span> 文件夹，然后点击 <span class="em">“选择文件夹”</span>。</p>
           <p>正确的根目录中应当可以直接看到 <span class="kbd">assets</span>、<span class="kbd">images</span>、<span class="kbd">manifest.json</span> 和 <span class="kbd">index.html</span>。不要选择 ZIP，也不要进入 assets 子文件夹。</p>
-          <div class="success"><span class="success-icon">✓</span><div><strong>安装成功的判断方法</strong>扩展程序页面出现“NIKKE Workshop 1.0.9”，并且右下角开关处于启用状态。示例截图中的版本号可能较旧，请以实际下载的最新版本为准。</div></div>
+          <div class="success"><span class="success-icon">✓</span><div><strong>安装成功的判断方法</strong>扩展程序页面出现“NIKKE Workshop 1.0.10”，并且右下角开关处于启用状态。示例截图中的版本号可能较旧，请以实际下载的最新版本为准。</div></div>
 <div class="shots single"><figure class="shot"><img src="assets-redacted/05-installed.png" alt="Chrome 扩展程序页面中已经安装并启用的 NIKKE Workshop"><figcaption>安装成功后，NIKKE Workshop 会出现在扩展程序列表中。</figcaption></figure></div>
+          <div class="notice"><strong>1.0.10 新增独立更新器：</strong>插件页眉的“版本更新”会提示 GitHub 新版。首次双击安装目录中的 <code>Workshop-Updater.vbs</code>，确认安装目录后点击“启用插件唤起”；以后可从插件点击“打开更新器”。浏览器可能要求确认打开外部程序。更新器中再点击“检查更新”，确认后才下载及覆盖；<code>snapshots</code> 与 <code>screenshots</code> 始终保留，失败时回滚。完成后到扩展管理页重新加载，不要卸载扩展。移动安装文件夹后需在新位置重新启用唤起；打不开时查看安装包内 <code>updater/README.md</code>。插件不直接安装、不降级，也不上传本地账号数据。</div>
         </div>
       </section>
     </div>
@@ -162,7 +163,7 @@
 
     <section class="chapter-panel" id="chapter-sync" role="tabpanel" aria-labelledby="tab-sync" hidden>
     <section class="intro chapter-intro">
-      <div><h2>同步账号数据</h2><p>Cookie 保存成功后，同步账号中已经拥有的妮姬、等级、突破和装备词条数据。同步结果保存在本地，后续可直接继续使用。</p></div>
+      <div><h2>同步账号数据</h2><p>Cookie 保存成功后，同步账号中已经拥有的妮姬、等级、突破、职业／企业研究等级和装备词条数据。同步结果保存在本地，后续可直接继续使用。</p></div>
     </section>
 
     <div class="steps sync-steps">
@@ -250,15 +251,15 @@
         <span class="step-number" aria-hidden="true"></span>
         <div>
           <h3>手动录入角色与本地图鉴</h3>
-          <p>没有同步账号数据时，可在 <span class="em">“全图鉴”</span> 中点击标准角色，在右侧抽屉填写等级、突破、战斗力、好感度以及四件装备的三个固定词条位置；保存后角色会进入始终可用的 <span class="em">“已录入”</span> 列表。</p>
+          <p>没有同步账号数据时，可在 <span class="em">“全图鉴”</span> 中点击标准角色，在右侧抽屉填写等级、战斗力、好感度、职业／企业等级以及四件装备的三个固定词条位置；突破使用 0～10 共 11 个合法状态的下拉选择。保存后角色会进入始终可用的 <span class="em">“已录入”</span> 列表。</p>
           <div class="shots single"><figure class="shot"><img src="assets-redacted/14a-manual-standard-entry.png" alt="在全图鉴中打开标准角色普丽瓦蒂的手动录入抽屉"><figcaption>点击全图鉴中的标准角色后，在右侧抽屉补充账号数据及四件装备词条；角色名称、属性、职业等固定资料由内置图鉴提供。</figcaption></figure></div>
           <p>点击“妮姬图鉴”标题旁的 <span class="em">“自定义角色”</span>，可以补充内置图鉴中没有的角色。属性、职业、爆裂阶段、企业、武器和稀有度使用受控选项，保存后会显示“自定义”标记。</p>
           <div class="shots single"><figure class="shot"><img src="assets-redacted/14b-manual-custom-entry.png" alt="从妮姬图鉴新建自定义角色的录入抽屉"><figcaption>自定义角色需要先填写完整的基础资料，再按相同格式录入账号数据和四件装备词条。</figcaption></figure></div>
           <p>点击标题旁的 <span class="em">“图片识别”</span>，选择安装目录中的 <code>screenshots</code> 文件夹，可以按角色子文件夹批量读取装备详情截图。扩展会先用固定界面模板定位白色装备详情面板，再根据装备图标、装备名称、词条名称、合法档位数值和锁定图标进行受约束匹配。</p>
-          <p>点击标题旁的 <span class="em">“阿卡数据”</span>，可以填写在阿卡机器人中通过 <code>#ApiKey</code> 获取的 Key，选择国服或外服后读取角色突破与装备词条。首次使用时浏览器会单独请求阿卡接口访问权限；Key 只保留在当前弹窗内，关闭弹窗后清空，不保存、不导出也不写入日志。</p>
+          <p>点击标题旁的 <span class="em">“阿卡数据”</span>，可以填写在阿卡机器人中通过 <code>#ApiKey</code> 获取的 Key，选择国服或外服后读取角色突破、好感度、职业／企业等级与装备词条。首次使用时浏览器会单独请求阿卡接口访问权限；Key 只保留在当前弹窗内，关闭弹窗后清空，不保存、不导出也不写入日志。</p>
           <p>点击标题旁的 <span class="em">“本地数据”</span>，可以直接选择此前导出的本地图鉴 Excel。四个录入入口固定排列为“自定义角色／图片识别／阿卡数据／本地数据”。</p>
           <div class="notice"><strong>本地截图识别：</strong>图片、OCR 模型和识别结果都只在当前浏览器本地处理，不会上传服务器。识别支持满级与未满级装备详情界面；保存前请快速核对装备部位、三条词条、档位和锁定状态。</div>
-          <p>任意列表底部都固定显示 <span class="em">“同步账号数据 / 导出图鉴”</span>。导出范围是当前列表，并且只包含确实带有等级、突破、战斗力、好感度或装备词条数据的角色；当前列表没有这类数据时，导出按钮会保持灰色。导入和导出都只在扩展本地处理，不会上传服务器。</p>
+          <p>任意列表底部都固定显示 <span class="em">“同步账号数据 / 导出图鉴”</span>。导出范围是当前列表，并且只包含确实带有等级、突破、战斗力、好感度、职业／企业等级或装备词条数据的角色；当前列表没有这类数据时，导出按钮会保持灰色。导入和导出都只在扩展本地处理，不会上传服务器。</p>
           <div class="notice"><strong>后一次成功操作优先：</strong>先本地录入再同步时，同步数据成为当前值；先同步再通过手动、截图、阿卡或 Excel 导入时，后录入的数据成为当前值。同步失败或中断不会修改已有数据，自定义角色不会被同步覆盖。</div>
         </div>
       </section>
@@ -268,7 +269,7 @@
         <div>
           <h3>导出当前列表的图鉴</h3>
           <p>点击底部的 <span class="em">“导出图鉴”</span>，即可把当前列表中已有数据的角色导出为角色卡式 Excel。全图鉴、已同步、已录入、常用、推荐方案和自建列表使用同一套导出规则。</p>
-          <div class="notice"><strong>导出范围按当前列表计算：</strong>角色仅有内置名称、属性或头像不算已经录入数据；至少需要有等级、突破、战斗力、好感度或一条装备词条。没有任何合格角色时，按钮会禁用。</div>
+          <div class="notice"><strong>导出范围按当前列表计算：</strong>角色仅有内置名称、属性或头像不算已经录入数据；至少需要有等级、突破、战斗力、好感度、职业／企业等级或一条装备词条。没有任何合格角色时，按钮会禁用。</div>
           <div class="shots single"><figure class="shot"><img src="assets-redacted/17-downloaded-excel-redacted.png" alt="导出后打开的角色卡式图鉴 Excel 文件，账号信息已隐藏"><figcaption>导出文件按角色卡展示基础资料、装备效果总览和四个装备部位明细。</figcaption></figure></div>
         </div>
       </section>

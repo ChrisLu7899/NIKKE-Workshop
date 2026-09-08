@@ -3,7 +3,26 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildCalculatorSnapshot } from "../src/utils/calculatorSnapshot.js";
+import { buildCharactersConfig } from "../src/utils/characterCollections.js";
 import { adaptCalculatorSnapshot } from "../src/calculator/snapshotAdapter.js";
+
+test("calculator snapshot auto-matches research levels from generated catalog config", () => {
+  const config = buildCharactersConfig([{
+    id: 1,
+    name_code: "c-auto",
+    name_cn: "自动匹配",
+    element: "Fire",
+    class: "Supporter",
+    corporation: "Tetra",
+  }]);
+  config.name = "自动匹配账号";
+  config.researchLevels = { supporter: 207, tetra: 191 };
+  config.elements.Fire[0].is_owned = true;
+
+  const character = buildCalculatorSnapshot([config]).accounts[0].characters[0];
+  assert.equal(character.classLevel, 207);
+  assert.equal(character.corporationLevel, 191);
+});
 
 test("calculator snapshot keeps owned equipment data and removes account credentials", () => {
   const snapshot = buildCalculatorSnapshot([{
@@ -12,17 +31,24 @@ test("calculator snapshot keeps owned equipment data and removes account credent
     password: "do-not-store",
     cookie: "game_token=secret",
     game_uid: "private-user-id",
+    researchLevels: { attacker: 202, elysion: 186 },
     elements: {
       Electronic: [{
         id: 1,
         name_code: "c1001",
         name_cn: "测试妮姬",
         name_en: "Test Nikke",
+        class: "Attacker",
+        corporation: "Elysion",
         level: 400,
         combat: 123456,
         affection_level: 30,
+        item_rare: "SSR",
+        item_level: 2,
         limit_break: { grade: 3, core: 2 },
         skill1_level: 1,
+        skill2_level: 7,
+        skill_burst_level: 10,
         equipments: {
           0: [{ position: 1, function_type: "StatAtk", function_value: 11.81, level: 11 }],
         },
@@ -31,7 +57,7 @@ test("calculator snapshot keeps owned equipment data and removes account credent
     },
   }]);
 
-  assert.equal(snapshot.version, 4);
+  assert.equal(snapshot.version, 7);
   assert.equal(snapshot.ownershipSource, "GetUserCharacters");
   assert.equal(snapshot.accounts.length, 1);
   assert.equal(snapshot.accounts[0].accountName, "测试账号");
@@ -39,6 +65,14 @@ test("calculator snapshot keeps owned equipment data and removes account credent
   assert.equal(snapshot.accounts[0].characters[0].level, 400);
   assert.equal(snapshot.accounts[0].characters[0].combat, 123456);
   assert.equal(snapshot.accounts[0].characters[0].affectionLevel, 30);
+  assert.equal(snapshot.accounts[0].characters[0].favoriteItemRarity, "SSR");
+  assert.equal(snapshot.accounts[0].characters[0].favoriteItemLevel, 2);
+  assert.equal(snapshot.accounts[0].characters[0].classLevel, 202);
+  assert.equal(snapshot.accounts[0].characters[0].corporationLevel, 186);
+  assert.equal(snapshot.accounts[0].characters[0].skill1Level, 1);
+  assert.equal(snapshot.accounts[0].characters[0].skill2Level, 7);
+  assert.equal(snapshot.accounts[0].characters[0].burstSkillLevel, 10);
+  assert.equal(snapshot.accounts[0].researchLevels.attacker, 202);
   assert.deepEqual(snapshot.accounts[0].characters[0].limitBreak, { grade: 3, core: 2 });
   assert.deepEqual(snapshot.accounts[0].characters[0].equipments[0], [{
     position: 1,

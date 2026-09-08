@@ -1,0 +1,72 @@
+{
+  "schema": "character-card-ui-v1",
+  "status": "promoted",
+  "source": {
+    "resource_key": "icon-atlased(hd)_assets_all_f86efaa8f533f840dc8b4b99c3d038e9.bundle",
+    "region": "core",
+    "bundle_hash": "f86efaa8f533f840dc8b4b99c3d038e9",
+    "bundle_sha256": "8b012a2b3b24ce51d0c74b7fe9c04198057a14e90899145330b94b9ac457bfd9",
+    "cab": "CAB-475a14ce9cdee5052706997f776a431f",
+    "normalized_bundle": "icon-atlased(hd)_assets_all.bundle"
+  },
+  "method": "UnityPy Sprite.image RGBA PNG; no scaling or screenshot crop",
+  "atlas": {
+    "resource_key": "icon-spriteatlas(hd)_assets_atlas_common_grade_85108d00054d3f5c5a0ae5edbc616f41.bundle",
+    "region": "core",
+    "bundle_hash": "85108d00054d3f5c5a0ae5edbc616f41",
+    "bundle_sha256": "86dfd45fee4b5b744d7f8d76784df2ee7cb7d72b5269fb6ba65f888feab55796"
+  },
+  "producer_sha256": "638858f5dd82d7f670cae64bc07d2ab4bb4ba860ca7329d7a1df2016fe398ea6",
+  "review_sha256": "4f390032d4dc32fc3433dd18885bfc6de79e737c732d8d718c30cc4eaa23060a",
+  "items": [
+    {
+      "id": "R",
+      "sprite_name": "ele_grade_icon_001",
+      "path_id": "3152515506138593663",
+      "size": [
+        57,
+        60
+      ],
+      "png_sha256": "46c6d2299e639b7d4ac3e51217208229812a30831d6cf7e1e7b4d5a688d8a2c0",
+      "review": "蓝色 R；字形完整，透明原图，无截图背景。",
+      "file": "rarity/r.png",
+      "review_status": "visually_verified",
+      "rect": "Rectf(height=73.0, width=188.0, x=0.0, y=0.0)",
+      "pivot": "Vector2f(0.5, 0.5)",
+      "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+    },
+    {
+      "id": "SR",
+      "sprite_name": "ele_grade_icon_002",
+      "path_id": "-4707876469663322804",
+      "size": [
+        107,
+        60
+      ],
+      "png_sha256": "20d35b0f6236f23f9ed7f46a791c901f9db91ece85369e01cee6ac54e3a564c8",
+      "review": "紫色 SR；两个字母完整，透明原图，无截图背景。",
+      "file": "rarity/sr.png",
+      "review_status": "visually_verified",
+      "rect": "Rectf(height=73.0, width=188.0, x=0.0, y=0.0)",
+      "pivot": "Vector2f(0.5, 0.5)",
+      "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+    },
+    {
+      "id": "SSR",
+      "sprite_name": "ele_grade_icon_003",
+      "path_id": "5804936268868591164",
+      "size": [
+        155,
+        59
+      ],
+      "png_sha256": "b84491296a3bd93770ddbc0aafda7c3f4aa90129453e460f7381633826fd34db",
+      "review": "橙色 SSR；三个字母完整，透明原图，无截图背景。",
+      "file": "rarity/ssr.png",
+      "review_status": "visually_verified",
+      "rect": "Rectf(height=73.0, width=188.0, x=0.0, y=0.0)",
+      "pivot": "Vector2f(0.5, 0.5)",
+      "border": "Vector4f(0.0, 0.0, 0.0, 0.0)"
+    }
+  ],
+  "formal_manifest_sha256": "824cea47484e8e88623b366299e33aa85e82416a80224e76ac473e2c1dc2ccdd"
+}
