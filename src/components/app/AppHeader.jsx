@@ -10,7 +10,6 @@ import Toolbar from "@mui/material/Toolbar";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
-import UpdateNotice from './UpdateNotice.jsx';
 
 const AppHeader = ({
   t,
@@ -69,7 +68,6 @@ const AppHeader = ({
         >
           {t("saveOrUpdateCookie")}
         </Button>
-        <UpdateNotice />
       </Toolbar>
     </AppBar>
   );

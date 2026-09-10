@@ -54,8 +54,8 @@ function Get-SafeRelative([string]$Name) {
     return ($parts -join '\')
 }
 function Test-Protected([string]$Relative) {
-    # snapshots is an explicit user invariant. screenshots also contains user inputs.
-    return (($Relative -split '[\\/]')[0] -in @('snapshots', 'screenshots'))
+    # User screenshot directory; Windows comparison is case-insensitive.
+    return (($Relative -split '[\\/]')[0] -eq 'screenshots')
 }
 function Join-Safe([string]$Root, [string]$Relative) {
     $rootPath = (Assert-PlainPath $Root).TrimEnd('\')
@@ -157,6 +157,8 @@ function Install-ValidatedPackage([string]$Zip, [string]$Digest, [string]$Versio
     $stage = Join-Safe $Transaction 'stage'
     [IO.Directory]::CreateDirectory($stage) | Out-Null
     $files = @(Expand-ValidatedPackage $Zip $stage $Version)
+    # Only full packages are accepted; earlier lite candidates can migrate to full.
+    if ((Get-InstallationVariant $stage) -ne 'full') { throw 'A complete installation package with all artwork is required.' }
     & $Progress @{ status = 'backingUp' }
     [long]$backupBytes = 0
     [long]$installBytes = 0
@@ -203,7 +205,7 @@ function Install-ValidatedPackage([string]$Zip, [string]$Digest, [string]$Versio
         Restore-Transaction $Transaction $Target
         throw "Installation failed and was rolled back: $reason"
     }
-    & $Progress @{ status = 'complete'; version = $Version; message = 'Update installed. snapshots and screenshots were not changed. Reload the extension.' }
+    & $Progress @{ status = 'complete'; version = $Version; message = 'Update installed. screenshots was not changed. Reload the extension.' }
 }
 function Get-ReleasePackage([string]$Version, [long]$AssetId) {
     $release = Get-LatestRelease
@@ -227,6 +229,13 @@ function Get-UpdateStateRoot([string]$Target) {
     try { $key = [BitConverter]::ToString($hash.ComputeHash([Text.Encoding]::UTF8.GetBytes([IO.Path]::GetFullPath($Target).ToLowerInvariant()))).Replace('-', '').Substring(0, 20) }
     finally { $hash.Dispose() }
     return Join-Safe (Join-Path $env:LOCALAPPDATA 'NIKKE-Workshop-Updater') $key
+}
+function Get-InstallationVariant([string]$Target) {
+    $path = Join-Safe $Target 'installation.json'
+    if (!(Test-Path -LiteralPath $path)) { return 'full' }
+    $data = Get-Content -LiteralPath $path -Raw -Encoding UTF8 | ConvertFrom-Json
+    if ($data.schemaVersion -ne 1 -or $data.variant -notin @('full', 'lite')) { throw 'Invalid installation variant.' }
+    return $data.variant
 }
 function Get-PendingTransactions([string]$StateRoot) {
     if (!(Test-Path -LiteralPath $StateRoot)) { return @() }

@@ -2,11 +2,15 @@
 
 NIKKE Workshop 是一个面向 Chromium 浏览器的本地扩展，集成账号角色数据获取、妮姬图鉴与列表管理、装备词条读取、有限状态 MDP 洗词条计算和 Excel 导出。
 
-当前版本：`1.0.10`　｜　支持：Google Chrome、Microsoft Edge
+当前版本：`1.0.11`　｜　支持：Google Chrome、Microsoft Edge
+
+安装与更新统一使用 `NIKKE-Workshop.zip`，自带全部 623 张立绘，无需另行下载素材或授予素材下载权限。角色卡直接读取安装目录中的图片。详见 [完整安装包说明](docs/完整安装包交付.md)。
+
+1.0.11 点击侧栏底部“版本更新”后会自动查询最新版本，插件更新窗口仅保留“关闭”和“打开更新器”。Windows 更新器支持“选择目录”：可切换到其他完整插件安装文件夹，自动读取该目录的版本并要求重新确认。选择目录不会移动文件或自动更改插件唤起设置；要记住新的唤起位置，请确认后点击“启用插件唤起”。
 
 角色卡现支持 Blablalink 同步的 T1～T9 装备原图与阶级，装备编号、强化等级及企业信息随本地记录保存。旧同步数据需重新同步一次；未知编号不再套用 T10 图标。非 T10 截图识别仍待后续实现。详见 [普通装备接入记录](docs/非T10装备接入.md)。
 
-1.0.10 同时包含角色卡素材更新、练度 OCR 优化和 Windows 独立更新器。插件页眉可检测 GitHub 新版并唤起更新器，首次需手动运行安装目录中的 `Workshop-Updater.vbs`，确认目录并启用唤起。覆盖安装始终保留 `snapshots` 和 `screenshots`，下载及安装由用户确认。详见 [更新器说明](https://github.com/ChrisLu7899/NIKKE-Workshop/blob/v1.0.10/public/updater/README.md)。
+1.0.10 同时包含角色卡素材更新、练度 OCR 优化和 Windows 独立更新器。插件侧栏底部可检测 GitHub 新版并唤起更新器，首次需手动运行安装目录中的 `Workshop-Updater.vbs`，确认目录并启用唤起。覆盖安装始终保留 `screenshots`，下载及安装由用户确认。详见 [更新器说明](https://github.com/ChrisLu7899/NIKKE-Workshop/blob/v1.0.11/public/updater/README.md)。
 
 企业装备显示已覆盖 T1～T9：紫色企业徽章在上、职业徽章在下；与 T10 改造徽章分开。已同步数据通常只需重新加载扩展并刷新页面，无需再次请求账号同步。
 

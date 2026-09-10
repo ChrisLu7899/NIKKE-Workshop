@@ -4,7 +4,8 @@
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { cp, mkdir, rm } from 'node:fs/promises'
+import { cp, mkdir, rm, writeFile } from 'node:fs/promises'
+import { createArtworkManifest } from './scripts/artwork-manifest.mjs'
 import { resolve } from 'node:path'
 import { COMMON_CHARACTER_LIST } from './src/data/commonCharacterList.js'
 
@@ -12,6 +13,10 @@ const copyLocalOcrAssets = () => ({
   name: 'copy-local-ocr-assets',
   async writeBundle(options) {
     const output = resolve(options.dir || 'dist')
+    const artwork = await createArtworkManifest()
+    await writeFile(resolve(output, 'artwork-manifest.json'), JSON.stringify(artwork))
+    await writeFile(resolve(output, 'artwork-installed.json'), JSON.stringify({ schemaVersion: 1, files: artwork.files }))
+    await writeFile(resolve(output, 'installation.json'), JSON.stringify({ schemaVersion: 1, variant: 'full' }))
     const ocrRoot = resolve(output, 'ocr')
     await mkdir(resolve(ocrRoot, 'core'), { recursive: true })
     await mkdir(resolve(ocrRoot, 'lang'), { recursive: true })

@@ -57,7 +57,7 @@
     <section class="chapter-panel" id="chapter-install" role="tabpanel" aria-labelledby="tab-install">
     <section class="intro">
       <div><h2>安装扩展</h2><p>第一次使用只需完成以下五步。安装过程中不需要运行命令，也不需要安装 Node.js、Python 或其他环境。</p></div>
-        <span class="support">适用版本：1.0.10</span>
+        <span class="support">适用版本：1.0.11</span>
     </section>
 
     <div class="steps">
@@ -112,10 +112,10 @@
         <div>
           <h3>选择扩展根目录</h3>
           <p>在文件夹选择窗口中，选中刚刚解压得到的 <span class="kbd">NIKKE-Workshop</span> 文件夹，然后点击 <span class="em">“选择文件夹”</span>。</p>
-          <p>正确的根目录中应当可以直接看到 <span class="kbd">assets</span>、<span class="kbd">images</span>、<span class="kbd">manifest.json</span> 和 <span class="kbd">index.html</span>。不要选择 ZIP，也不要进入 assets 子文件夹。</p>
-          <div class="success"><span class="success-icon">✓</span><div><strong>安装成功的判断方法</strong>扩展程序页面出现“NIKKE Workshop 1.0.10”，并且右下角开关处于启用状态。示例截图中的版本号可能较旧，请以实际下载的最新版本为准。</div></div>
+          <p>统一下载包含全部立绘的 <span class="kbd">NIKKE-Workshop.zip</span>，无需另外下载素材。正确的根目录中应当可以直接看到 <span class="kbd">assets</span>、<span class="kbd">images</span>、<span class="kbd">manifest.json</span> 和 <span class="kbd">index.html</span>。不要选择 ZIP，也不要进入 assets 子文件夹。</p>
+          <div class="success"><span class="success-icon">✓</span><div><strong>安装成功的判断方法</strong>扩展程序页面出现“NIKKE Workshop 1.0.11”，并且右下角开关处于启用状态。示例截图中的版本号可能较旧，请以实际下载的最新版本为准。</div></div>
 <div class="shots single"><figure class="shot"><img src="assets-redacted/05-installed.png" alt="Chrome 扩展程序页面中已经安装并启用的 NIKKE Workshop"><figcaption>安装成功后，NIKKE Workshop 会出现在扩展程序列表中。</figcaption></figure></div>
-          <div class="notice"><strong>1.0.10 新增独立更新器：</strong>插件页眉的“版本更新”会提示 GitHub 新版。首次双击安装目录中的 <code>Workshop-Updater.vbs</code>，确认安装目录后点击“启用插件唤起”；以后可从插件点击“打开更新器”。浏览器可能要求确认打开外部程序。更新器中再点击“检查更新”，确认后才下载及覆盖；<code>snapshots</code> 与 <code>screenshots</code> 始终保留，失败时回滚。完成后到扩展管理页重新加载，不要卸载扩展。移动安装文件夹后需在新位置重新启用唤起；打不开时查看安装包内 <code>updater/README.md</code>。插件不直接安装、不降级，也不上传本地账号数据。</div>
+<div class="notice"><strong>1.0.11 独立更新器：</strong>点击插件侧栏底部“版本更新”后，会自动查询 GitHub 新版；插件更新窗口仅保留“关闭”和“打开更新器”，重复查询保留 60 秒冷却及限流等待。首次双击安装目录中的 <code>Workshop-Updater.vbs</code>，目录不正确时点击“选择目录”，选择包含 manifest.json 的完整插件根目录；确认安装目录后点击“启用插件唤起”；以后可从插件点击“打开更新器”。浏览器可能要求确认打开外部程序。更新器中再点击“检查更新”，确认后才下载及覆盖；<code>screenshots</code> 截图目录始终保留，失败时回滚。完成后到扩展管理页重新加载，不要卸载扩展。移动安装文件夹后需在新位置重新启用唤起；打不开时查看安装包内 <code>updater/README.md</code>。插件不直接安装、不降级，也不上传本地账号数据。</div>
         </div>
       </section>
     </div>

@@ -22,6 +22,7 @@ import { useSidePanelSession } from "./components/app/hooks/useSidePanelSession.
 import { useBlablalinkLoginStatus } from "./components/app/hooks/useBlablalinkLoginStatus.js";
 import AppHeader from "./components/app/AppHeader.jsx";
 import CrawlerTabContent from "./components/app/CrawlerTabContent.jsx";
+import UpdateNotice from "./components/app/UpdateNotice.jsx";
 
 // ========== React 主组件 ==========
 export default function App() {
@@ -119,7 +120,7 @@ export default function App() {
 
   /* ========== UI 界面渲染 ========== */
   return (
-    <>
+    <Box sx={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column' }}>
       <AppHeader
         t={t}
         checking={loginStatus.checking}
@@ -130,7 +131,7 @@ export default function App() {
         onSaveCookie={handleSaveOrUpdateCookie}
       />
       
-      <Container sx={{ mt: 2, width: 340, pb: 1 }}>
+      <Container sx={{ mt: 2, width: 340, maxWidth: '100%', pb: 1 }}>
         <Stack spacing={2}>
           <CrawlerTabContent
             t={t}
@@ -227,6 +228,10 @@ export default function App() {
         </Stack>
       </Container>
 
+      <Box component="nav" aria-label="插件工具" sx={{ mt: 'auto', position: 'sticky', bottom: 0, zIndex: (theme) => theme.zIndex.appBar, bgcolor: 'background.paper', borderTop: 1, borderColor: 'divider', px: 2, py: 1, display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 1, '& > .MuiButton-root': { minHeight: 44, whiteSpace: 'nowrap' } }}>
+        <UpdateNotice color="primary" />
+      </Box>
+
       <Snackbar
         open={notification.open}
         autoHideDuration={6000}
@@ -242,6 +247,6 @@ export default function App() {
         </Alert>
       </Snackbar>
 
-    </>
+    </Box>
   );
 }

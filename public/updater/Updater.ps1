@@ -6,6 +6,7 @@ Add-Type -AssemblyName System.Drawing
 [Windows.Forms.Application]::EnableVisualStyles()
 try {
     . (Join-Path $PSScriptRoot 'Core.ps1')
+    . (Join-Path $PSScriptRoot 'Window.ps1')
     $script:target = [IO.Path]::GetDirectoryName($PSScriptRoot)
     $script:stateRoot = Get-UpdateStateRoot $script:target
     $script:initialPending = @(Get-PendingTransactions $script:stateRoot)
@@ -22,7 +23,15 @@ try {
 $mutex = New-Object Threading.Mutex($false, ('Local\NIKKEWorkshopUpdater-' + [IO.Path]::GetFileName($script:stateRoot)))
 try { $ownsMutex = $mutex.WaitOne(0) } catch [Threading.AbandonedMutexException] { $ownsMutex = $true }
 if (!$ownsMutex) {
-    [Windows.Forms.MessageBox]::Show('此安装目录的更新器已经打开，请返回已有窗口。', 'NIKKE Workshop 更新器') | Out-Null
+    $activated = $false
+    $deadline = [datetime]::UtcNow.AddSeconds(5)
+    do {
+        $activated = Show-ExistingUpdater $script:target
+        if (!$activated) { Start-Sleep -Milliseconds 200 }
+    } while (!$activated -and [datetime]::UtcNow -lt $deadline)
+    if (!$activated) {
+        [Windows.Forms.MessageBox]::Show('另一个更新器进程正在启动或没有响应，暂未找到可显示的窗口。请稍后重试；若仍无法打开，请联系维护者检查进程。为保护正在进行的更新，不会强制结束进程。', 'NIKKE Workshop 更新器') | Out-Null
+    }
     $mutex.Dispose(); exit
 }
 $script:worker = $null; $script:handle = $null; $script:release = $null; $script:pending = $script:initialPending
@@ -36,8 +45,8 @@ $form.Font = New-Object Drawing.Font('Microsoft YaHei UI', 10)
 $form.BackColor = [Drawing.Color]::White
 $layout = New-Object Windows.Forms.TableLayoutPanel
 $layout.Dock = 'Fill'; $layout.Padding = New-Object Windows.Forms.Padding(24)
-$layout.ColumnCount = 1; $layout.RowCount = 9
-foreach ($height in @(46, 30, 58, 30, 54, 0, 30, 40, 52)) {
+$layout.ColumnCount = 1; $layout.RowCount = 8
+foreach ($height in @(46, 30, 58, 30, 0, 30, 40, 52)) {
     $style = New-Object Windows.Forms.RowStyle
     if ($height -eq 0) { $style.SizeType = 'Percent'; $style.Height = 100 } else { $style.SizeType = 'Absolute'; $style.Height = $height }
     $layout.RowStyles.Add($style) | Out-Null
@@ -53,22 +62,33 @@ $heading = Add-Label 'NIKKE Workshop 更新器' 0
 $heading.Font = New-Object Drawing.Font('Microsoft YaHei UI', 18, [Drawing.FontStyle]::Bold)
 $versions = Add-Label ("当前版本：{0}    GitHub 正式版：尚未检测" -f $script:current.version) 1
 $targetBox = New-Object Windows.Forms.TextBox
-$targetBox.Multiline = $true; $targetBox.ReadOnly = $true; $targetBox.Dock = 'Fill'; $targetBox.Text = "安装目录：`r`n$script:target"
-$targetBox.BackColor = [Drawing.Color]::WhiteSmoke; $layout.Controls.Add($targetBox, 0, 2)
+$targetBox.ReadOnly = $true; $targetBox.Anchor = 'Left,Right'; $targetBox.Text = $script:target
+$targetBox.AccessibleName = '插件安装目录'; $targetBox.WordWrap = $false
+$targetBox.BackColor = [Drawing.Color]::WhiteSmoke
+$directoryRow = New-Object Windows.Forms.TableLayoutPanel
+$directoryRow.Dock = 'Fill'; $directoryRow.Margin = New-Object Windows.Forms.Padding(0)
+$directoryRow.ColumnCount = 3; $directoryRow.RowCount = 1
+$null = $directoryRow.ColumnStyles.Add((New-Object Windows.Forms.ColumnStyle('Absolute', 78)))
+$null = $directoryRow.ColumnStyles.Add((New-Object Windows.Forms.ColumnStyle('Percent', 100)))
+$null = $directoryRow.ColumnStyles.Add((New-Object Windows.Forms.ColumnStyle('Absolute', 120)))
+$directoryLabel = New-Object Windows.Forms.Label
+$directoryLabel.Text = '目录：'; $directoryLabel.Dock = 'Fill'; $directoryLabel.TextAlign = 'MiddleLeft'
+$directoryRow.Controls.Add($directoryLabel, 0, 0); $directoryRow.Controls.Add($targetBox, 1, 0)
+$chooseDirectory = New-Object Windows.Forms.Button
+$chooseDirectory.Text = '选择目录'; $chooseDirectory.Anchor = 'Left,Right'; $chooseDirectory.Height = 36; $chooseDirectory.AccessibleName = '选择插件安装目录'
+$directoryRow.Controls.Add($chooseDirectory, 2, 0); $layout.Controls.Add($directoryRow, 0, 2)
 $confirmed = New-Object Windows.Forms.CheckBox
 $confirmed.Text = '已确认这是需要更新的插件安装目录'; $confirmed.Dock = 'Fill'; $layout.Controls.Add($confirmed, 0, 3)
-$protect = Add-Label "snapshots 与 screenshots 不覆盖、不删除，回滚也不触碰。`r`n更新前备份程序文件；不清理旧文件，不修改浏览器中的账号数据。" 4
-$protect.ForeColor = [Drawing.Color]::FromArgb(35, 93, 52)
 $notes = New-Object Windows.Forms.TextBox
 $notes.Multiline = $true; $notes.ReadOnly = $true; $notes.ScrollBars = 'Vertical'; $notes.Dock = 'Fill'; $notes.BackColor = [Drawing.Color]::White
-$notes.Text = "点击「检查更新」读取官方发布信息。`r`n`r`n首次使用：确认安装目录后，点击「启用插件唤起」。以后可以在插件内点击「打开更新器」。移动安装文件夹后，在新位置重新启用。`r`n`r`n下载及覆盖需要你再次确认，不会静默安装。"
-$layout.Controls.Add($notes, 0, 5)
+$notes.Text = "点击「检查更新」读取官方发布信息。`r`n`r`n目录不正确时，点击「选择目录」，选择含 manifest.json 的插件安装文件夹。切换后需重新确认目录并检查版本；不会移动插件文件。`r`n`r`n要让插件以后打开这个目录的更新器，请确认目录后点击「启用插件唤起」。下载及覆盖需要你再次确认，不会静默安装。"
+$layout.Controls.Add($notes, 0, 4)
 $bar = New-Object Windows.Forms.ProgressBar
-$bar.Dock = 'Fill'; $bar.Style = 'Continuous'; $layout.Controls.Add($bar, 0, 6)
-$status = Add-Label '尚未检测。可以先启用插件唤起，或直接检查更新。' 7
+$bar.Dock = 'Fill'; $bar.Style = 'Continuous'; $layout.Controls.Add($bar, 0, 5)
+$status = Add-Label '尚未检测。可以先启用插件唤起，或直接检查更新。' 6
 $buttons = New-Object Windows.Forms.FlowLayoutPanel
 $buttons.Dock = 'Fill'; $buttons.FlowDirection = 'LeftToRight'; $buttons.WrapContents = $true
-$layout.Controls.Add($buttons, 0, 8)
+$layout.Controls.Add($buttons, 0, 7)
 function Add-Button([string]$Text) {
     $button = New-Object Windows.Forms.Button
     $button.Text = $Text; $button.AutoSize = $true; $button.Height = 36; $button.MinimumSize = New-Object Drawing.Size(130, 36)
@@ -88,7 +108,64 @@ function Refresh-Buttons {
     if ($install.Enabled) { $install.BackColor = [Drawing.Color]::FromArgb(25, 118, 210) }
     else { $install.BackColor = [Drawing.Color]::FromArgb(230, 230, 230) }
     $confirmed.Enabled = !$busy
+    $chooseDirectory.Enabled = !$busy -and $script:pending.Count -eq 0
 }
+function Select-UpdateDirectory([string]$Directory) {
+    if ($script:worker -or $script:pending.Count -gt 0) { throw '请先完成当前任务或恢复未完成更新，再切换目录。' }
+    # Validate and lock the new installation before changing any active state.
+    $nextTarget = (Assert-PlainPath $Directory).TrimEnd('\')
+    $nextCurrent = Read-InstallManifest $nextTarget
+    $null = Get-Version $nextCurrent.version
+    foreach ($required in @('index.html', 'management.html', 'background.js')) {
+        if (!(Test-Path -LiteralPath (Join-Safe $nextTarget $required) -PathType Leaf)) { throw '目录缺少插件程序文件。请选择完整解压、含 manifest.json 的 NIKKE Workshop 根目录。' }
+    }
+    if ($nextTarget -eq $script:target) { return }
+    $nextStateRoot = Get-UpdateStateRoot $nextTarget
+    $nextPending = @(Get-PendingTransactions $nextStateRoot)
+    $nextMutex = New-Object Threading.Mutex($false, ('Local\NIKKEWorkshopUpdater-' + [IO.Path]::GetFileName($nextStateRoot)))
+    $acquired = $false; $transferred = $false
+    try {
+        try { $acquired = $nextMutex.WaitOne(0) } catch [Threading.AbandonedMutexException] { $acquired = $true }
+        if (!$acquired) {
+            $activated = Show-ExistingUpdater $nextTarget
+            if ($activated) { $status.Text = '该目录的更新器已打开，已切换到已有窗口；本窗口目录保持不变。' }
+            else { $status.Text = '该目录已有更新器正在运行，请稍后重试。本窗口目录保持不变。' }
+            return
+        }
+        # A different updater may have finished between validation and locking.
+        $nextCurrent = Read-InstallManifest $nextTarget
+        $null = Get-Version $nextCurrent.version
+        $nextPending = @(Get-PendingTransactions $nextStateRoot)
+        [WorkshopUpdaterWindow]::BindTarget($form.Handle, (Get-UpdaterWindowKey $script:target), (Get-UpdaterWindowKey $nextTarget))
+        $previousMutex = $script:mutex
+        $script:mutex = $nextMutex; $transferred = $true
+        $script:target = $nextTarget; $script:current = $nextCurrent
+        $script:stateRoot = $nextStateRoot; $script:pending = $nextPending; $script:release = $null
+        $previousMutex.ReleaseMutex(); $previousMutex.Dispose()
+        $queued = $null
+        while ($script:events.TryDequeue([ref]$queued)) { }
+        $confirmed.Checked = $false
+        $targetBox.Text = $script:target
+        $bar.Style = 'Continuous'; $bar.Value = 0
+        $versions.Text = "当前版本：$($script:current.version)    GitHub 正式版：尚未检测"
+        $status.Text = '已切换目录。请重新确认安装目录，再检查更新。'
+        if ($script:pending.Count -gt 0) { $status.Text = '此目录有未完成更新。请确认目录后先恢复。'; $versions.Text = '当前版本：待恢复后确认' }
+        $notes.Text = "本次操作使用所选目录，不会移动插件文件。`r`n`r`n如果需要让插件以后唤起这个目录，请确认后点击「启用插件唤起」。选择目录本身不会修改唤起设置。"
+        Refresh-Buttons
+    } finally {
+        if (!$transferred) { if ($acquired) { $nextMutex.ReleaseMutex() }; $nextMutex.Dispose() }
+    }
+}
+$chooseDirectory.Add_Click({
+    if (!$chooseDirectory.Enabled) { return }
+    $picker = New-Object Windows.Forms.FolderBrowserDialog
+    $picker.Description = '选择 NIKKE Workshop 安装目录（根目录中应包含 manifest.json）'
+    $picker.ShowNewFolderButton = $false; $picker.SelectedPath = $script:target
+    try {
+        if ($picker.ShowDialog($form) -eq [Windows.Forms.DialogResult]::OK) { Select-UpdateDirectory $picker.SelectedPath }
+    } catch { [Windows.Forms.MessageBox]::Show($form, "无法切换目录，原目录保持不变。`r`n$($_.Exception.Message)", '选择安装目录', 'OK', 'Warning') | Out-Null }
+    finally { $picker.Dispose() }
+})
 function Start-Work([string]$Action) {
     if ($script:worker) { return }
     $script:worker = [PowerShell]::Create()
@@ -101,7 +178,7 @@ function Start-Work([string]$Action) {
                 $raw = Get-LatestRelease
                 $version = $raw.tag_name.TrimStart('v')
                 $allowed = @('NIKKE-Workshop.zip', "NIKKE-Workshop-$($raw.tag_name).zip", "NIKKE-Workshop-$version.zip")
-                $asset = $raw.assets | Where-Object { $_.name -cin $allowed } | Sort-Object { $_.name -cne 'NIKKE-Workshop.zip' } | Select-Object -First 1
+                $asset = $raw.assets | Where-Object { $_.name -cin $allowed } | Sort-Object { $allowed.IndexOf($_.name) } | Select-Object -First 1
                 if ($asset -and $asset.digest -notmatch '^sha256:[a-fA-F0-9]{64}$') { $asset = $null }
                 $queue.Enqueue(@{ status = 'release'; version = $version; asset = $asset; notes = [string]$raw.body; published = $raw.published_at })
             } elseif ($action -eq 'recover') {
@@ -126,8 +203,8 @@ $register.Add_Click({
 $check.Add_Click({ Start-Work 'check' })
 $install.Add_Click({
     $action = 'install'
-    $message = "即将下载并覆盖此目录的程序文件：`r`n$script:target`r`n`r`nsnapshots 和 screenshots 保持不变。请先保存插件内未保存的编辑。是否继续？"
-    if ($script:pending.Count -gt 0) { $action = 'recover'; $message = '检测到未完成更新，将恢复更新前的程序文件。snapshots 和 screenshots 保持不变。是否继续？' }
+    $message = "即将下载并覆盖此目录的程序文件：`r`n$script:target`r`n`r`nscreenshots 截图目录保持不变。请先保存插件内未保存的编辑。是否继续？"
+    if ($script:pending.Count -gt 0) { $action = 'recover'; $message = '检测到未完成更新，将恢复更新前的程序文件。screenshots 截图目录保持不变。是否继续？' }
     if ([Windows.Forms.MessageBox]::Show($form, $message, '确认操作', 'YesNo', 'Question') -eq 'Yes') { Start-Work $action }
 })
 $timer = New-Object Windows.Forms.Timer
@@ -164,7 +241,8 @@ $timer.Add_Tick({
     }
 })
 $form.Add_FormClosing({ param($sender, $event) if ($script:worker) { $event.Cancel = $true; $status.Text = '任务进行中，请等待完成后关闭，避免打断文件更新。' } })
-$form.Add_Shown({ $check.Focus() | Out-Null })
+$form.Add_HandleCreated({ [WorkshopUpdaterWindow]::BindTarget($form.Handle, $null, (Get-UpdaterWindowKey $script:target)) })
+$form.Add_Shown({ [WorkshopUpdaterWindow]::Activate($form.Handle); $check.Focus() | Out-Null })
 try {
     $script:pending = @(Get-PendingTransactions $script:stateRoot)
     if ($script:pending.Count -gt 0) { $status.Text = '发现未完成更新。请确认目录后先恢复，再检查新版本。'; $versions.Text = '当前版本：待恢复后确认' }
