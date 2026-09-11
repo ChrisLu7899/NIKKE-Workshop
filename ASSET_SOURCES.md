@@ -92,6 +92,18 @@
 
 上述游戏美术权利属于 SHIFT UP、Tencent 及相关权利人，不属于项目 GPL 代码授权。资源站公开下载与包内 README 不构成商业使用或再分发授权；本次只用于用户要求的本地插件验收，未发布 ZIP／GitHub，后续外部分发仍须单独核对授权。
 
+## 2026-09-10 露菲技能动画素材核对
+
+露菲奢侈兔 `lobby_burst_c200_01` 使用素材库已晋级的 native 1.2.4 成果。该版本按当前粒子渲染器的 Apply Active Color Space 设置，在进入线性合成前转换粒子颜色，修复背景偏灰；保留 5.600 秒选帧、全部原生固定粒子层，三帧人物层 SHA 与修复前一致。正式 PNG 与派生 WebP 的摘要分别记录在 `character-artwork/extracted-sources.json`，来源仍为 `NIKKE_files/output/lobby_burst_static/c200_01`。动态粒子、完整后处理及游戏同帧截图逐像素对齐仍不在本次修复的验证范围内。
+
+露菲默认 `lobby_burst_c200_00` 已核对精确骨架的 idle 动画：睁眼附件从循环起点被隐藏，25 个采样点均保持闭眼笑表情，因此保留原图。本次仅本地交付，不更新已发布 ZIP 或 GitHub。
+
+## 2026-09-10 爱丽丝与麦斯威尔画面确认
+
+用户查看并明确批准爱丽丝·童话幻梦 `lobby_burst_c191_02` 的 8.200 秒画面与麦斯威尔默认 `lobby_burst_c102_00` 的 2.967 秒画面，授权替换正式素材。两项使用素材库 native 1.2.5 的来源绑定旋转配方，恢复主体可见；规则仅适用于已确认的当前场景与渲染对象，不作为其他角色的通用旋转算法。
+
+正式合成 PNG 与用户确认图逐字节一致，经素材库复核、正式晋级后转换为完整画布 WebP；输入、批准配方及 PNG/WebP 摘要记录在素材库 manifest 和 `character-artwork/extracted-sources.json`。用户批准证明这两张画面满足本次交付要求，不代表已验证 Unity 原生 billboard 旋转实现或整场景逐像素游戏一致。两项素材选项 ID 不变，保留已有角色卡构图设置。本次仅同步源码和本地验收目录。
+
 ## 本地 NIKKE UI 素材库
 
 2026-09-06：角色卡 R／SR／SSR 改为素材库正式 `output/character_card_ui` 中逐图复核的原始 Sprite，路径为 `public/ui-assets/nikke/metadata/rarity/`。用 `scripts/sync-character-card-ui.mjs` 接入、`--check` 校验；随附 `extracted-sources.json` 记录主 Bundle 与图集依赖 SHA、PathID、原 PNG SHA 和复核证据。原截图 SSR 文件已删除；其他截图或 Wiki 素材尚未全量替换。只用于本地验收，不意味着获得美术再分发许可。

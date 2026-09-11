@@ -123,3 +123,29 @@ test("recorded and synced remain selectable when their lists are empty", () => {
   assert.equal(isSystemCollectionSelectable("catalog"), true);
   assert.equal(isSystemCollectionSelectable("unknown"), false);
 });
+
+test("custom calculator lists retain synced, recorded and custom identities across save and merge", () => {
+  const recorded = { name_code: "c-recorded", name_cn: "录入角色", element: "Water" };
+  const custom = { name_code: "custom:qa-1", name_cn: "自定义测试", element: "Utility" };
+  const absent = { name_code: "catalog-only", element: "Fire" };
+  const created = buildCharactersConfig([catalog[0], recorded]);
+  const merged = mergeNikkesIntoCharacters(created, [recorded, custom, absent]);
+  const saved = JSON.parse(JSON.stringify(merged));
+  const templates = [{ id: "mixed", name: "混合列表", data: saved }];
+  const snapshot = {
+    accounts: [
+      { characters: [{ nameCode: "c1" }] },
+      { source: "local", characters: [{ nameCode: "c1" }, { nameCode: "c-recorded" }, { nameCode: "custom:qa-1" }] },
+    ],
+  };
+  const result = attachCalculatorCollections(snapshot, templates, "template:mixed", "custom:qa-1");
+  const list = result.collections.find(c => c.id === "template:mixed");
+  assert.deepEqual(new Set(list.characterCodes), new Set(["c1", "c-recorded", "custom:qa-1"]));
+  assert.equal(list.characterCodes.length, 3);
+  assert.equal(result.defaultCollectionId, "template:mixed");
+  assert.equal(result.defaultCharacterCode, "custom:qa-1");
+  const offline = buildCalculatorCollections({ accounts: snapshot.accounts.slice(1) }, templates);
+  assert.equal(offline.some(c => c.id === "owned"), false);
+  assert.deepEqual(new Set(offline.find(c => c.id === "template:mixed").characterCodes), new Set(list.characterCodes));
+  assert.deepEqual(buildCalculatorCollections({ accounts: [] }, templates), []);
+});

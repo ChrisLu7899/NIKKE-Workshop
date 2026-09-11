@@ -42,11 +42,11 @@ export default function UpdateNotice({ showTrigger = true, color = 'inherit' }) 
   }, [open, inManagementPage, check]);
   const date = (value) => value && Number.isFinite(new Date(value).getTime()) ? new Date(value).toLocaleString('zh-CN') : '—';
   if (!inManagementPage) return <Button color={color} size="small" startIcon={<SystemUpdateAltIcon />} component="a" href="management.html#workshop-updater" target="_blank" rel="noopener noreferrer" sx={{ flexShrink: 0, whiteSpace: 'nowrap' }}>
-    {newer ? '发现新版' : '版本更新'}
+    版本更新
   </Button>;
   return <>
     {showTrigger && <Button color={color} size="small" startIcon={<SystemUpdateAltIcon />} onClick={() => setOpen(true)} sx={{ flexShrink: 0, whiteSpace: 'nowrap' }}>
-      {newer ? '发现新版' : '版本更新'}
+      版本更新
     </Button>}
     <Dialog open={open} onClose={() => setOpen(false)} maxWidth="xs" fullWidth aria-labelledby="workshop-update-title">
       <DialogTitle id="workshop-update-title">版本更新</DialogTitle>

@@ -108,12 +108,12 @@ const FALLBACK_COPY = {
     details: "角色信息",
     calculateCharacter: "洗词条",
     notOwned: "账号尚未获得",
-    noOwnedData: "同步账号数据后可查看当前装备并创建列表。",
+    noOwnedData: "同步或录入角色数据后可查看当前装备并创建列表。",
     equipment: "装备 {slot}",
     noEquipmentLines: "暂无词条",
     customLists: "自建列表",
     listEmpty: "这个列表暂时没有妮姬。可以进入多选模式后添加。",
-    selectOwnedOnly: "自建列表只能加入账号已同步的妮姬。",
+    selectAvailableOnly: "自建列表可加入已同步或已录入的妮姬。",
     selectAll: "全选",
     clearSelection: "全不选",
   },
@@ -156,12 +156,12 @@ const FALLBACK_COPY = {
     details: "Character details",
     calculateCharacter: "Calculator",
     notOwned: "Not owned on this account",
-    noOwnedData: "Sync account data to inspect equipment and create lists.",
+    noOwnedData: "Sync or record character data to inspect equipment and create lists.",
     equipment: "Equipment {slot}",
     noEquipmentLines: "No effects",
     customLists: "Custom lists",
     listEmpty: "This list is empty. Enter selection mode to add Nikkes.",
-    selectOwnedOnly: "Only synced Nikkes can be added to a custom list.",
+    selectAvailableOnly: "Synced or recorded Nikkes can be added to a custom list.",
     selectAll: "Select all",
     clearSelection: "Clear all",
   },
@@ -317,6 +317,8 @@ const CharacterGalleryTabContent = ({
   ])), [localRecords]);
   const recordedCodes = useMemo(() => new Set(recordedCharacters.map(localCharacterKey)), [recordedCharacters]);
 
+  const listEligibleCodes = useMemo(() => new Set([...ownedCodes, ...recordedCodes]), [ownedCodes, recordedCodes]);
+
   const currentTemplate = useMemo(() => {
     if (!String(activeCollectionId).startsWith("template:")) return null;
     const id = String(activeCollectionId).slice("template:".length);
@@ -430,8 +432,8 @@ const CharacterGalleryTabContent = ({
   const selectableVisibleCodes = useMemo(
     () => visibleNikkes
       .map((nikke) => normalizeCode(nikke?.name_code))
-      .filter((code) => ownedCodes.has(code)),
-    [ownedCodes, visibleNikkes],
+      .filter((code) => listEligibleCodes.has(code)),
+    [listEligibleCodes, visibleNikkes],
   );
   const allVisibleSelected = Boolean(
     selectableVisibleCodes.length
@@ -483,7 +485,7 @@ const CharacterGalleryTabContent = ({
       setDetailNikke(nikke);
       return;
     }
-    if (!ownedCodes.has(code)) return;
+    if (!listEligibleCodes.has(code)) return;
     setSelectedCodes((previous) => {
       const next = new Set(previous);
       if (next.has(code)) next.delete(code);
@@ -493,8 +495,8 @@ const CharacterGalleryTabContent = ({
   };
 
   const selectedNikkes = useMemo(
-    () => (nikkeList || []).filter((nikke) => selectedCodes.has(normalizeCode(nikke?.name_code))),
-    [nikkeList, selectedCodes],
+    () => (nikkeList || []).filter((nikke) => selectedCodes.has(normalizeCode(nikke?.name_code)) && listEligibleCodes.has(normalizeCode(nikke?.name_code))),
+    [nikkeList, selectedCodes, listEligibleCodes],
   );
 
   const handleAddToList = async () => {
@@ -700,7 +702,7 @@ const CharacterGalleryTabContent = ({
             setMultiSelectMode((current) => !current);
             setSelectedCodes(new Set());
           }}
-          disabled={!ownedCodes.size}
+          disabled={!listEligibleCodes.size}
           sx={{ minHeight: 40, ml: "auto" }}
         >
           {multiSelectMode ? copy.finish : copy.multi}
@@ -753,7 +755,7 @@ const CharacterGalleryTabContent = ({
         </Box>
       </Popover>
 
-      {multiSelectMode ? <Alert severity="info" sx={{ mb: 2 }}>{copy.selectOwnedOnly}</Alert> : null}
+      {multiSelectMode ? <Alert severity="info" sx={{ mb: 2 }}>{copy.selectAvailableOnly}</Alert> : null}
 
       {visibleNikkes.length ? (
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(178px, 1fr))", gap: 1.25 }}>
@@ -762,6 +764,7 @@ const CharacterGalleryTabContent = ({
             const accountCharacter = ownedCharacterMap.get(code);
             const localRecord = localRecordMap.get(nikke?._localRecordId) || localRecordMap.get(code);
             const owned = Boolean(accountCharacter);
+            const listEligible = listEligibleCodes.has(code);
             const effectiveCharacter = localRecord || accountCharacter;
             const selected = selectedCodes.has(code);
             const avatar = getNikkeAvatarUrl(nikke);
@@ -787,11 +790,11 @@ const CharacterGalleryTabContent = ({
                   borderRadius: 1.5,
                   bgcolor: "background.paper",
                   color: "text.primary",
-                  cursor: multiSelectMode && !owned ? "not-allowed" : "pointer",
-                  opacity: multiSelectMode && !owned ? 0.55 : 1,
+                  cursor: multiSelectMode && !listEligible ? "not-allowed" : "pointer",
+                  opacity: multiSelectMode && !listEligible ? 0.55 : 1,
                   boxShadow: selected ? "0 0 0 2px rgba(25, 118, 210, 0.08)" : "none",
                   transition: "border-color 140ms ease-out, background-color 140ms ease-out",
-                  "&:hover": { borderColor: owned || !multiSelectMode ? "primary.light" : "divider", bgcolor: "#fbfdff" },
+                  "&:hover": { borderColor: listEligible || !multiSelectMode ? "primary.light" : "divider", bgcolor: "#fbfdff" },
                   "&:focus-visible": { outline: "2px solid #1976d2", outlineOffset: 2 },
                   "@media (prefers-reduced-motion: reduce)": { transition: "none" },
                 }}
@@ -855,7 +858,7 @@ const CharacterGalleryTabContent = ({
                 ) : null}
                 {localRecord?.custom ? <Chip size="small" color="secondary" label="自定义" sx={{ position: "absolute", right: 4, bottom: 4, height: 20 }} /> : null}
                 {multiSelectMode ? (
-                  <Checkbox checked={selected} disabled={!owned} size="small" tabIndex={-1} sx={{ position: "absolute", top: 2, right: 2, p: 0.5 }} />
+                  <Checkbox checked={selected} disabled={!listEligible} size="small" tabIndex={-1} sx={{ position: "absolute", top: 2, right: 2, p: 0.5 }} />
                 ) : null}
               </Box>
             );

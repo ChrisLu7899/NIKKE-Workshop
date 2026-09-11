@@ -8,14 +8,19 @@ import {
 } from "../src/domain/trainingScreenshotOcr.js";
 import {
   deriveIdentityRegionsFromRarityWordmark,
+  countStars,
   findCoreBadge,
   findCubeStripeCandidates,
+  findIdentityBar,
   isRarityWordmarkAnchor,
   recognizeAffection,
   recognizeCubeLevel,
+  projectRarityWordmarkFromIdentityBar,
 } from "../src/domain/trainingOcrCore.js";
+import { recognizeTrainingDigit } from "../src/domain/trainingOcrDigits.js";
 import * as classLevelField from "../src/domain/trainingOcrFields/classLevel.js";
 import * as enterpriseLevelField from "../src/domain/trainingOcrFields/enterpriseLevel.js";
+import * as limitBreakField from "../src/domain/trainingOcrFields/limitBreak.js";
 
 const recognized = (field, value) => ({ field, status: "recognized", value, confidence: 0.9 });
 const notVisible = (field) => ({ field, status: "not_visible", value: null, confidence: 0 });
@@ -40,6 +45,48 @@ function paintPixels(raw, width, left, top, rows, color = [220, 220, 220]) {
     raw[offset + 2] = color[2];
   }));
 }
+
+test("core badge ranks its glyph only against legal core levels", () => {
+  const rows = [
+    ".....#####.", ".#########.", ".#########.", ".......###.",
+    ".......###.", ".......###.", ".......###.", ".......###.",
+    ".########..", ".#########.", ".##....####", ".......####",
+    ".......####", ".......####", ".......####", "###########",
+    "##########.", "#####......",
+  ];
+  const mask = Uint8Array.from(rows.flatMap((row) => [...row].map((pixel) => pixel === "#" ? 1 : 0)));
+  assert.equal(recognizeTrainingDigit(mask, 11, 18).value, null);
+  assert.equal(recognizeTrainingDigit(mask, 11, 18, { allowedValues: [1, 2, 3, 4, 5, 6, 7] }).value, 3);
+});
+
+test("cropped portrait screenshot uses the rarity-independent identity bar and treats three gray stars as zero breakthrough", async () => {
+  const width = 561;
+  const height = 902;
+  const raw = rgbaFixture(width, height, [245, 245, 245]);
+  paintPixels(raw, width, 83, 102, Array(94).fill("#".repeat(403)), [55, 55, 55]);
+  const identityBar = findIdentityBar(raw, width, height);
+  assert.ok(identityBar);
+  const wordmark = projectRarityWordmarkFromIdentityBar(identityBar, width, height);
+
+  const regions = deriveIdentityRegionsFromRarityWordmark(wordmark, width, height);
+  const star = [
+    "....#....", "...###...", "#########", ".#######.", "..#####..",
+    ".#######.", ".##...##.", "#.......#",
+  ];
+  const scaledStar = star.flatMap((row) => Array(4).fill([...row].map((pixel) => pixel.repeat(4)).join("")));
+  [0, 32, 64].forEach((offset) => paintPixels(raw, width, regions.stars.x + 50 + offset, regions.stars.y + 16, scaledStar, [135, 135, 135]));
+  const stars = countStars(raw, width, regions.stars);
+  assert.equal(stars.value, 0);
+
+  const result = await limitBreakField.recognize({
+    raw,
+    width,
+    anchors: { identityBar, rarityWordmark: wordmark, coreBadge: null },
+    regions,
+  });
+  assert.equal(result.status, "recognized");
+  assert.deepEqual(result.value, { stars: 0, core: 0, total: 0 });
+});
 
 test("练度 OCR 只覆盖成功识别的字段", () => {
   const existing = {

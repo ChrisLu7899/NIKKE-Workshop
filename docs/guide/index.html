@@ -3,592 +3,498 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="NIKKE Workshop 图文操作指南：安装更新、同步与本地录入、截图识别、角色卡和洗词条计算。">
   <title>NIKKE Workshop 操作指南</title>
-  <style>
-    :root{--blue:#1976d2;--blue-dark:#0e5fab;--ink:#152333;--body:#40556a;--muted:#65778a;--line:#d8e1e9;--soft:#f2f7fb;--ok:#167955;--warn:#9f5d00}
-    *{box-sizing:border-box}body{margin:0;background:#edf3f7;color:var(--ink);font:16px/1.72 "Segoe UI","Microsoft YaHei",Arial,sans-serif}img{display:block;max-width:100%}
-    .top{background:var(--blue);color:#fff;padding:28px 24px}.top-inner{width:min(1280px,calc(100% - 32px));margin:auto}.brand{display:flex;align-items:center;justify-content:space-between;gap:40px}.brand-main{display:flex;align-items:center;gap:13px;min-width:0}.mark{display:grid;place-items:center;flex:0 0 auto;width:48px;height:48px;border-radius:12px;background:#fff;color:var(--blue);font-size:26px}.top h1{margin:0;font-size:clamp(26px,4vw,38px);line-height:1.22;letter-spacing:-.02em}.top p{margin:5px 0 0;color:#e5f2ff}.hero-credits{flex:0 1 500px;margin:0;padding:8px 0 8px 24px;border-left:1px solid rgba(255,255,255,.38);list-style:none;color:#fff;font-size:14px;line-height:1.65}.hero-credits li+li{margin-top:2px}
-    .guide-shell{width:min(1280px,calc(100% - 32px));margin:24px auto 56px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px;align-items:start}.chapter-nav-wrap{position:sticky;top:16px;z-index:20;padding:16px;background:#fff;border-radius:14px}.chapter-nav-title{margin:0 0 11px;padding:0 5px 11px;border-bottom:1px solid var(--line);font-size:14px;font-weight:800;color:var(--muted)}.chapter-nav{display:flex;flex-direction:column;gap:7px}.chapter-tab{width:100%;min-height:48px;padding:10px 12px;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--body);font:inherit;font-size:15px;font-weight:700;line-height:1.35;text-align:left;cursor:pointer;transition:background-color .16s ease,border-color .16s ease,color .16s ease}.chapter-tab:hover{background:#f2f7fb;border-color:#c7d9e8;color:var(--blue-dark)}.chapter-tab.is-active{background:var(--blue);border-color:var(--blue);color:#fff}.chapter-tab:focus-visible{outline:3px solid #8fc5f2;outline-offset:2px}.chapter-tab .chapter-index{display:inline-grid;place-items:center;width:24px;height:24px;margin-right:8px;border-radius:50%;background:#eaf4fc;color:var(--blue-dark);font-size:13px}.chapter-tab.is-active .chapter-index{background:rgba(255,255,255,.22);color:#fff}.chapter-subnav{display:flex;flex-direction:column;gap:2px;margin:-2px 0 3px 32px;padding:4px 0 4px 12px;border-left:2px solid #d7e2eb}#tab-calculator:not(.is-active)+.chapter-subnav{display:none}.sidebar-subchapter{display:block;padding:6px 8px;border-radius:6px;color:var(--muted);font-size:13px;font-weight:700;line-height:1.35;text-decoration:none}.sidebar-subchapter:hover{background:#eef6fc;color:var(--blue-dark)}.sidebar-subchapter.is-active{background:#e4f1fc;color:var(--blue-dark)}.sidebar-subchapter:focus-visible{outline:3px solid #8fc5f2;outline-offset:1px}
-    .page{width:100%;scroll-margin-top:18px;margin:0;background:#fff;border-radius:14px;padding:clamp(22px,4vw,44px)}.chapter-panel[hidden]{display:none}.chapter-panel>.chapter-intro{margin-top:0;padding-top:0;border-top:0}.intro{display:flex;justify-content:space-between;gap:24px;align-items:flex-end;padding-bottom:24px;border-bottom:1px solid var(--line)}.intro>div{width:100%}.intro h2{margin:0;font-size:28px}.intro p{width:100%;max-width:none;margin:5px 0 0;color:var(--body)}.support{white-space:nowrap;color:var(--blue-dark);font-weight:700}
-    .steps{counter-reset:install}.step{counter-increment:install;display:grid;grid-template-columns:48px minmax(0,1fr);gap:18px;padding:34px 0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}.step-number{width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:20px;font-weight:800}.step-number:before{content:counter(install)}.step h3{margin:2px 0 7px;font-size:23px;line-height:1.32}.step p{width:100%;max-width:none;margin:0;color:var(--body)}.step p+p{margin-top:8px}.kbd{display:inline-block;padding:1px 7px;border:1px solid #bfccd7;border-bottom-width:2px;border-radius:5px;background:#fff;color:#22384b;font-family:Consolas,"Microsoft YaHei",monospace;font-size:.92em}.em{font-weight:800;color:var(--ink)}
-    .shots{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}.shots.single{grid-template-columns:1fr}.shot{margin:0;border:1px solid #cbd7e1;border-radius:10px;overflow:hidden;background:#f8fafc}.shot.compact{width:min(100%,450px);margin-inline:auto}.shot img{width:100%;height:auto}.shot figcaption{padding:10px 13px;background:#f5f8fa;border-top:1px solid #d9e2e9;color:var(--muted);font-size:13px}.route{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.route-item{padding:16px;border-radius:10px;background:var(--soft)}.route-item strong{display:block;margin-bottom:7px}.route-item code{display:block;padding:10px 12px;border-radius:7px;background:#fff;border:1px solid #c7d5e0;color:#174d78;font:600 14px/1.4 Consolas,monospace;overflow-wrap:anywhere}
-    .notice{margin-top:18px;padding:14px 16px;border-radius:9px;background:#fff6e7;color:#754900;border:1px solid #efca84}.notice strong{color:var(--warn)}.success{display:flex;gap:13px;align-items:flex-start;margin-top:20px;padding:16px;border-radius:10px;background:#edf9f4;border:1px solid #9cd4bd;color:#265e4a}.success-icon{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--ok);color:#fff;font-weight:900}.success strong{display:block;color:#155c40;margin-bottom:2px}
-    .chapter-intro{margin-top:46px;padding-top:36px;border-top:4px solid var(--blue)}.login-steps{counter-reset:login}.login-steps .step{counter-increment:login}.login-steps .step-number:before{content:counter(login)}.sync-steps{counter-reset:sync}.sync-steps .step{counter-increment:sync}.sync-steps .step-number:before{content:counter(sync)}.catalog-steps{counter-reset:catalog}.catalog-steps .step{counter-increment:catalog}.catalog-steps .step-number:before{content:counter(catalog)}.calculator-steps{counter-reset:calculator}.calculator-steps .step{counter-increment:calculator}.calculator-steps .step-number:before{content:counter(calculator)}.subchapter-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;padding:7px;border-radius:10px;background:var(--soft)}.subchapter-link{display:inline-flex;align-items:center;min-height:40px;padding:7px 13px;border:1px solid #a9c9e5;border-radius:7px;background:#fff;color:var(--blue);font-weight:800;text-decoration:none}.subchapter-link:hover{background:#eaf4fd}.subchapter-link:focus-visible{outline:3px solid #8fc5f2;outline-offset:2px}.subchapter-index{margin-right:8px;color:#5d87ab;font-size:13px}.subchapter{scroll-margin-top:0}.subchapter+.subchapter{margin-top:40px;padding-top:0;border-top:2px solid var(--line)}.subchapter-heading{display:flex;align-items:center;gap:12px;margin:28px 0 4px}.subchapter-heading span{flex:0 0 auto;padding:5px 9px;border-radius:7px;background:var(--blue);color:#fff;font-size:13px;font-weight:900}.subchapter-heading h3{margin:0;color:var(--ink);font-size:25px}.privacy{margin-top:18px;padding:14px 16px;border-radius:9px;background:#eef6ff;border:1px solid #a9cdec;color:#244b6c}.privacy strong{color:#124f82}.key-list{width:100%;max-width:none;margin:12px 0 0;padding-left:22px;color:var(--body)}.key-list li+li{margin-top:7px}.key-list strong{color:var(--ink)}
-    .footer{margin-top:32px;color:var(--muted);font-size:13px;text-align:center}
-    @media(max-width:860px){.top{padding:22px 10px}.top-inner{width:calc(100% - 20px)}.brand{align-items:flex-start;flex-direction:column;gap:16px}.hero-credits{flex:none;width:100%;padding:13px 0 0;border-top:1px solid rgba(255,255,255,.38);border-left:0;font-size:13px}.guide-shell{width:100%;margin:0;display:block}.chapter-nav-wrap{top:0;padding:9px 10px;background:#edf3f7;border-radius:0;border-bottom:1px solid var(--line)}.chapter-nav-title,.chapter-subnav{display:none}.chapter-nav{flex-direction:row;gap:7px;overflow-x:auto;scrollbar-width:thin}.chapter-tab{flex:0 0 158px;width:auto;min-height:44px;padding:8px 10px;font-size:14px;background:#fff;border-color:#bfd0df;text-align:center}.chapter-tab .chapter-index{width:22px;height:22px;margin-right:6px}.page{width:calc(100% - 20px);scroll-margin-top:74px;padding:22px;margin:12px auto 32px}.intro{display:block}.support{display:block;margin-top:12px}.step{grid-template-columns:38px minmax(0,1fr);gap:12px;padding:28px 0}.step-number{width:34px;height:34px;font-size:16px}.step h3{font-size:20px}.shots,.route{grid-template-columns:1fr}.shot figcaption{font-size:12px}}
-    @media print{body{background:#fff;font-size:10pt}.top{padding:12mm 10mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}.guide-shell{display:block;width:auto;margin:0}.chapter-nav-wrap{display:none}.page{width:190mm;margin:0 auto;padding:8mm;border-radius:0}.chapter-panel[hidden]{display:block!important}.chapter-panel+.chapter-panel .chapter-intro{margin-top:12mm;padding-top:8mm;border-top:1mm solid var(--blue)}.step{break-inside:avoid;padding:7mm 0}.shot,.route-item,.success{break-inside:avoid}.footer{display:none}}
-  </style>
+  <style>:root{color-scheme:light;--blue:#176bc0;--blue-dark:#115394;--ink:#172b40;--body:#334d65;--muted:#536b81;--line:#d6e1ea;--surface:#fff;--page:#f1f5f8;--soft:#edf4fb;font-family:"Segoe UI","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--page)}*{box-sizing:border-box}body{margin:0;font-size:16px;line-height:1.8}::selection{background:#c7e1fa;color:#132e49}a{color:var(--blue-dark);text-underline-offset:4px}a:hover{color:#073966}button,select{font:inherit}button,a,summary,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:focus-visible,a:focus-visible,summary:focus-visible,select:focus-visible,[tabindex="0"]:focus-visible{outline:3px solid #176bc0;outline-offset:4px}h1,h2,h3,h4{line-height:1.4;text-wrap:balance}h1{font-size:2rem;margin:0}h2{font-size:1.8rem;margin:0 0 12px}h3{font-size:1.35rem;margin:0 0 16px}h4{font-size:1.08rem;margin:0 0 8px}p{margin:0 0 14px}ul,ol{padding-left:24px}li+li{margin-top:10px}code,pre{font-family:Consolas,monospace;font-size:.92em}code{overflow-wrap:anywhere;background:var(--soft);padding:2px 5px;border-radius:3px}pre{background:var(--soft);padding:20px;overflow:auto;line-height:1.65}strong{font-weight:650}button,summary{touch-action:manipulation}.skip-link{position:fixed;left:16px;top:-90px;z-index:99;background:#fff;padding:12px}.skip-link:focus{top:12px}.top{background:var(--blue);color:#fff}.top-inner{max-width:1200px;margin:auto;padding:28px 28px 26px;display:flex;align-items:center;justify-content:space-between;gap:28px}.top p{margin:8px 0 0;color:#e9f4ff}.top .edition{font-size:.875rem;color:#e9f4ff}.guide-actions{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}.guide-actions button{color:#fff;border:1px solid #acd2f5;background:transparent;border-radius:6px;padding:8px 12px;min-height:44px}.guide-actions button:hover{background:#12599f}.guide-actions button:focus-visible{outline-color:#fff}.guide-shell{max-width:1200px;margin:28px auto 56px;padding:0 28px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:36px;align-items:start}.chapter-nav-wrap{position:sticky;top:24px;max-height:calc(100vh - 48px);overflow:auto;scrollbar-color:#a9bccd transparent}.nav-title{font-size:.875rem;color:var(--muted);margin:0 0 12px;padding:0 12px}.chapter-nav{display:flex;flex-direction:column;gap:5px}.chapter-tab{display:flex;align-items:center;gap:12px;text-align:left;min-height:48px;border:0;border-radius:6px;padding:9px 12px;background:transparent;color:var(--body);font-weight:600;font-size:.94rem}.chapter-tab span{font-size:.85rem;font-variant-numeric:tabular-nums;color:var(--muted)}.chapter-tab:hover{background:#e4edf6}.chapter-tab[aria-selected="true"]{background:var(--blue);color:#fff}.chapter-tab[aria-selected="true"] span{color:#e9f4ff}.chapter-subnav{display:none;padding:2px 0 8px 36px}.chapter-subnav a{display:block;min-height:36px;padding:4px 6px;font-size:.85rem;text-decoration:none;color:var(--muted)}.chapter-subnav a[aria-current="location"]{color:var(--blue-dark);font-weight:700;text-decoration:underline}.chapter-tab[aria-selected="true"]+.chapter-subnav{display:block}.mobile-nav{display:none}.page{min-width:0;max-width:75ch;padding:32px 36px;background:var(--surface);border-radius:12px}.chapter-panel{scroll-margin-top:28px}.chapter-panel[hidden]{display:none}.chapter-intro{padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:28px}.chapter-intro p{color:var(--muted);margin:0}.chapter-number{display:none}.reading-route{border-bottom:1px solid var(--line);padding:0 0 22px;margin-bottom:36px}.reading-route strong{display:block;margin-bottom:10px}.reading-route p{margin:4px 0}.topic{margin-top:40px;scroll-margin-top:28px}.steps{counter-reset:steps;list-style:none;padding:0;margin:22px 0}.steps>li{counter-increment:steps;position:relative;padding-left:38px;margin:0 0 28px}.steps>li:before{content:counter(steps);position:absolute;left:0;top:0;width:26px;height:26px;display:grid;place-items:center;border:1px solid #96b6d1;border-radius:50%;font-weight:600;font-size:.85rem;color:var(--blue-dark)}.steps>li:last-child{margin-bottom:0}.note{background:var(--soft);padding:16px 18px;margin:20px 0;color:#234965;font-size:.94rem;border-radius:6px}.result{padding:14px 0;border-top:1px solid var(--line);color:#245d46;margin-top:20px}.table-wrap{overflow-x:auto;margin:20px 0;scrollbar-color:#a9bccd transparent}table{width:100%;border-collapse:collapse;text-align:left;font-size:.94rem}th,td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}thead th{background:var(--soft);font-weight:650}tbody th{min-width:96px;font-weight:600}td{color:var(--body)}.guide-shot{margin:22px 0 28px;border:1px solid var(--line);border-radius:8px;overflow:hidden}.screenshot-placeholder{min-height:176px;padding:28px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;background:#f7f9fb;color:var(--muted);gap:10px}.screenshot-placeholder span{font-weight:600;color:var(--body);font-size:.9rem}.screenshot-placeholder p{font-size:.875rem;line-height:1.7;max-width:38em;margin:0}.guide-shot-item+.guide-shot-item{border-top:1px solid var(--line);margin-top:16px}.guide-shot-label{padding:10px 14px;margin:0;background:var(--soft);font-size:.9rem}.guide-shot-item a{display:block}.guide-shot img{display:block;max-width:100%;width:100%;height:auto}.guide-shot figcaption{padding:10px 14px;font-size:.85rem;color:var(--muted);border-top:1px solid var(--line)}details{border-top:1px solid var(--line);margin:12px 0}summary{cursor:pointer;padding:14px 0;font-weight:600;min-height:48px;color:var(--ink)}.detail-body{padding:0 0 12px;color:var(--body)}.detail-body p:last-child{margin-bottom:0}.chapter-pager{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;font-size:.9rem}.chapter-pager a{padding:6px 0}.footer{max-width:1200px;margin:0 auto 36px;padding:0 28px;color:var(--muted);font-size:.8rem}.footer p{margin:4px 0}.all-chapters .chapter-panel+.chapter-panel{margin-top:56px;padding-top:32px;border-top:2px solid var(--line)}.all-chapters .chapter-pager{display:none}.print-note{display:none}.noscript-note{padding:16px 28px;background:#fff2dc}
+@media(max-width:900px){.top-inner{align-items:flex-start;flex-direction:column;gap:18px}.guide-shell{grid-template-columns:210px minmax(0,1fr);gap:22px;padding:0 20px}.page{padding:28px 24px}}
+@media(max-width:700px){body{font-size:16px}h1{font-size:1.65rem}h2{font-size:1.5rem}h3{font-size:1.2rem}.top-inner{padding:24px 20px}.guide-actions{gap:8px}.guide-actions button{font-size:.875rem}.guide-shell{display:block;margin:0 0 32px;padding:0}.chapter-nav-wrap{display:none}.mobile-nav{position:sticky;top:0;display:flex;align-items:center;gap:12px;padding:10px 20px;background:var(--page);border-bottom:1px solid var(--line);z-index:10}.mobile-nav label{font-size:.875rem;flex-shrink:0}.mobile-nav select{min-width:0;width:100%;min-height:44px;border:1px solid #9eb4c7;border-radius:5px;background:#fff;color:var(--ink);padding:8px}.page{padding:28px 20px;border-radius:0;max-width:none}.topic,.chapter-panel{scroll-margin-top:84px}.steps>li{padding-left:34px}.screenshot-placeholder{min-height:150px;padding:22px 16px}.chapter-pager{flex-direction:column;gap:6px}.footer{padding:0 20px}.table-wrap{margin-left:0;margin-right:0}th,td{padding:10px 8px}}
+@media(prefers-reduced-motion:no-preference){a,button,summary{transition:background-color .15s ease,color .15s ease}}
+@media print{@page{size:A4;margin:15mm}body{background:#fff;font-size:10pt;line-height:1.65}.top{background:#fff;color:#172b40;border-bottom:1px solid #aab9c5}.top-inner{display:block;padding:0 0 7mm}.top p,.top .edition{color:#334d65}h1{font-size:22pt}h2{font-size:18pt}h3{font-size:14pt}h4{font-size:11pt}.guide-actions,.chapter-nav-wrap,.mobile-nav,.chapter-pager,.skip-link,.noscript-note{display:none!important}.guide-shell{display:block;margin:0;padding:0;max-width:none}.page{padding:0;max-width:none;border-radius:0}.chapter-panel[hidden]{display:block!important}.chapter-panel+.chapter-panel{break-before:page}.chapter-intro{padding-top:7mm}.topic{margin-top:8mm}.steps>li{margin-bottom:6mm}.guide-shot-item,.note,tr,pre{break-inside:avoid}h2,h3,h4,summary{break-after:avoid}p{orphans:3;widows:3}.screenshot-placeholder{min-height:30mm;padding:5mm}.guide-shot{margin:5mm 0}.guide-shot img{max-height:160mm;object-fit:contain}details{display:block}.detail-body{display:block!important}.print-note{display:block}.footer{padding:6mm 0 0;margin:0}a{color:#172b40}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style>
+<style>
+#screenshot-entry h5{font-size:1rem;line-height:1.4;margin:0 0 8px;text-wrap:balance}
+#screenshot-entry>.topic:first-of-type{margin-top:22px}
+@media print{#screenshot-entry h5{font-size:10pt;break-after:avoid}}
+</style>
 </head>
 <body>
-  <header class="top">
-    <div class="top-inner brand">
-      <div class="brand-main">
-        <div class="mark">♛</div>
-        <div><h1>NIKKE Workshop 操作指南</h1><p>支持 Google Chrome 与 Microsoft Edge</p></div>
-      </div>
-      <ul class="hero-credits" aria-label="制作信息">
-        <li>👑 伟大的皇冠王国国王为战术整备室负责 `( ゜- ゜)</li>
-        <li>💡 钟鸣提供技术支持：ヽ(&#96;Д´)ﾉKISAMAAAAA！</li>
-        <li>✍️ 作者：異界型w、夕紫</li>
-      </ul>
-    </div>
-  </header>
+<a href="#main" class="skip-link">跳到正文</a>
+<header class="top"><div class="top-inner"><div><h1>NIKKE Workshop 操作指南</h1>
+<p>从安装、录入到制作角色卡和洗词条。</p>
+<p class="edition">适用版本 1.0.11 · Chrome / Edge · 图文已更新</p>
+</div><div class="guide-actions"><button id="show-all" type="button" aria-pressed="false">显示全部章节</button><button id="print-guide" type="button">打印 / 保存 PDF</button></div></div></header>
 
-  <div class="guide-shell">
-  <nav class="chapter-nav-wrap" aria-label="操作指南目录">
-    <p class="chapter-nav-title">操作目录</p>
-    <div class="chapter-nav" role="tablist" aria-label="操作指南章节">
-      <button type="button" class="chapter-tab is-active" id="tab-install" role="tab" aria-selected="true" aria-controls="chapter-install" tabindex="0" data-chapter="chapter-install"><span class="chapter-index">1</span>安装扩展</button>
-      <button type="button" class="chapter-tab" id="tab-login" role="tab" aria-selected="false" aria-controls="chapter-login" tabindex="-1" data-chapter="chapter-login"><span class="chapter-index">2</span>登录与 Cookie</button>
-      <button type="button" class="chapter-tab" id="tab-sync" role="tab" aria-selected="false" aria-controls="chapter-sync" tabindex="-1" data-chapter="chapter-sync"><span class="chapter-index">3</span>同步账号数据</button>
-      <button type="button" class="chapter-tab" id="tab-catalog" role="tab" aria-selected="false" aria-controls="chapter-catalog" tabindex="-1" data-chapter="chapter-catalog"><span class="chapter-index">4</span>图鉴与角色列表</button>
-      <button type="button" class="chapter-tab" id="tab-calculator" role="tab" aria-selected="false" aria-controls="chapter-calculator" tabindex="-1" data-chapter="chapter-calculator"><span class="chapter-index">5</span>洗词条计算器</button>
-      <nav class="chapter-subnav" aria-label="洗词条计算器小章节">
-        <a class="sidebar-subchapter" href="#calculator-common-guide">5.1　计算器通用功能</a>
-        <a class="sidebar-subchapter" href="#single-equipment-guide">5.2　单装备模拟</a>
-        <a class="sidebar-subchapter" href="#character-calculation-guide">5.3　单角色：独立与全局</a>
-        <a class="sidebar-subchapter" href="#calculator-download-guide">5.4　结果保存与下载</a>
-        <a class="sidebar-subchapter" href="#calculator-algorithm-guide">5.5　有限状态 MDP</a>
-      </nav>
-    </div>
-  </nav>
+<noscript><p class="noscript-note">当前未启用 JavaScript，全部章节已展开，可使用浏览器查找阅读。</p>
+</noscript>
+<div class="mobile-nav"><label for="chapter-select">章节</label><select id="chapter-select"><option value="chapter-install">1. 安装与更新</option><option value="chapter-account">2. 登录与同步</option><option value="chapter-catalog">3. 图鉴与列表</option><option value="chapter-input">4. 数据录入与截图识别</option><option value="chapter-card">5. 角色卡制作</option><option value="chapter-calculator">6. 洗词条计算器</option><option value="chapter-faq">7. 常见问题</option></select></div>
+<div class="guide-shell"><aside class="chapter-nav-wrap"><p class="nav-title">操作目录</p>
+<nav class="chapter-nav" role="tablist" aria-label="指南章节" aria-orientation="vertical"><button type="button" class="chapter-tab" id="tab-chapter-install" role="tab" aria-selected="true" aria-controls="chapter-install" tabindex="0" data-chapter="chapter-install"><span>1</span>安装与更新</button>
+<button type="button" class="chapter-tab" id="tab-chapter-account" role="tab" aria-selected="false" aria-controls="chapter-account" tabindex="-1" data-chapter="chapter-account"><span>2</span>登录与同步</button>
+<button type="button" class="chapter-tab" id="tab-chapter-catalog" role="tab" aria-selected="false" aria-controls="chapter-catalog" tabindex="-1" data-chapter="chapter-catalog"><span>3</span>图鉴与列表</button>
+<button type="button" class="chapter-tab" id="tab-chapter-input" role="tab" aria-selected="false" aria-controls="chapter-input" tabindex="-1" data-chapter="chapter-input"><span>4</span>数据录入与截图识别</button><nav class="chapter-subnav" aria-label="数据录入方式"><a href="#manual-entry">4.1 手动录入</a><a href="#custom-character">4.2 自定义角色</a><a href="#screenshot-entry">4.3 截图识别</a><a href="#aka-import">4.4 阿卡数据</a><a href="#local-excel">4.5 本地图鉴 Excel</a></nav>
+<button type="button" class="chapter-tab" id="tab-chapter-card" role="tab" aria-selected="false" aria-controls="chapter-card" tabindex="-1" data-chapter="chapter-card"><span>5</span>角色卡制作</button>
+<button type="button" class="chapter-tab" id="tab-chapter-calculator" role="tab" aria-selected="false" aria-controls="chapter-calculator" tabindex="-1" data-chapter="chapter-calculator"><span>6</span>洗词条计算器</button><nav class="chapter-subnav" aria-label="计算器小节"><a href="#single-equipment-guide">6.1 单装备示例</a><a href="#calculator-common-guide">6.2 盘面与目标</a><a href="#character-calculation-guide">6.3 四装备模式</a><a href="#equipment-overview">6.4 装备效果</a><a href="#calculator-download-guide">6.5 保存与导出</a><a href="#calculator-algorithm-guide">6.6 算法说明</a></nav>
 
-  <main class="page">
-    <section class="chapter-panel" id="chapter-install" role="tabpanel" aria-labelledby="tab-install">
-    <section class="intro">
-      <div><h2>安装扩展</h2><p>第一次使用只需完成以下五步。安装过程中不需要运行命令，也不需要安装 Node.js、Python 或其他环境。</p></div>
-        <span class="support">适用版本：1.0.11</span>
-    </section>
+<button type="button" class="chapter-tab" id="tab-chapter-faq" role="tab" aria-selected="false" aria-controls="chapter-faq" tabindex="-1" data-chapter="chapter-faq"><span>7</span>常见问题</button></nav>
+</aside>
+<main id="main" class="page" tabindex="-1"><section class="chapter-panel" id="chapter-install" role="tabpanel" aria-labelledby="tab-chapter-install"><header class="chapter-intro"><span class="chapter-number">第 1 章</span><h2 tabindex="-1">安装与更新</h2>
+<p>把插件安装到固定文件夹；以后通过更新器更新，并保留本地数据。</p>
+</header>
+<div class="reading-route"><strong>先选一条使用路线</strong><p>需要读取账号数据：安装 → <a href="#chapter-account">登录与同步</a> → <a href="#chapter-catalog">查看图鉴</a>。</p>
+<p>先体验本地功能：安装 → <a href="#manual-entry">手动录入</a>，或直接使用<a href="#single-equipment-guide">单装备模拟</a>。</p>
+</div><section class="topic" id="install-start"><h3>首次安装</h3>
+<ol class="steps"><li><h4>下载完整安装包</h4>
+<p>打开 <a href="https://github.com/ChrisLu7899/NIKKE-Workshop/releases/latest" target="_blank" rel="noopener noreferrer">最新 Release</a>，在 Assets 中下载 <code>NIKKE-Workshop.zip</code>。安装包已包含立绘和本地识别所需文件，无需另下素材。</p>
+<aside class="note">请选择项目提供的安装 ZIP；GitHub 自动生成的 Source code 是源码归档。</aside>
+<figure class="guide-shot" data-shot-id="G01"><div class="guide-shot-item"><a href="assets-redacted/guide-G01.png" target="_blank" rel="noopener" aria-label="完整安装包下载项：查看大图"><img src="assets-redacted/guide-G01.png" alt="完整安装包下载项" width="1525" height="554" loading="lazy"></a></div><figcaption>下载完整安装包 · 点击图片查看大图</figcaption></figure>
+</li>
+<li><h4>完整解压到固定位置</h4>
+<p>解压后，选择能直接看到 <code>manifest.json</code> 的文件夹。不要选择 ZIP 文件，也不要进入 <code>assets</code> 子目录。浏览器会持续读取这个文件夹，安装后请保留它。</p>
+<figure class="guide-shot" data-shot-id="G02"><div class="guide-shot-item"><a href="assets-redacted/guide-G02.png" target="_blank" rel="noopener" aria-label="扩展根目录与更新器：查看大图"><img src="assets-redacted/guide-G02.png" alt="扩展根目录与更新器" width="1364" height="1153" loading="lazy"></a></div><figcaption>选择包含 manifest.json 的扩展根目录 · 点击图片查看大图</figcaption></figure>
+</li>
+<li><h4>加载扩展</h4>
+<div class="table-wrap" tabindex="0" role="region" aria-label="浏览器与打开的地址与操作对照表"><table><thead><tr><th scope="col">浏览器</th><th scope="col">打开的地址</th><th scope="col">操作</th></tr>
+</thead><tbody><tr><th scope="row">Chrome</th><td><code>chrome://extensions/</code></td><td>开启开发者模式 → 加载未打包的扩展程序</td></tr>
+<tr><th scope="row">Edge</th><td><code>edge://extensions/</code></td><td>开启开发者模式 → 加载解压缩的扩展</td></tr>
+</tbody></table>
+</div><p>在文件夹选择窗口中选中上一步的根目录。按钮名称可能随浏览器版本略有不同。</p>
+<figure class="guide-shot" data-shot-id="G03"><div class="guide-shot-item"><a href="assets-redacted/guide-G03.png" target="_blank" rel="noopener" aria-label="Chrome 加载扩展根目录：查看大图"><img src="assets-redacted/guide-G03.png" alt="Chrome 加载扩展根目录" width="1809" height="869" loading="lazy"></a></div><figcaption>Chrome：开发者模式与加载按钮 · 点击图片查看大图</figcaption></figure>
+<figure class="guide-shot" data-shot-id="G04"><div class="guide-shot-item"><a href="assets-redacted/guide-G04.png" target="_blank" rel="noopener" aria-label="Edge 加载扩展：查看大图"><img src="assets-redacted/guide-G04.png" alt="Edge 加载扩展" width="1708" height="920" loading="lazy"></a></div><figcaption>Edge：开发者模式与加载按钮 · 点击图片查看大图</figcaption></figure>
+</li>
+<li><h4>打开插件</h4>
+<p>确认扩展列表中出现 NIKKE Workshop，开关处于启用状态。从浏览器扩展菜单打开插件侧栏，需要经常使用时可固定到工具栏。</p>
+<p class="result"><strong>完成后：</strong>可以打开侧栏和主页面；需要账号数据时继续下一章。</p>
+</li>
+</ol>
+</section>
+<section class="topic" id="update-first"><h3>首次设置 Windows 更新器</h3>
+<p>Windows 10/11 可使用安装包附带的更新器。只需在首次使用或移动安装目录后设置唤起位置。</p>
+<ol class="steps"><li><h4>打开更新器并核对目录</h4>
+<p>双击安装根目录的 <code>Workshop-Updater.vbs</code>。默认目录不正确时，点击“选择目录”，选中完整插件安装文件夹，再勾选确认。</p>
+</li>
+<li><h4>启用插件唤起</h4>
+<p>点击“启用插件唤起”。以后可从插件进入更新器；更换安装目录后，需要在新目录重新确认并启用。</p>
+<figure class="guide-shot" data-shot-id="G06"><div class="guide-shot-item"><a href="assets-redacted/guide-G06.png" target="_blank" rel="noopener" aria-label="确认目录并启用插件唤起：查看大图"><img src="assets-redacted/guide-G06.png" alt="确认目录并启用插件唤起" width="1368" height="1149" loading="lazy"></a></div><figcaption>首次设置更新器与选择目录 · 点击图片查看大图</figcaption></figure>
+</li>
+</ol>
+<aside class="note">“选择目录”只改变本次更新目标，不移动插件文件，也不自动更改浏览器加载目录。多个安装副本共用唤起入口，请核对更新器实际显示的目录。</aside>
+</section>
+<section class="topic" id="update-daily"><h3>日常检查与更新</h3>
+<ol class="steps"><li><h4>在插件中查看新版</h4>
+<p>点击侧栏底部“版本更新”，打开的窗口会自动查询一次。插件窗口只有“关闭”和“打开更新器”；重复检查有 60 秒冷却，网络限流时按页面提示等待。</p>
+<figure class="guide-shot" data-shot-id="G05"><div class="guide-shot-item"><a href="assets-redacted/guide-G05.png" target="_blank" rel="noopener" aria-label="版本更新入口与发现新版：查看大图"><img src="assets-redacted/guide-G05.png" alt="版本更新入口与发现新版" width="1806" height="871" loading="lazy"></a></div><figcaption>侧栏版本更新入口与自动检测结果 · 点击图片查看大图</figcaption></figure>
+</li>
+<li><h4>打开更新器</h4>
+<p>点击“打开更新器”，如果浏览器询问是否打开外部程序，确认后继续。首次尚未设置时，先完成上面的更新器设置。</p>
+</li>
+<li><h4>检查并确认安装</h4>
+<p>在独立更新器中点击“检查更新”。发现可安装的新版本后，核对版本与目录，点击“下载并更新”，按提示确认。安装期间保留窗口并等待完成。</p>
+<figure class="guide-shot" data-shot-id="G07"><div class="guide-shot-item"><a href="assets-redacted/guide-G07.png" target="_blank" rel="noopener" aria-label="检查更新与下载并更新：查看大图"><img src="assets-redacted/guide-G07.png" alt="检查更新与下载并更新" width="1368" height="1149" loading="lazy"></a></div><figcaption>检查更新并确认安装 · 点击图片查看大图</figcaption></figure>
+</li>
+<li><h4>重新加载扩展</h4>
+<p>回到浏览器扩展管理页，点击 NIKKE Workshop 的重新加载按钮，再刷新插件页面。无需卸载扩展。</p>
+<p class="result"><strong>完成后：</strong>插件显示更新后的版本，原本的本地记录仍可使用。更新器会保留 <code>screenshots</code> 截图目录。</p>
+</li>
+</ol>
+<details><summary>打不开更新器，或希望手动更新</summary><div class="detail-body"><p>可先手动运行安装目录中的 <code>Workshop-Updater.vbs</code>。如果系统不支持该更新器，下载完整 ZIP，先备份安装文件夹和需要保留的数据，再将程序文件更新到原目录；保留自己的 <code>screenshots</code>，最后重新加载扩展。详细故障处理见安装包中的 <code>updater/README.md</code>。</p>
+</div></details>
+</section>
+<nav class="chapter-pager" aria-label="章节翻页"><span></span><a href="#chapter-account">下一章：登录与同步</a></nav>
+</section>
 
-    <div class="steps">
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>下载正式版安装包</h3>
-          <p>进入 <span class="em">NIKKE-Workshop GitHub 项目主页</span>，在右侧找到 <span class="em">Releases</span>，点击标有 <span class="em">Latest</span> 的最新版本。</p>
-          <p>进入版本页面后，在 <span class="em">Assets</span> 中下载 <span class="kbd">NIKKE-Workshop.zip</span>。</p>
-          <div class="notice"><strong>不要下载 Source code：</strong>“Source code (zip)”和“Source code (tar.gz)”是源码归档，不是给普通用户安装的正式版。</div>
-          <div class="shots">
-<figure class="shot"><img src="assets-redacted/01-releases.png" alt="GitHub 项目主页右侧的 Releases 区域"><figcaption>① 在项目主页右侧进入最新 Release。</figcaption></figure>
-<figure class="shot"><img src="assets-redacted/02-release-asset.png" alt="GitHub Release 页面中的 NIKKE-Workshop zip 下载项"><figcaption>② 在 Assets 中点击 NIKKE-Workshop.zip。</figcaption></figure>
-          </div>
-        </div>
-      </section>
+<section class="chapter-panel" id="chapter-account" role="tabpanel" aria-labelledby="tab-chapter-account"><header class="chapter-intro"><span class="chapter-number">第 2 章</span><h2 tabindex="-1">登录与同步</h2>
+<p>通过 Blablalink 获取账号角色数据；已有本地记录时，不必每次打开插件都同步。</p>
+</header>
+<section class="topic" id="login-start"><h3>登录并保存 Cookie</h3>
+<ol class="steps"><li><h4>从侧栏打开登录页</h4>
+<p>点击侧栏顶部“登录”，在新标签页进入 Blablalink。按实际账号选择服务器；<code>area_id</code> 通常留空，自动识别失败时再手动补充。</p>
+<figure class="guide-shot" data-shot-id="G08"><div class="guide-shot-item"><a href="assets-redacted/guide-G08.png" target="_blank" rel="noopener" aria-label="登录前的侧栏：查看大图"><img src="assets-redacted/guide-G08.png" alt="登录前的侧栏" width="449" height="1214" loading="lazy"></a></div><figcaption>侧栏登录与 Cookie 保存入口 · 点击图片查看大图</figcaption></figure>
+</li>
+<li><h4>完成账号登录</h4>
+<p>在 Blablalink 页面填写账号、密码并完成验证。确认页面已登录后，返回插件。账号密码只在 Blablalink 页面填写。</p>
+<figure class="guide-shot" data-shot-id="G09"><div class="guide-shot-item"><a href="assets-redacted/guide-G09.png" target="_blank" rel="noopener" aria-label="Blablalink 登录窗口：查看大图"><img src="assets-redacted/guide-G09.png" alt="Blablalink 登录窗口" width="1808" height="870" loading="lazy"></a></div><figcaption>在 Blablalink 完成登录 · 点击图片查看大图</figcaption></figure>
+</li>
+<li><h4>保存当前登录状态</h4>
+<p>点击“保存/更新 COOKIE”。看到保存成功后即可关闭登录标签页；Cookie 失效时，重新登录并用同一个按钮更新。</p>
+<p class="result"><strong>完成后：</strong>插件已保存当前登录状态，可以开始同步。</p>
+</li>
+</ol>
+<aside class="note">Cookie 代表登录状态。分享问题截图时，请遮盖账号、Cookie 和其他身份标识。</aside>
+</section>
+<section class="topic" id="sync-start"><h3>同步并确认角色数据</h3>
+<ol class="steps"><li><h4>开始同步</h4>
+<p>进入主页面“妮姬”标签页，点击底部“同步账号数据”。保持页面开启，等待完成提示；同步期间不要连续重复点击。</p>
+</li>
+<li><h4>查看已同步角色</h4>
+<p>同步成功后默认进入预设“常用”列表。要看账号的全部已同步角色，在主列表中选择“已同步”。“常用”只是一种显示范围，不代表只同步了这部分角色。</p>
+<figure class="guide-shot" data-shot-id="G10"><div class="guide-shot-item"><p class="guide-shot-label">1. 同步账号数据入口</p><a href="assets-redacted/guide-G10.png" target="_blank" rel="noopener" aria-label="同步账号数据入口：查看大图"><img src="assets-redacted/guide-G10.png" alt="同步账号数据入口" width="2078" height="1219" loading="lazy"></a></div><div class="guide-shot-item"><p class="guide-shot-label">2. 同步完成提示</p><a href="assets-redacted/guide-G10-2.png" target="_blank" rel="noopener" aria-label="同步完成提示：查看大图"><img src="assets-redacted/guide-G10-2.png" alt="同步完成提示" width="2078" height="1219" loading="lazy"></a></div><div class="guide-shot-item"><p class="guide-shot-label">3. 切换主列表</p><a href="assets-redacted/guide-G10-3.png" target="_blank" rel="noopener" aria-label="切换主列表：查看大图"><img src="assets-redacted/guide-G10-3.png" alt="切换主列表" width="2078" height="1219" loading="lazy"></a></div><figcaption>同步完成后切换到已同步列表 · 点击图片查看大图</figcaption></figure>
+</li>
+<li><h4>按需再次同步</h4>
+<p>同步结果会保存在当前浏览器本地。角色等级、突破或装备变化后，再次同步即可读取新数据。</p>
+<p class="result"><strong>完成后：</strong>点击一位角色，可以检查角色数据、制作角色卡或进入洗词条计算器。</p>
+</li>
+</ol>
+<aside class="note">Blablalink 不提供装备词条的锁定状态。进入计算器后，请对照游戏补全“已锁”；不要把缺失锁状态当成已经核对。</aside>
+<details><summary>本地录入和同步发生在同一角色上时</summary><div class="detail-body"><p>同一标准角色以最后一次成功写入的数据为准；不同来源只更新各自支持的字段。同步失败或中断不会覆盖原有记录，自定义角色不会被账号同步覆盖。再次同步前，先保留需要留存的本地编辑。</p>
+</div></details>
+</section>
+<nav class="chapter-pager" aria-label="章节翻页"><a href="#chapter-install">上一章：安装与更新</a><a href="#chapter-catalog">下一章：图鉴与列表</a></nav>
+</section>
 
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>完整解压缩安装包</h3>
-          <p>下载完成后，将 <span class="kbd">NIKKE-Workshop.zip</span> 完整解压，得到名为 <span class="kbd">NIKKE-Workshop</span> 的文件夹。</p>
-          <p>请把这个文件夹放在不容易误删或移动的位置。浏览器后续会持续读取其中的扩展文件。</p>
-<div class="shots single"><figure class="shot"><img src="assets-redacted/03-unzip.png" alt="下载目录中的 NIKKE-Workshop 压缩包和解压文件夹"><figcaption>正确结果：压缩包旁边出现解压后的 NIKKE-Workshop 文件夹。</figcaption></figure></div>
-        </div>
-      </section>
+<section class="chapter-panel" id="chapter-catalog" role="tabpanel" aria-labelledby="tab-chapter-catalog"><header class="chapter-intro"><span class="chapter-number">第 3 章</span><h2 tabindex="-1">图鉴与列表</h2>
+<p>用列表决定查看范围，再用搜索、筛选和推荐方案找到角色。</p>
+</header>
+<section class="topic" id="catalog-views"><h3>先选择查看范围</h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="列表与用来做什么对照表"><table><thead><tr><th scope="col">列表</th><th scope="col">用来做什么</th></tr>
+</thead><tbody><tr><th scope="row">全图鉴</th><td>查询当前收录的标准角色，包括未同步的角色。</td></tr>
+<tr><th scope="row">已同步</th><td>查看从账号同步到本地的角色。</td></tr>
+<tr><th scope="row">已录入</th><td>查看手动、图片识别、阿卡或本地 Excel 保存的数据。</td></tr>
+<tr><th scope="row">常用</th><td>快速查看插件预设的常用角色。</td></tr>
+<tr><th scope="row">自建列表</th><td>按个人用途整理已同步或已录入角色，包括自定义角色。</td></tr>
+</tbody></table>
+</div><p>角色仅出现在“全图鉴”，不代表已经有账号练度数据。需要录入时，点击角色并切换到“角色数据”。</p>
+</section>
+<section class="topic" id="catalog-filter"><h3>搜索、筛选与推荐方案</h3>
+<p>搜索框按角色名称查找；Ⅰ、Ⅱ、Ⅲ 按爆裂阶段筛选。筛选面板可组合职业、属性、武器和企业，排序按钮用于调整显示顺序。</p>
+<p>“推荐方案”按推图、异常拦截、辅助、个突主 C、企业塔等场景分组，角色按录入的攻略顺序展示。</p>
+<figure class="guide-shot" data-shot-id="G11"><div class="guide-shot-item"><p class="guide-shot-label">1. 推荐方案菜单</p><a href="assets-redacted/guide-G11.png" target="_blank" rel="noopener" aria-label="推荐方案菜单：查看大图"><img src="assets-redacted/guide-G11.png" alt="推荐方案菜单" width="2078" height="1219" loading="lazy"></a></div><div class="guide-shot-item"><p class="guide-shot-label">2. 搜索、排序与筛选面板</p><a href="assets-redacted/guide-G11-2.png" target="_blank" rel="noopener" aria-label="搜索、排序与筛选面板：查看大图"><img src="assets-redacted/guide-G11-2.png" alt="搜索、排序与筛选面板" width="2078" height="1219" loading="lazy"></a></div><figcaption>搜索、筛选与推荐方案 · 点击图片查看大图</figcaption></figure>
+<details><summary>“400级属性”会改掉我的角色等级吗？</summary><div class="detail-body"><p>不会。它只决定同步数据中的模拟生命、攻击、防御是否按 400 级计算，不修改实际同步等级。</p>
+</div></details>
+</section>
+<section class="topic" id="catalog-custom"><h3>创建自选列表</h3>
+<ol class="steps"><li><h4>选中角色</h4>
+<p>切换到“已同步”或“已录入”，点击“自选列表”进入多选状态，再勾选需要的妮姬。两类角色都能加入自建列表，包括已录入的自定义角色。仅在全图鉴中展示、尚未同步或录入的角色不可选。</p>
+</li>
+<li><h4>保存列表</h4>
+<p>在底部选择加入已有列表，或点击“新建列表”填写名称。保存后，从主列表下拉框打开；列表旁的编辑、复制、删除入口用于后续管理。</p>
+<aside class="note">下图保留拍摄时的界面，其中“只能加入账号已同步”的提示已过时。当前自建列表支持已同步或已录入角色，包括自定义角色。</aside>
+<figure class="guide-shot" data-shot-id="G12"><div class="guide-shot-item"><p class="guide-shot-label">1. 选择成员并点击新建列表</p><a href="assets-redacted/guide-G12.png" target="_blank" rel="noopener" aria-label="选择成员并点击新建列表：查看大图"><img src="assets-redacted/guide-G12.png" alt="选择成员并点击新建列表" width="2078" height="1219" loading="lazy"></a></div><div class="guide-shot-item"><p class="guide-shot-label">2. 填写列表名称</p><a href="assets-redacted/guide-G12-2.png" target="_blank" rel="noopener" aria-label="填写列表名称：查看大图"><img src="assets-redacted/guide-G12-2.png" alt="填写列表名称" width="2078" height="1219" loading="lazy"></a></div><div class="guide-shot-item"><p class="guide-shot-label">3. 创建后的列表</p><a href="assets-redacted/guide-G12-3.png" target="_blank" rel="noopener" aria-label="创建后的列表：查看大图"><img src="assets-redacted/guide-G12-3.png" alt="创建后的列表" width="2078" height="1219" loading="lazy"></a></div><figcaption>选择成员并创建自建列表 · 点击图片查看大图</figcaption></figure>
+</li>
+</ol>
+</section>
+<p>需要保存当前列表的数据？前往<a href="#local-excel">本地图鉴导入与导出</a>。</p>
+<nav class="chapter-pager" aria-label="章节翻页"><a href="#chapter-account">上一章：登录与同步</a><a href="#chapter-input">下一章：数据录入与截图识别</a></nav>
+</section>
 
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>打开浏览器扩展程序页面</h3>
-          <p>根据正在使用的浏览器，在地址栏输入对应地址并按回车。</p>
-          <div class="route">
-            <div class="route-item"><strong>Google Chrome</strong><code>chrome://extensions</code></div>
-            <div class="route-item"><strong>Microsoft Edge</strong><code>edge://extensions</code></div>
-          </div>
-        </div>
-      </section>
+<section class="chapter-panel" id="chapter-input" role="tabpanel" aria-labelledby="tab-chapter-input"><header class="chapter-intro"><span class="chapter-number">第 4 章</span><h2 tabindex="-1">数据录入与截图识别</h2>
+<p>不依赖账号同步，也可以维护角色数据。先选择录入方式，再核对结果并保存。</p>
+</header>
+<section class="topic" id="input-options"><h3>选择数据来源</h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="入口与适合的情况对照表"><table><thead><tr><th scope="col">入口</th><th scope="col">适合的情况</th></tr>
+</thead><tbody><tr><th scope="row"><a href="#manual-entry">标准角色 → 角色数据</a></th><td>已经在图鉴里，手动补充或修正一位角色。</td></tr>
+<tr><th scope="row"><a href="#custom-character">自定义角色</a></th><td>当前图鉴里还没有，需要自行填写基础资料。</td></tr>
+<tr><th scope="row"><a href="#screenshot-entry">图片识别</a></th><td>已有游戏内装备或练度截图，需要批量录入。</td></tr>
+<tr><th scope="row"><a href="#aka-import">阿卡数据</a></th><td>已有阿卡 API Key，希望读取国服或外服数据。</td></tr>
+<tr><th scope="row"><a href="#local-excel">本地数据</a></th><td>恢复或导入此前导出的本地图鉴 Excel。</td></tr>
+</tbody></table>
+</div><figure class="guide-shot" data-shot-id="G13"><div class="guide-shot-item"><a href="assets-redacted/guide-G13.png" target="_blank" rel="noopener" aria-label="四个数据录入入口：查看大图"><img src="assets-redacted/guide-G13.png" alt="四个数据录入入口" width="2078" height="1219" loading="lazy"></a></div><figcaption>四个数据录入入口 · 点击图片查看大图</figcaption></figure>
+</section>
+<section class="topic" id="manual-entry"><h3>4.1 手动录入</h3>
+<ol class="steps"><li><h4>打开角色数据页</h4>
+<p>在“全图鉴”中点击目标角色，切换到“角色数据”。标准角色的名称、属性等固定资料由图鉴提供；等级、战斗力等未知数值可以留空。</p>
+</li>
+<li><h4>填写练度与装备</h4>
+<p>按游戏填写等级、突破、好感度、职业／企业等级、技能、魔方和收藏品信息。四件装备的词条按实际 1、2、3 号位置填写，没有的词条保持空位，不把后面的词条向前挪。</p>
+<p>突破采用 0～10 的下拉选项。普通装备与 T10 分开显示；当前为非 OVERLOAD 装备时，不把它当成带超频词条的 T10。</p>
+<figure class="guide-shot" data-shot-id="G14"><div class="guide-shot-item"><a href="assets-redacted/guide-G14.png" target="_blank" rel="noopener" aria-label="标准角色数据表单：查看大图"><img src="assets-redacted/guide-G14.png" alt="标准角色数据表单" width="2078" height="1219" loading="lazy"></a></div><figcaption>编辑标准角色数据 · 点击图片查看大图</figcaption></figure>
+</li>
+<li><h4>保存并检查</h4>
+<p>点击“保存”，回到“已录入”列表查看。需要计算时，使用工作区上方“洗词条”入口。</p>
+<p class="result"><strong>完成后：</strong>这位角色的数据可用于角色卡、本地图鉴导出和计算器。</p>
+</li>
+</ol>
+</section>
+<section class="topic" id="custom-character"><h3>4.2 自定义角色</h3>
+<p>点击“自定义角色”，填写名称，并选择属性、职业、爆裂阶段、企业、武器与稀有度，再按相同方式录入练度和装备。保存后显示“自定义”标记；以后账号同步不会覆盖该角色。</p>
+<figure class="guide-shot" data-shot-id="G15"><div class="guide-shot-item"><a href="assets-redacted/guide-G15.png" target="_blank" rel="noopener" aria-label="自定义角色表单：查看大图"><img src="assets-redacted/guide-G15.png" alt="自定义角色表单" width="2078" height="1219" loading="lazy"></a></div><figcaption>创建自定义角色 · 点击图片查看大图</figcaption></figure>
+</section>
+<section class="topic" id="screenshot-entry"><h3>4.3 截图识别</h3>
+<section class="topic" id="ocr-prepare"><h4>准备截图文件夹</h4>
+<p>在安装目录的 <code>screenshots</code> 内，为每位角色建立一个子文件夹，名称使用图鉴中的完整角色名。将该角色的截图放进去；同一文件夹可以混放装备、技能、魔方和完整练度截图。</p>
+<pre aria-label="截图目录示例">screenshots/
+  爱丽丝/
+    头部.png
+    技能.png
+    练度.png
+  麦斯威尔/
+    魔方.png</pre><p>在图片识别窗口中选择整个 <code>screenshots</code> 目录，至少保留一层角色文件夹。未匹配的文件夹会被跳过；可以改为完整角色名，或先创建同名自定义角色。</p>
+<figure class="guide-shot" data-shot-id="G16"><div class="guide-shot-item"><p class="guide-shot-label">1. 按角色保存截图</p><a href="assets-redacted/guide-G16.png" target="_blank" rel="noopener" aria-label="按角色保存截图：查看大图"><img src="assets-redacted/guide-G16.png" alt="按角色保存截图" width="1555" height="1011" loading="lazy"></a></div><div class="guide-shot-item"><p class="guide-shot-label">2. 装备截图示例</p><a href="assets-redacted/guide-G16-2.png" target="_blank" rel="noopener" aria-label="装备截图示例：查看大图"><img src="assets-redacted/guide-G16-2.png" alt="装备截图示例" width="670" height="1115" loading="lazy"></a></div><div class="guide-shot-item"><p class="guide-shot-label">3. 练度截图示例：技能页</p><a href="assets-redacted/guide-G16-3.png" target="_blank" rel="noopener" aria-label="练度截图示例：技能页：查看大图"><img src="assets-redacted/guide-G16-3.png" alt="练度截图示例：技能页" width="2334" height="1349" loading="lazy"></a></div><div class="guide-shot-item"><p class="guide-shot-label">4. 练度截图示例：魔方页</p><a href="assets-redacted/guide-G16-4.png" target="_blank" rel="noopener" aria-label="练度截图示例：魔方页：查看大图"><img src="assets-redacted/guide-G16-4.png" alt="练度截图示例：魔方页" width="2334" height="1349" loading="lazy"></a></div><figcaption>按角色整理截图文件夹 · 点击图片查看大图</figcaption></figure>
+</section>
+<section class="topic" id="ocr-run"><h4>选择模式并开始识别</h4>
+<div class="table-wrap" tabindex="0" role="region" aria-label="识别类型与适合的截图对照表"><table><thead><tr><th scope="col">识别类型</th><th scope="col">适合的截图</th></tr>
+</thead><tbody><tr><th scope="row">智能识别（推荐）</th><td>按图判断装备、技能、魔方或完整练度；适合混合目录。</td></tr>
+<tr><th scope="row">装备截图</th><td>OVERLOAD 装备详情，识别部位、三条词条、档位和锁定状态。</td></tr>
+<tr><th scope="row">练度截图</th><td>完整或局部练度、技能与魔方；按可识别字段分别给出结果。</td></tr>
+</tbody></table>
+</div><p>点击“图片识别” → 选择识别类型 → “选择截图目录” → “开始识别”。先查看发现的角色与图片数量，再等待结果。图片和识别模型都在本机处理。</p>
+<aside class="note">当前装备 OCR 支持 T10／OVERLOAD 详情，包括满级与未满级；T1～T9 装备原图显示已支持，但非 T10 截图识别尚未实现。局部截图也可能因缺少定位信息而需要人工确认。</aside>
+<figure class="guide-shot" data-shot-id="G17"><div class="guide-shot-item"><p class="guide-shot-label">1. 选择识别类型</p><a href="assets-redacted/guide-G17.png" target="_blank" rel="noopener" aria-label="选择识别类型：查看大图"><img src="assets-redacted/guide-G17.png" alt="选择识别类型" width="2078" height="1219" loading="lazy"></a></div><div class="guide-shot-item"><p class="guide-shot-label">2. 选择含角色子文件夹的 screenshots 目录</p><a href="assets-redacted/guide-G17-2.png" target="_blank" rel="noopener" aria-label="选择含角色子文件夹的 screenshots 目录：查看大图"><img src="assets-redacted/guide-G17-2.png" alt="选择含角色子文件夹的 screenshots 目录" width="1637" height="960" loading="lazy"></a></div><figcaption>选择识别类型并开始识别 · 点击图片查看大图</figcaption></figure>
+</section>
+<section class="topic" id="ocr-review"><h4>核对结果，再确认保存</h4>
+<ol class="steps"><li><h5>核对装备截图</h5>
+<p>检查装备部位、三个固定词条位置、档位和“已锁”。识别不正确时直接修改；重复部位或不一致结果需先处理，避免把两张不同装备图保存到同一个位置。</p>
+<figure class="guide-shot" data-shot-id="G18"><div class="guide-shot-item"><a href="assets-redacted/guide-G18.png" target="_blank" rel="noopener" aria-label="装备识别结果核对：查看大图"><img src="assets-redacted/guide-G18.png" alt="装备识别结果核对" width="1890" height="901" loading="lazy"></a></div><figcaption>核对装备识别结果 · 点击图片查看大图</figcaption></figure>
+</li>
+<li><h5>核对练度字段</h5>
+<p>练度结果分别列出珍藏品、突破、角色等级、好感度、战斗力、职业／企业等级、技能 1、技能 2、爆裂技能、魔方及魔方等级。对照“原值 → 新值”，修改错误结果，或取消该字段的导入勾选。</p>
+<p>“未定位”“待确认”“识别失败”不等于零。只保存成功确认且勾选的字段，其余保留原值；收藏品星级不会被自动换算成 R／SR 的精确等级。</p>
+<figure class="guide-shot" data-shot-id="G19"><div class="guide-shot-item"><a href="assets-redacted/guide-G19.png" target="_blank" rel="noopener" aria-label="练度字段核对与保存：查看大图"><img src="assets-redacted/guide-G19.png" alt="练度字段核对与保存" width="1909" height="1130" loading="lazy"></a></div><figcaption>核对练度字段并保存到已录入 · 点击图片查看大图</figcaption></figure>
+</li>
+<li><h5>处理冲突或失败图片</h5>
+<p>不需要的图片取消“导入此图”。多图对同一字段给出冲突结果时，先修改或排除冲突；失败图片可“重试此图”，未知类型还可“按练度重试”或“按装备重试”。</p>
+</li>
+<li><h5>保存到已录入</h5>
+<p>点击“确认保存到已录入”。保存成功后检查角色数据；保存失败时结果会保留，可以重试。取消识别只停止剩余任务，已完成的结果仍可检查与保存。</p>
+<p class="result"><strong>完成后：</strong>确认的数据进入“已录入”，并可供角色卡和计算器使用。</p>
+</li>
+</ol>
+</section>
+</section>
+<section class="topic" id="aka-import"><h3>4.4 阿卡数据</h3>
+<ol class="steps"><li><h4>准备 Key 并选择服务器</h4>
+<p>在阿卡中通过 <code>#ApiKey</code> 获取 Key。点击“阿卡数据”，选择国服或外服，填写 Key。</p>
+</li>
+<li><h4>读取并检查预览</h4>
+<p>点击“读取角色数据”。首次读取会请求阿卡接口访问权限；确认读取意图后继续，核对匹配人数和未匹配角色。</p>
+<figure class="guide-shot" data-shot-id="G20"><div class="guide-shot-item"><a href="assets-redacted/guide-G20.png" target="_blank" rel="noopener" aria-label="填写服务器与 Key 后读取：查看大图"><img src="assets-redacted/guide-G20.png" alt="填写服务器与 Key 后读取" width="1637" height="960" loading="lazy"></a></div><figcaption>选择服务器并读取阿卡数据 · 点击图片查看大图</figcaption></figure>
+</li>
+<li><h4>确认导入</h4>
+<p>点击“确认导入”。突破、好感度、职业／企业等级和装备词条按阿卡数据更新；阿卡未提供的角色等级与战斗力保留，未匹配角色不导入。</p>
+</li>
+</ol>
+<aside class="note">Key 仅保留在当前弹窗内，关闭后清空，不保存或导出。请勿分享自己的 Key。</aside>
+</section>
+<section class="topic" id="local-excel"><h3>4.5 本地图鉴 Excel</h3>
+<p>在任意列表底部点击“导出图鉴”，将当前列表中有实际数据的角色保存为 Excel。文件包含角色展示板块、装备效果总览、四部位明细和可往返的锁定状态。仅有内置名称或头像不算已录入数据，因此空列表的导出按钮会禁用。</p>
+<p>恢复时点击顶部“本地数据”，选择此前由本插件“导出图鉴”生成的 Excel。目前仅支持本插件导出的图鉴 Excel，不支持任意 Excel 或计算器的洗词条结果表。文件在本地解析，完成后查看匹配、更新、新建和跳过的数量。</p>
+<figure class="guide-shot" data-shot-id="G21"><div class="guide-shot-item"><p class="guide-shot-label">1. 选择插件导出的图鉴 Excel</p><a href="assets-redacted/guide-G21.png" target="_blank" rel="noopener" aria-label="选择插件导出的图鉴 Excel：查看大图"><img src="assets-redacted/guide-G21.png" alt="选择插件导出的图鉴 Excel" width="1637" height="961" loading="lazy"></a></div><div class="guide-shot-item"><p class="guide-shot-label">2. 图鉴导入完成统计</p><a href="assets-redacted/guide-G21-2.png" target="_blank" rel="noopener" aria-label="图鉴导入完成统计：查看大图"><img src="assets-redacted/guide-G21-2.png" alt="图鉴导入完成统计" width="2078" height="1219" loading="lazy"></a></div><figcaption>导入本插件导出的图鉴 Excel · 点击图片查看大图</figcaption></figure>
+<aside class="note">图鉴 Excel、计算器结果 Excel 和角色卡 PNG 用途不同；它们不是包含所有设置、Cookie 和截图的完整扩展备份。</aside>
+</section>
+<nav class="chapter-pager" aria-label="章节翻页"><a href="#chapter-catalog">上一章：图鉴与列表</a><a href="#chapter-card">下一章：角色卡制作</a></nav>
+</section>
 
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>启用开发者模式</h3>
-          <p>打开扩展程序页面右上角的 <span class="em">开发者模式</span>，然后点击左上角的加载按钮。</p>
-          <p>Chrome 中按钮名称为 <span class="em">“加载未打包的扩展程序”</span>；Edge 中通常显示为 <span class="em">“加载解压缩的扩展”</span>。</p>
-<div class="shots single"><figure class="shot"><img src="assets-redacted/04-load-root.png" alt="Chrome 扩展程序页面的开发者模式、加载按钮和文件夹选择窗口"><figcaption>截图同时标出了开发者模式、加载按钮和文件夹选择位置。</figcaption></figure></div>
-        </div>
-      </section>
+<section class="chapter-panel" id="chapter-card" role="tabpanel" aria-labelledby="tab-chapter-card"><header class="chapter-intro"><span class="chapter-number">第 5 章</span><h2 tabindex="-1">角色卡制作</h2>
+<p>选择背景、调整构图和显示内容，再生成可分享的角色卡。</p>
+</header>
+<section class="topic" id="card-open"><h3>打开角色卡</h3>
+<p>点击图鉴中的角色，打开统一角色工作区。“角色卡”展示当前数据，“角色数据”用于编辑；上方“洗词条”进入该角色的计算器。</p>
+<figure class="guide-shot" data-shot-id="G22"><div class="guide-shot-item"><a href="assets-redacted/guide-G22.png" target="_blank" rel="noopener" aria-label="角色卡、背景调整与下载：查看大图"><img src="assets-redacted/guide-G22.png" alt="角色卡、背景调整与下载" width="2078" height="1219" loading="lazy"></a></div><figcaption>角色卡与角色数据切换 · 点击图片查看大图</figcaption></figure>
+<p>缺失数值显示“—”，不表示实际为零。需要补数据时，先到“角色数据”填写并保存。</p>
+</section>
+<section class="topic" id="card-background"><h3>选择背景与调整构图</h3>
+<ol class="steps"><li><h4>选择背景素材</h4>
+<p>点击“调整背景”，在“背景素材”中选择当前角色可用的默认立绘、皮肤、珍藏品背景或技能动画图。选项以该角色实际列表为准；技能动画选项使用静态画面，不播放视频。</p>
+</li>
+<li><h4>移动与缩放</h4>
+<p>用方向按钮移动人物，使用缩放滑杆调整大小。“位置居中”用于重新对齐；恢复按钮将当前背景恢复为默认构图。</p>
+</li>
+<li><h4>保留自己的构图</h4>
+<p>构图按角色与背景分别保存在本地，切换回来可继续使用。保存失败时按提示重试。</p>
+</li>
+</ol>
+</section>
+<section class="topic" id="card-modules"><h3>选择显示内容并下载</h3>
+<p>在“调整背景”的显示模块中，勾选希望保留的内容：收藏品、稀有度／突破、等级／名称、好感度、战斗力、属性图标、技能等级、魔方、词条合计、四件装备。选择按角色保存，同时作用于预览和下载图。</p>
+<p>确认预览后点击“下载角色卡”，等待浏览器下载 <code>角色名-角色卡.png</code>。输出尺寸为 <strong>736 × 1096 像素</strong>；下载使用点击时的内容和构图，生成失败时可重试。</p>
+<p class="result"><strong>完成后：</strong>得到一张可分享的 PNG。分享前检查展示数据是否符合你的意愿。</p>
+</section>
+<section class="topic" id="card-equipment"><h3>读懂装备与词条汇总</h3>
+<p>角色卡支持已保存身份的 T1～T9 普通装备与 T10 装备。企业装备使用企业徽章，T10 保留改造徽章；未知装备不会强行套用 T10 图标。旧同步记录没有装备身份时，可重新同步一次。</p>
+<p>角色卡的“词条合计”只展示汇总摘要。需要核对所有词条的完整合计，使用计算器的<a href="#equipment-overview">装备效果一览</a>。</p>
+</section>
+<nav class="chapter-pager" aria-label="章节翻页"><a href="#chapter-input">上一章：数据录入与截图识别</a><a href="#chapter-calculator">下一章：洗词条计算器</a></nav>
+</section>
 
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>选择扩展根目录</h3>
-          <p>在文件夹选择窗口中，选中刚刚解压得到的 <span class="kbd">NIKKE-Workshop</span> 文件夹，然后点击 <span class="em">“选择文件夹”</span>。</p>
-          <p>统一下载包含全部立绘的 <span class="kbd">NIKKE-Workshop.zip</span>，无需另外下载素材。正确的根目录中应当可以直接看到 <span class="kbd">assets</span>、<span class="kbd">images</span>、<span class="kbd">manifest.json</span> 和 <span class="kbd">index.html</span>。不要选择 ZIP，也不要进入 assets 子文件夹。</p>
-          <div class="success"><span class="success-icon">✓</span><div><strong>安装成功的判断方法</strong>扩展程序页面出现“NIKKE Workshop 1.0.11”，并且右下角开关处于启用状态。示例截图中的版本号可能较旧，请以实际下载的最新版本为准。</div></div>
-<div class="shots single"><figure class="shot"><img src="assets-redacted/05-installed.png" alt="Chrome 扩展程序页面中已经安装并启用的 NIKKE Workshop"><figcaption>安装成功后，NIKKE Workshop 会出现在扩展程序列表中。</figcaption></figure></div>
-<div class="notice"><strong>1.0.11 独立更新器：</strong>点击插件侧栏底部“版本更新”后，会自动查询 GitHub 新版；插件更新窗口仅保留“关闭”和“打开更新器”，重复查询保留 60 秒冷却及限流等待。首次双击安装目录中的 <code>Workshop-Updater.vbs</code>，目录不正确时点击“选择目录”，选择包含 manifest.json 的完整插件根目录；确认安装目录后点击“启用插件唤起”；以后可从插件点击“打开更新器”。浏览器可能要求确认打开外部程序。更新器中再点击“检查更新”，确认后才下载及覆盖；<code>screenshots</code> 截图目录始终保留，失败时回滚。完成后到扩展管理页重新加载，不要卸载扩展。移动安装文件夹后需在新位置重新启用唤起；打不开时查看安装包内 <code>updater/README.md</code>。插件不直接安装、不降级，也不上传本地账号数据。</div>
-        </div>
-      </section>
-    </div>
-    </section>
+<section class="chapter-panel" id="chapter-calculator" role="tabpanel" aria-labelledby="tab-chapter-calculator"><header class="chapter-intro"><span class="chapter-number">第 6 章</span><h2 tabindex="-1">洗词条计算器</h2>
+<p>先用单装备完成一次计算，再按需要进入角色的四装备模式。</p>
+</header>
+<section class="topic" id="single-equipment-guide"><h3>先完成一次单装备计算</h3>
+<p>这条路线不需要登录，也不需要先录入角色。下面只示范操作顺序；目标词条与档位请按自己的角色需求设置。</p>
+<ol class="steps"><li><h4>选择“单装备模拟”</h4>
+<p>打开“洗词条计算器”标签，在第一个下拉框选择“单装备模拟”。</p>
+</li>
+<li><h4>填写当前盘面与目标词条池</h4>
+<p>对照游戏填写三个位置的词条、实际档位和“已锁”状态，空位保持“空词条”。本例盘面如下：</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="单装备示例盘面对照表"><table><thead><tr><th scope="col">位置</th><th scope="col">当前词条</th><th scope="col">档位与数值</th><th scope="col">已锁</th></tr></thead><tbody>
+<tr><th scope="row">第 1 行</th><td>防御力增加</td><td>第 1 档 · 4.77%</td><td>不勾选</td></tr>
+<tr><th scope="row">第 2 行</th><td>攻击力增加</td><td>第 15 档 · 14.63%</td><td>勾选</td></tr>
+<tr><th scope="row">第 3 行</th><td>空词条</td><td>空</td><td>不勾选</td></tr>
+</tbody></table></div>
+<p>在“目标词条池”中设置两项：<strong>优越代码伤害增加，第 10 档 22.15%</strong>；<strong>攻击力增加，第 10 档 11.11%</strong>。两项都勾选“必选”，其余目标保持“空词条”。本例不额外设置“强制保留”。</p>
+<p>目标档位是最低要求：本例当前攻击力增加已达第 15 档，高于目标第 10 档，无需把当前盘面改成第 10 档。实际使用时按自己的装备填写，示例目标不代表所有角色的推荐配置。</p>
+<figure class="guide-shot" data-shot-id="G25"><div class="guide-shot-item"><a href="assets-redacted/guide-G25.png" target="_blank" rel="noopener" aria-label="单装备盘面与两项必选目标：查看大图"><img src="assets-redacted/guide-G25.png" alt="单装备盘面与两项必选目标" width="2078" height="1219" loading="lazy"></a></div><figcaption>填写单装备示例与目标池 · 点击图片查看大图</figcaption></figure>
+</li>
+<li><h4>运行并阅读建议</h4>
+<p>点击“运行算法测试”，查看“最优结果”的下一步操作、停止条件和期望耗石。达到停止条件后再进入下一阶段。</p>
+<figure class="guide-shot" data-shot-id="G26"><div class="guide-shot-item"><p class="guide-shot-label">1. 阶段结果概览</p><a href="assets-redacted/guide-G26.png" target="_blank" rel="noopener" aria-label="阶段结果概览：查看大图"><img src="assets-redacted/guide-G26.png" alt="阶段结果概览" width="2078" height="1219" loading="lazy"></a></div><div class="guide-shot-item"><p class="guide-shot-label">2. 展开完整决策树</p><a href="assets-redacted/guide-G26-2.png" target="_blank" rel="noopener" aria-label="展开完整决策树：查看大图"><img src="assets-redacted/guide-G26-2.png" alt="展开完整决策树" width="2078" height="1219" loading="lazy"></a></div><figcaption>按阶段阅读最优结果 · 点击图片查看大图</figcaption></figure>
+</li>
+</ol>
+<p class="result"><strong>完成后：</strong>可以读出当前该洗名称还是数值、保留哪些位置，以及何时切换操作。实际盘面或目标变化后重新计算。</p>
+</section>
+<section class="topic" id="calculator-common-guide"><h3>理解盘面、锁定与目标池</h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="设置与代表什么对照表"><table><thead><tr><th scope="col">设置</th><th scope="col">代表什么</th></tr>
+</thead><tbody><tr><th scope="row">已锁</th><td>游戏中该词条当前已锁定。同步后需手动对照，OCR 或本地记录的值也应核对。</td></tr>
+<tr><th scope="row">强制保留</th><td>点击词条左侧圆形编号，变蓝后要求后续保留这条现有词条；再次点击取消。</td></tr>
+<tr><th scope="row">必选</th><td>目标池中的该词条必须进入最终目标，最多 3 个。</td></tr>
+<tr><th scope="row">最低档位</th><td>达到该档或更高即满足目标。选定目标词条时默认第 10 档。</td></tr>
+</tbody></table>
+</div><p>当前每件装备和目标池都不能有重复词条。目标池可设 1～5 个候选：不超过 3 个时需要全部满足，超过 3 个时选取满足必选条件且期望成本最低的 3 个。强制保留的非目标词条会占用槽位，可能让目标无法同时成立。</p>
+<aside class="note">“已锁”是现状，“强制保留”是要求。未锁词条设为强制保留时，算法会计入首次锁定及后续维持锁定的成本。</aside>
+<details><summary>怎样理解结果中的两个耗石数字</summary><div class="detail-body"><p>“约 X 颗石头”是完成当前阶段的期望成本；“总计约 Y 颗石头”是从该阶段开始直到全部目标完成的剩余期望成本。它们不能再相加。期望是平均意义上的成本，不是一次实际洗练的保证值。</p>
+<p>若前一步已经完成目标，就不再执行后面的条件阶段。需要看其他随机结果时，展开“查看完整决策树”。</p>
+</div></details>
+</section>
+<section class="topic" id="character-calculation-guide"><h3>为一个角色计算四件装备</h3>
+<p>从已同步、已录入、自建列表或推荐方案选择具体妮姬，也可从角色工作区点击“洗词条”。核对头部、身躯、臂部、腿部的词条和锁定状态；培养建议存在时，可点击摘要查看详细建议。</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="模式与适用情况与如何设置对照表"><table><thead><tr><th scope="col">模式</th><th scope="col">适用情况</th><th scope="col">如何设置</th></tr>
+</thead><tbody><tr><th scope="row">全局（角色默认）</th><td>只关心四件装备合计有多少条、达到多少数值。</td><td>填写目标词条、至少条数、合计数值至少；最多 6 条不同条件。</td></tr>
+<tr><th scope="row">独立</th><td>已经确定每件装备分别承担哪些目标。</td><td>为每件参与计算的装备设置自己的目标池，也可先用预设再调整。</td></tr>
+</tbody></table>
+</div><p>不想洗的装备勾选“不跑”，其成本不计入本次总计；至少保留一件参与计算。运行后，在装备下方查看“算法分配目标”和“最优结果”。</p>
+<aside class="note"><strong>“算法分配目标”的编号只是展示顺序，不代表装备词条的实际位置。</strong>例如本例臂部的分配目标中，“攻击力增加”列在第 2 项，但当前盘面中的攻击词条位于第 3 行。填写盘面和执行锁定操作时，以“当前词条”的第 1～3 行及“最优结果”的操作建议为准，不要按目标列表编号对应槽位。</aside>
+<figure class="guide-shot" data-shot-id="G27"><div class="guide-shot-item"><p class="guide-shot-label">1. 设置四装备全局目标</p><a href="assets-redacted/guide-G27.png" target="_blank" rel="noopener" aria-label="设置四装备全局目标：查看大图"><img src="assets-redacted/guide-G27.png" alt="设置四装备全局目标" width="2078" height="1219" loading="lazy"></a></div><div class="guide-shot-item"><p class="guide-shot-label">2. 分配目标与各装备结果</p><a href="assets-redacted/guide-G27-2.png" target="_blank" rel="noopener" aria-label="分配目标与各装备结果：查看大图"><img src="assets-redacted/guide-G27-2.png" alt="分配目标与各装备结果" width="2078" height="1219" loading="lazy"></a></div><figcaption>四装备全局目标与分配结果 · 点击图片查看大图</figcaption></figure>
+<figure class="guide-shot" data-shot-id="G28"><div class="guide-shot-item"><a href="assets-redacted/guide-G28.png" target="_blank" rel="noopener" aria-label="全局模式：头部与臂部勾选不跑：查看大图"><img src="assets-redacted/guide-G28.png" alt="全局模式：头部与臂部勾选不跑" width="2078" height="1219" loading="lazy"></a></div><figcaption>使用“不跑”跳过装备 · 点击图片查看大图</figcaption></figure>
+<details><summary>没有角色数据，也想试四件装备</summary><div class="detail-body"><p>选择“四装备全局模拟”，手动填写四件装备。该临时盘面不绑定角色，不会写入角色结果汇总。</p>
+</div></details>
+<details><summary>全局与独立模式的预设</summary><div class="detail-body"><p>独立模式可使用“4优越4攻击”“4优越”“4攻击”。全局的 4优越4攻击预设包括顶级（110 优越／50 攻击）、毕业（100／45）、优秀（90／40）、出村（80／30）；先选接近需求的预设，再核对和调整目标。</p>
+</div></details>
+</section>
+<section class="topic" id="equipment-overview"><h3>查看装备效果一览</h3>
+<p>具体角色计算器中的“装备效果一览”汇总四件装备的词条效果。它用于核对当前数据的整体情况，不等同于目标条件，也不是角色完整战斗伤害计算。</p>
+<figure class="guide-shot" data-shot-id="G29"><div class="guide-shot-item"><a href="assets-redacted/guide-G29.png" target="_blank" rel="noopener" aria-label="具体角色的装备效果一览：查看大图"><img src="assets-redacted/guide-G29.png" alt="具体角色的装备效果一览" width="2078" height="1219" loading="lazy"></a></div><figcaption>查看完整装备效果汇总 · 点击图片查看大图</figcaption></figure>
+</section>
+<section class="topic" id="calculator-download-guide"><h3>保存与导出计算结果</h3>
+<p>具体角色成功计算后，会保存该角色最后一次模式、目标条件和结果；再次运行同一角色会更新这条记录。单装备与临时四装备模拟没有绑定角色，不会新增角色汇总。</p>
+<ol class="steps"><li><h4>在“全部结果”中检查记录</h4>
+<p>按时间或耗石数量排序，展开“查看最优结果”核对每件装备的建议。</p>
+</li>
+<li><h4>下载 Excel</h4>
+<p>至少有一名角色的保存结果后，“下载 Excel”才会启用。结果表包含全体预计耗石、角色小计、当前词条、算法目标和建议；红色表示需要洗，绿色表示已满足，灰色表示本次不跑。</p>
+<figure class="guide-shot" data-shot-id="G30"><div class="guide-shot-item"><p class="guide-shot-label">1. 全部结果与下载 Excel</p><a href="assets-redacted/guide-G30.png" target="_blank" rel="noopener" aria-label="全部结果与下载 Excel：查看大图"><img src="assets-redacted/guide-G30.png" alt="全部结果与下载 Excel" width="2078" height="1219" loading="lazy"></a></div><div class="guide-shot-item"><p class="guide-shot-label">2. 计算结果 Excel 示例</p><a href="assets-redacted/guide-G30-2.png" target="_blank" rel="noopener" aria-label="计算结果 Excel 示例：查看大图"><img src="assets-redacted/guide-G30-2.png" alt="计算结果 Excel 示例" width="1180" height="923" loading="lazy"></a></div><figcaption>全部结果与 Excel 下载 · 点击图片查看大图</figcaption></figure>
+</li>
+</ol>
+<aside class="note">计算器结果 Excel 用于保存方案；要导入角色数据，请使用“导出图鉴”生成的本地图鉴 Excel。</aside>
+</section>
+<section class="topic" id="calculator-algorithm-guide"><h3>进阶：算法怎样计算期望</h3>
+<p>不需要模拟次数或随机种子。单装备使用有限状态 MDP，将当前盘面、锁定与目标组成状态，比较每种操作的当前成本和后续期望成本。计算在本机进行。</p>
+<details><summary>状态、动作、概率与收敛</summary><div class="detail-body"><ul><li>状态：词条名称、档位、锁定与强制保留要求。</li>
+<li>动作：洗名称、洗数值，以及锁定组合。</li>
+<li>转移：动作可能产生的下一盘面及对应概率。</li>
+<li>求解：通过 Bellman 迭代求各状态的动作与期望，界面再归纳成连续操作阶段。</li>
+</ul>
+<p>“使用说明”页签保留状态数量、求解轮数和残差等信息，供需要时检查。模型使用完整离散概率求解，而非随机抽样；结果仍受模型假设与输入正确性约束。</p>
+</div></details>
+<details><summary>全局模式的计算范围</summary><div class="detail-body"><p>全局模式搜索多组跨装备的静态目标分配，通过移动、交换、条数和档位调整改进候选，再用单装备 MDP 精确复核。在当前搜索预算内选择合计期望较低的方案；它不是四件装备全部随机分支的联合动态最优策略。</p>
+</div></details>
+<details><summary>状态规模为什么会受限</summary><div class="detail-body"><p>单件装备组合超过 24,000 个状态时，会要求缩小目标池或调整保留条件，以避免浏览器长时间卡住。操作前请先排除重复词条、必选过多或槽位不足等输入问题。</p>
+</div></details>
+</section>
+<nav class="chapter-pager" aria-label="章节翻页"><a href="#chapter-card">上一章：角色卡制作</a><a href="#chapter-faq">下一章：常见问题</a></nav>
+</section>
 
-    <section class="chapter-panel" id="chapter-login" role="tabpanel" aria-labelledby="tab-login" hidden>
-    <section class="intro chapter-intro">
-      <div><h2>登录与 Cookie</h2><p>安装完成后，先通过 Blablalink 完成账号登录，再将当前登录状态保存到扩展中。账号和密码只需要在 Blablalink 登录页面填写。</p></div>
-    </section>
-
-    <div class="steps login-steps">
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>打开 Blablalink 登录页</h3>
-          <p>打开 NIKKE Workshop，在侧栏顶部点击 <span class="em">“登录”</span>。扩展会在新的浏览器标签页中打开 Blablalink。</p>
-          <p>服务器请选择游戏账号所在区域。<span class="kbd">area_id</span> 通常保持空白，只有自动识别失败时才需要手动填写。</p>
-          <div class="shots single"><figure class="shot compact"><img src="assets-redacted/06-extension-login.png" alt="NIKKE Workshop 侧栏顶部的登录和保存更新 Cookie 按钮"><figcaption>点击左上角“登录”进入 Blablalink；登录完成后使用右上角按钮保存 Cookie。</figcaption></figure></div>
-        </div>
-      </section>
-
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>完成账号登录</h3>
-          <p>在 Blablalink 登录窗口中选择正确的服务器区域，填写账号和密码，并根据页面提示完成验证，然后点击 <span class="em">“登入”</span>。</p>
-          <p>看到 Blablalink 首页已经显示登录状态后，先不要关闭该标签页，返回 NIKKE Workshop 保存 Cookie。</p>
-          <div class="privacy"><strong>隐私说明：</strong>下方示例截图中的账号和密码已经使用输入框背景色完全遮盖。制作或分享自己的操作截图时，也请先隐藏这些信息。</div>
-          <div class="shots single"><figure class="shot"><img src="assets-redacted/07-blablalink-login-redacted.png" alt="已隐藏账号和密码的 Blablalink 登录窗口"><figcaption>选择对应区域，填写账号和密码并完成登录。示例中的账号信息已脱敏。</figcaption></figure></div>
-        </div>
-      </section>
-
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>保存或更新 Cookie</h3>
-          <p>返回扩展侧栏，点击 <span class="em">“保存/更新 COOKIE”</span>。首次登录用于保存 Cookie；重新登录或 Cookie 失效后，点击同一个按钮即可更新。</p>
-          <p>保存成功后，可以关闭 Blablalink 标签页。后续同步账号数据时会直接使用已经保存在本地的 Cookie。</p>
-          <div class="notice"><strong>不要向他人分享 Cookie：</strong>Cookie 代表当前登录状态。请勿把 Cookie、完整日志或未脱敏的账号截图发送给其他人。</div>
-          <div class="success"><span class="success-icon">✓</span><div><strong>登录配置完成</strong>扩展确认 Cookie 保存成功后，即可进入下一部分同步账号与妮姬数据。Cookie 失效时，重新完成本节三步即可。</div></div>
-        </div>
-      </section>
-    </div>
-    </section>
-
-    <section class="chapter-panel" id="chapter-sync" role="tabpanel" aria-labelledby="tab-sync" hidden>
-    <section class="intro chapter-intro">
-      <div><h2>同步账号数据</h2><p>Cookie 保存成功后，同步账号中已经拥有的妮姬、等级、突破、职业／企业研究等级和装备词条数据。同步结果保存在本地，后续可直接继续使用。</p></div>
-    </section>
-
-    <div class="steps sync-steps">
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>开始同步账号数据</h3>
-          <p>进入 <span class="em">“妮姬”</span> 标签页，点击页面底部左侧的 <span class="em">“同步账号数据”</span>。首次同步会根据账号中已经拥有的妮姬逐个读取数据，请保持页面开启并等待流程结束。</p>
-          <div class="notice"><strong>同步期间不要连续重复点击：</strong>如果页面提示 Cookie、服务器或区域识别失败，请先检查上一部分的登录状态；自动识别 area_id 失败时，再返回侧栏手动填写。</div>
-          <div class="shots single"><figure class="shot"><img src="assets-redacted/08-sync-start.png" alt="妮姬图鉴页面底部的同步账号数据按钮"><figcaption>在妮姬页面底部点击“同步账号数据”。首次同步前，已拥有数量可能显示为 0。</figcaption></figure></div>
-        </div>
-      </section>
-
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>确认同步完成</h3>
-          <p>出现 <span class="em">“妮姬数据获取完成”</span> 提示后，同步即告完成。页面会自动进入我们预设好的 <span class="em">“常用”</span> 角色列表，方便直接查看常用角色。</p>
-          <p><span class="em">这里显示“常用”不代表只同步了常用角色。</span>账号中全部已经拥有的妮姬数据都已保存，可在主列表下拉框中切换到“已同步”查看。</p>
-          <div class="success"><span class="success-icon">✓</span><div><strong>同步数据会保存在本地</strong>正常情况下不必每次打开扩展都重新同步。角色等级、突破或装备词条发生变化，需要读取最新数据时再同步即可。</div></div>
-          <div class="shots single"><figure class="shot"><img src="assets-redacted/09-sync-complete.png" alt="账号数据同步完成后显示的常用角色列表"><figcaption>同步完成后默认显示预设的“常用”列表，底部会出现获取完成提示。</figcaption></figure></div>
-        </div>
-      </section>
-
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>切换全图鉴、已同步、已录入和常用</h3>
-          <p>点击页面左上方的主列表下拉框，可以在四个基础视图以及之后建立的自选列表之间切换。菜单用分隔线依次区分全图鉴、个人数据列表以及常用／自建列表。</p>
-          <ul class="key-list">
-            <li><strong>全图鉴：</strong>显示扩展当前收录的全部妮姬，包括账号尚未拥有的角色，适合查询角色和使用筛选功能。</li>
-            <li><strong>已同步：</strong>显示刚刚从账号同步到本地的全部已拥有妮姬，并显示对应等级和突破信息。</li>
-            <li><strong>已录入：</strong>显示通过手动、截图识别、阿卡或本地 Excel 保存的数据。</li>
-            <li><strong>常用：</strong>由扩展预设的一组常用角色，便于快速整理和进入洗词条计算。</li>
-          </ul>
-          <div class="shots single"><figure class="shot"><img src="assets-redacted/10-list-menu.png" alt="妮姬页面主列表下拉框中的全图鉴、已同步、已录入和常用选项"><figcaption>同步完成后可随时把“常用”切换为“已同步”或“全图鉴”。</figcaption></figure></div>
-        </div>
-      </section>
-    </div>
-    </section>
-
-    <section class="chapter-panel" id="chapter-catalog" role="tabpanel" aria-labelledby="tab-catalog" hidden>
-    <section class="intro chapter-intro">
-      <div><h2>使用图鉴与角色列表</h2><p>通过搜索和筛选浏览图鉴，调用内置推荐方案，或把需要关注的妮姬整理成自己的列表。</p></div>
-    </section>
-
-    <div class="steps catalog-steps">
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>搜索、排序和筛选妮姬</h3>
-          <p>使用搜索框查找角色；使用 <span class="kbd">Ⅰ</span>、<span class="kbd">Ⅱ</span>、<span class="kbd">Ⅲ</span> 快速筛选爆裂阶段。点击排序按钮可调整正倒序，点击齿轮旁的筛选按钮可设置职业、属性、武器和企业等条件。</p>
-          <p>齿轮中的 <span class="em">“400级属性”</span> 仅控制同步数据中的模拟生命、攻击和防御是否统一按 400 级计算，不会修改账号实际同步到的等级。</p>
-          <div class="shots">
-            <figure class="shot"><img src="assets-redacted/14-filter-panel.png" alt="妮姬图鉴的排序和筛选面板"><figcaption>筛选面板支持排序、职业、属性、武器和企业等条件。</figcaption></figure>
-            <figure class="shot"><img src="assets-redacted/15-level-setting.png" alt="妮姬图鉴设置中的 400 级属性选项"><figcaption>400级属性只影响模拟字段，实际同步等级不会改变。</figcaption></figure>
-          </div>
-        </div>
-      </section>
-
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>使用内置推荐方案</h3>
-          <p>点击主列表右侧的 <span class="em">“推荐方案”</span> 下拉框，可以直接查看内置的推图阵容、异常拦截、辅助角色、个突主C、企业塔及其他专题方案。</p>
-          <p>推荐方案按照攻略中录入的顺序展示角色，适合快速判断账号在某个场景中已经拥有和需要培养的妮姬。</p>
-          <div class="shots single"><figure class="shot"><img src="assets-redacted/11-recommendation-menu.png" alt="妮姬图鉴页面中的推荐方案下拉菜单"><figcaption>推荐方案按使用场景分组，选择任意方案即可查看对应角色。</figcaption></figure></div>
-        </div>
-      </section>
-
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>创建和使用自选列表</h3>
-          <p>切换到 <span class="em">“已同步”</span> 后，点击右侧的 <span class="em">“自选列表”</span> 进入多选状态。勾选需要的妮姬后，可在底部把角色加入已有列表，或点击 <span class="em">“新建列表”</span> 并填写名称。</p>
-          <p>自选列表只能加入账号已经获得的妮姬。保存后，新列表会出现在主列表下拉框中；列表旁的编辑、复制和删除按钮可用于后续管理。</p>
-          <div class="shots">
-            <figure class="shot"><img src="assets-redacted/12-custom-list-create.png" alt="妮姬多选状态下的新建列表窗口"><figcaption>在“已同步”中多选妮姬，再新建列表或加入已有列表。</figcaption></figure>
-            <figure class="shot"><img src="assets-redacted/13-custom-list-saved.png" alt="新建完成后只显示所选角色的自选列表"><figcaption>保存后可从主列表下拉框打开自选列表。</figcaption></figure>
-          </div>
-        </div>
-      </section>
-
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>手动录入角色与本地图鉴</h3>
-          <p>没有同步账号数据时，可在 <span class="em">“全图鉴”</span> 中点击标准角色，在右侧抽屉填写等级、战斗力、好感度、职业／企业等级以及四件装备的三个固定词条位置；突破使用 0～10 共 11 个合法状态的下拉选择。保存后角色会进入始终可用的 <span class="em">“已录入”</span> 列表。</p>
-          <div class="shots single"><figure class="shot"><img src="assets-redacted/14a-manual-standard-entry.png" alt="在全图鉴中打开标准角色普丽瓦蒂的手动录入抽屉"><figcaption>点击全图鉴中的标准角色后，在右侧抽屉补充账号数据及四件装备词条；角色名称、属性、职业等固定资料由内置图鉴提供。</figcaption></figure></div>
-          <p>点击“妮姬图鉴”标题旁的 <span class="em">“自定义角色”</span>，可以补充内置图鉴中没有的角色。属性、职业、爆裂阶段、企业、武器和稀有度使用受控选项，保存后会显示“自定义”标记。</p>
-          <div class="shots single"><figure class="shot"><img src="assets-redacted/14b-manual-custom-entry.png" alt="从妮姬图鉴新建自定义角色的录入抽屉"><figcaption>自定义角色需要先填写完整的基础资料，再按相同格式录入账号数据和四件装备词条。</figcaption></figure></div>
-          <p>点击标题旁的 <span class="em">“图片识别”</span>，选择安装目录中的 <code>screenshots</code> 文件夹，可以按角色子文件夹批量读取装备详情截图。扩展会先用固定界面模板定位白色装备详情面板，再根据装备图标、装备名称、词条名称、合法档位数值和锁定图标进行受约束匹配。</p>
-          <p>点击标题旁的 <span class="em">“阿卡数据”</span>，可以填写在阿卡机器人中通过 <code>#ApiKey</code> 获取的 Key，选择国服或外服后读取角色突破、好感度、职业／企业等级与装备词条。首次使用时浏览器会单独请求阿卡接口访问权限；Key 只保留在当前弹窗内，关闭弹窗后清空，不保存、不导出也不写入日志。</p>
-          <p>点击标题旁的 <span class="em">“本地数据”</span>，可以直接选择此前导出的本地图鉴 Excel。四个录入入口固定排列为“自定义角色／图片识别／阿卡数据／本地数据”。</p>
-          <div class="notice"><strong>本地截图识别：</strong>图片、OCR 模型和识别结果都只在当前浏览器本地处理，不会上传服务器。识别支持满级与未满级装备详情界面；保存前请快速核对装备部位、三条词条、档位和锁定状态。</div>
-          <p>任意列表底部都固定显示 <span class="em">“同步账号数据 / 导出图鉴”</span>。导出范围是当前列表，并且只包含确实带有等级、突破、战斗力、好感度、职业／企业等级或装备词条数据的角色；当前列表没有这类数据时，导出按钮会保持灰色。导入和导出都只在扩展本地处理，不会上传服务器。</p>
-          <div class="notice"><strong>后一次成功操作优先：</strong>先本地录入再同步时，同步数据成为当前值；先同步再通过手动、截图、阿卡或 Excel 导入时，后录入的数据成为当前值。同步失败或中断不会修改已有数据，自定义角色不会被同步覆盖。</div>
-        </div>
-      </section>
-
-      <section class="step">
-        <span class="step-number" aria-hidden="true"></span>
-        <div>
-          <h3>导出当前列表的图鉴</h3>
-          <p>点击底部的 <span class="em">“导出图鉴”</span>，即可把当前列表中已有数据的角色导出为角色卡式 Excel。全图鉴、已同步、已录入、常用、推荐方案和自建列表使用同一套导出规则。</p>
-          <div class="notice"><strong>导出范围按当前列表计算：</strong>角色仅有内置名称、属性或头像不算已经录入数据；至少需要有等级、突破、战斗力、好感度、职业／企业等级或一条装备词条。没有任何合格角色时，按钮会禁用。</div>
-          <div class="shots single"><figure class="shot"><img src="assets-redacted/17-downloaded-excel-redacted.png" alt="导出后打开的角色卡式图鉴 Excel 文件，账号信息已隐藏"><figcaption>导出文件按角色卡展示基础资料、装备效果总览和四个装备部位明细。</figcaption></figure></div>
-        </div>
-      </section>
-    </div>
-    </section>
-
-    <section class="chapter-panel" id="chapter-calculator" role="tabpanel" aria-labelledby="tab-calculator" hidden>
-      <section class="intro chapter-intro">
-        <div><h2>洗词条计算器</h2><p>根据当前装备盘面和目标词条，使用有限状态 MDP 计算期望石头消耗，并把最优策略整理成可以连续执行的操作阶段。</p></div>
-      </section>
-
-      <section class="subchapter" id="calculator-common-guide" aria-labelledby="calculator-common-title">
-        <div class="subchapter-heading"><span>5.1</span><h3 id="calculator-common-title">计算器通用功能</h3></div>
-        <div class="steps calculator-steps">
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>选择计算对象</h3>
-              <p>打开主页面顶部的 <span class="em">“洗词条计算器”</span> 标签。第一个下拉框可以选择 <span class="em">单装备模拟</span>、<span class="em">四装备全局模拟</span>、<span class="em">已同步</span> 或自选列表；推荐方案单独位于第二个下拉框。选择列表或方案后，再从第三个下拉框选择具体妮姬。</p>
-              <p>选择具体妮姬后，如果攻略数据中存在培养建议，页面右侧会显示摘要；点击后可查看备注、装备、词条、技能、魔方和珍藏品建议。</p>
-              <div class="shots single"><figure class="shot"><img src="assets-redacted/18-calculator-single-overview.png" alt="洗词条计算器的单装备模拟完整页面"><figcaption>单装备模式左侧填写当前盘面和目标池，右侧运行有限状态 MDP 并查看结果。</figcaption></figure></div>
-            </div>
-          </section>
-
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>填写当前装备盘面</h3>
-              <p><span class="em">“当前装备”</span> 的三行分别对应装备现有的 1、2、3 号词条。每行先选择词条名称，再选择实际档位；没有词条的位置保持 <span class="em">“空词条”</span>。</p>
-              <ul class="key-list">
-                <li><strong>词条和档位：</strong>必须按游戏内当前装备如实填写；同一件装备不能出现重复词条。</li>
-                <li><strong>已锁：</strong>表示这个词条在游戏中目前已经锁定。Blablalink 不能提供词条是否已锁的数据，因此同步账号后必须对照游戏界面，手动勾选每个已锁词条。勾选后，算法会从当前锁定状态继续计算洗练成本。</li>
-                <li><strong>强制保留：</strong>点击词条左侧的圆形编号，编号变蓝后，该词条在后续策略中必须保留。再次点击可取消。</li>
-              </ul>
-              <div class="notice"><strong>同步后请先检查锁定状态：</strong>Blablalink 只提供词条名称、档位和所在的 1/2/3 号位置，不提供游戏内是否已经锁定。计算前请对照游戏手动补全“已锁”。“已锁”描述游戏里的当前状态；“强制保留”描述你对最终方案的要求。未锁词条设为强制保留时，算法会同时计入从未锁到锁定，以及后续维持锁定所需的石头。</div>
-              <div class="shots single"><figure class="shot"><img src="assets-redacted/19-calculator-single-filled.png" alt="已经填写当前词条、已锁状态、强制保留和目标池的单装备示例"><figcaption>示例中 1 号位蓝色编号代表强制保留，2 号位勾选“已锁”代表游戏内当前已经锁定。</figcaption></figure></div>
-            </div>
-          </section>
-
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>设置目标词条池</h3>
-              <p><span class="em">“目标词条池”</span> 可以填写 1～5 个候选词条。选定词条后档位默认设为第 10 档，可再改成自己能够接受的最低档位。</p>
-              <ul class="key-list">
-                <li><strong>候选数量：</strong>候选不超过 3 个时，最终目标包含全部候选；候选超过 3 个时，算法从中选择满足条件且期望成本最低的 3 个。</li>
-                <li><strong>必选：</strong>勾选后，该词条必须进入最终目标；最多可以标记 3 个必选。</li>
-                <li><strong>档位：</strong>目标档位是最低门槛，高于该档位同样视为达标。</li>
-              </ul>
-              <p>目标池内不能出现重复词条。强制保留的非目标词条会占用一个槽位，因此要确认剩余槽位仍能容纳全部必选目标。</p>
-            </div>
-          </section>
-
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>运行计算</h3>
-              <p>确认当前盘面、锁定状态和目标条件后，点击右上角的 <span class="em">“运行算法测试”</span>。单装备会计算一件装备；单角色则会同时处理所有未勾选“不跑”的装备。</p>
-              <div class="privacy"><strong>不需要模拟次数或随机种子：</strong>这里运行的是有限状态 MDP 精确求解，不是蒙特卡洛抽样。整个计算在本机完成，不会上传装备数据。</div>
-              <p><span class="em">“最优结果”</span> 会按操作不变的连续阶段展示：每个阶段先写应持续执行的操作和停止条件，再同时显示该阶段自身的期望耗石，以及从该阶段开始完成全部目标的总期望耗石。点击 <span class="em">“查看完整决策树”</span> 可逐级展开随机结果对应的后续动作。</p>
-              <div class="notice"><strong>按停止条件切换阶段：</strong>同一阶段内可持续执行相同操作；达到“获得指定词条”或“指定数值达标”等条件后，再按下一阶段操作。条件步骤只在上一步尚未完成全部目标时执行。</div>
-            </div>
-          </section>
-
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>结果页签、重置与错误提示</h3>
-              <ul class="key-list">
-                <li><strong>计算结果：</strong>显示有限状态 MDP 的当前最佳动作和总期望；装备盘面下方的“最优结果”显示阶段式建议和可逐级展开的完整决策树。</li>
-                <li><strong>使用说明：</strong>显示模型自检、有限状态 MDP 期望、状态数量、求解轮数和 Bellman 残差，用于核对求解是否正常。</li>
-                <li><strong>全部结果：</strong>用于汇总按具体妮姬运行并保存的最后一次结果；单装备模拟没有绑定妮姬，不会新增一条角色记录。</li>
-                <li><strong>重置：</strong>清空当前装备、目标池、锁定状态和本次结果，恢复到初始单装备盘面。</li>
-              </ul>
-              <div class="notice"><strong>常见无法运行的原因：</strong>当前装备或目标池存在重复词条、没有设置目标、必选超过 3 个、强制保留占满可锁位置，或目标候选过多导致状态超过 24,000。根据页面提示减少候选或调整强制保留条件后再试。</div>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <section class="subchapter" id="single-equipment-guide" aria-labelledby="single-equipment-title">
-        <div class="subchapter-heading"><span>5.2</span><h3 id="single-equipment-title">单装备模拟</h3></div>
-        <div class="steps calculator-steps">
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>进入手动单装备模式</h3>
-              <p>在第一个下拉框选择 <span class="em">“单装备模拟”</span>。这种模式不依赖账号同步数据，适合临时计算任意一件装备，或在无法自动同步账号时手动录入盘面。</p>
-              <p>按照游戏内数据填写三条当前词条、档位和已锁状态；需要无条件保留的现有词条，点击左侧圆形编号设为强制保留。随后设置 1～5 个目标候选，并标出最多 3 个必选。</p>
-            </div>
-          </section>
-
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>读取单装备结果</h3>
-              <p>运行后，每个阶段都包含两组数字：<span class="em">“约 X 颗石头”</span> 表示只完成当前阶段的期望耗石；括号中的 <span class="em">“总计约 Y 颗石头”</span> 表示从该阶段起点继续执行最优策略，直到全部目标完成的期望耗石。</p>
-              <p>如果洗出目标词条时数值可能不达标，结果会额外列出“若数值未达标”的条件阶段；这个阶段不会在前一步已经完成全部目标时执行。</p>
-              <div class="shots single"><figure class="shot"><img src="assets-redacted/20-calculator-single-result.png" alt="单装备有限状态 MDP 计算完成后的计算结果和最优建议"><figcaption>详细结果保留当前最佳动作；盘面下方的“最优结果”会进一步展示完整操作阶段及两种期望耗石。</figcaption></figure></div>
-              <div class="notice"><strong>单装备结果不会写入妮姬汇总：</strong>它没有绑定具体妮姬，因此不会出现在“全部结果”或汇总 Excel 中。需要保存角色结果时，请选择具体妮姬后运行。</div>
-            </div>
-          </section>
-
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>处理无法运行的提示</h3>
-              <p>常见原因包括：当前装备或目标池存在重复词条、没有设置目标、必选超过 3 个、强制保留占满可用槽位，或目标候选过多导致状态超过 24,000。根据页面提示减少候选、降低强制保留数量或修正重复项后再试。</p>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <section class="subchapter" id="character-calculation-guide" aria-labelledby="character-calculation-title">
-        <div class="subchapter-heading"><span>5.3</span><h3 id="character-calculation-title">单角色：独立与全局</h3></div>
-        <div class="steps calculator-steps">
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>选择四装备来源并检查盘面</h3>
-              <p>从 <span class="em">已同步</span>、自选列表或推荐方案中选择具体妮姬后，计算器会自动导入头部、身躯、臂部和腿部的当前词条。请先核对同步结果；不想参与本次计算的装备可勾选右上角 <span class="em">“不跑”</span>，其成本不会计入总计。</p>
-              <p>没有同步账号数据时，也可在第一个下拉框选择 <span class="em">“四装备全局模拟”</span>，手动填写四件装备的词条、档位和已锁状态，再使用相同的全局条件求解。该临时盘面不绑定妮姬，也不会写入角色汇总。</p>
-              <p>单角色模式默认进入 <span class="em">“全局”</span>。右上角的模式下拉框可以在 <span class="em">全局</span> 与 <span class="em">独立</span> 之间切换；四件装备中至少要保留一件参与计算。</p>
-            </div>
-          </section>
-
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>独立：分别设置每件装备的目标池</h3>
-              <p>独立模式下，每件未跳过的装备都有自己的目标词条池。可以逐件手动填写，也可以使用 <span class="em">4优越4攻击</span>、<span class="em">4优越</span> 或 <span class="em">4攻击</span> 预设，再逐件修改最低档位、必选和强制保留。</p>
-              <p>运行后，每件装备分别求解有限状态 MDP，并在各自下方输出最优结果；角色总期望石头等于所有未跳过装备期望值之和。</p>
-              <div class="shots single"><figure class="shot"><img src="assets-redacted/23-calculator-character-independent.png" alt="单角色四件装备的独立目标模式"><figcaption>独立模式为四件装备分别设置目标池，适合已经明确知道每件装备分别要洗什么的情况。</figcaption></figure></div>
-            </div>
-          </section>
-
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>全局：按条数和合计数值分配目标</h3>
-              <p>全局模式不要求预先指定词条落在哪件装备。每条条件由 <span class="em">目标词条</span>、<span class="em">至少条数</span> 和 <span class="em">合计数值至少</span> 组成；同一词条不能重复添加，最多可设置 6 条条件。</p>
-              <p>内置 4优越4攻击预设包括：顶级（110 优越 / 50 攻击）、毕业（100 / 45）、优秀（90 / 40）和出村（80 / 30）。运行后，算法会把 <span class="em">算法分配目标</span> 和 <span class="em">最优结果</span> 写回对应装备下方。</p>
-              <div class="shots single"><figure class="shot"><img src="assets-redacted/22-calculator-character-global.png" alt="单角色四件装备的全局目标模式"><figcaption>全局模式按四件装备合计的词条数量与百分比设定目标，由算法决定各目标具体分配到哪件装备。</figcaption></figure></div>
-            </div>
-          </section>
-
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>怎样选择模式</h3>
-              <div class="route">
-                <div class="route-item"><strong>选择“独立”</strong><p>你已经确定每件装备的目标，或想固定四件装备各自承担的词条。算法逐件求解，最后直接相加。</p></div>
-                <div class="route-item"><strong>选择“全局”</strong><p>你只关心四件装备合计需要几条、总数值达到多少，希望算法自动寻找成本更低的装备分配。</p></div>
-              </div>
-              <div class="notice"><strong>全局模式的范围：</strong>它会生成多组满足条件的静态目标分配，使用跨装备移动、交换、目标条数和档位调整搜索邻近方案，再对候选分配中的每件装备进行精确 MDP 求解；并不是把四件装备的每一次随机洗练合并成一个超大型动态策略。</div>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <section class="subchapter" id="calculator-download-guide" aria-labelledby="calculator-download-title">
-        <div class="subchapter-heading"><span>5.4</span><h3 id="calculator-download-title">结果保存与下载</h3></div>
-        <div class="steps calculator-steps">
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>保存和整理妮姬结果</h3>
-              <p>具体妮姬每次成功运行后，程序会在本地保存该妮姬最后一次使用的模式、目标条件、四件装备结果和期望石头。再次运行同一妮姬会覆盖旧记录，因此“全部结果”始终代表每名妮姬的最新方案。</p>
-              <p>切换到 <span class="em">“全部结果”</span> 后，可以按时间顺序、时间倒序、数量顺序或数量倒序排列；默认是时间顺序。展开 <span class="em">“查看最优结果”</span> 可以检查四件装备建议。</p>
-              <div class="shots single"><figure class="shot"><img src="assets-redacted/24-calculator-all-results.png" alt="洗词条计算器全部结果页签的排序与下载 Excel 按钮"><figcaption>“全部结果”汇总每名妮姬的最后一次结果；左侧选择排序方式，右侧下载 Excel。</figcaption></figure></div>
-            </div>
-          </section>
-
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>下载汇总 Excel</h3>
-              <p>至少存在一名妮姬的已保存结果后，<span class="em">“下载 Excel”</span> 才会启用。导出的单个 <span class="em">“洗词条结果”</span> Sheet 包含：</p>
-              <ul class="key-list">
-                <li><strong>最上方：</strong>全部妮姬预计石头总计。</li>
-                <li><strong>每名妮姬：</strong>独立板块、模式、保存时间和妮姬小计。</li>
-                <li><strong>每件装备：</strong>当前词条、右侧算法分配目标、预计石头和下方最优建议。</li>
-                <li><strong>颜色：</strong>需要洗为红色、已经满足为绿色、本次不跑为灰色。</li>
-              </ul>
-              <div class="privacy"><strong>结果只保存在本地：</strong>页面记录和 Excel 都由当前浏览器本地生成，不会上传到其他服务器。清除扩展数据或卸载扩展前，请先下载需要保留的结果。</div>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <section class="subchapter" id="calculator-algorithm-guide" aria-labelledby="calculator-algorithm-title">
-        <div class="subchapter-heading"><span>5.5</span><h3 id="calculator-algorithm-title">有限状态 MDP 算法解释</h3></div>
-        <div class="steps calculator-steps">
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>状态、动作与转移概率</h3>
-              <p>有限状态 MDP 可以理解为“把所有可能盘面和下一步操作都列出来，再从终点反推当前最省石头的动作”。</p>
-              <ul class="key-list">
-                <li><strong>状态：</strong>三条词条的名称、档位、已锁状态，以及强制保留要求。</li>
-                <li><strong>动作：</strong>洗名称、洗数值，以及采用哪一种锁定组合。</li>
-                <li><strong>转移：</strong>每种动作可能出现的下一盘面及其游戏概率。</li>
-                <li><strong>目标：</strong>满足候选 / 必选最低档位，或满足全局条数与合计数值。</li>
-              </ul>
-              <p>算法使用 Bellman 迭代比较各状态下所有动作的“本次成本 + 后续期望成本”，直到残差足够小，得到每个状态下的最低期望与最优动作。界面再把连续采用相同操作的状态压缩成阶段，并保留阶段内全部随机分支的概率与成本。</p>
-            </div>
-          </section>
-
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>“精确”与“期望”分别代表什么</h3>
-              <p><span class="em">精确求解</span> 指使用完整离散概率而不是随机抽样，所以不需要模拟次数和随机种子；<span class="em">期望石头</span> 是大量重复情况下的平均成本，不保证某一次实际洗练恰好等于这个数字。</p>
-              <p>阶段式建议只在当前操作仍符合该阶段说明时连续执行；达到停止条件后切换下一阶段。如果实际盘面与阶段条件不一致，或手动改变了锁定状态、目标或词条，请更新当前盘面并重新求解。</p>
-              <div class="shots single"><figure class="shot"><img src="assets-redacted/21-calculator-single-details.png" alt="使用说明页签里的有限状态 MDP 状态数量、轮数与 Bellman 残差"><figcaption>“使用说明”会显示状态数量、求解轮数和 Bellman 残差，便于确认本次求解是否正常收敛。</figcaption></figure></div>
-            </div>
-          </section>
-
-          <section class="step">
-            <span class="step-number" aria-hidden="true"></span>
-            <div>
-              <h3>不同模式怎样使用算法</h3>
-              <ul class="key-list">
-                <li><strong>单装备：</strong>对一件装备直接建立有限状态 MDP。</li>
-                <li><strong>单角色独立：</strong>对每件未跳过装备分别精确求解，总期望为各装备期望之和。</li>
-                <li><strong>四装备全局：</strong>无论盘面来自具体妮姬还是手动录入，都会先保留多指标候选，再通过跨装备移动、交换、条数和档位邻域搜索改进方案。</li>
-                <li><strong>精确复核：</strong>对搜索候选中的每件装备运行有限状态 MDP，并选择在当前搜索预算内合计期望最低的静态分配。</li>
-              </ul>
-              <div class="notice"><strong>状态规模保护：</strong>如果目标候选和强制保留组合使单件装备超过 24,000 个状态，程序会提示缩小目标池，以避免浏览器长时间卡死。</div>
-            </div>
-          </section>
-        </div>
-      </section>
-    </section>
-
-    <p class="footer">【王国大学习】NIKKE 战术整备室 · 操作指南预览</p>
-  </main>
-  </div>
-  <script>
-    (() => {
-      const tabs = Array.from(document.querySelectorAll('.chapter-tab'));
-      const panels = Array.from(document.querySelectorAll('.chapter-panel'));
-      const subchapterLinks = Array.from(document.querySelectorAll('.sidebar-subchapter'));
-      const page = document.querySelector('.page');
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      function updateSubchapterActive(hashId) {
-        subchapterLinks.forEach(link => {
-          link.classList.toggle('is-active', link.hash === `#${hashId}`);
-        });
-      }
-
-      function chapterForHash(hashId) {
-        const directPanel = panels.find(panel => panel.id === hashId);
-        if (directPanel) return directPanel.id;
-        return document.getElementById(hashId)?.closest('.chapter-panel')?.id || '';
-      }
-
-      function activateChapter(chapterId, options = {}) {
-        const { updateHash = true, focus = false, scroll = false } = options;
-        const activeTab = tabs.find(tab => tab.dataset.chapter === chapterId) || tabs[0];
-        const activeId = activeTab.dataset.chapter;
-
-        tabs.forEach(tab => {
-          const isActive = tab === activeTab;
-          tab.classList.toggle('is-active', isActive);
-          tab.setAttribute('aria-selected', String(isActive));
-          tab.tabIndex = isActive ? 0 : -1;
-        });
-
-        panels.forEach(panel => {
-          panel.hidden = panel.id !== activeId;
-        });
-
-        if (updateHash) history.replaceState(null, '', `#${activeId}`);
-        updateSubchapterActive(activeId === 'chapter-calculator' && !updateHash ? location.hash.slice(1) : '');
-        if (focus) activeTab.focus();
-        if (scroll) page.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-      }
-
-      tabs.forEach((tab, index) => {
-        tab.addEventListener('click', () => activateChapter(tab.dataset.chapter, { scroll: true }));
-        tab.addEventListener('keydown', event => {
-          let nextIndex = null;
-          if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
-          if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
-          if (event.key === 'Home') nextIndex = 0;
-          if (event.key === 'End') nextIndex = tabs.length - 1;
-          if (nextIndex === null) return;
-          event.preventDefault();
-          activateChapter(tabs[nextIndex].dataset.chapter, { focus: true });
-        });
-      });
-
-      subchapterLinks.forEach(link => {
-        link.addEventListener('click', event => {
-          event.preventDefault();
-          const targetId = link.hash.slice(1);
-          activateChapter('chapter-calculator', { updateHash: false });
-          history.replaceState(null, '', `#${targetId}`);
-          updateSubchapterActive(targetId);
-          requestAnimationFrame(() => {
-            document.getElementById(targetId)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-          });
-        });
-      });
-
-      window.addEventListener('hashchange', () => {
-        const hashId = location.hash.slice(1);
-        const chapterId = chapterForHash(hashId);
-        if (chapterId) {
-          activateChapter(chapterId, { updateHash: false });
-          updateSubchapterActive(hashId);
-        }
-      });
-
-      const initialChapter = chapterForHash(location.hash.slice(1));
-      activateChapter(initialChapter || 'chapter-install', { updateHash: false });
-    })();
-  </script>
+<section class="chapter-panel" id="chapter-faq" role="tabpanel" aria-labelledby="tab-chapter-faq"><header class="chapter-intro"><span class="chapter-number">第 7 章</span><h2 tabindex="-1">常见问题</h2>
+<p>先看问题对应的处理方法，需要详细步骤时跳回相应章节。</p>
+</header>
+<section class="topic" id="faq-account"><h3>账号与列表</h3>
+<details><summary>Cookie 失效，或者同步提示区域错误</summary><div class="detail-body"><p>重新登录 Blablalink，返回侧栏“保存/更新 COOKIE”。核对服务器；只有自动区域识别失败时再填写 area_id。见<a href="#login-start">登录步骤</a>。</p>
+</div></details>
+<details><summary>为什么同步后只看到“常用”？</summary><div class="detail-body"><p>主列表自动切换到了预设视图。选择“已同步”即可查看同步角色；还找不到角色时，检查搜索词和筛选条件。</p>
+</div></details>
+<details><summary>“已录入”为空，或无法加入自选列表</summary><div class="detail-body"><p>识别出结果还不等于已保存，先检查是否完成“确认保存到已录入”。已同步或已录入角色都能加入自选列表，包括自定义角色。仅在全图鉴中展示、尚无同步或录入记录的角色不可选；本地录入不会自动变为已同步。</p>
+</div></details>
+</section>
+<section class="topic" id="faq-ocr"><h3>图片识别与保存</h3>
+<details><summary>没有找到角色文件夹</summary><div class="detail-body"><p>选择包含角色子文件夹的 screenshots 根目录；角色文件夹使用图鉴完整名称。自定义角色先创建再识别。见<a href="#ocr-prepare">目录示例</a>。</p>
+</div></details>
+<details><summary>截图分类错误，或只有部分字段识别成功</summary><div class="detail-body"><p>使用“按练度重试”“按装备重试”，或切换明确的识别类型。局部截图可能缺少定位线索；待确认字段请手动修正，无法判断时取消导入，保留原值。</p>
+</div></details>
+<details><summary>确认保存按钮灰色，或提示结果冲突</summary><div class="detail-body"><p>检查至少勾选一张有效图片，并处理同一字段的不同结果、重复装备部位和不合法词条。正在识别或保存时按钮也会禁用。</p>
+</div></details>
+<details><summary>保存失败后需要重新识别吗？</summary><div class="detail-body"><p>无需马上重跑。结果会保留，先按提示重试保存；取消识别后，已完成的结果仍可单独核对。</p>
+</div></details>
+</section>
+<section class="topic" id="faq-download"><h3>图片与导出</h3>
+<details><summary>角色卡缺少数值或图片</summary><div class="detail-body"><p>“—”表示缺少数据，先检查角色数据是否已保存。缺图时确认完整安装包已解压；没有该角色背景时仍可使用其他显示模块。生成失败可重试，修改构图后需重新下载。</p>
+</div></details>
+<details><summary>“导出图鉴”或“下载 Excel”按钮灰色</summary><div class="detail-body"><p>“导出图鉴”需要当前列表中有实际角色数据；计算器的“下载 Excel”需要至少一条绑定角色的成功结果。两种导出条件不同。</p>
+</div></details>
+<details><summary>图鉴 Excel、结果 Excel 和角色卡 PNG 有什么区别？</summary><div class="detail-body"><p>图鉴 Excel 用于角色数据保存与再导入；结果 Excel 用于查看洗词条方案；PNG 用于分享角色卡。三者都不包含完整扩展设置备份。</p>
+</div></details>
+</section>
+<section class="topic" id="faq-update"><h3>更新与计算</h3>
+<details><summary>点击打开更新器没有反应</summary><div class="detail-body"><p>先手动运行 Workshop-Updater.vbs，确认目录并启用插件唤起；也检查浏览器是否等待外部程序确认。移动文件夹后重新设置。见<a href="#update-first">首次设置</a>。</p>
+</div></details>
+<details><summary>更新后仍显示旧版本</summary><div class="detail-body"><p>确认更新器选择的是浏览器实际加载的安装目录，再到扩展管理页重新加载并刷新插件。请勿通过卸载来刷新版本。</p>
+</div></details>
+<details><summary>更新过程中断了</summary><div class="detail-body"><p>重新打开同一目录的更新器，按提示先“恢复未完成更新”。存在未完成事务时先恢复，再检查新版。</p>
+</div></details>
+<details><summary>计算无法开始，或实际耗石与期望不同</summary><div class="detail-body"><p>先核对重复词条、目标数量、必选数量、保留槽位和“不跑”选择。期望不保证单次实际消耗；游戏盘面发生变化时更新输入并重新计算。见<a href="#calculator-common-guide">目标与结果说明</a>。</p>
+</div></details>
+</section>
+<nav class="chapter-pager" aria-label="章节翻页"><a href="#chapter-calculator">上一章：洗词条计算器</a><a href="#chapter-install">回到第一章</a></nav>
+</section>
+</main></div>
+<footer class="footer"><p>【王国大学习】NIKKE 战术整备室 · 操作指南</p>
+<p>伟大的皇冠王国国王为战术整备室负责 · 钟鸣提供技术支持 · 作者：異界型w、夕紫</p>
+<p>截图占位编号与补图清单一一对应。截图补齐后再导出正式 PDF。</p>
+</footer>
+<script>(() => {
+  const tabs = [...document.querySelectorAll('.chapter-tab')];
+  const panels = [...document.querySelectorAll('.chapter-panel')];
+  const selector = document.getElementById('chapter-select');
+  const allButton = document.getElementById('show-all');
+  const aliases = {'chapter-login':'login-start','chapter-sync':'sync-start'};
+  let all = false;
+  let selected = 'chapter-install';
+  const hashId = () => { try { return decodeURIComponent(location.hash.slice(1)); } catch { return ''; } };
+  function applyState() {
+    document.body.classList.toggle('all-chapters', all);
+    tabs.forEach(tab => {const active = tab.dataset.chapter === selected; tab.setAttribute('aria-selected', String(active)); tab.tabIndex = active ? 0 : -1;});
+    panels.forEach(panel => {panel.hidden = !all && panel.id !== selected;});
+    selector.value = selected;
+    allButton.setAttribute('aria-pressed', String(all));
+    allButton.textContent = all ? '按章节阅读' : '显示全部章节';
+    const current = aliases[hashId()] || hashId();
+    document.querySelectorAll('.chapter-subnav a').forEach(a => {if(a.hash.slice(1) === current) a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});
+  }
+  function navigate(id, {push=false, focus=false, scroll=true}={}) {
+    id = aliases[id] || id;
+    const target = document.getElementById(id);
+    const panel = target?.closest('.chapter-panel');
+    if (!panel) return false;
+    selected = panel.id;
+    if (push && hashId() !== id) history.pushState(null, '', '#' + id);
+    applyState();
+    for(let parent = target.parentElement; parent; parent = parent.parentElement) if(parent.tagName === 'DETAILS') parent.open = true;
+    if(scroll) requestAnimationFrame(() => {
+      const heading = target.matches('.chapter-panel') ? target.querySelector('h2') : target.querySelector('h3') || target;
+      target.scrollIntoView({block:'start'});
+      if(focus){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});}
+    });
+    return true;
+  }
+  tabs.forEach((tab,index) => {
+    tab.addEventListener('click',()=>navigate(tab.dataset.chapter,{push:true,focus:true}));
+    tab.addEventListener('keydown',event=>{
+      let next;
+      if(['ArrowDown','ArrowRight'].includes(event.key))next=(index+1)%tabs.length;
+      if(['ArrowUp','ArrowLeft'].includes(event.key))next=(index-1+tabs.length)%tabs.length;
+      if(event.key==='Home')next=0;if(event.key==='End')next=tabs.length-1;
+      if(next===undefined)return;event.preventDefault();navigate(tabs[next].dataset.chapter,{push:true,scroll:false});tabs[next].focus();
+    });
+  });
+  selector.addEventListener('change',()=>navigate(selector.value,{push:true,focus:true}));
+  document.addEventListener('click',event=>{
+    const anchor=event.target.closest('a[href^="#"]');if(!anchor || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)return;
+    if(navigate(anchor.hash.slice(1),{push:true,focus:true}))event.preventDefault();
+  });
+  allButton.addEventListener('click',()=>{all=!all;applyState();});
+  window.addEventListener('popstate',()=>navigate(hashId()||'chapter-install'));
+  window.addEventListener('hashchange',()=>navigate(hashId()||'chapter-install'));
+  let previousDetails=[];
+  window.addEventListener('beforeprint',()=>{previousDetails=[...document.querySelectorAll('details')].map(d=>[d,d.open]);previousDetails.forEach(([d])=>{d.open=true;});});
+  window.addEventListener('afterprint',()=>{previousDetails.forEach(([d,open])=>{d.open=open;});previousDetails=[];});
+  document.getElementById('print-guide').addEventListener('click',()=>window.print());
+  if(!navigate(hashId()||'chapter-install',{scroll:Boolean(hashId())}))navigate('chapter-install',{scroll:false});
+})();</script>
 </body>
 </html>

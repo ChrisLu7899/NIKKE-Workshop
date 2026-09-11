@@ -104,11 +104,85 @@ export function isRarityWordmarkAnchor(candidate, imageWidth, imageHeight) {
   const aspect = bounds.width / Math.max(1, bounds.height);
   const centerX = bounds.left + (bounds.width / 2);
   const centerY = bounds.top + (bounds.height / 2);
+  if (candidate.kind === "rarity-wordmark") {
+    const horizontalPositionValid = imageWidth < imageHeight
+      ? centerX >= imageWidth * 0.12 && centerX <= imageWidth * 0.72
+      : centerX >= imageWidth * 0.72;
+    return aspect >= 2.2 && aspect <= 4.2
+      && horizontalPositionValid
+      && centerY >= imageHeight * 0.03 && centerY <= imageHeight * 0.32
+      && bounds.width >= imageWidth * 0.035 && bounds.width <= imageWidth * 0.32;
+  }
   return candidate.confidence !== "high"
     && aspect >= 2.2 && aspect <= 4.2
     && centerX >= imageWidth * 0.72
     && centerY >= imageHeight * 0.1 && centerY <= imageHeight * 0.32
     && bounds.width >= imageWidth * 0.035 && bounds.width <= imageWidth * 0.09;
+}
+
+export function findRarityWordmark(raw, width, height) {
+  if (!raw || width < 2 || height < 2 || raw.length !== width * height * 4) return null;
+  const searchHeight = Math.max(1, Math.floor(height * 0.35));
+  const search = cropRgba(raw, width, { x: 0, y: 0, width, height: searchHeight });
+  const orange = makeMask(search, width, searchHeight, (r, g, b) => (
+    r >= 175 && g >= 90 && b <= 155 && r - b >= 65 && g - b >= 15
+  ));
+  const candidates = connectedComponents(
+    orange,
+    width,
+    searchHeight,
+    Math.max(18, Math.round(width * searchHeight * 0.00008)),
+  ).filter((component) => {
+    const aspect = component.width / Math.max(1, component.height);
+    const fill = component.pixelCount / Math.max(1, component.width * component.height);
+    return aspect >= 2.2 && aspect <= 4.2
+      && component.width >= width * 0.035 && component.width <= width * 0.32
+      && component.height >= height * 0.012 && component.height <= height * 0.12
+      && fill >= 0.2;
+  }).sort((left, right) => right.pixelCount - left.pixelCount);
+  const best = candidates[0];
+  if (!best) return null;
+  return {
+    kind: "rarity-wordmark",
+    confidence: "medium",
+    bounds: { left: best.x, top: best.y, width: best.width, height: best.height },
+    candidates: candidates.slice(0, 6),
+  };
+}
+
+export function findIdentityBar(raw, width, height) {
+  if (!raw || width < 2 || height < 2 || raw.length !== width * height * 4) return null;
+  const dark = makeMask(raw, width, height, (r, g, b) => Math.max(r, g, b) <= 100);
+  const candidates = connectedComponents(
+    dark,
+    width,
+    height,
+    Math.max(80, Math.round(width * height * 0.0002)),
+  ).filter((component) => {
+    const aspect = component.width / Math.max(1, component.height);
+    const fill = component.pixelCount / Math.max(1, component.width * component.height);
+    const centerX = component.x + (component.width / 2);
+    return component.y >= height * 0.03 && component.y <= height * 0.34
+      && component.width >= width * 0.12 && component.width <= width * 0.9
+      && component.height >= height * 0.025 && component.height <= height * 0.16
+      && aspect >= 3 && aspect <= 8
+      && fill >= 0.25
+      && (width < height || centerX >= width * 0.62);
+  }).sort((left, right) => right.pixelCount - left.pixelCount);
+  const best = candidates[0];
+  return best ? { ...best, confidence: 0.9, candidates: candidates.slice(0, 6) } : null;
+}
+
+export function projectRarityWordmarkFromIdentityBar(bar, imageWidth, imageHeight) {
+  if (!bar || imageWidth <= 0 || imageHeight <= 0) return null;
+  const left = clamp(Math.round(bar.x + bar.width * 0.02), 0, imageWidth - 1);
+  const top = clamp(Math.round(bar.y - bar.height * 0.4), 0, imageHeight - 1);
+  return {
+    left,
+    top,
+    width: Math.min(Math.max(1, Math.round(bar.width * 0.33)), imageWidth - left),
+    height: Math.min(Math.max(1, Math.round(bar.height * 0.5)), imageHeight - top),
+  };
 }
 
 export function deriveIdentityRegionsFromRarityWordmark(wordmark, imageWidth, imageHeight) {
@@ -197,7 +271,45 @@ export function countStars(raw, imageWidth, region) {
       const aspect = component.width / component.height;
       return aspect >= 0.35 && aspect <= 1.8 && component.pixelCount / (region.width * region.height) >= 0.003 && component.height >= region.height * 0.18;
     }).sort((left, right) => left.x - right.x).slice(0, 3);
-  return { value: components.length || null, confidence: components.length ? round(0.78 + components.length * 0.05) : 0, components };
+  if (components.length) {
+    return { value: components.length, confidence: round(0.78 + components.length * 0.05), components, emptyStarEvidence: [] };
+  }
+
+  // Zero breakthrough still renders three gray stars. They often touch into one
+  // neutral strip, so the absence of yellow alone is not enough: require the
+  // visible gray-star geometry before committing an exact zero.
+  const neutral = makeMask(roi, region.width, region.height, (r, g, b) => {
+    const maximum = Math.max(r, g, b);
+    const minimum = Math.min(r, g, b);
+    return maximum - minimum <= 45 && minimum >= 55 && maximum <= 225;
+  });
+  const neutralComponents = connectedComponents(
+    neutral,
+    region.width,
+    region.height,
+    Math.max(8, Math.round(region.width * region.height * 0.001)),
+  );
+  const emptyStarEvidence = neutralComponents.filter((component) => {
+    const aspect = component.width / Math.max(1, component.height);
+    const fill = component.pixelCount / Math.max(1, component.width * component.height);
+    const joinedStrip = aspect >= 1.8 && aspect <= 4.2
+      && component.width >= region.width * 0.4 && component.width <= region.width * 0.95;
+    const singleStar = aspect >= 0.55 && aspect <= 1.6
+      && component.width >= region.width * 0.12 && component.width <= region.width * 0.4;
+    return (joinedStrip || singleStar)
+      && component.y <= region.height * 0.58
+      && component.height >= region.height * 0.25 && component.height <= region.height * 0.72
+      && fill >= 0.15;
+  });
+  const separateStars = emptyStarEvidence.filter((component) => component.width < region.width * 0.4);
+  const joinedStars = emptyStarEvidence.some((component) => component.width >= region.width * 0.4);
+  const hasThreeEmptyStars = joinedStars || separateStars.length >= 3;
+  return {
+    value: hasThreeEmptyStars ? 0 : null,
+    confidence: hasThreeEmptyStars ? 0.84 : 0,
+    components,
+    emptyStarEvidence,
+  };
 }
 
 export function recognizeCoreLevel(raw, imageWidth, region) {
@@ -209,7 +321,12 @@ export function recognizeCoreLevel(raw, imageWidth, region) {
   if (!last) return { value: null, confidence: 0, note: "未找到核心数字字形。", components };
   const aspect = last.width / last.height;
   const { glyph, glyphWidth, glyphHeight } = extractGlyph(mask, region.width, last.x, last.y, last.x+last.width-1, last.y+last.height-1);
-  const recognized = recognizeTrainingDigit(glyph, glyphWidth, glyphHeight);
+  // A visible core badge always represents core level 1-7. Rank the captured
+  // glyph only against those legal values so an impossible 9 cannot suppress
+  // a valid 3 merely because antialiasing makes their right edges similar.
+  const recognized = recognizeTrainingDigit(glyph, glyphWidth, glyphHeight, {
+    allowedValues: [1, 2, 3, 4, 5, 6, 7],
+  });
   const value = recognized.value >= 1 && recognized.value <= 7 ? recognized.value : null;
   return { value, confidence: value === null ? 0 : recognized.confidence, note: value === null ? "核心字形不明确，请手动确认；不按宽高比猜测为 03。" : "核心数字字形识别。", lastDigitAspect: round(aspect), components };
 }

@@ -5,19 +5,20 @@ export const field = "limitBreak";
 export async function recognize(context) {
   if (!context.anchors?.coreBadge && context.anchors?.rarityWordmark && hasRegion(context, "stars", 20, 12)) {
     const stars = countStars(context.raw, context.width, context.regions.stars);
-    if (!stars.value) return trainingFieldResult(field, {
+    const anchorMethod = context.anchors?.identityBar ? "identity-bar" : "rarity-wordmark";
+    if (stars.value === null) return trainingFieldResult(field, {
       status: TRAINING_FIELD_STATUS.UNCERTAIN, region: context.regions.stars,
       warnings: ["未检测到黄色星；可能是零突破或截图缺失，请人工确认。"],
-      method: "rarity-wordmark + star-color-components", debug: { stars },
+      method: `${anchorMethod} + star-color-components`, debug: { stars },
     });
     const value = { stars: stars.value || 0, core: 0, total: stars.value || 0 };
     return trainingFieldResult(field, {
       status: TRAINING_FIELD_STATUS.RECOGNIZED,
       value,
-      confidence: stars.value ? stars.confidence : 0.74,
+      confidence: stars.confidence,
       region: context.regions.stars,
-      method: "rarity-wordmark + star-color-components + no-core-badge",
-      warnings: stars.value ? [] : ["未显示核心徽章且没有黄色星，按零突破处理。"],
+      method: `${anchorMethod} + star-color-components + no-core-badge`,
+      warnings: [],
       debug: { stars },
     });
   }

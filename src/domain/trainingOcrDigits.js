@@ -3,7 +3,7 @@
 const PATTERNS = ["1110111", "0010010", "1011101", "1011011", "0111010", "1101011", "1101111", "1010010", "1111111", "1111011"];
 const CELLS = [[.2,0,.8,.18],[0,.16,.32,.48],[.68,.16,1,.48],[.2,.41,.8,.61],[0,.57,.32,.85],[.68,.57,1,.85],[.2,.82,.8,1]];
 
-export function recognizeTrainingDigit(mask, width, height) {
+export function recognizeTrainingDigit(mask, width, height, { allowedValues = null } = {}) {
   if (height < 7 || width < 1) return { value: null, confidence: 0 };
   const ink = mask.reduce((sum, pixel) => sum + Boolean(pixel), 0) / (width * height);
   if (ink < .12 || ink > .95) return { value: null, confidence: 0 };
@@ -16,9 +16,13 @@ export function recognizeTrainingDigit(mask, width, height) {
     }
     return ink / Math.max(1,total);
   });
+  const allowed = Array.isArray(allowedValues) && allowedValues.length
+    ? new Set(allowedValues.map(Number))
+    : null;
   const ranked = PATTERNS.map((pattern, value) => ({ value,
     distance: [...pattern].reduce((sum, bit, i) => sum + Math.abs(Number(bit) - scores[i]),0)/7,
-  })).sort((a,b) => a.distance-b.distance);
+  })).filter(({ value }) => !allowed || allowed.has(value)).sort((a,b) => a.distance-b.distance);
+  if (ranked.length < 2) return { value: null, confidence: 0, scores, margin: 0, ranked };
   const margin = ranked[1].distance-ranked[0].distance;
   const valid = ranked[0].distance <= .3 && margin >= .09;
   return { value: valid ? ranked[0].value : null, confidence: valid ? .82 : 0, scores, margin, ranked: ranked.slice(0,2) };

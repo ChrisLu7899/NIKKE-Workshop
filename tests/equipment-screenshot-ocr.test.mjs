@@ -75,6 +75,8 @@ test("affix OCR aliases map to the unified equipment model", () => {
   assert.equal(matchEquipmentFunctionType("【优越代码伤害增加】"), "IncElementDmg");
   assert.equal(matchEquipmentFunctionType("攻击力增加"), "StatAtk");
   assert.equal(matchEquipmentFunctionType("最大装单数增加"), "StatAmmoLoad");
+  assert.equal(matchEquipmentFunctionType("【暮击伤家增加】"), "StatCriticalDamage");
+  assert.equal(matchEquipmentFunctionType("【晴击伤家增加】"), "StatCriticalDamage");
 });
 
 test("label recognition waits for constrained value-template evidence", () => {

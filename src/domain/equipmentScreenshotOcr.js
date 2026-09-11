@@ -232,7 +232,12 @@ export function matchEquipmentFunctionType(rawText) {
       return levenshtein(source, target) / Math.max(source.length, target.length);
     })),
   })).sort((a, b) => a.score - b.score);
-  return ranked[0].score <= 0.28 && ranked[1].score - ranked[0].score >= 0.12 ? ranked[0].value : "";
+  // Labels come from a closed set of nine affixes. OCR commonly substitutes
+  // two visually similar Han characters in the same otherwise-complete label
+  // (for example 暴→暮 and 害→家). Accept the nearest legal candidate when it
+  // remains clearly separated from the runner-up; ambiguous or fragmentary
+  // text still stays unresolved instead of being forced into a value.
+  return ranked[0].score <= 0.4 && ranked[1].score - ranked[0].score >= 0.12 ? ranked[0].value : "";
 }
 
 export function isUnearnedEquipmentEffect(rawText) {

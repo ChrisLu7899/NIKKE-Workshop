@@ -18,7 +18,7 @@ const SOURCE_NAME = "NIKKE_files validated extracted asset library";
 const OUTPUT_SIZE = 1600;
 // Released pixel contracts may coexist during a scoped material-library update.
 // Each still requires the current package and a review bound to its exact PNG.
-const ACCEPTED_NATIVE_VERSIONS = new Set(["1.1.0", "1.2.0", "1.2.1", "1.2.2", "1.2.3"]);
+const ACCEPTED_NATIVE_VERSIONS = new Set(["1.1.0", "1.2.0", "1.2.1", "1.2.2", "1.2.3", "1.2.4", "1.2.5"]);
 const CURRENT_TREASURE_PIPELINE = "2.2.0";
 const EXCLUDED_ARTWORK_IDS = new Set(["c010_01", "c600_02", "c601_02"]);
 const APPROVED_REGIONAL_ARTWORK_IDS = new Set(["c082_80", "c233_80", "c260_80"]);

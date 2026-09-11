@@ -219,6 +219,10 @@ test("lobby imports require the current package and a review bound to exact pixe
   assert.equal(acceptedLobbyManifest(manifest), true);
   assert.equal(acceptedLobbyManifest({ ...manifest, native_version: "1.2.0" }), true);
   assert.equal(acceptedLobbyManifest({ ...manifest, native_version: "1.2.1" }), true);
+  assert.equal(acceptedLobbyManifest({ ...manifest, native_version: "1.2.4" }), true);
+  assert.equal(acceptedLobbyManifest({ ...manifest, native_version: "1.2.4", output_sha256: "c".repeat(64) }), false);
+  assert.equal(acceptedLobbyManifest({ ...manifest, native_version: "1.2.5" }), true);
+  assert.equal(acceptedLobbyManifest({ ...manifest, native_version: "1.2.5", output_sha256: "c".repeat(64) }), false);
   assert.equal(acceptedLobbyManifest({ ...manifest, native_version: "1.2.0", output_sha256: "c".repeat(64) }), false);
   assert.equal(acceptedLobbyManifest({ ...manifest, native_version: "1.3.0" }), false);
   assert.equal(acceptedLobbyManifest({ ...manifest, visual_review_evidence: undefined }), false);
@@ -253,6 +257,8 @@ test("portrait import accepts released native scene contracts without dropping r
   assert.equal(validLobbyDimensions({ width: 1105, height: 1300 }, native), true);
   assert.equal(validLobbyDimensions({ width: 1105, height: 1300 }, { ...native, nativeVersion: "1.2.0" }), true);
   assert.equal(validLobbyDimensions({ width: 1105, height: 1300 }, { ...native, nativeVersion: "1.2.1" }), true);
+  assert.equal(validLobbyDimensions({ width: 1105, height: 1300 }, { ...native, nativeVersion: "1.2.4" }), true);
+  assert.equal(validLobbyDimensions({ width: 1105, height: 1300 }, { ...native, nativeVersion: "1.2.5" }), true);
   assert.equal(validLobbyDimensions({ width: 1105, height: 1300 }, { ...native, nativeVersion: "1.3.0" }), false);
   assert.equal(validLobbyDimensions({ width: 1920, height: 1080 }, native), false);
   assert.equal(validLobbyDimensions({ width: 1105, height: 1300 }, { nativeVersion: "0.4.0", previewStatus: "native_timeline_partial_preview" }), false);

@@ -1,0 +1,387 @@
+{
+  "schema_version": 2,
+  "shots": [
+    {
+      "id": "G01",
+      "chapter": "安装与更新",
+      "caption": "下载完整安装包",
+      "capture": "GitHub 最新 Release 的 Assets 区域，突出 NIKKE-Workshop.zip 下载项。",
+      "file": "assets-redacted/guide-G01.png",
+      "status": "approved",
+      "reviewed_sha256": "e26b6c530f4a3db31f35ec44500d93a3ebc25706909343faa39ffc102b65b9a6",
+      "label": "完整安装包下载项",
+      "extra_images": []
+    },
+    {
+      "id": "G02",
+      "chapter": "安装与更新",
+      "caption": "选择包含 manifest.json 的扩展根目录",
+      "capture": "解压后的文件夹，展示 manifest.json 和 Workshop-Updater.vbs；隐藏个人路径。",
+      "file": "assets-redacted/guide-G02.png",
+      "status": "approved",
+      "reviewed_sha256": "538f29975e2f8107b212ccd88778a6678ba0255928438ef253c6bfe5960d995f",
+      "label": "扩展根目录与更新器",
+      "extra_images": []
+    },
+    {
+      "id": "G03",
+      "chapter": "安装与更新",
+      "caption": "Chrome：开发者模式与加载按钮",
+      "capture": "Chrome 扩展管理页，标出开发者模式和“加载未打包的扩展程序”。",
+      "file": "assets-redacted/guide-G03.png",
+      "status": "approved",
+      "reviewed_sha256": "ceeb31a3723bbe2d83043d3cd72816570511aced48ea5934610c7e5744214639",
+      "label": "Chrome 加载扩展根目录",
+      "extra_images": []
+    },
+    {
+      "id": "G04",
+      "chapter": "安装与更新",
+      "caption": "Edge：开发者模式与加载按钮",
+      "capture": "Edge 扩展管理页，标出开发者模式和“加载解压缩的扩展”。",
+      "file": "assets-redacted/guide-G04.png",
+      "status": "approved",
+      "reviewed_sha256": "0b6cac653ba8ffbd696dc0e67497d65ce92ed99e355236a92cb884322d627e2b",
+      "label": "Edge 加载扩展",
+      "extra_images": []
+    },
+    {
+      "id": "G05",
+      "chapter": "安装与更新",
+      "caption": "侧栏版本更新入口与自动检测结果",
+      "capture": "插件侧栏底部的“版本更新”入口，以及打开后的更新窗口；可拼为一张图。",
+      "file": "assets-redacted/guide-G05.png",
+      "status": "approved",
+      "reviewed_sha256": "f61198c4e6bf4fb2545a81b7abf49f2f9e0c129eb9f4dada0c1e6f56aea70cc9",
+      "label": "版本更新入口与发现新版",
+      "extra_images": []
+    },
+    {
+      "id": "G06",
+      "chapter": "安装与更新",
+      "caption": "首次设置更新器与选择目录",
+      "capture": "更新器窗口，展示“选择目录”、目录确认和“启用插件唤起”；隐藏个人路径。",
+      "file": "assets-redacted/guide-G06.png",
+      "status": "approved",
+      "reviewed_sha256": "0de788ae17d622dd77d83d55fe48daacd529024bee6c92ab32667d906fb6be2a",
+      "label": "确认目录并启用插件唤起",
+      "extra_images": []
+    },
+    {
+      "id": "G07",
+      "chapter": "安装与更新",
+      "caption": "检查更新并确认安装",
+      "capture": "更新器检测到新版后的状态，突出“检查更新”和“下载并更新”；隐藏个人路径。",
+      "file": "assets-redacted/guide-G07.png",
+      "status": "approved",
+      "reviewed_sha256": "ee99acfd768fc2c9dc83e2e3ee1abb4a13af118f7697dedfa621821f86cf9e23",
+      "label": "检查更新与下载并更新",
+      "extra_images": []
+    },
+    {
+      "id": "G08",
+      "chapter": "登录与同步",
+      "caption": "侧栏登录与 Cookie 保存入口",
+      "capture": "插件侧栏的登录、保存/更新 COOKIE、服务器和 area_id 区域；隐藏账号标识。",
+      "file": "assets-redacted/guide-G08.png",
+      "status": "approved",
+      "reviewed_sha256": "b72fb38e15340db01f10c077df3ee469de9e9405427289dd62540f70a1a71f96",
+      "label": "登录前的侧栏",
+      "extra_images": []
+    },
+    {
+      "id": "G09",
+      "chapter": "登录与同步",
+      "caption": "在 Blablalink 完成登录",
+      "capture": "Blablalink 登录窗口与服务器选择；用粗马赛克模糊账号、密码及验证码等身份内容，确保字符及密码圆点数量不可辨认。",
+      "file": "assets-redacted/guide-G09.png",
+      "status": "approved",
+      "reviewed_sha256": "7cbacea498ae77a02afb46b896686054948adad517875ef1222a7294d6381354",
+      "label": "Blablalink 登录窗口",
+      "extra_images": []
+    },
+    {
+      "id": "G10",
+      "chapter": "登录与同步",
+      "caption": "同步完成后切换到已同步列表",
+      "capture": "妮姬页面的同步完成提示与主列表下拉框，突出“常用”和“已同步”。",
+      "file": "assets-redacted/guide-G10.png",
+      "status": "approved",
+      "reviewed_sha256": "1fa4d8808f9cb3508cf003a0966547786a2253616bda0d9fd0423d1b2566c6a0",
+      "label": "同步账号数据入口",
+      "extra_images": [
+        {
+          "file": "assets-redacted/guide-G10-2.png",
+          "label": "同步完成提示",
+          "reviewed_sha256": "b42a13536d655106dc2e6e99d46f8672de0a0b5598e7b76276cb1a03ea6fcdaa"
+        },
+        {
+          "file": "assets-redacted/guide-G10-3.png",
+          "label": "切换主列表",
+          "reviewed_sha256": "e6bcc81149a6a54bd4efcf7a3db2a170d246b94cb715a3cb3987a728a41fa17a"
+        }
+      ]
+    },
+    {
+      "id": "G11",
+      "chapter": "图鉴与列表",
+      "caption": "搜索、筛选与推荐方案",
+      "capture": "图鉴顶部搜索及筛选区域；展开推荐方案或筛选面板，保证文字可读。",
+      "file": "assets-redacted/guide-G11.png",
+      "status": "approved",
+      "reviewed_sha256": "7b277091548de057b3eb52c36dc762f1b2245b23ce067532e7922ed9196358ff",
+      "label": "推荐方案菜单",
+      "extra_images": [
+        {
+          "file": "assets-redacted/guide-G11-2.png",
+          "label": "搜索、排序与筛选面板",
+          "reviewed_sha256": "6d90eed1c2ef27c7543da1e7889364246da96957db9ed7055602f77a601031ad"
+        }
+      ]
+    },
+    {
+      "id": "G12",
+      "chapter": "图鉴与列表",
+      "caption": "选择成员并创建自建列表",
+      "capture": "选择成员、新建列表命名及创建结果；自建列表支持已同步或已录入角色。",
+      "file": "assets-redacted/guide-G12.png",
+      "status": "approved",
+      "reviewed_sha256": "554ea00229a939735d4f024acbeb61772b9d400e1354d6e47a0908916bc208fe",
+      "label": "选择成员并点击新建列表",
+      "extra_images": [
+        {
+          "file": "assets-redacted/guide-G12-2.png",
+          "label": "填写列表名称",
+          "reviewed_sha256": "6bbec52819fdf26d2d1c362f4bedbf8fdac9e1ec56dcd7f5acd3c5b0614add40"
+        },
+        {
+          "file": "assets-redacted/guide-G12-3.png",
+          "label": "创建后的列表",
+          "reviewed_sha256": "7f420104036f8b9fa9640e4aedc948f355a80e9219fdb6b67b057f9d31ca1f1f"
+        }
+      ]
+    },
+    {
+      "id": "G13",
+      "chapter": "数据录入",
+      "caption": "四个数据录入入口",
+      "capture": "妮姬图鉴顶部“自定义角色／图片识别／阿卡数据／本地数据”四个入口。",
+      "file": "assets-redacted/guide-G13.png",
+      "status": "approved",
+      "reviewed_sha256": "819bf6566d536bad3a7b35cfbadaaa67cec14121f18c39377629f8066ef7b030",
+      "label": "四个数据录入入口",
+      "extra_images": []
+    },
+    {
+      "id": "G14",
+      "chapter": "数据录入",
+      "caption": "编辑标准角色数据",
+      "capture": "角色数据页的基础数值表单；装备及保存操作见正文。",
+      "file": "assets-redacted/guide-G14.png",
+      "status": "approved",
+      "reviewed_sha256": "f8dd51848cc054be96b531fe464c53c320b58dfa65d5412193816a72d5d2b02c",
+      "label": "标准角色数据表单",
+      "extra_images": []
+    },
+    {
+      "id": "G15",
+      "chapter": "数据录入",
+      "caption": "创建自定义角色",
+      "capture": "自定义角色表单，展示名称和基础资料选择；使用演示名称。",
+      "file": "assets-redacted/guide-G15.png",
+      "status": "approved",
+      "reviewed_sha256": "6e088b034b0d60d7ca8bd7d214219e2c7a4f7d27667cba3b27d1ced8ffd1e3c2",
+      "label": "自定义角色表单",
+      "extra_images": []
+    },
+    {
+      "id": "G16",
+      "chapter": "数据录入",
+      "caption": "按角色整理截图文件夹",
+      "capture": "screenshots 下的角色子文件夹与示例图片，展示一层角色目录结构；隐藏个人路径。",
+      "file": "assets-redacted/guide-G16.png",
+      "status": "approved",
+      "reviewed_sha256": "be0de792c7dcc58f2e1eef9cc73fa8030b698868af5e1de789cb1ef92a3b9615",
+      "label": "按角色保存截图",
+      "extra_images": [
+        {
+          "file": "assets-redacted/guide-G16-2.png",
+          "label": "装备截图示例",
+          "reviewed_sha256": "193c188a196d8e75871f7a0cbeeac2531262a5f3d8d3d0d04800ec18fdc6b6a3"
+        },
+        {
+          "file": "assets-redacted/guide-G16-3.png",
+          "label": "练度截图示例：技能页",
+          "reviewed_sha256": "8553c6f28f61a1718f4653f3cb69e5dc658f2da02286abc8a1f69546a6de161d"
+        },
+        {
+          "file": "assets-redacted/guide-G16-4.png",
+          "label": "练度截图示例：魔方页",
+          "reviewed_sha256": "198e79b07ce3575d1e98f7b9f61ed21426f49fd736d483ec98d164912d4bf601"
+        }
+      ]
+    },
+    {
+      "id": "G17",
+      "chapter": "数据录入",
+      "caption": "选择识别类型并开始识别",
+      "capture": "图片识别窗口，展开“识别类型”，展示选择目录和开始识别入口。",
+      "file": "assets-redacted/guide-G17.png",
+      "status": "approved",
+      "reviewed_sha256": "401288dfde1419dac4505097b8386322081b9c95de4b83bf2bfaa8f96dad8c46",
+      "label": "选择识别类型",
+      "extra_images": [
+        {
+          "file": "assets-redacted/guide-G17-2.png",
+          "label": "选择含角色子文件夹的 screenshots 目录",
+          "reviewed_sha256": "dbf23c1baf0761f1daf2481d0f77ef5ac22e1f0f96acfe642b88c0b93f493919"
+        }
+      ]
+    },
+    {
+      "id": "G18",
+      "chapter": "数据录入",
+      "caption": "核对装备识别结果",
+      "capture": "原图与装备部位、三条词条、档位数值和锁定状态下拉框对照。",
+      "file": "assets-redacted/guide-G18.png",
+      "status": "approved",
+      "reviewed_sha256": "1060aba2e1b5fb7e5d63e55c57e474a478722b9d24ca2f4d721eb9e3e639dea9",
+      "label": "装备识别结果核对",
+      "extra_images": []
+    },
+    {
+      "id": "G19",
+      "chapter": "数据录入",
+      "caption": "核对练度字段并保存到已录入",
+      "capture": "字段导入开关、原值与识别值对照，以及确认保存入口。",
+      "file": "assets-redacted/guide-G19.png",
+      "status": "approved",
+      "reviewed_sha256": "ff8d4a0fbb8c05d55cd4767e4ee1531b66eaf90a5b0c80cbf69485519c7c132d",
+      "label": "练度字段核对与保存",
+      "extra_images": []
+    },
+    {
+      "id": "G20",
+      "chapter": "数据录入",
+      "caption": "选择服务器并读取阿卡数据",
+      "capture": "读取前的服务器、Key 输入和读取角色数据入口；Key 内容完全遮盖。",
+      "file": "assets-redacted/guide-G20.png",
+      "status": "approved",
+      "reviewed_sha256": "2369c49bac0e67112ebfac16404c0f0f26e1ae30103311fdd5ea9e34baacf5cc",
+      "label": "填写服务器与 Key 后读取",
+      "extra_images": []
+    },
+    {
+      "id": "G21",
+      "chapter": "数据录入",
+      "caption": "导入本插件导出的图鉴 Excel",
+      "capture": "选择图鉴 Excel 文件及导入完成统计；只支持本插件导出的图鉴 Excel。",
+      "file": "assets-redacted/guide-G21.png",
+      "status": "approved",
+      "reviewed_sha256": "16ff2aa95e32f64cdf6b473aace1a64aa556ebadf60e44aae2d9f07b2c584566",
+      "label": "选择插件导出的图鉴 Excel",
+      "extra_images": [
+        {
+          "file": "assets-redacted/guide-G21-2.png",
+          "label": "图鉴导入完成统计",
+          "reviewed_sha256": "e2ddf064c83bf91c6848bc06ce5e7e26220523af20c1c10ab3068fdbcd0c056c"
+        }
+      ]
+    },
+    {
+      "id": "G22",
+      "chapter": "角色卡制作",
+      "caption": "角色卡与角色数据切换",
+      "capture": "角色工作区完整视图，展示“角色卡／角色数据”“洗词条”和“调整背景”。",
+      "file": "assets-redacted/guide-G22.png",
+      "status": "approved",
+      "reviewed_sha256": "5ad6c9af66aa5d8d5f940601a6ea565aa0665081cff058595182c9d155b85a7d",
+      "label": "角色卡、背景调整与下载",
+      "extra_images": []
+    },
+    {
+      "id": "G25",
+      "chapter": "洗词条计算器",
+      "caption": "填写单装备示例与目标池",
+      "capture": "单装备示例：第 1 行防御力增加第 1 档 4.77%，未锁；第 2 行攻击力增加第 15 档 14.63%，已锁；第 3 行空词条。目标池为优越代码伤害增加第 10 档 22.15%和攻击力增加第 10 档 11.11%，两项均勾选必选。",
+      "file": "assets-redacted/guide-G25.png",
+      "status": "approved",
+      "reviewed_sha256": "9b7ae67095d9714b683fad4b2c2bb012dc179d692a4d00e9536a252875bb6424",
+      "label": "单装备盘面与两项必选目标",
+      "extra_images": []
+    },
+    {
+      "id": "G26",
+      "chapter": "洗词条计算器",
+      "caption": "按阶段阅读最优结果",
+      "capture": "单装备结果中的操作、停止条件、本阶段期望和剩余总期望；展开一层决策树。",
+      "file": "assets-redacted/guide-G26.png",
+      "status": "approved",
+      "reviewed_sha256": "1933e2a54303691a2b779236b20fb9a1c742b9fa50ca7a7979459df8a2fd7413",
+      "label": "阶段结果概览",
+      "extra_images": [
+        {
+          "file": "assets-redacted/guide-G26-2.png",
+          "label": "展开完整决策树",
+          "reviewed_sha256": "a18eabd28d511cbdb39092e85b846f4bcad5cf56ef6fc33576deb6bc9cfac32f"
+        }
+      ]
+    },
+    {
+      "id": "G27",
+      "chapter": "洗词条计算器",
+      "caption": "四装备全局目标与分配结果",
+      "capture": "全局模式，展示至少条数、合计数值及算法分配目标。",
+      "file": "assets-redacted/guide-G27.png",
+      "status": "approved",
+      "reviewed_sha256": "133b05ef4f4a86ce41b61e32012d204fe740a575d2036c6748806b15c3889813",
+      "label": "设置四装备全局目标",
+      "extra_images": [
+        {
+          "file": "assets-redacted/guide-G27-2.png",
+          "label": "分配目标与各装备结果",
+          "reviewed_sha256": "e933e647a6d134f47c1257cd904f5240386a85697b002e19b4d1b899f9001db3"
+        }
+      ]
+    },
+    {
+      "id": "G28",
+      "chapter": "洗词条计算器",
+      "caption": "使用“不跑”跳过装备",
+      "capture": "全局模式下头部、臂部跳过，身躯、腿部继续计算；独立模式操作见正文。",
+      "file": "assets-redacted/guide-G28.png",
+      "status": "approved",
+      "reviewed_sha256": "7e3c12c12799931bc0badd81ed18bf0c6b24f54095918f8be2b3b43f1f698346",
+      "label": "全局模式：头部与臂部勾选不跑",
+      "extra_images": []
+    },
+    {
+      "id": "G29",
+      "chapter": "洗词条计算器",
+      "caption": "查看完整装备效果汇总",
+      "capture": "具体角色计算器中的“装备效果一览”，保持词条名称和合计数值清晰。",
+      "file": "assets-redacted/guide-G29.png",
+      "status": "approved",
+      "reviewed_sha256": "33489447cd72a26ccb54b8d03115cde28ff23a3086987c8458e89e206343ed90",
+      "label": "具体角色的装备效果一览",
+      "extra_images": []
+    },
+    {
+      "id": "G30",
+      "chapter": "洗词条计算器",
+      "caption": "全部结果与 Excel 下载",
+      "capture": "全部结果页签的角色记录、排序和“下载 Excel”；使用演示数据。",
+      "file": "assets-redacted/guide-G30.png",
+      "status": "approved",
+      "reviewed_sha256": "c998fcd2a5ee9c278d6af3faffc6d41e5214f03285f9380821af2c008846ee6c",
+      "label": "全部结果与下载 Excel",
+      "extra_images": [
+        {
+          "file": "assets-redacted/guide-G30-2.png",
+          "label": "计算结果 Excel 示例",
+          "reviewed_sha256": "382e2f44f85fbcc79a5ba2d37b8f1403cc2e076d677b81b9d2289f14eb04d259"
+        }
+      ]
+    }
+  ]
+}

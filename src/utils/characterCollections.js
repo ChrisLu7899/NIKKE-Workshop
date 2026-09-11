@@ -152,6 +152,7 @@ export function buildCalculatorCollections(snapshot, templates) {
     (Array.isArray(snapshot?.accounts) ? snapshot.accounts : []).filter((account) => account?.source === "local").flatMap((account) =>
       (Array.isArray(account?.characters) ? account.characters : []).map((character) => normalizeCode(character?.nameCode)).filter(Boolean)),
   );
+  const listEligibleCodes = new Set([...ownedCodes, ...recordedCodes]);
   const collections = [];
   if (ownedCodes.size) collections.push({ id: SYSTEM_COLLECTION_IDS.owned, name: "已同步", characterCodes: [...ownedCodes], system: true });
   if (recordedCodes.size) collections.push({ id: SYSTEM_COLLECTION_IDS.recorded, name: "已录入", characterCodes: [...recordedCodes], system: true });
@@ -170,7 +171,7 @@ export function buildCalculatorCollections(snapshot, templates) {
   });
 
   (Array.isArray(templates) ? templates : []).forEach((template) => {
-    const codes = [...characterCodeSet(template?.data)].filter((code) => ownedCodes.has(code));
+    const codes = [...characterCodeSet(template?.data)].filter((code) => listEligibleCodes.has(code));
     if (!codes.length) return;
     collections.push({
       id: `template:${template.id}`,

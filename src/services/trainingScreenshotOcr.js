@@ -7,8 +7,11 @@ import {
   findCoreBadge,
   findCubeIconRegion,
   findCubeStripeCandidates,
+  findIdentityBar,
+  findRarityWordmark,
   isRarityWordmarkAnchor,
   locateTrainingLocalRegions,
+  projectRarityWordmarkFromIdentityBar,
 } from "../domain/trainingOcrCore.js";
 import { locateOverloadLogoFromRgba } from "../domain/equipmentScreenshotTemplate.js";
 import { TRAINING_FIELD_STATUS, constrainedNumericResult, trainingFieldResult } from "../domain/trainingOcrFieldContract.js";
@@ -144,12 +147,17 @@ export async function recognizeTrainingScreenshot(file, workers, { characterName
     const canvas = bitmapCanvas(bitmap);
     const imageData = canvas.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, bitmap.width, bitmap.height);
     const anchor = findCoreBadge(imageData.data, bitmap.width, bitmap.height);
+    const identityBar = anchor.badge
+      ? null
+      : findIdentityBar(imageData.data, bitmap.width, bitmap.height);
     const wordmarkDetection = anchor.badge
       ? null
-      : locateOverloadLogoFromRgba(imageData.data, bitmap.width, bitmap.height);
-    const rarityWordmark = isRarityWordmarkAnchor(wordmarkDetection, bitmap.width, bitmap.height)
-      ? wordmarkDetection.bounds
-      : null;
+      : findRarityWordmark(imageData.data, bitmap.width, bitmap.height)
+        || locateOverloadLogoFromRgba(imageData.data, bitmap.width, bitmap.height);
+    const rarityWordmark = projectRarityWordmarkFromIdentityBar(identityBar, bitmap.width, bitmap.height)
+      || (isRarityWordmarkAnchor(wordmarkDetection, bitmap.width, bitmap.height)
+        ? wordmarkDetection.bounds
+        : null);
     const anchoredRegions = anchor.badge
       ? deriveIdentityRegions(anchor.badge, bitmap.width, bitmap.height)
       : deriveIdentityRegionsFromRarityWordmark(rarityWordmark, bitmap.width, bitmap.height);
@@ -161,8 +169,9 @@ export async function recognizeTrainingScreenshot(file, workers, { characterName
       layout: bitmap.width >= bitmap.height ? "landscape" : "portrait",
       anchors: {
         coreBadge: anchor.badge,
+        identityBar,
         rarityWordmark,
-        identitySource: anchor.badge ? "core-badge" : rarityWordmark ? "rarity-wordmark" : "",
+        identitySource: anchor.badge ? "core-badge" : identityBar ? "identity-bar" : rarityWordmark ? "rarity-wordmark" : "",
       },
       regions,
       cache: {},
