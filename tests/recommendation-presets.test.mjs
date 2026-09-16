@@ -64,7 +64,7 @@ test("corrected avatar identities keep their verified name codes and source orde
   const expectedCodesById = {
     "stage-one-cooldown": ["5169", "5137", "1021", "5011", "5049", "5129", "5158", "5110"],
     "flexible-support": ["5065", "5155", "5007", "5126", "5151", "5160", "5021", "5125", "5116", "5098"],
-    "water-main-c": ["5161", "5145", "5066", "5007", "5122", "5018", "5146", "5103", "5128", "5121"],
+    "water-main-c": ["5161", "5145", "5066", "5007", "5122", "5135", "5146", "5103", "5128", "5121"],
     "wind-main-c": ["5105", "5156", "5155", "5133", "5177", "5174", "5163", "5132", "1019", "5178"],
     "electric-main-c": ["5170", "5124", "5152", "5140", "5013", "5045", "5127", "5097", "5077", "5134", "5041"],
     "iron-main-c": ["5175", "5129", "5176", "5143", "5142", "5150", "5012", "5101", "5164", "5165"],
@@ -100,13 +100,13 @@ test("recognized recommendation entries use unique stable codes and complete fie
 test("character advice includes cultivation data, prefers the active preset, and ignores avatar-only lineups", () => {
   const privatyAdvice = listRecommendationAdvice("5007", recommendationCollectionId("water-main-c"));
   assert.deepEqual(privatyAdvice.map(({ presetId }) => presetId), ["water-main-c", "flexible-support"]);
-  assert.equal(privatyAdvice[0].lines, "无装弹、攻击、优越（优越和攻击收益接近）");
+  assert.equal(privatyAdvice[0].lines, "无装弹、攻击、优越（优越和攻击收益差不多）");
   assert.deepEqual(mergeRecommendationAdvice(privatyAdvice), {
-    note: "2红级；可以轴外，很好用",
+    note: "高伤主力；2红级；可以轴外，很好用",
     equipment: "4T10，头手甲升级",
-    lines: "无装弹、攻击、优越（优越和攻击收益接近）",
+    lines: "无装弹、攻击、优越（优越和攻击收益差不多）",
     skills: "10/10/7+",
-    cube: "遗迹巨熊",
+    cube: "遗迹巨熊魔方",
     collectible: "珍藏品3阶",
   });
 
@@ -124,23 +124,47 @@ test("Scarlet output tiers preserve the source image's 红级 terminology", () =
   ]) {
     const preset = RECOMMENDATION_PRESETS.find(entry => entry.id === presetId);
     const item = preset?.items.find(entry => entry.nameCode === nameCode);
-    assert.match(item?.note || "", /^3\.5红级/);
+    assert.match(item?.note || "", /(?:^|；)3\.5红级(?:；|$)/);
   }
 
   const redLotusShadow = RECOMMENDATION_PRESETS
     .find(entry => entry.id === "wind-main-c")
     ?.items.find(entry => entry.nameCode === "5105");
-  assert.match(redLotusShadow?.note || "", /^3红级/);
+  assert.match(redLotusShadow?.note || "", /(?:^|；)3红级(?:；|$)/);
 
   for (const preset of RECOMMENDATION_PRESETS) {
     for (const item of preset.items) {
       assert.doesNotMatch(
         item.note,
-        /^(?:推荐|预计)?(?:\d+(?:\.\d+)?|1～3)级/,
+        /(?:^|；)(?:推荐|预计|超)?(?:\d+(?:\.\d+)?|1～3)级/,
         `${preset.name} / ${item.name} 丢失“红级”专有词`,
       );
     }
   }
+});
+
+test("approved infographic maps the water attacker to Brade rather than Brid", () => {
+  const water = getRecommendationPreset(recommendationCollectionId("water-main-c"));
+  assert.equal(water.items[5].nameCode, "5135");
+  assert.equal(water.items[5].name, "布蕾德");
+  assert.equal(water.items.some(entry => entry.nameCode === "5018"), false);
+  assert.equal(listRecommendationAdvice("5018").length, 0);
+  const advice = mergeRecommendationAdvice(listRecommendationAdvice("5135"));
+  assert.equal(advice.skills, "7/10/7");
+  assert.equal(advice.cube, "遗迹分裂魔方");
+  assert.match(advice.note, /须配分摊\/持续伤害提升辅助/);
+});
+
+test("approved source preserves plus signs, threshold wording and skill references", () => {
+  const entry = (presetId, code) => getRecommendationPreset(recommendationCollectionId(presetId)).items.find(item => item.nameCode === code);
+  assert.equal(entry("stage-one-cooldown", "5049").skills, "10/4+/7+");
+  assert.equal(entry("flexible-support", "5151").skills, "4+/4+/10");
+  assert.equal(entry("fire-main-c", "5004").skills, "10/4+/10");
+  assert.equal(entry("iron-main-c", "5012").skills, "4+/4+/10");
+  assert.match(entry("fire-main-c", "5129").note, /超4红级/);
+  assert.match(entry("iron-main-c", "5129").note, /超4红级/);
+  assert.match(entry("water-main-c", "5103").lines, /技能1没核心基本上没用/);
+  assert.match(entry("electric-main-c", "5140").note, /让伊莎变3红/);
 });
 
 test("China-exclusive characters expose their supplied cultivation advice without adding selectable presets", () => {

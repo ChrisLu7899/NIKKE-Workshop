@@ -1,0 +1,22 @@
+{
+  "author": "屑芙蒂",
+  "title": "NIKKE国际服PVE一图流",
+  "authorUrl": "https://space.bilibili.com/17057196/dynamic",
+  "sourceSha256": "717768cd8509e9e72e32f474f4856accef7b27465f12038cc02deb936e850406",
+  "sourcePublishedAt": null,
+  "reviewedAt": "2026-09-16",
+  "approvedBy": "用户确认整体方案并授权替换",
+  "cultivationEntries": 87,
+  "presetCount": 21,
+  "identityCorrections": [
+    {
+      "sectionId": "water-main-c",
+      "reviewId": "E06",
+      "previousName": "布丽德",
+      "previousCode": "5018",
+      "name": "布蕾德",
+      "nameCode": "5135",
+      "confirmation": "用户逐项确认"
+    }
+  ]
+}
