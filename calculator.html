@@ -136,6 +136,10 @@
           <p>有限状态 MDP 在本机完成，不会上传数据。</p>
         </div>
         <div class="calculation-actions">
+          <select class="calculation-rule-select" id="calculation-rule" aria-label="计算模式">
+            <option value="global-current" selected>国际服（新规则）</option>
+            <option value="cn-legacy">国服（旧规则）</option>
+          </select>
           <button class="button button-primary" id="calculate" type="button">运行算法测试</button>
           <button class="button button-secondary" id="reset" type="button">重置</button>
         </div>

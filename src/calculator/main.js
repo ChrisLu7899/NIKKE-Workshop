@@ -40,9 +40,24 @@ import {
   shouldShowRecommendationSelector,
   SINGLE_EQUIPMENT_COLLECTION_ID,
 } from "./manualEquipment.js";
-import { createPolicyBranchStage } from "./policyTree.js";
+import {
+  createCandidateDecisionStage,
+  createPolicyBranchStage,
+} from "./policyTree.js";
 import { unavailableStatsForRow } from "./statOptions.js";
 import { summarizeEquipmentEffects } from "./equipmentEffectOverview.js";
+import {
+  duplicateSafeTierGroupOutcomes,
+} from "./duplicateReroll.js";
+import {
+  applyKeepOrReplacePolicy,
+  CALCULATION_RULES,
+  calculationRuleLabel,
+  canKeepRerollCandidate,
+  evaluateKeepOrReplaceAction,
+  normalizeCalculationRule,
+  usesDuplicateSafeRerolls,
+} from "./calculationRules.js";
 import {
   EQUIPMENT_FUNCTION_LABELS,
   updateLocalCharacterEquipmentSlot,
@@ -116,6 +131,7 @@ import {
     const app = document.querySelector("#app");
     const initialRows = document.querySelector("#initial-rows");
     const targetRows = document.querySelector("#target-rows");
+    const calculationRuleSelect = document.querySelector("#calculation-rule");
     const calculateButton = document.querySelector("#calculate");
     const resetButton = document.querySelector("#reset");
     const message = document.querySelector("#message");
@@ -168,12 +184,24 @@ import {
     let showEquipmentEffectOverview = false;
     let runRecordStore = normalizeRunRecordStore(null);
     const characterExactSolutionCache = new Map();
-    const DEFAULT_DETAILS = [
-      "使用说明",
-      "=".repeat(36),
-      "• 有限状态 MDP：枚举完整概率，并在每个盘面比较锁定、洗名称和洗数值。",
-      "• 实际执行一次建议后，请按新的盘面重新计算下一步。"
-    ].join("\n");
+
+    function selectedCalculationRule() {
+      return normalizeCalculationRule(calculationRuleSelect.value);
+    }
+
+    function defaultDetails(calculationRule = selectedCalculationRule()) {
+      const ruleLine = calculationRule === CALCULATION_RULES.CN_LEGACY
+        ? "• 国服旧版：采用原始抽取概率，每次洗练结果直接覆盖当前词条。"
+        : "• 国际服新版：不会出现与当前完全相同的效果与数值；看到候选后可选择覆盖或保留原词条。";
+      return [
+        "使用说明",
+        "=".repeat(36),
+        `• 当前计算模式：${calculationRuleLabel(calculationRule)}。`,
+        "• 有限状态 MDP：枚举完整概率，并在每个盘面比较锁定、洗名称和洗数值。",
+        ruleLine,
+        "• 实际执行一次建议后，请按新的盘面重新计算下一步。"
+      ].join("\n");
+    }
 
     function optionsHtml(values) {
       return values.map(value => `<option value="${value}">${value}</option>`).join("");
@@ -806,8 +834,8 @@ import {
       syncEquipmentStatOptions(container);
     }
 
-    function characterExactSolutionCacheKey(characterKey, mode, equipmentIndex) {
-      return `${characterKey}::${mode}::${equipmentIndex}`;
+    function characterExactSolutionCacheKey(characterKey, mode, equipmentIndex, calculationRule = selectedCalculationRule()) {
+      return `${characterKey}::${mode}::${calculationRule}::${equipmentIndex}`;
     }
 
     function cacheCharacterExactSolutions(characterKey, mode, equipmentResults) {
@@ -834,7 +862,7 @@ import {
     function restoreCharacterRunRecord(character) {
       const characterKey = String(character?.key || `character::${character?.name || ""}`);
       const record = runRecordStore.entries[characterKey];
-      if (!record) return false;
+      if (!record || record.calculationRule !== selectedCalculationRule()) return false;
 
       targetPresetSelect.value = "";
       setCalculationMode(record.mode === "global" ? "global" : "equipment");
@@ -880,7 +908,7 @@ import {
       }
 
       setResult(record.resultText || "已恢复最后一次测试结果。", false);
-      setDetails(record.detailsText || DEFAULT_DETAILS);
+      setDetails(record.detailsText || defaultDetails());
       activateOutputTab("result");
       return true;
     }
@@ -1006,15 +1034,80 @@ import {
       }).join("；");
     }
 
+    function exactBranchConditionRows(state, model) {
+      if (!state?.slots) {
+        return Array.from({ length: 3 }, (_, index) => ({
+          position: `词条${index + 1}`,
+          result: "状态不可用",
+          target: false,
+        }));
+      }
+      return state.slots.map((slot, index) => {
+        const target = isTargetCode(slot.code);
+        let result = slot.statName || "非目标/空词条";
+        if (target) {
+          result = model.targets[targetIndexFromCode(slot.code)]?.name || "目标词条";
+          result += slot.ok ? " · 达标" : " · 未达标";
+        }
+        if (slot.locked) result += " · 已锁";
+        return { position: `词条${index + 1}`, result, target };
+      });
+    }
+
+    function mergeEquivalentTerminalBranches(branches, model) {
+      const merged = [];
+      const terminalByState = new Map();
+      branches.forEach(branch => {
+        if (!branch.terminal) {
+          merged.push(branch);
+          return;
+        }
+        const stateText = exactBranchStateText(branch.state, model);
+        const existing = terminalByState.get(stateText);
+        if (existing) {
+          existing.probability += branch.probability;
+          existing.mergedStates.push(branch.state);
+          return;
+        }
+        const copy = { ...branch, mergedStates: [branch.state] };
+        terminalByState.set(stateText, copy);
+        merged.push(copy);
+      });
+      return merged.sort((left, right) => right.probability - left.probability);
+    }
+
+    function policyProbabilityText(probability) {
+      return `${(probability * 100).toFixed(probability < 0.01 ? 2 : 1)}%`;
+    }
+
+    function branchConditionTable(rows) {
+      const body = rows.map(row => `
+        <tr>
+          <th scope="row">${escapeHtml(row.position)}</th>
+          <td class="${row.target ? "is-target" : "is-empty"}">${escapeHtml(row.result)}</td>
+        </tr>
+      `).join("");
+      return `<table class="policy-condition-table" aria-label="分支触发条件"><tbody>${body}</tbody></table>`;
+    }
+
+    function policyBranchCopy({ probability, conditionHtml, actionText, detail }) {
+      return `<span class="policy-branch-probability">${policyProbabilityText(probability)}</span><span class="policy-branch-copy"><span class="policy-branch-condition">${conditionHtml}</span><strong class="policy-branch-action">${actionText}</strong><small>${detail}</small></span>`;
+    }
+
     function policyTreeStageElement(exactSolution, stateIndex, depth, ancestorIndexes) {
       const policyData = exactSolution.policyData;
-      const stage = createPolicyBranchStage({
+      const stageInput = {
         records: policyData.records,
         policy: policyData.policy,
         values: policyData.values,
         startIndex: stateIndex,
         describeAction: exactActionDescription,
-      });
+      };
+      const candidateStage = exactSolution.calculationRule === CALCULATION_RULES.GLOBAL_CURRENT
+        ? createCandidateDecisionStage(stageInput)
+        : null;
+      const stage = candidateStage || createPolicyBranchStage(stageInput);
+      const isCandidateStage = Boolean(candidateStage);
       const wrap = document.createElement("div");
       wrap.className = "policy-stage";
       if (!stage) {
@@ -1029,41 +1122,71 @@ import {
 
       const heading = document.createElement("div");
       heading.className = "policy-stage-heading";
-      heading.innerHTML = `<strong>本阶段：${compactStageActionText(stage.actionText)}</strong><span>本阶段约 ${stage.stageExpectedCost.toFixed(1)} 颗 · 从此处完成约 ${stage.totalExpectedCost.toFixed(1)} 颗</span>`;
+      const stageActionText = compactStageActionText(stage.actionText);
+      const stageCostText = isCandidateStage
+        ? `单次 ${stage.singleCost} 颗 · 进入新分支前约 ${stage.expectedAttempts.toFixed(1)} 次 / ${stage.stageExpectedCost.toFixed(1)} 颗 · 从此处完成约 ${stage.totalExpectedCost.toFixed(1)} 颗`
+        : `本阶段约 ${stage.stageExpectedCost.toFixed(1)} 颗 · 从此处完成约 ${stage.totalExpectedCost.toFixed(1)} 颗`;
+      heading.innerHTML = `<strong>本阶段：${stageActionText}</strong><span>${stageCostText}</span>`;
       wrap.append(heading);
 
       const note = document.createElement("p");
       note.className = "policy-stage-note";
-      note.textContent = "以下概率表示反复执行本阶段操作后，最终进入各分支的概率。";
+      note.textContent = isCandidateStage
+        ? "以下仅列出会进入新状态的单次洗练结果；未列出的结果不会改变盘面，需要重复本阶段。"
+        : "以下概率表示反复执行本阶段操作后，最终进入各分支的概率。";
       wrap.append(note);
 
       const list = document.createElement("div");
       list.className = "policy-branch-list";
-      stage.branches.forEach(branch => {
+      mergeEquivalentTerminalBranches(stage.branches, exactSolution.model).forEach(branch => {
+        const conditionRows = isCandidateStage
+          ? candidateBranchConditionRows(exactSolution, stateIndex, branch)
+          : exactBranchConditionRows(branch.state, exactSolution.model);
+        const conditionHtml = branchConditionTable(conditionRows);
+        const actionText = branch.terminal
+          ? "目标完成"
+          : compactStageActionText(branch.nextActionText);
+        const detail = branch.terminal
+          ? "无需继续消耗"
+          : `从该分支完成约 ${branch.remainingExpectedCost.toFixed(1)} 颗石头`;
+        if (branch.terminal) {
+          const complete = document.createElement("div");
+          complete.className = "policy-branch policy-branch-complete";
+          complete.innerHTML = `<div class="policy-branch-static">${policyBranchCopy({
+            probability: branch.probability,
+            conditionHtml,
+            actionText,
+            detail,
+          })}</div>`;
+          list.append(complete);
+          return;
+        }
+
         const details = document.createElement("details");
-        details.className = `policy-branch${branch.terminal ? " policy-branch-complete" : ""}`;
+        details.className = "policy-branch";
         const summary = document.createElement("summary");
-        const probability = `${(branch.probability * 100).toFixed(branch.probability < 0.01 ? 2 : 1)}%`;
-        const stateText = exactBranchStateText(branch.state, exactSolution.model);
-        summary.innerHTML = `<span class="policy-branch-probability">${probability}</span><span class="policy-branch-copy"><strong>${branch.terminal ? "目标完成" : compactStageActionText(branch.nextActionText)}</strong><span>${stateText}</span><small>${branch.terminal ? "无需继续消耗" : `从该分支完成约 ${branch.remainingExpectedCost.toFixed(1)} 颗石头`}</small></span>`;
+        summary.innerHTML = policyBranchCopy({
+          probability: branch.probability,
+          conditionHtml,
+          actionText,
+          detail,
+        });
         details.append(summary);
 
-        if (!branch.terminal) {
-          details.addEventListener("toggle", () => {
-            if (!details.open || details.dataset.loaded === "true") return;
-            details.dataset.loaded = "true";
-            if (depth >= 10 || ancestorIndexes.has(branch.stateIndex)) {
-              const cycle = document.createElement("p");
-              cycle.className = "policy-stage-note";
-              cycle.textContent = "该分支会回到已显示的策略状态，请继续按上方相同操作执行。";
-              details.append(cycle);
-              return;
-            }
-            const nextAncestors = new Set(ancestorIndexes);
-            nextAncestors.add(branch.stateIndex);
-            details.append(policyTreeStageElement(exactSolution, branch.stateIndex, depth + 1, nextAncestors));
-          });
-        }
+        details.addEventListener("toggle", () => {
+          if (!details.open || details.dataset.loaded === "true") return;
+          details.dataset.loaded = "true";
+          if (depth >= 10 || ancestorIndexes.has(branch.stateIndex)) {
+            const cycle = document.createElement("p");
+            cycle.className = "policy-stage-note";
+            cycle.textContent = "该分支会回到已显示的策略状态，请继续按上方相同操作执行。";
+            details.append(cycle);
+            return;
+          }
+          const nextAncestors = new Set(ancestorIndexes);
+          nextAncestors.add(branch.stateIndex);
+          details.append(policyTreeStageElement(exactSolution, branch.stateIndex, depth + 1, nextAncestors));
+        });
         list.append(details);
       });
       wrap.append(list);
@@ -1111,29 +1234,92 @@ import {
         .replace("洗词条名称", "洗名称");
     }
 
+    function formatTierRanges(tiers) {
+      const sorted = [...new Set(tiers)].sort((left, right) => left - right);
+      if (!sorted.length) return "";
+      const ranges = [];
+      let start = sorted[0];
+      let end = sorted[0];
+      sorted.slice(1).forEach(tier => {
+        if (tier === end + 1) {
+          end = tier;
+          return;
+        }
+        ranges.push(start === end ? `${start}档` : `${start}-${end}档`);
+        start = tier;
+        end = tier;
+      });
+      ranges.push(start === end ? `${start}档` : `${start}-${end}档`);
+      return ranges.join("、");
+    }
+
+    function selectedPolicyAction(exactSolution, stateIndex) {
+      const policyData = exactSolution.policyData;
+      const record = policyData?.records?.[stateIndex];
+      const actionIndex = policyData?.policy?.[stateIndex] ?? -1;
+      return actionIndex >= 0 ? record?.actions?.[actionIndex] || null : null;
+    }
+
+    function candidateTierValues(exactSolution, candidateSlot) {
+      if (!isTargetCode(candidateSlot.code)) return [];
+      const target = exactSolution.model.targets[targetIndexFromCode(candidateSlot.code)];
+      const tiers = [];
+      TIER_PROBS.forEach((weight, index) => {
+        const tier = index + 1;
+        if (weight === candidateSlot.tierWeight && (tier >= target.minimumTier) === candidateSlot.ok) {
+          tiers.push(tier);
+        }
+      });
+      return tiers;
+    }
+
+    function candidateBranchConditionRows(exactSolution, stateIndex, branch) {
+      const policyData = exactSolution.policyData;
+      const currentState = policyData.records[stateIndex]?.state;
+      const action = selectedPolicyAction(exactSolution, stateIndex);
+      if (!currentState || !action) {
+        return exactBranchConditionRows(branch.state, exactSolution.model);
+      }
+
+      const candidateStates = branch.mergedStates || [branch.state];
+      return currentState.slots.map((_, slotIndex) => {
+        const groups = new Map();
+        candidateStates.forEach(candidateState => {
+          const candidateSlot = candidateState?.slots?.[slotIndex];
+          if (!candidateSlot) return;
+          if (!isTargetCode(candidateSlot.code)) {
+            groups.set("X", { label: "非目标/空词条", tiers: new Set(), target: false });
+            return;
+          }
+          const target = exactSolution.model.targets[targetIndexFromCode(candidateSlot.code)];
+          const group = groups.get(candidateSlot.code) || {
+            label: target.name,
+            tiers: new Set(),
+            target: true,
+          };
+          candidateTierValues(exactSolution, candidateSlot).forEach(tier => group.tiers.add(tier));
+          groups.set(candidateSlot.code, group);
+        });
+        const values = [...groups.values()];
+        let result = values.map(group => {
+          const tiers = formatTierRanges(group.tiers);
+          return tiers ? `${group.label} · ${tiers}` : group.label;
+        }).join(" 或 ") || "结果不可用";
+        if (candidateStates.some(candidateState => candidateState?.slots?.[slotIndex]?.locked)) {
+          result += " · 已锁";
+        }
+        return {
+          position: `词条${slotIndex + 1}`,
+          result,
+          target: values.some(group => group.target),
+        };
+      });
+    }
+
     function inlineOptimalResultText({ exactSolution }) {
       const expectedCost = exactSolution?.value ?? 0;
       if (expectedCost <= 1e-9) return "当前盘面已经满足目标，无需消耗石头。";
-      const stages = exactSolution.policyStagePreview?.stages || [];
-      if (!stages.length) return `预计从当前盘面达标：约 ${expectedCost.toFixed(1)} 颗石头\n第一步：${exactSolution.firstActionText}`;
-      const numerals = ["一", "二", "三", "四", "五", "六", "七", "八"];
-      const lines = [];
-      stages.forEach((stage, index) => {
-        const operation = compactStageActionText(stage.actionText);
-        const milestone = stage.milestoneText || "";
-        const conditional = index > 0 && stages[index - 1].continuationProbability < 1 - 1e-9
-          ? stage.conditionText || "若上一步尚未完成全部目标，"
-          : "";
-        lines.push(
-          `${numerals[index] || index + 1}、${conditional}${operation}${milestone}`,
-          `   约 ${stage.stageExpectedCost.toFixed(1)} 颗石头（总计约 ${stage.totalExpectedCost.toFixed(1)} 颗石头）`,
-        );
-        if (index < stages.length - 1) lines.push("");
-      });
-      if (exactSolution.policyStagePreview?.branched) {
-        lines.push("后续存在多种最优操作分支，均已计入上述期望耗石。");
-      }
-      return lines.join("\n");
+      return `${compactStageActionText(exactSolution.firstActionText)}（约 ${expectedCost.toFixed(1)} 颗石头）`;
     }
 
     function clearScopedOptimalResult(control) {
@@ -1226,7 +1412,7 @@ import {
       showMessage("");
       if (character.transient || !restoreCharacterRunRecord(character)) {
         setResult("设置四件装备的目标词条后，点击“运行算法测试”。可勾选“不跑”跳过单件装备。", true);
-        setDetails(DEFAULT_DETAILS);
+        setDetails(defaultDetails());
       }
     }
 
@@ -1410,7 +1596,26 @@ import {
           : "设置目标词条后，点击“运行算法测试”。",
         true
       );
-      setDetails(DEFAULT_DETAILS);
+      setDetails(defaultDetails());
+      activateOutputTab("result");
+    }
+
+    function handleCalculationRuleChange() {
+      calculationRuleSelect.value = selectedCalculationRule();
+      characterExactSolutionCache.clear();
+      setInlineOptimalResult(classicOptimalResult, "运行算法测试后显示。", true);
+      characterEquipmentMode.querySelectorAll(".equipment-optimal-result").forEach(output => {
+        setInlineOptimalResult(output, "运行算法测试后显示。", true);
+      });
+      characterEquipmentMode.querySelectorAll(".global-assignment-output").forEach(output => {
+        output.textContent = "运行全局测试后显示。";
+      });
+      if (calculationModeSelect.value === "global") {
+        globalTargetStatus.textContent = "计算模式已切换，请重新运行算法测试。";
+      }
+      setResult(`已切换为${calculationRuleLabel(selectedCalculationRule())}，请重新运行算法测试。`, true);
+      setDetails(defaultDetails());
+      showMessage("");
       activateOutputTab("result");
     }
 
@@ -1484,6 +1689,8 @@ import {
           return {
             code,
             ok: targetIndex >= 0 ? item.tier >= model.targets[targetIndex].minimumTier : false,
+            tierWeight: targetIndex >= 0 ? TIER_PROBS[Number(item.tier) - 1] : 0,
+            displayTier: targetIndex >= 0 ? Number(item.tier) : 0,
             locked: Boolean(item.flagged) && (targetIndex >= 0 || forced),
             forced,
             statName: forced && targetIndex < 0 ? item.stat : "",
@@ -1493,11 +1700,11 @@ import {
     }
 
     function exactStateKey(state) {
-      return state.slots.map(slot => `${slot.code}:${slot.ok ? 1 : 0}:${slot.locked ? 1 : 0}:${slot.forced ? 1 : 0}:${slot.statName || ""}`).join("|");
+      return state.slots.map(slot => `${slot.code}:${slot.tierWeight || 0}:${slot.ok ? 1 : 0}:${slot.locked ? 1 : 0}:${slot.forced ? 1 : 0}:${slot.statName || ""}`).join("|");
     }
 
     function exactBaseKey(state) {
-      return state.slots.map(slot => `${slot.code}:${slot.ok ? 1 : 0}:${slot.forced ? 1 : 0}:${slot.statName || ""}`).join("|");
+      return state.slots.map(slot => `${slot.code}:${slot.tierWeight || 0}:${slot.ok ? 1 : 0}:${slot.forced ? 1 : 0}:${slot.statName || ""}`).join("|");
     }
 
     function exactLockMask(state) {
@@ -1585,7 +1792,7 @@ import {
       }
     }
 
-    function enumerateExactNameTransitions(state, lockMask, model) {
+    function enumerateExactNameTransitions(state, lockMask, model, calculationRule) {
       const prepared = applyExactLocks(state, lockMask);
       const outcomes = new Map();
       const outputSlots = Array(3);
@@ -1613,7 +1820,7 @@ import {
 
         const appearanceProbability = SLOT_PROBS[slotIndex];
         if (appearanceProbability < 1) {
-          outputSlots[slotIndex] = { code: "X", ok: false, locked: false, forced: false, statName: "" };
+          outputSlots[slotIndex] = { code: "X", tierWeight: 0, ok: false, locked: false, forced: false, statName: "" };
           visit(slotIndex + 1, probability * (1 - appearanceProbability));
         }
 
@@ -1624,17 +1831,28 @@ import {
           usedActualStats.add(statName);
           if (model.targetByName.has(statName)) {
             const targetIndex = model.targetByName.get(statName);
-            const successProbability = model.targets[targetIndex].successProbability;
-            if (successProbability > 0) {
-              outputSlots[slotIndex] = { code: `T${targetIndex}`, ok: true, locked: false, forced: false, statName: "" };
-              visit(slotIndex + 1, probability * statProbability * successProbability);
-            }
-            if (successProbability < 1) {
-              outputSlots[slotIndex] = { code: `T${targetIndex}`, ok: false, locked: false, forced: false, statName: "" };
-              visit(slotIndex + 1, probability * statProbability * (1 - successProbability));
-            }
+            const target = model.targets[targetIndex];
+            const sameEffect = usesDuplicateSafeRerolls(calculationRule)
+              && currentSlot.code === `T${targetIndex}`;
+            duplicateSafeTierGroupOutcomes(
+              TIER_PROBS,
+              target.minimumTier,
+              currentSlot.tierWeight,
+              currentSlot.ok,
+              sameEffect,
+            ).forEach(tierOutcome => {
+              outputSlots[slotIndex] = {
+                code: `T${targetIndex}`,
+                tierWeight: tierOutcome.tierWeight,
+                ok: tierOutcome.ok,
+                locked: false,
+                forced: false,
+                statName: "",
+              };
+              visit(slotIndex + 1, probability * statProbability * tierOutcome.probability);
+            });
           } else {
-            outputSlots[slotIndex] = { code: "X", ok: false, locked: false, forced: false, statName: "" };
+            outputSlots[slotIndex] = { code: "X", tierWeight: 0, ok: false, locked: false, forced: false, statName: "" };
             visit(slotIndex + 1, probability * statProbability);
           }
           usedActualStats.delete(statName);
@@ -1645,7 +1863,7 @@ import {
       return outcomes;
     }
 
-    function enumerateExactValueTransitions(state, lockMask, model) {
+    function enumerateExactValueTransitions(state, lockMask, model, calculationRule) {
       const prepared = applyExactLocks(state, lockMask);
       const outcomes = new Map();
       const outputSlots = Array(3);
@@ -1663,15 +1881,22 @@ import {
           return;
         }
 
-        const successProbability = model.targets[targetIndexFromCode(slot.code)].successProbability;
-        if (successProbability > 0) {
-          outputSlots[slotIndex] = { ...slot, ok: true, locked: false };
-          visit(slotIndex + 1, probability * successProbability);
-        }
-        if (successProbability < 1) {
-          outputSlots[slotIndex] = { ...slot, ok: false, locked: false };
-          visit(slotIndex + 1, probability * (1 - successProbability));
-        }
+        const target = model.targets[targetIndexFromCode(slot.code)];
+        duplicateSafeTierGroupOutcomes(
+          TIER_PROBS,
+          target.minimumTier,
+          slot.tierWeight,
+          slot.ok,
+          usesDuplicateSafeRerolls(calculationRule),
+        ).forEach(tierOutcome => {
+          outputSlots[slotIndex] = {
+            ...slot,
+            tierWeight: tierOutcome.tierWeight,
+            ok: tierOutcome.ok,
+            locked: false,
+          };
+          visit(slotIndex + 1, probability * tierOutcome.probability);
+        });
       }
 
       visit(0, 1);
@@ -1732,7 +1957,15 @@ import {
         : "";
     }
 
-    async function solveExactOptimal(initialState, model, onProgress = () => {}, retainPolicy = false) {
+    async function solveExactOptimal(
+      initialState,
+      model,
+      calculationRule,
+      onProgress = () => {},
+      retainPolicy = false,
+    ) {
+      const normalizedRule = normalizeCalculationRule(calculationRule);
+      const allowKeep = canKeepRerollCandidate(normalizedRule);
       const startKey = exactStateKey(initialState);
       const records = new Map();
       const queue = [];
@@ -1757,12 +1990,12 @@ import {
             throw new Error("强制保留占满了可锁位置，当前目标没有可执行的洗练动作");
           }
           for (const { mode, lockMask } of choices) {
-            const cacheKey = `${mode}|${exactBaseKey(record.state)}|${lockMask}`;
+            const cacheKey = `${normalizedRule}|${mode}|${exactBaseKey(record.state)}|${lockMask}`;
             let outcomes = transitionCache.get(cacheKey);
             if (!outcomes) {
               outcomes = mode === "name"
-                ? enumerateExactNameTransitions(record.state, lockMask, model)
-                : enumerateExactValueTransitions(record.state, lockMask, model);
+                ? enumerateExactNameTransitions(record.state, lockMask, model, normalizedRule)
+                : enumerateExactValueTransitions(record.state, lockMask, model, normalizedRule);
               transitionCache.set(cacheKey, outcomes);
             }
 
@@ -1779,6 +2012,7 @@ import {
             record.actions.push({
               mode,
               lockMask,
+              allowKeep,
               immediateCost: exactLockChangeCost(record.state, lockMask) + rerollStoneCost(lockMask),
               transitions
             });
@@ -1819,22 +2053,32 @@ import {
           let bestActionIndex = -1;
 
           record.actions.forEach((action, actionIndex) => {
-            let selfProbability = 0;
-            let futureValue = 0;
-            action.transitions.forEach(transition => {
-              if (transition.index === stateIndex) {
-                selfProbability += transition.probability;
-              } else {
-                futureValue += transition.probability * values[transition.index];
+            let candidate = Number.POSITIVE_INFINITY;
+            if (allowKeep) {
+              candidate = evaluateKeepOrReplaceAction(
+                action.immediateCost,
+                action.transitions,
+                values,
+                stateIndex,
+              ).value;
+            } else {
+              let selfProbability = 0;
+              let futureValue = 0;
+              action.transitions.forEach(transition => {
+                if (transition.index === stateIndex) {
+                  selfProbability += transition.probability;
+                } else {
+                  futureValue += transition.probability * values[transition.index];
+                }
+              });
+              const denominator = 1 - selfProbability;
+              if (denominator > 1e-14) {
+                candidate = (action.immediateCost + futureValue) / denominator;
               }
-            });
-            const denominator = 1 - selfProbability;
-            if (denominator > 1e-14) {
-              const candidate = (action.immediateCost + futureValue) / denominator;
-              if (candidate < bestValue) {
-                bestValue = candidate;
-                bestActionIndex = actionIndex;
-              }
+            }
+            if (candidate < bestValue) {
+              bestValue = candidate;
+              bestActionIndex = actionIndex;
             }
           });
 
@@ -1855,6 +2099,34 @@ import {
       if (!Number.isFinite(values[indexByKey.get(startKey)])) throw new Error("有限状态 MDP 未得到有限期望");
       if (residual >= tolerance) throw new Error(`有限状态 MDP 未收敛，剩余误差 ${residual}`);
       const startIndex = indexByKey.get(startKey);
+      if (allowKeep) {
+        recordList.forEach((record, stateIndex) => {
+          const actionIndex = policy[stateIndex];
+          if (actionIndex < 0) return;
+          const action = record.actions[actionIndex];
+          const decision = evaluateKeepOrReplaceAction(
+            action.immediateCost,
+            action.transitions,
+            values,
+            stateIndex,
+          );
+          const acceptedStateIndexes = new Set(
+            [...decision.acceptedStateIndexes].filter(index => {
+              return values[index] < values[stateIndex] - 1e-7;
+            }),
+          );
+          action.candidateTransitions = action.transitions;
+          action.acceptedStateIndexes = [...acceptedStateIndexes];
+          action.acceptedProbability = action.transitions.reduce((sum, transition) => {
+            return sum + (acceptedStateIndexes.has(transition.index) ? transition.probability : 0);
+          }, 0);
+          action.transitions = applyKeepOrReplacePolicy(
+            action.transitions,
+            stateIndex,
+            acceptedStateIndexes,
+          );
+        });
+      }
       const firstActionIndex = policy[startIndex];
       const firstAction = firstActionIndex >= 0 ? recordList[startIndex].actions[firstActionIndex] : null;
       const policyStagePreview = createPolicyStageSummary({
@@ -1873,6 +2145,7 @@ import {
         firstAction,
         firstActionText: firstAction ? exactActionDescription(initialState, firstAction) : "目标已经完成",
         policyStagePreview,
+        calculationRule: normalizedRule,
         model,
         stateCount: recordList.length,
         iterations: completedIterations,
@@ -1881,7 +2154,8 @@ import {
       };
     }
 
-    function formulaFastPath(initialState, model, firstAction) {
+    function formulaFastPath(initialState, model, firstAction, calculationRule) {
+      if (normalizeCalculationRule(calculationRule) !== CALCULATION_RULES.CN_LEGACY) return null;
       if (forcedRetentionMask(initialState.slots)) return null;
       if (!firstAction || firstAction.mode !== "name" || model.targets.length !== 3 || model.goal !== 3) return null;
       if (exactNamesReady(initialState, model)) return null;
@@ -1901,7 +2175,8 @@ import {
       const rerollCost = rerollStoneCost(firstAction.lockMask);
       const lockCost = exactLockChangeCost(initialState, firstAction.lockMask);
       const nameCost = rerollCost / nameProbability;
-      const valueCost = rerollCost * (1 - missingTarget.successProbability) / missingTarget.successProbability;
+      const expectedValueRerolls = (1 - missingTarget.successProbability) / missingTarget.successProbability;
+      const valueCost = rerollCost * expectedValueRerolls;
       return {
         value: lockCost + nameCost + valueCost,
         lockCost,
@@ -1914,11 +2189,16 @@ import {
       };
     }
 
-    function findFormulaFastPath(initialState, model) {
+    function findFormulaFastPath(initialState, model, calculationRule) {
       const candidates = [];
       for (let lockMask = 0; lockMask < 8; lockMask += 1) {
         if (bitCount(lockMask) !== 2) continue;
-        const result = formulaFastPath(initialState, model, { mode: "name", lockMask });
+        const result = formulaFastPath(
+          initialState,
+          model,
+          { mode: "name", lockMask },
+          calculationRule,
+        );
         if (result) candidates.push({ ...result, lockMask });
       }
       candidates.sort((left, right) => left.value - right.value);
@@ -1942,9 +2222,9 @@ import {
       ];
       const model = buildExactModel(targetInput);
       const state = buildExactInitialState(initialInput, model);
-      const formula = findFormulaFastPath(state, model);
+      const formula = findFormulaFastPath(state, model, CALCULATION_RULES.CN_LEGACY);
       if (!formula || Math.abs(formula.value - 91.66666666666667) > 1e-9) {
-        throw new Error("91.666667 理论基准校验失败");
+        throw new Error("国服旧版理论基准校验失败");
       }
       return true;
     }
@@ -1974,10 +2254,10 @@ import {
       calculateButton.textContent = isCalculating ? "正在计算…" : "运行算法测试";
       if (!isCalculating) renderRunRecords();
     }
-    function resultHeader(targetInput, methodText) {
+    function resultHeader(targetInput, methodText, calculationRule) {
       const candidateCount = targetInput.filter(item => item.stat !== "空词条").length;
       const targetCount = Math.min(3, candidateCount);
-      return `最佳动作演算完毕（目标数:${targetCount}条/从${candidateCount}个候选选出，${methodText}），版本号V2.81:`;
+      return `最佳动作演算完毕（${calculationRuleLabel(calculationRule)}，目标数:${targetCount}条/从${candidateCount}个候选选出，${methodText}），版本号V2.81:`;
     }
 
     function resultFooter() {
@@ -1990,7 +2270,7 @@ import {
 
     function buildExactResultOutput(exactSolution, targetInput) {
       const separator = "=".repeat(40);
-      const lines = [resultHeader(targetInput, "有限状态 MDP"), separator];
+      const lines = [resultHeader(targetInput, "有限状态 MDP", exactSolution.calculationRule), separator];
       if (exactSolution.value <= 1e-9) {
         lines.push("🎉 当前盘面已经满足全部目标，无需继续消耗石头。");
       } else {
@@ -2000,7 +2280,7 @@ import {
       return lines.join("\n");
     }
     function buildDetailsOutput({ exactSolution, formulaResult }) {
-      const lines = [DEFAULT_DETAILS, "", "本次计算明细", "=".repeat(36), "模型自检：通过"];
+      const lines = [defaultDetails(exactSolution?.calculationRule), "", "本次计算明细", "=".repeat(36), "模型自检：通过"];
       if (exactSolution) {
         lines.push(
           `有限状态 MDP 期望：${exactSolution.value.toFixed(6)} 颗石头`,
@@ -2025,7 +2305,10 @@ import {
       lines.push(
         "",
         "算法说明",
-        "有限状态 MDP 枚举每次洗练的完整离散概率，并在每个盘面同时比较洗名称、洗数值和锁定动作。"
+        "有限状态 MDP 枚举每次洗练的完整离散概率，并在每个盘面同时比较洗名称、洗数值和锁定动作。",
+        exactSolution?.calculationRule === CALCULATION_RULES.CN_LEGACY
+          ? "国服旧版按原始概率直接覆盖每次结果，不排除相同结果，也不模拟保留原词条。"
+          : "国际服新版排除与当前完全相同的结果，并在每次候选出现后比较覆盖或保留原词条。"
       );
       return lines.join("\n");
     }
@@ -2213,7 +2496,7 @@ import {
         .join("\n");
     }
 
-    async function solveGlobalEquipmentProfile(equipment, targets, cache, progressCallback) {
+    async function solveGlobalEquipmentProfile(equipment, targets, cache, calculationRule, progressCallback) {
       if (!targets.length) {
         return {
           value: 0,
@@ -2223,19 +2506,24 @@ import {
           residual: 0
         };
       }
-      const profileKey = `${equipment.index}|${targets.map(target => `${target.stat}:${target.tier}`).sort().join("|")}`;
+      const profileKey = `${calculationRule}|${equipment.index}|${targets.map(target => `${target.stat}:${target.tier}`).sort().join("|")}`;
       if (cache.has(profileKey)) return cache.get(profileKey);
       const targetInput = globalTargetInput(targets);
       const model = buildExactModel(targetInput);
       const initialState = buildExactInitialState(equipment.initialInput, model);
-      const solution = await solveExactOptimal(initialState, model, progressCallback);
+      const solution = await solveExactOptimal(initialState, model, calculationRule, progressCallback);
       cache.set(profileKey, solution);
       return solution;
     }
 
     function buildGlobalConditionOutput(characterName, bestResult, conditions, activeEquipments, candidateCount, evaluatedCount) {
       const separator = "=".repeat(44);
-      const lines = [`${characterName} · 全局条件静态分配测试`, separator, "达成目标："];
+      const lines = [
+        `${characterName} · 全局条件静态分配测试`,
+        `计算模式：${calculationRuleLabel(selectedCalculationRule())}`,
+        separator,
+        "达成目标：",
+      ];
       conditions.forEach(condition => {
         const assigned = bestResult.plan.targetsByEquipment.flat().filter(target => target.stat === condition.stat);
         const totalBasis = assigned.reduce((sum, target) => sum + statTierBasisPoints(target.stat, target.tier), 0);
@@ -2263,6 +2551,7 @@ import {
     function buildGlobalConditionDetails(characterName, bestResult, conditions) {
       const lines = [
         `${characterName} · 全局条件测试明细`,
+        `计算模式：${calculationRuleLabel(selectedCalculationRule())}`,
         "=".repeat(38)
       ];
       conditions.forEach(condition => {
@@ -2290,6 +2579,7 @@ import {
     }
 
     async function runGlobalConditionBatch() {
+      const calculationRule = selectedCalculationRule();
       const allEquipments = readCharacterEquipmentInputs();
       const activeEquipments = allEquipments.filter(item => !item.skipped);
       const characterName = characterSelect.selectedOptions[0]?.textContent.trim() || "当前角色";
@@ -2367,7 +2657,13 @@ import {
               const percent = progressStart + completedProfiles / totalProfiles * (progressEnd - progressStart);
               setBatchProgress(percent, `${phaseLabel} ${planIndex + 1}/${pendingPlans.length} · ${equipment.label} · 有限状态 MDP…`);
               try {
-                const exactSolution = await solveGlobalEquipmentProfile(equipment, targets, cache, () => {});
+                const exactSolution = await solveGlobalEquipmentProfile(
+                  equipment,
+                  targets,
+                  cache,
+                  calculationRule,
+                  () => {},
+                );
                 equipmentResults.push({ ...equipment, targets, exactSolution });
                 totalExpectedCost += exactSolution.value;
               } catch (error) {
@@ -2439,7 +2735,13 @@ import {
           const targetInput = globalTargetInput(item.targets);
           const model = buildExactModel(targetInput);
           const initialState = buildExactInitialState(item.initialInput, model);
-          item.exactSolution = await solveExactOptimal(initialState, model, () => {}, true);
+          item.exactSolution = await solveExactOptimal(
+            initialState,
+            model,
+            calculationRule,
+            () => {},
+            true,
+          );
         }
 
         const activeResultByIndex = new Map(bestResult.equipmentResults.map(item => [item.index, item]));
@@ -2486,7 +2788,7 @@ import {
           if (output.textContent === "正在计算…") setInlineOptimalResult(output, `计算失败：${detail}`);
         });
         setResult(`本次全局条件测试未完成。\n\n${detail}`);
-        setDetails(DEFAULT_DETAILS);
+        setDetails(defaultDetails());
         activateOutputTab("result");
         console.error(error);
       } finally {
@@ -2503,7 +2805,11 @@ import {
 
     function buildCharacterBatchOutput(characterName, equipmentResults) {
       const separator = "=".repeat(42);
-      const lines = [`${characterName} · 四件装备联合计算`, separator];
+      const lines = [
+        `${characterName} · 四件装备联合计算`,
+        `计算模式：${calculationRuleLabel(selectedCalculationRule())}`,
+        separator,
+      ];
       let totalExpectedCost = 0;
 
       equipmentResults.forEach(item => {
@@ -2542,6 +2848,7 @@ import {
     function buildCharacterBatchDetails(characterName, equipmentResults) {
       const lines = [
         `${characterName} · 四件装备计算明细`,
+        `计算模式：${calculationRuleLabel(selectedCalculationRule())}`,
         "=".repeat(38)
       ];
 
@@ -2586,6 +2893,7 @@ import {
         savedAt: Date.now(),
         mode: "equipment",
         algorithmMode: "exact",
+        calculationRule: selectedCalculationRule(),
         targetSummary: independentTargetSummary(equipmentResults),
         targetConfig: {
           equipments: equipmentResults.map(item => ({
@@ -2646,6 +2954,7 @@ import {
         savedAt: Date.now(),
         mode: "global",
         algorithmMode: "exact",
+        calculationRule: selectedCalculationRule(),
         targetSummary: globalTargetSummary(conditions),
         targetConfig: {
           conditions: conditions.map(condition => ({
@@ -2663,6 +2972,7 @@ import {
     }
 
     async function runCharacterEquipmentBatch() {
+      const calculationRule = selectedCalculationRule();
       const allEquipments = readCharacterEquipmentInputs();
       const activeEquipments = allEquipments.filter(item => !item.skipped);
       const characterName = characterSelect.selectedOptions[0]?.textContent.trim() || "当前角色";
@@ -2701,7 +3011,7 @@ import {
           const exactModel = buildExactModel(equipment.targetInput);
           const exactInitialState = buildExactInitialState(equipment.initialInput, exactModel);
           setBatchProgress(segmentStart + 1, `${equipment.label} · 枚举有限状态 MDP…`);
-          const exactSolution = await solveExactOptimal(exactInitialState, exactModel, (stage, current, detail) => {
+          const exactSolution = await solveExactOptimal(exactInitialState, exactModel, calculationRule, (stage, current, detail) => {
             const localFraction = stage === "graph" ? 0.36 : 0.72;
             const percent = segmentStart + (segmentEnd - segmentStart) * localFraction;
             const text = stage === "graph"
@@ -2709,7 +3019,7 @@ import {
               : `${equipment.label} · 第 ${current} 轮求解，残差 ${Number(detail).toExponential(2)}…`;
             setBatchProgress(percent, text);
           }, true);
-          const formulaResult = findFormulaFastPath(exactInitialState, exactModel);
+          const formulaResult = findFormulaFastPath(exactInitialState, exactModel, calculationRule);
           const computedResult = { ...equipment, exactSolution, formulaResult };
           computedResults.push(computedResult);
           const equipmentOutput = characterEquipmentMode.querySelector(`[data-equipment-index="${equipment.index}"] .equipment-optimal-result`);
@@ -2738,7 +3048,7 @@ import {
           if (output.textContent === "正在计算…") setInlineOptimalResult(output, `计算失败：${detail}`);
         });
         setResult(`本次联合计算未完成。\n\n${detail}`);
-        setDetails(DEFAULT_DETAILS);
+        setDetails(defaultDetails());
         activateOutputTab("result");
         console.error(error);
       } finally {
@@ -2757,6 +3067,7 @@ import {
       }
       const initialInput = readRows(initialRows);
       const targetInput = readRows(targetRows);
+      const calculationRule = selectedCalculationRule();
       const validationError = validateInputs(initialInput, targetInput);
       if (validationError) {
         showMessage(validationError, true);
@@ -2777,7 +3088,7 @@ import {
         const exactInitialState = buildExactInitialState(initialInput, exactModel);
         progressBar.style.width = "8%";
         progressText.textContent = "有限状态 MDP：枚举可达状态…";
-        const exactSolution = await solveExactOptimal(exactInitialState, exactModel, (stage, current, detail) => {
+        const exactSolution = await solveExactOptimal(exactInitialState, exactModel, calculationRule, (stage, current, detail) => {
           if (stage === "graph") {
             progressBar.style.width = "30%";
             progressTrack.setAttribute("aria-valuenow", "30");
@@ -2788,7 +3099,7 @@ import {
             progressText.textContent = `有限状态 MDP：第 ${current} 轮求解，残差 ${Number(detail).toExponential(2)}…`;
           }
         }, true);
-        const formulaResult = findFormulaFastPath(exactInitialState, exactModel);
+        const formulaResult = findFormulaFastPath(exactInitialState, exactModel, calculationRule);
         setResult(buildExactResultOutput(exactSolution, targetInput));
         renderInlineOptimalResult(classicOptimalResult, exactSolution);
         setDetails(buildDetailsOutput({ exactSolution, formulaResult }));
@@ -2798,7 +3109,7 @@ import {
         showMessage(`算法测试失败：${detail}`, true);
         setInlineOptimalResult(classicOptimalResult, `计算失败：${detail}`);
         setResult(`本次算法测试未完成。\n\n${detail}`);
-        setDetails(DEFAULT_DETAILS);
+        setDetails(defaultDetails());
         activateOutputTab("result");
         console.error(error);
       } finally {
@@ -2809,7 +3120,7 @@ import {
     createRows(initialRows, 3, "initial");
     createRows(targetRows, 5, "target");
     resetGlobalConditions();
-    setDetails(DEFAULT_DETAILS);
+    setDetails(defaultDetails());
     populateUnsyncedSelectors();
     resultTab.addEventListener("click", () => activateOutputTab("result"));
     detailsTab.addEventListener("click", () => activateOutputTab("details"));
@@ -2829,6 +3140,7 @@ import {
         activateOutputTab(nextName, true);
       });
     });
+    calculationRuleSelect.addEventListener("change", handleCalculationRuleChange);
     calculateButton.addEventListener("click", runAlgorithmTest);
     resetButton.addEventListener("click", resetAll);
     collectionSelect.addEventListener("change", () => {

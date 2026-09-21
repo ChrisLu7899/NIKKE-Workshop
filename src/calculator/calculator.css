@@ -251,6 +251,21 @@
 
     .calculation-actions .button { min-height: 42px; }
     .calculation-actions .button-primary { min-width: 180px; }
+    .result-panel .panel-header {
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .result-panel .panel-header-copy { flex: 1 1 100%; }
+    .result-panel .calculation-actions {
+      width: 100%;
+      margin-left: 0;
+    }
+    .calculation-rule-select {
+      flex: 1 1 208px;
+      min-width: 208px;
+      min-height: 42px;
+      background-color: var(--bg);
+    }
     .calculation-message { margin: 0; padding: 0 20px; }
 
     #collection-select,
@@ -701,12 +716,16 @@
       border-top: 1px solid var(--line);
     }
 
-    .policy-branch > summary {
+    .policy-branch > summary,
+    .policy-branch-static {
       display: grid;
       grid-template-columns: 54px minmax(0, 1fr);
       gap: 8px;
       align-items: start;
       padding: 9px 10px;
+    }
+
+    .policy-branch > summary {
       cursor: pointer;
       list-style: none;
     }
@@ -727,13 +746,54 @@
 
     .policy-branch-copy {
       display: grid;
-      gap: 2px;
+      gap: 4px;
       min-width: 0;
     }
 
-    .policy-branch-copy > span {
+    .policy-branch-condition {
+      display: block;
+      min-width: 0;
+    }
+
+    .policy-condition-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
       color: var(--ink);
       font-size: 0.76rem;
+      line-height: 1.45;
+    }
+
+    .policy-condition-table th,
+    .policy-condition-table td {
+      padding: 3px 0;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .policy-condition-table tr + tr > * {
+      border-top: 1px solid var(--line);
+    }
+
+    .policy-condition-table th {
+      width: 54px;
+      padding-right: 8px;
+      color: var(--muted);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .policy-condition-table td.is-target {
+      font-weight: 700;
+    }
+
+    .policy-condition-table td.is-empty {
+      color: var(--muted);
+    }
+
+    .policy-branch-action {
+      color: var(--ink);
+      font-size: 0.78rem;
       line-height: 1.5;
     }
 
@@ -1184,7 +1244,8 @@
       .panel-header, .form-section, .controls { padding: 16px; }
       .equipment-effect-overview { align-items: flex-start; flex-direction: column; gap: 8px; padding: 14px 16px; }
       .panel-header { align-items: flex-start; flex-wrap: wrap; }
-      .calculation-actions { width: 100%; margin-left: 0; }
+      .calculation-actions { width: 100%; margin-left: 0; flex-wrap: wrap; }
+      .calculation-rule-select { flex: 1 1 100%; width: 100%; }
       .calculation-actions .button-primary { flex: 1; min-width: 0; }
 
       .form-row {
