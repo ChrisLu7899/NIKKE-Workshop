@@ -1,5 +1,10 @@
 # NIKKE Workshop 修改说明
 
+## 2026-09-24：发布 1.0.14
+
+- 补入客户端 152.8.13 的两个新角色默认全身立绘：吉尔提：神力兔女郎（c404）与森：疾速兔女郎（c405）。两张图均由素材库正式验收成果派生，保留来源和输出哈希。
+- 安装包生成增加新版角色表覆盖门禁：所有可显示角色必须有默认立绘目录映射、已验收来源和与清单一致的构建图片；缺失时停止打包。
+
 ## 2026-09-24：发布 1.0.13
 
 - 更新插件版本标识、完整安装包和 GitHub Release；功能与 1.0.12 一致。
@@ -49,7 +54,7 @@
 - 上游项目：[ExiaProject/ExiaInvasion](https://github.com/ExiaProject/ExiaInvasion)
 - 初始基准版本：`3.1.2`
 - 上游许可证：GNU General Public License v3.0
-- 当前项目版本：`NIKKE Workshop 1.0.13`
+- 当前项目版本：`NIKKE Workshop 1.0.14`
 
 本文件用于说明 NIKKE Workshop 相对上游项目的主要修改。Git 历史和源码中的 SPDX 标识用于记录后续具体变更。
 

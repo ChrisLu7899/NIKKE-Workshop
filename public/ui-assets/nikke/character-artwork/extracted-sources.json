@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-09-10",
+  "revision": "2026-09-24",
   "source": "NIKKE_files validated extracted asset library",
   "assetLibraryContract": "NIKKE_files/output only; no game-installation or runtime path dependency",
   "recipes": {
@@ -8,7 +8,7 @@
     "favorite": "square-transparent-v1:webp-q94-alpha100-effort5",
     "lobby-burst": "timeline-portrait-1105x1300-v2:webp-q94-effort5"
   },
-  "importedCount": 618,
+  "importedCount": 620,
   "preservedCount": 3,
   "excludedSources": [
     "c010_01",
@@ -3895,6 +3895,36 @@
       "sourceSha256": "65975b5b53062535c713c3250a928a42502405fdba90ab09368f2659967f4971",
       "outputSha256": "3ba9408a5b550cc28fb0c5ac32db9b83b88af68ce0691d865269b369a540b88b",
       "outputSize": 229884,
+      "width": 1600,
+      "height": 1600,
+      "recipe": "square-transparent-v1:webp-q90-alpha100-effort5",
+      "visualCheck": "passed"
+    },
+    "c404": {
+      "type": "static-art",
+      "resourceNumber": "404",
+      "sourceAssetId": "c404_00",
+      "source": "static_art/c404_00/c404_00.png",
+      "manifest": "static_art/c404_00/manifest.json",
+      "bundleHash": "318912c6cd2dfee0ed06c1b560472f48",
+      "sourceSha256": "33ef02e4f2d42ac93bf89e1927d1144a5230c4d52eeb7f06a13a39c366de7a0a",
+      "outputSha256": "31bf1f0acbb4fbf6a7d1b4b7ded3f14cbbcae611ae6cfd56e321bb73420a5ecd",
+      "outputSize": 244000,
+      "width": 1600,
+      "height": 1600,
+      "recipe": "square-transparent-v1:webp-q90-alpha100-effort5",
+      "visualCheck": "passed"
+    },
+    "c405": {
+      "type": "static-art",
+      "resourceNumber": "405",
+      "sourceAssetId": "c405_00",
+      "source": "static_art/c405_00/c405_00.png",
+      "manifest": "static_art/c405_00/manifest.json",
+      "bundleHash": "28598687960928a29d2683f29ebad78c",
+      "sourceSha256": "0673acf15f7855df9c0bef24767a10b828c5821dc5ed42ef0e969e7c4956aa8f",
+      "outputSha256": "e67bf3f13b57f5719914da1b0f6ecfbb6a4cf4826cc67481108a1f47075cda76",
+      "outputSize": 244866,
       "width": 1600,
       "height": 1600,
       "recipe": "square-transparent-v1:webp-q90-alpha100-effort5",

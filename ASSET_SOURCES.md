@@ -1,5 +1,9 @@
 # 素材来源说明
 
+## 新角色默认立绘（2026-09-24）
+
+吉尔提：神力兔女郎（`c404_00`）和森：疾速兔女郎（`c405_00`）来自当前客户端资源，在 `E:\NIKKE_files\output\static_art` 完成来源核对、逐帧视觉复核与哈希绑定审核后，按既有透明画布配方转换为 `c404.webp`、`c405.webp`。具体 Bundle、源 PNG 与派生 WebP SHA-256 记录在 `public/ui-assets/nikke/character-artwork/extracted-sources.json`；这两张是独立角色的默认立绘，不并入其他角色皮肤。游戏美术权利属于原权利人，不包含在本项目 GPL 代码许可中。
+
 ## 推荐一图流文字数据（2026-09-16 复核）
 
 来源为用户提供、署名“屑芙蒂”的《NIKKE国际服PVE一图流》，作者主页沿用 <https://space.bilibili.com/17057196/dynamic>。原图未标明可确认的发布日期，本次日期仅表示复核日期。原图 SHA-256 为 `717768cd8509e9e72e32f474f4856accef7b27465f12038cc02deb936e850406`。

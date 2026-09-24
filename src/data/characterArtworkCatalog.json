@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-09-10",
+  "revision": "2026-09-24",
   "source": "NIKKE_files validated extracted asset library",
-  "characterCount": 200,
-  "artworkCount": 621,
+  "characterCount": 202,
+  "artworkCount": 623,
   "characters": {
     "100": [
       {
@@ -2119,6 +2119,22 @@
         "label": "技能动画 · 默认",
         "assetId": "lobby_burst_c403_00",
         "url": "/ui-assets/nikke/character-artwork/lobby_burst_c403_00.webp"
+      }
+    ],
+    "404": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c404",
+        "url": "/ui-assets/nikke/character-artwork/c404.webp"
+      }
+    ],
+    "405": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c405",
+        "url": "/ui-assets/nikke/character-artwork/c405.webp"
       }
     ],
     "411": [

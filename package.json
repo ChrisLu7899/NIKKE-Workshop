@@ -1,7 +1,7 @@
 {
   "name": "nikke-workshop",
   "private": true,
-  "version": "1.0.13",
+  "version": "1.0.14",
   "license": "GPL-3.0-or-later",
   "type": "module",
   "scripts": {
@@ -12,6 +12,7 @@
     "test": "node --test tests/*.test.mjs",
     "sync:character-artwork": "node scripts/sync-character-artwork.mjs",
     "check:character-artwork": "node scripts/sync-character-artwork.mjs --check",
+    "check:character-artwork-coverage": "node scripts/check-character-artwork-coverage.mjs",
     "sync:character-objects": "node scripts/sync-character-objects.mjs",
     "check:character-objects": "node scripts/sync-character-objects.mjs --check",
     "sync:skill-icons": "node scripts/sync-character-objects.mjs",

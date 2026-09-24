@@ -138,8 +138,10 @@ test("published and runtime artwork catalogs remain identical", () => {
 
 test("local artwork catalog covers every current standard character and only exposes local files", () => {
   const entries = Object.values(characterArtworkCatalog.characters).flat();
-  assert.equal(characterArtworkCatalog.characterCount, 200);
-  assert.equal(characterArtworkCatalog.artworkCount, 621);
+  assert.equal(characterArtworkCatalog.characterCount, Object.keys(characterArtworkCatalog.characters).length);
+  for (const assetId of ["c404", "c405"]) {
+    assert.equal(characterArtworkCatalog.characters[assetId.slice(1)]?.find((item) => item.id === "default")?.assetId, assetId);
+  }
   assert.equal(entries.length, characterArtworkCatalog.artworkCount);
   Object.values(characterArtworkCatalog.characters).forEach((artworks) => {
     assert.ok(artworks.some((item) => item.id === "default"));

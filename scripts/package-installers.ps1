@@ -1,8 +1,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-param([Parameter(Mandatory=$true)][string]$BuildDirectory, [Parameter(Mandatory=$true)][string]$OutputDirectory)
+param([Parameter(Mandatory=$true)][string]$BuildDirectory, [Parameter(Mandatory=$true)][string]$OutputDirectory, [Parameter(Mandatory=$true)][string]$CharacterTable)
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $build = (Resolve-Path -LiteralPath $BuildDirectory).Path.TrimEnd('\')
+$table = (Resolve-Path -LiteralPath $CharacterTable).Path
 $output = [IO.Path]::GetFullPath($OutputDirectory).TrimEnd('\')
 if ((Test-Path -LiteralPath $output) -or $output.StartsWith($build + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Use a new output directory outside the build.' }
 $manifest = Get-Content -LiteralPath (Join-Path $build 'manifest.json') -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -10,6 +11,8 @@ $art = Get-Content -LiteralPath (Join-Path $build 'artwork-manifest.json') -Raw 
 if ($manifest.name -ne 'NIKKE Workshop' -or $manifest.version -ne $art.appVersion) { throw 'Build/artwork version mismatch.' }
 $installation = Get-Content -LiteralPath (Join-Path $build 'installation.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 if ($installation.schemaVersion -ne 1 -or $installation.variant -ne 'full' -or @($art.files).Count -eq 0) { throw 'A complete build with all artwork is required.' }
+& node (Join-Path $PSScriptRoot 'check-character-artwork-coverage.mjs') "--character-table=$table" "--build-directory=$build"
+if ($LASTEXITCODE -ne 0) { throw 'Character artwork coverage check failed; packaging stopped.' }
 $images = @{}
 foreach ($entry in $art.files) {
     if ($entry.path -cnotmatch '^ui-assets/nikke/character-artwork/[a-z0-9_-]+\.webp$' -or $images.ContainsKey($entry.path)) { throw 'Invalid artwork manifest.' }

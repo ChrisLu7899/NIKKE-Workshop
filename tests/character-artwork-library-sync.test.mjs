@@ -161,7 +161,10 @@ test("approved regional costumes remain dedicated preserved artwork", () => {
 test("generated provenance contains only portable validated-output references", () => {
   const serialized = JSON.stringify(provenance);
   assert.equal(provenance.source, "NIKKE_files validated extracted asset library");
-  assert.equal(provenance.importedCount, 618);
+  assert.equal(provenance.importedCount, Object.keys(provenance.assets).length);
+  for (const assetId of ["c404", "c405"]) {
+    assert.equal(provenance.assets[assetId]?.sourceAssetId, `${assetId}_00`);
+  }
   assert.equal(provenance.preservedCount, 3);
   assert.deepEqual(provenance.excludedSources, ["c010_01", "c600_02", "c601_02"]);
   assert.ok(provenance.unmappedStaticSources.length > 0);
