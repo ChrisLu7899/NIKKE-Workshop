@@ -21,7 +21,8 @@
 Set-Location -LiteralPath "D:\path\to\NIKKE-Workshop-source"
 $workshopRepo = (Get-Location).Path
 $workshopReleaseRoot = Split-Path -Parent $workshopRepo
-$workshopVersion = "1.0.11"
+$workshopVersion = "<本次新版本号>"
+$workshopCharacterTable = "<本次客户端更新批次>\staticdata\tables\CharacterTable.json"
 ```
 
 检查工作区、远端和运行环境：
@@ -40,6 +41,7 @@ npm --version
 - 本地主分支没有落后或意外分叉。
 - Node.js 版本符合 `.nvmrc`。
 - 本次功能已经在浏览器中手动验收。
+- `$workshopCharacterTable` 指向本次客户端更新批次的角色表；不能沿用旧批次，不能直接读取游戏安装目录。
 
 ## 3. 版本和文档检查
 
@@ -51,6 +53,7 @@ npm --version
 - `MODIFICATIONS.md` 的“当前项目版本”和主要差异。
 - `PRODUCT.md` 是否仍描述已经删除的功能。
 - `docs/guide/index.html` 的“适用版本”和安装成功提示。
+- 新角色的已验收默认立绘、目录映射和来源记录；不能只依据现有 WebP 总数判断完整性。
 - 本地操作指南副本是否与 `docs/guide/index.html` 一致。
 - Release 更新内容是否覆盖自上一个标签以来的全部用户可见变化。
 
@@ -155,25 +158,25 @@ npm run build
 - 三个 HTML 引用的哈希 JS/CSS 均存在。
 - `dist/assets` 只有本次 HTML 实际引用的文件，没有旧哈希残留。
 - 构建警告已经人工确认，不影响扩展运行。
+- 按本次角色表运行 `npm run check:character-artwork-coverage -- --character-table=$workshopCharacterTable --build-directory=$workshopDist`，确认每个可显示角色的默认立绘映射、正式来源和构建图片哈希。检查失败时先回素材库完成审核与接入，不得继续打包。
 
 ## 8. 生成本地安装包和源码包
 
 先将已有同名压缩包移入 `.tmp/release-backups`，不要直接无备份覆盖。
 
-安装包必须压缩 `dist` 的内容，而不是把 `dist` 文件夹本身作为 ZIP 第一层：
+安装包必须由受控打包脚本生成，脚本会再次执行角色立绘覆盖检查、素材哈希校验和 ZIP 逐文件回读；不要绕过脚本直接压缩 `dist`：
 
 ```powershell
 $workshopDist = (Resolve-Path -LiteralPath (Join-Path $workshopRepo "dist")).Path
 $workshopInstallZip = Join-Path $workshopReleaseRoot "NIKKE-Workshop.zip"
 $workshopSourceZip = Join-Path $workshopReleaseRoot "NIKKE-Workshop-source.zip"
 
-Add-Type -AssemblyName System.IO.Compression.FileSystem
-[System.IO.Compression.ZipFile]::CreateFromDirectory(
-  $workshopDist,
-  $workshopInstallZip,
-  [System.IO.Compression.CompressionLevel]::Optimal,
-  $false
-)
+$workshopPackageOutput = Join-Path $workshopRepo ".tmp\package-v$workshopVersion-<本轮唯一编号>"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/package-installers.ps1 `
+  -BuildDirectory $workshopDist `
+  -OutputDirectory $workshopPackageOutput `
+  -CharacterTable $workshopCharacterTable
+Copy-Item -LiteralPath (Join-Path $workshopPackageOutput "NIKKE-Workshop.zip") -Destination $workshopInstallZip
 
 git archive --format=zip --output="$workshopSourceZip" "v$workshopVersion"
 Get-FileHash -Algorithm SHA256 -LiteralPath $workshopInstallZip, $workshopSourceZip
@@ -272,6 +275,7 @@ Release 说明至少包含：
 - [ ] 依赖审计已人工复核
 - [ ] 敏感信息与截图已检查
 - [ ] 从干净 `dist` 构建
+- [ ] 当前客户端角色表覆盖检查通过，缺图时打包中止
 - [ ] 安装包根目录和 Manifest 引用通过检查
 - [ ] 源码包基于最终标签生成
 - [ ] main 与目标标签已推送
