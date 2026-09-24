@@ -1,5 +1,10 @@
 # NIKKE Workshop 修改说明
 
+## 2026-09-24：发布 1.0.13
+
+- 更新插件版本标识、完整安装包和 GitHub Release；功能与 1.0.12 一致。
+- 客户端 152.8.13 的解包数据在独立素材库维护，本次未将未经正式验收的资源接入插件。
+
 ## 2026-09-16：替换用户确认的一图流推荐方案
 
 - 更新 87 条培养建议的备注、装备、词条、技能、魔方和收藏品字段，保留现有 6 类、21 个方案及默认顺序。
@@ -44,7 +49,7 @@
 - 上游项目：[ExiaProject/ExiaInvasion](https://github.com/ExiaProject/ExiaInvasion)
 - 初始基准版本：`3.1.2`
 - 上游许可证：GNU General Public License v3.0
-- 当前项目版本：`NIKKE Workshop 1.0.11`
+- 当前项目版本：`NIKKE Workshop 1.0.13`
 
 本文件用于说明 NIKKE Workshop 相对上游项目的主要修改。Git 历史和源码中的 SPDX 标识用于记录后续具体变更。
 
