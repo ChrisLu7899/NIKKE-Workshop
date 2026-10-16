@@ -133,12 +133,12 @@
       <div class="panel-header">
         <div class="panel-header-copy">
           <h2 id="calc-title">模拟计算</h2>
-          <p>有限状态 MDP 在本机完成，不会上传数据。</p>
+          <p>新规则限制不会出现重复，因此保留低档位理论上可以提高高档位的出现概率，实测差距非常小，但是在计算和操作流程上会有更高的复杂度，谨慎使用。</p>
         </div>
         <div class="calculation-actions">
           <select class="calculation-rule-select" id="calculation-rule" aria-label="计算模式">
-            <option value="global-current" selected>国际服（新规则）</option>
-            <option value="cn-legacy">国服（旧规则）</option>
+            <option value="cn-legacy" selected>旧规则</option>
+            <option value="global-current">新规则</option>
           </select>
           <button class="button button-primary" id="calculate" type="button">运行算法测试</button>
           <button class="button button-secondary" id="reset" type="button">重置</button>

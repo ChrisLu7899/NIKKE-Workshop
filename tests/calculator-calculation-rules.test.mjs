@@ -4,6 +4,8 @@ import assert from "node:assert/strict";
 import {
   applyKeepOrReplacePolicy,
   CALCULATION_RULES,
+  normalizeCalculationRule,
+  calculationRuleLabel,
   canKeepRerollCandidate,
   evaluateKeepOrReplaceAction,
   usesDuplicateSafeRerolls,
@@ -50,4 +52,16 @@ test("keeping a low-tier current result can reject a worse candidate", () => {
   const decision = evaluateKeepOrReplaceAction(1, transitions, values, 0);
   assert.deepEqual([...decision.acceptedStateIndexes].sort((a, b) => a - b), [1, 3]);
   assert.equal(decision.acceptedStateIndexes.has(2), false);
+});
+
+
+test("missing or invalid rules default to legacy while new rules remain selectable", () => {
+  for (const value of [undefined, null, "", "invalid", CALCULATION_RULES.CN_LEGACY]) {
+    assert.equal(normalizeCalculationRule(value), CALCULATION_RULES.CN_LEGACY);
+    assert.equal(usesDuplicateSafeRerolls(value), false);
+    assert.equal(canKeepRerollCandidate(value), false);
+    assert.equal(calculationRuleLabel(value), "旧规则");
+  }
+  assert.equal(normalizeCalculationRule(CALCULATION_RULES.GLOBAL_CURRENT), CALCULATION_RULES.GLOBAL_CURRENT);
+  assert.equal(calculationRuleLabel(CALCULATION_RULES.GLOBAL_CURRENT), "新规则");
 });

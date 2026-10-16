@@ -2,6 +2,7 @@
 // 抓取任务准入控制。只限制网络抓取，不影响下载已缓存数据。
 
 export const DEFAULT_FULL_CRAWL_COOLDOWN_MS = 60_000;
+export const FAILED_CRAWL_COOLDOWN_MS = 10_000;
 
 export const CRAWL_CIRCUIT_STORAGE_KEY = "crawlCircuitBreakerV1";
 
@@ -182,10 +183,12 @@ export const recordCrawlCircuitFailure = async (failures, {
 
 export const createCrawlRunGate = ({
   cooldownMs = DEFAULT_FULL_CRAWL_COOLDOWN_MS,
+  failureCooldownMs = FAILED_CRAWL_COOLDOWN_MS,
   now = () => Date.now(),
 } = {}) => {
   let active = false;
-  let lastFullCrawlFinishedAt = 0;
+  let lastFullCrawlFinishedAt = null;
+  let lastCooldownMs = cooldownMs;
 
   return {
     tryEnter({ fullCrawl = true } = {}) {
@@ -194,8 +197,8 @@ export const createCrawlRunGate = ({
       }
       const currentTime = now();
       const elapsed = currentTime - lastFullCrawlFinishedAt;
-      const waitMs = fullCrawl && lastFullCrawlFinishedAt > 0
-        ? Math.max(0, cooldownMs - elapsed)
+      const waitMs = fullCrawl && lastFullCrawlFinishedAt !== null
+        ? Math.max(0, lastCooldownMs - elapsed)
         : 0;
       if (waitMs > 0) {
         return {
@@ -208,10 +211,13 @@ export const createCrawlRunGate = ({
       return { allowed: true, reason: "", waitMs: 0 };
     },
 
-    leave({ fullCrawl = true } = {}) {
+    leave({ fullCrawl = true, success = true } = {}) {
       if (!active) return;
       active = false;
-      if (fullCrawl) lastFullCrawlFinishedAt = now();
+      if (fullCrawl) {
+        lastFullCrawlFinishedAt = now();
+        lastCooldownMs = success ? cooldownMs : failureCooldownMs;
+      }
     },
 
     isActive() {

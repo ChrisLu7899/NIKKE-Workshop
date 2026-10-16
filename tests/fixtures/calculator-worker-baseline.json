@@ -1,0 +1,318 @@
+[
+  {
+    "name": "single target from empty",
+    "initialInput": [
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      },
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      },
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      }
+    ],
+    "targetInput": [
+      {
+        "stat": "攻击力增加",
+        "tier": 1,
+        "flagged": true,
+        "forceKeep": false
+      }
+    ],
+    "calculationRule": "cn-legacy",
+    "expected": {
+      "value": 5.51043431599146,
+      "firstActionText": "全不锁，洗词条名称",
+      "stateCount": 10,
+      "iterations": 2
+    }
+  },
+  {
+    "name": "single target from empty",
+    "initialInput": [
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      },
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      },
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      }
+    ],
+    "targetInput": [
+      {
+        "stat": "攻击力增加",
+        "tier": 1,
+        "flagged": true,
+        "forceKeep": false
+      }
+    ],
+    "calculationRule": "global-current",
+    "expected": {
+      "value": 5.510434315991394,
+      "firstActionText": "全不锁，洗词条名称",
+      "stateCount": 10,
+      "iterations": 2
+    }
+  },
+  {
+    "name": "G25 locked attack and missing superior",
+    "initialInput": [
+      {
+        "stat": "防御力增加",
+        "tier": 1,
+        "flagged": false,
+        "forceKeep": false
+      },
+      {
+        "stat": "攻击力增加",
+        "tier": 15,
+        "flagged": true,
+        "forceKeep": false
+      },
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      }
+    ],
+    "targetInput": [
+      {
+        "stat": "优越代码伤害增加",
+        "tier": 10,
+        "flagged": true,
+        "forceKeep": false
+      },
+      {
+        "stat": "攻击力增加",
+        "tier": 10,
+        "flagged": true,
+        "forceKeep": false
+      }
+    ],
+    "calculationRule": "cn-legacy",
+    "expected": {
+      "value": 28.451644575304776,
+      "firstActionText": "锁定 2号位，洗词条名称",
+      "stateCount": 409,
+      "iterations": 53
+    }
+  },
+  {
+    "name": "G25 locked attack and missing superior",
+    "initialInput": [
+      {
+        "stat": "防御力增加",
+        "tier": 1,
+        "flagged": false,
+        "forceKeep": false
+      },
+      {
+        "stat": "攻击力增加",
+        "tier": 15,
+        "flagged": true,
+        "forceKeep": false
+      },
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      }
+    ],
+    "targetInput": [
+      {
+        "stat": "优越代码伤害增加",
+        "tier": 10,
+        "flagged": true,
+        "forceKeep": false
+      },
+      {
+        "stat": "攻击力增加",
+        "tier": 10,
+        "flagged": true,
+        "forceKeep": false
+      }
+    ],
+    "calculationRule": "global-current",
+    "expected": {
+      "value": 26.730533464244804,
+      "firstActionText": "锁定 2号位，洗词条名称",
+      "stateCount": 409,
+      "iterations": 28
+    }
+  },
+  {
+    "name": "already satisfied",
+    "initialInput": [
+      {
+        "stat": "攻击力增加",
+        "tier": 15,
+        "flagged": true,
+        "forceKeep": false
+      },
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      },
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      }
+    ],
+    "targetInput": [
+      {
+        "stat": "攻击力增加",
+        "tier": 10,
+        "flagged": true,
+        "forceKeep": false
+      }
+    ],
+    "calculationRule": "cn-legacy",
+    "expected": {
+      "value": 0,
+      "firstActionText": "目标已经完成",
+      "stateCount": 1,
+      "iterations": 1
+    }
+  },
+  {
+    "name": "already satisfied",
+    "initialInput": [
+      {
+        "stat": "攻击力增加",
+        "tier": 15,
+        "flagged": true,
+        "forceKeep": false
+      },
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      },
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      }
+    ],
+    "targetInput": [
+      {
+        "stat": "攻击力增加",
+        "tier": 10,
+        "flagged": true,
+        "forceKeep": false
+      }
+    ],
+    "calculationRule": "global-current",
+    "expected": {
+      "value": 0,
+      "firstActionText": "目标已经完成",
+      "stateCount": 1,
+      "iterations": 1
+    }
+  },
+  {
+    "name": "forced non target physical slot",
+    "initialInput": [
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      },
+      {
+        "stat": "防御力增加",
+        "tier": 1,
+        "flagged": false,
+        "forceKeep": true
+      },
+      {
+        "stat": "攻击力增加",
+        "tier": 1,
+        "flagged": false,
+        "forceKeep": false
+      }
+    ],
+    "targetInput": [
+      {
+        "stat": "攻击力增加",
+        "tier": 10,
+        "flagged": true,
+        "forceKeep": false
+      }
+    ],
+    "calculationRule": "cn-legacy",
+    "expected": {
+      "value": 18.666666665945034,
+      "firstActionText": "强制保留 2号位，洗数值",
+      "stateCount": 14,
+      "iterations": 45
+    }
+  },
+  {
+    "name": "forced non target physical slot",
+    "initialInput": [
+      {
+        "stat": "空词条",
+        "tier": 0,
+        "flagged": false,
+        "forceKeep": false
+      },
+      {
+        "stat": "防御力增加",
+        "tier": 1,
+        "flagged": false,
+        "forceKeep": true
+      },
+      {
+        "stat": "攻击力增加",
+        "tier": 1,
+        "flagged": false,
+        "forceKeep": false
+      }
+    ],
+    "targetInput": [
+      {
+        "stat": "攻击力增加",
+        "tier": 10,
+        "flagged": true,
+        "forceKeep": false
+      }
+    ],
+    "calculationRule": "global-current",
+    "expected": {
+      "value": 16.71085858585859,
+      "firstActionText": "强制保留 2号位，洗数值",
+      "stateCount": 14,
+      "iterations": 12
+    }
+  }
+]

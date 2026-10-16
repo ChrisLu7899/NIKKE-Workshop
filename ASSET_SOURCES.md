@@ -1,5 +1,15 @@
 # 素材来源说明
 
+## 客户端资源热更新（2026-10-08）
+
+贝洛塔：南瓜女巫的远程头像尚未提供（404），补入当前包内 `mi_c063_00_s` 原始 Sprite，本地优先读取；保持原始像素与透明度，来源及审核哈希见 `public/ui-assets/nikke/character-avatars/sources.json`。
+
+贝洛塔：南瓜女巫（`c063_00`）、灰姑娘「水晶女仆」（`c511_03`）和蕾贝儿「神秘学者」（`c582_01`）来自当前客户端资源，角色与皮肤身份另经 Blablalink 官方在线目录及 roledata 核对。三张新立绘与十张来源发生变化的既有立绘均重新渲染，查看完整图、多帧及白/灰/深色背景后，以源文件哈希绑定审核并晋级素材库正式 output。`c290_00` 改用 0ms，避免 800ms 的瞬时眨眼。
+
+插件继续使用正式 PNG 派生的透明 WebP，来源 Bundle、PNG 与 WebP 哈希见 `public/ui-assets/nikke/character-artwork/extracted-sources.json`。部分更新仅改变资源来源，最终像素相同，仍刷新来源记录。游戏美术权利属于原权利人。
+
+当前静态数值包无法用现有解析配置解码；此次覆盖核对使用明确标注来源的官方在线目录，不冒充新版解包角色表。该次素材交付未改动洗词条数值、未发布 ZIP/GitHub；现随 1.0.15 一并发布。
+
 ## 新角色默认立绘（2026-09-24）
 
 吉尔提：神力兔女郎（`c404_00`）和森：疾速兔女郎（`c405_00`）来自当前客户端资源，在 `E:\NIKKE_files\output\static_art` 完成来源核对、逐帧视觉复核与哈希绑定审核后，按既有透明画布配方转换为 `c404.webp`、`c405.webp`。具体 Bundle、源 PNG 与派生 WebP SHA-256 记录在 `public/ui-assets/nikke/character-artwork/extracted-sources.json`；这两张是独立角色的默认立绘，不并入其他角色皮肤。游戏美术权利属于原权利人，不包含在本项目 GPL 代码许可中。

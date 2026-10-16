@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "source": "NIKKE_files validated extracted asset library",
+  "assets": {
+    "c063": {
+      "schemaVersion": 1,
+      "assetId": "c063",
+      "resourceKey": "icons-char-mi(hd)_assets_mi_c063_00_s_fdfa3b7fe2e7507cc974a093a4eb2d84.bundle",
+      "bundleHash": "fdfa3b7fe2e7507cc974a093a4eb2d84",
+      "bundleSha256": "e37fdd0cd0ac75938e98cefd3598c56b8353a0db4da080029589f921e679cb2c",
+      "spriteName": "mi_c063_00_s",
+      "cab": "CAB-1d63b00ce6bab07cdf1955a5739990a1",
+      "pathId": "-4058961104830686716",
+      "size": [
+        256,
+        471
+      ],
+      "pngSha256": "ce03bc25e089104c6e7483c9acd4cea7de84ad8a8a14793f1d813ea4cfdac4e1",
+      "recipe": "UnityPy Sprite.image; original pixels, size and alpha; no crop, resize or repaint",
+      "reviewStatus": "passed",
+      "reviewedAt": "2026-10-08T09:31:50.502568+00:00",
+      "visualReview": {
+        "sha256": "ce03bc25e089104c6e7483c9acd4cea7de84ad8a8a14793f1d813ea4cfdac4e1",
+        "reviewer": "Codex visual QA",
+        "checks": {
+          "identity": true,
+          "face": true,
+          "originalFraming": true,
+          "alpha": true
+        },
+        "note": "Viewed native portrait Sprite; matches official c063 identity and approved standing artwork."
+      },
+      "source": "character_avatars/c063/mi_c063_00_s.png"
+    }
+  }
+}

@@ -95,3 +95,21 @@ test("stale half-open recovery lease cannot block synchronization forever", asyn
   assert.equal(permit.allowed, true);
   assert.equal(permit.probe, true);
 });
+
+
+test("failed full sync retries after 10 seconds while successful sync retains 60 seconds", () => {
+  let timestamp = 0;
+  const gate = createCrawlRunGate({ now: () => timestamp });
+  assert.equal(gate.tryEnter().allowed, true);
+  gate.leave({ success: false });
+  assert.equal(gate.tryEnter().waitMs, 10_000);
+  timestamp = 9_999;
+  assert.equal(gate.tryEnter().allowed, false);
+  timestamp = 10_000;
+  assert.equal(gate.tryEnter().allowed, true);
+  gate.leave({ success: true });
+  timestamp = 20_000;
+  assert.equal(gate.tryEnter().waitMs, 50_000);
+  timestamp = 70_000;
+  assert.equal(gate.tryEnter().allowed, true);
+});

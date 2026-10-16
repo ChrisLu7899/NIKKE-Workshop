@@ -436,8 +436,7 @@ const ManagementPage = () => {
           );
           await setCalculatorData(calculatorSnapshot);
         }
-        setCalculatorFrameHeight(720);
-        setCalculatorFrameKey((current) => current + 1);
+        // Keep the iframe (and its calculation worker) alive across tab switches.
       }
       setTab(newTab);
       chrome.storage.local.set({ managementTab: newTab, managementLayoutVersion: 2 });

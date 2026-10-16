@@ -262,3 +262,11 @@ export function expandGlobalPlanNeighbors(seedPlan, {
 
   return selected;
 }
+
+/** Remaining equipment costs are nonnegative. Preserve ties and a small
+ * numerical margin so rounding cannot prune an equivalent beam seed. */
+export function cannotImproveGlobalBeam(partialCost, completeCosts, beamSize) {
+  if (!Number.isFinite(partialCost) || completeCosts.length < beamSize || beamSize < 1) return false;
+  const threshold = [...completeCosts].sort((a, b) => a - b)[beamSize - 1];
+  return partialCost > threshold + 1e-7 * Math.max(1, Math.abs(threshold));
+}

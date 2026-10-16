@@ -6,15 +6,15 @@ export const CALCULATION_RULES = Object.freeze({
 });
 
 export function normalizeCalculationRule(value) {
-  return value === CALCULATION_RULES.CN_LEGACY
-    ? CALCULATION_RULES.CN_LEGACY
-    : CALCULATION_RULES.GLOBAL_CURRENT;
+  return value === CALCULATION_RULES.GLOBAL_CURRENT
+    ? CALCULATION_RULES.GLOBAL_CURRENT
+    : CALCULATION_RULES.CN_LEGACY;
 }
 
 export function calculationRuleLabel(value) {
   return normalizeCalculationRule(value) === CALCULATION_RULES.CN_LEGACY
-    ? "国服（旧规则）"
-    : "国际服（新规则）";
+    ? "旧规则"
+    : "新规则";
 }
 
 export function usesDuplicateSafeRerolls(value) {
@@ -78,4 +78,53 @@ export function applyKeepOrReplacePolicy(transitions, currentIndex, acceptedStat
     probabilities.set(index, (probabilities.get(index) || 0) + transition.probability);
   });
   return [...probabilities].map(([index, probability]) => ({ index, probability }));
+}
+
+// Transition arrays are immutable during value iteration; share their compiled form.
+const compiledTransitions = new WeakMap();
+export function prepareKeepOrReplaceAction(transitions, currentIndex) {
+  let compiled = compiledTransitions.get(transitions);
+  if (!compiled) {
+    compiled = {
+      indexes: Int32Array.from(transitions, item => item.index),
+      probabilities: Float64Array.from(transitions, item => item.probability),
+    };
+    compiledTransitions.set(transitions, compiled);
+  }
+  return { ...compiled, transitions, currentIndex };
+}
+
+/** Positive cost gives c = sum(p * max(V - futureValue, 0)).
+ * Removing values at/above V can only lower V, so accepted sets are nested.
+ * Keep the sorted implementation for unusual inputs and slow convergence,
+ * and for the final policy's explicit accepted-state set.
+ */
+export function evaluatePreparedKeepOrReplaceValue(immediateCost, prepared, values) {
+  const { indexes, probabilities, currentIndex, transitions } = prepared;
+  const fallback = () => evaluateKeepOrReplaceAction(immediateCost, transitions, values, currentIndex).value;
+  if (!(immediateCost > 0) || !Number.isFinite(immediateCost)) return fallback();
+  let threshold = Infinity;
+  let previousCount = -1;
+  for (let pass = 0; pass < 8; pass += 1) {
+    let probability = 0;
+    let weightedValue = 0;
+    let count = 0;
+    for (let i = 0; i < indexes.length; i += 1) {
+      if (indexes[i] === currentIndex || probabilities[i] <= 0) continue;
+      const value = values[indexes[i]];
+      if (value === Infinity) continue;
+      if (!Number.isFinite(value) || !Number.isFinite(probabilities[i])) return fallback();
+      if (value >= threshold) continue;
+      probability += probabilities[i];
+      weightedValue += probabilities[i] * value;
+      count += 1;
+    }
+    if (!(probability > 0)) return Infinity;
+    const next = (immediateCost + weightedValue) / probability;
+    if (!Number.isFinite(next)) return fallback();
+    if (count === previousCount) return next;
+    previousCount = count;
+    threshold = next;
+  }
+  return fallback();
 }

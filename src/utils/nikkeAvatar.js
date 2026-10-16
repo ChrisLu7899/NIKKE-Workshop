@@ -3,6 +3,7 @@
 
 import { SHOW_NIKKE_IMAGES } from "../config/displayPreferences.js";
 import characterArtworkCatalog from "../data/characterArtworkCatalog.json" with { type: "json" };
+import characterAvatarCatalog from "../data/characterAvatarCatalog.json" with { type: "json" };
 import { favoriteItemDisplayAsset } from "../domain/characterObjectAssets.js";
 
 export const getNikkeResourceId = (nikke, resourceIdMap) => {
@@ -26,6 +27,7 @@ export const getNikkeAvatarUrl = (nikke, resourceIdMap) => {
   const rid = getNikkeResourceId(nikke, resourceIdMap);
   if (rid === undefined || rid === null || rid === "") return "";
   const ridStr = String(rid).padStart(3, "0");
+  if (characterAvatarCatalog[ridStr]) return characterAvatarCatalog[ridStr];
   return `https://nikke-db.github.io/images/sprite/si_c${ridStr}_00_s.png`;
 };
 

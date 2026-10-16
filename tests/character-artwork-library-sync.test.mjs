@@ -162,7 +162,7 @@ test("generated provenance contains only portable validated-output references", 
   const serialized = JSON.stringify(provenance);
   assert.equal(provenance.source, "NIKKE_files validated extracted asset library");
   assert.equal(provenance.importedCount, Object.keys(provenance.assets).length);
-  for (const assetId of ["c404", "c405"]) {
+  for (const assetId of ["c063", "c404", "c405"]) {
     assert.equal(provenance.assets[assetId]?.sourceAssetId, `${assetId}_00`);
   }
   assert.equal(provenance.preservedCount, 3);

@@ -179,6 +179,7 @@ export function useCrawler({
     }
     let circuitPermit = null;
     let circuitSettled = false;
+    let crawlSucceeded = false;
     try {
       circuitPermit = await acquireCrawlCircuitPermit();
       setCrawlCircuitState(circuitPermit.state);
@@ -669,6 +670,7 @@ export function useCrawler({
           .join("；")
         : "";
       if (successAccounts.length > 0) {
+        crawlSucceeded = true;
         const nextCircuitState = await recordCrawlCircuitSuccess();
         setCrawlCircuitState(nextCircuitState);
         circuitSettled = true;
@@ -727,7 +729,7 @@ export function useCrawler({
           }
         }
         setLoading(false);
-        crawlRunGateRef.current.leave({ fullCrawl: true });
+        crawlRunGateRef.current.leave({ fullCrawl: true, success: crawlSucceeded });
       }
     }
   }, [t, server, clearLogs, addLog, addDiagnosticLog, addCharacterDetailsToDictWithAccount]);

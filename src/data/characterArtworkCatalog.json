@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-09-24",
+  "revision": "2026-10-08",
   "source": "NIKKE_files validated extracted asset library",
-  "characterCount": 202,
-  "artworkCount": 623,
+  "characterCount": 203,
+  "artworkCount": 626,
   "characters": {
     "100": [
       {
@@ -2453,6 +2453,12 @@
         "url": "/ui-assets/nikke/character-artwork/c511_02.webp"
       },
       {
+        "id": "skin-3",
+        "label": "水晶女仆",
+        "assetId": "c511_03",
+        "url": "/ui-assets/nikke/character-artwork/c511_03.webp"
+      },
+      {
         "id": "lobby-burst-default",
         "label": "技能动画 · 默认",
         "assetId": "lobby_burst_c511_00",
@@ -2709,6 +2715,12 @@
         "label": "默认",
         "assetId": "c582",
         "url": "/ui-assets/nikke/character-artwork/c582.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "神秘学者",
+        "assetId": "c582_01",
+        "url": "/ui-assets/nikke/character-artwork/c582_01.webp"
       },
       {
         "id": "lobby-burst-default",
@@ -4145,6 +4157,14 @@
         "label": "技能动画 · 默认",
         "assetId": "lobby_burst_c095_00",
         "url": "/ui-assets/nikke/character-artwork/lobby_burst_c095_00.webp"
+      }
+    ],
+    "063": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c063",
+        "url": "/ui-assets/nikke/character-artwork/c063.webp"
       }
     ]
   }

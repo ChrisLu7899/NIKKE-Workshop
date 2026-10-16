@@ -3,6 +3,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { SHOW_NIKKE_IMAGES } from "../src/config/displayPreferences.js";
 import characterArtworkCatalog from "../src/data/characterArtworkCatalog.json" with { type: "json" };
 import {
@@ -27,6 +28,19 @@ test("bundled CN-only avatars resolve without an external resource id", () => {
   );
 });
 
+test("new client portrait works without a remote avatar and retains verified source bytes", () => {
+  const url = "/ui-assets/nikke/character-avatars/c063.png";
+  assert.equal(getNikkeAvatarUrl({ resource_id: 63 }), url);
+  assert.equal(getNikkeAvatarUrl({ id: 306301 }, new Map([[306301, 63]])), url);
+  assert.equal(getNikkeAvatarUrl({ resource_id: 63, avatar_url: "/custom.png" }), "/custom.png");
+  const source = JSON.parse(readFileSync(new URL("../public/ui-assets/nikke/character-avatars/sources.json", import.meta.url))).assets.c063;
+  const png = readFileSync(new URL(`../public${url}`, import.meta.url));
+  assert.equal(source.spriteName, "mi_c063_00_s");
+  assert.equal(source.reviewStatus, "passed");
+  assert.equal(createHash("sha256").update(png).digest("hex"), source.pngSha256);
+  assert.equal(source.visualReview.sha256, source.pngSha256);
+});
+
 test("artwork choices use full-body artwork and bundled renders for supported costumes", () => {
   assert.deepEqual(getNikkeArtworkCandidates({
     resource_id: 511,
@@ -38,6 +52,7 @@ test("artwork choices use full-body artwork and bundled renders for supported co
     { id: "default", label: "默认", url: "/ui-assets/nikke/character-artwork/c511.webp" },
     { id: "skin-2", label: "美丽的我", url: "/ui-assets/nikke/character-artwork/c511_02.webp" },
     { id: "skin-1", label: "水晶公主", url: "/ui-assets/nikke/character-artwork/c511_01.webp" },
+    { id: "skin-3", label: "水晶女仆", url: "/ui-assets/nikke/character-artwork/c511_03.webp" },
     { id: "lobby-burst-default", label: "技能动画 · 默认", url: "/ui-assets/nikke/character-artwork/lobby_burst_c511_00.webp" },
     { id: "lobby-burst-skin-1", label: "技能动画 · 水晶公主", url: "/ui-assets/nikke/character-artwork/lobby_burst_c511_01.webp" },
   ]);
@@ -62,6 +77,7 @@ test("bundled skin choices remain visible when the upstream directory omits cost
     { id: "default", label: "默认", url: "/ui-assets/nikke/character-artwork/c511.webp" },
     { id: "skin-1", label: "水晶公主", url: "/ui-assets/nikke/character-artwork/c511_01.webp" },
     { id: "skin-2", label: "美丽的我", url: "/ui-assets/nikke/character-artwork/c511_02.webp" },
+    { id: "skin-3", label: "水晶女仆", url: "/ui-assets/nikke/character-artwork/c511_03.webp" },
     { id: "lobby-burst-default", label: "技能动画 · 默认", url: "/ui-assets/nikke/character-artwork/lobby_burst_c511_00.webp" },
     { id: "lobby-burst-skin-1", label: "技能动画 · 水晶公主", url: "/ui-assets/nikke/character-artwork/lobby_burst_c511_01.webp" },
   ]);
@@ -139,8 +155,11 @@ test("published and runtime artwork catalogs remain identical", () => {
 test("local artwork catalog covers every current standard character and only exposes local files", () => {
   const entries = Object.values(characterArtworkCatalog.characters).flat();
   assert.equal(characterArtworkCatalog.characterCount, Object.keys(characterArtworkCatalog.characters).length);
-  for (const assetId of ["c404", "c405"]) {
+  for (const assetId of ["c063", "c404", "c405"]) {
     assert.equal(characterArtworkCatalog.characters[assetId.slice(1)]?.find((item) => item.id === "default")?.assetId, assetId);
+  }
+  for (const [resource, skin, asset] of [["511", "skin-3", "c511_03"], ["582", "skin-1", "c582_01"]]) {
+    assert.equal(characterArtworkCatalog.characters[resource].find((item) => item.id === skin)?.assetId, asset);
   }
   assert.equal(entries.length, characterArtworkCatalog.artworkCount);
   Object.values(characterArtworkCatalog.characters).forEach((artworks) => {

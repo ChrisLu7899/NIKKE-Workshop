@@ -20,7 +20,7 @@
 <a href="#main" class="skip-link">跳到正文</a>
 <header class="top"><div class="top-inner"><div><h1>NIKKE Workshop 操作指南</h1>
 <p>从安装、录入到制作角色卡和洗词条。</p>
-<p class="edition">适用版本 1.0.14 · Chrome / Edge · 图文已更新</p>
+<p class="edition">适用版本 1.0.15 · Chrome / Edge · 图文已更新</p>
 </div><div class="guide-actions"><button id="show-all" type="button" aria-pressed="false">显示全部章节</button><button id="print-guide" type="button">打印 / 保存 PDF</button></div></div></header>
 
 <noscript><p class="noscript-note">当前未启用 JavaScript，全部章节已展开，可使用浏览器查找阅读。</p>
@@ -375,7 +375,8 @@
 <aside class="note">计算器结果 Excel 用于保存方案；要导入角色数据，请使用“导出图鉴”生成的本地图鉴 Excel。</aside>
 </section>
 <section class="topic" id="calculator-algorithm-guide"><h3>进阶：算法怎样计算期望</h3>
-<p>不需要模拟次数或随机种子。单装备使用有限状态 MDP，将当前盘面、锁定与目标组成状态，比较每种操作的当前成本和后续期望成本。计算在本机进行。</p>
+<p>不需要模拟次数或随机种子。单装备使用有限状态 MDP，将当前盘面、锁定与目标组成状态，比较每种操作的当前成本和后续期望成本。计算在本机的独立 Worker 线程进行，切换图鉴标签不会中断正在运行的计算；请勿关闭或刷新扩展页面。</p>
+<p>默认使用“旧规则”，也可切换“新规则”。新规则限制不会出现重复，因此保留低档位理论上可以提高高档位的出现概率，实测差距非常小，但是在计算和操作流程上会有更高的复杂度，谨慎使用。</p>
 <details><summary>状态、动作、概率与收敛</summary><div class="detail-body"><ul><li>状态：词条名称、档位、锁定与强制保留要求。</li>
 <li>动作：洗名称、洗数值，以及锁定组合。</li>
 <li>转移：动作可能产生的下一盘面及对应概率。</li>

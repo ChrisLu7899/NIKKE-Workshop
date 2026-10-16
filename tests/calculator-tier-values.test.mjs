@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const calculatorSource = fs.readFileSync(
-  path.join(projectRoot, "src", "calculator", "main.js"),
+  path.join(projectRoot, "src", "calculator", "engine.js"),
   "utf8",
 );
 
