@@ -47,8 +47,10 @@ def find_row_bands(rgb: np.ndarray) -> list[tuple[int, int]]:
 def crop_value(image: Image.Image, row: tuple[int, int]) -> Image.Image:
     rgb = np.asarray(image.convert("RGB"))
     start, end = row
-    x0 = int(rgb.shape[1] * 0.53)
-    strip = rgb[start:end, x0:]
+    # Start from the whole row. Values in short-label tables can begin before
+    # 53% of the table width; that fixed boundary used to cut the first digit.
+    # Find the rightmost cluster first, then apply padding in source coordinates.
+    strip = rgb[start:end]
     luminance = (strip[..., 0] * 0.299) + (strip[..., 1] * 0.587) + (strip[..., 2] * 0.114)
     ink = luminance < 165
     column_runs = contiguous_runs(np.any(ink, axis=0))
@@ -68,7 +70,7 @@ def crop_value(image: Image.Image, row: tuple[int, int]) -> Image.Image:
     right = min(strip.shape[1], int(xs.max()) + 4)
     top = max(0, int(ys.min()) - 3)
     bottom = min(strip.shape[0], int(ys.max()) + 4)
-    return image.crop((x0 + left, start + top, x0 + right, start + bottom))
+    return image.crop((left, start + top, right, start + bottom))
 
 
 def main() -> None:

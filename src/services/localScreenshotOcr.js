@@ -334,12 +334,22 @@ async function recognizeImage(file, workers, { characterName, onProgress, bitmap
       });
     }
     if (previewLine.functionType) {
-      const templateMatch = await matchEquipmentValueTemplate(
-        bitmap,
-        effectRow.value,
-        previewLine.functionType,
-        { valueStyle },
-      );
+      let templateMatch = null;
+      try {
+        templateMatch = await matchEquipmentValueTemplate(
+          bitmap,
+          effectRow.value,
+          previewLine.functionType,
+          { valueStyle },
+        );
+      } catch {
+        // A damaged/missing value asset must not discard other physical rows.
+        // Cancellation still aborts the task, rather than becoming a warning.
+        checkOcrSignal(signal);
+        previewLine = { ...previewLine, warnings: [
+          ...(previewLine.warnings || []), "数值模板加载或匹配失败，可重试此图或手动确认",
+        ] };
+      }
       if (templateMatch) {
         previewLine = {
           ...previewLine,

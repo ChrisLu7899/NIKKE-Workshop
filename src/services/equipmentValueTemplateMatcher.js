@@ -15,6 +15,7 @@ import {
 
 const templateCache = new Map();
 const glyphCache = new Map();
+const candidateCache = new Map();
 
 const extensionUrl = (path) => (
   globalThis.chrome?.runtime?.getURL ? chrome.runtime.getURL(path) : `/${path}`
@@ -85,6 +86,17 @@ async function createLegalGlyphCandidate(valueStyle, level, value) {
   return { level, value, mask: composeValueGlyphMasks(glyphs) };
 }
 
+function getGlyphCandidates(functionType, valueStyle, levels, legal) {
+  const key = `${functionType}:${valueStyle}`;
+  if (!candidateCache.has(key)) {
+    const pending = Promise.all(levels.map((level) => (
+      createLegalGlyphCandidate(valueStyle || OCR_VALUE_STYLES.LIGHT_BLACK, level, legal[level - 1])
+    ))).catch((error) => { candidateCache.delete(key); throw error; });
+    candidateCache.set(key, pending);
+  }
+  return candidateCache.get(key);
+}
+
 export async function matchEquipmentValueTemplate(bitmap, rect, functionType, { valueStyle = "" } = {}) {
   const legal = EQUIPMENT_TIER_VALUES[functionType] || [];
   if (!legal.length) return null;
@@ -96,15 +108,7 @@ export async function matchEquipmentValueTemplate(bitmap, rect, functionType, { 
 
   const levels = legal.map((_, index) => index + 1)
     .filter((level) => !valueStyle || isOcrValueStyleCompatible(level, valueStyle));
-  const fullValueCandidates = await Promise.all(levels.map(async (level) => ({
-    level,
-    value: legal[level - 1],
-    mask: await loadTemplateMask(functionType, level),
-  })));
-  const effectiveStyle = valueStyle || OCR_VALUE_STYLES.LIGHT_BLACK;
-  const glyphCandidates = await Promise.all(levels.map((level) => (
-    createLegalGlyphCandidate(effectiveStyle, level, legal[level - 1])
-  )));
+  const glyphCandidates = await getGlyphCandidates(functionType, valueStyle, levels, legal);
   const glyphRanked = rankComposedValueCandidates(observed, glyphCandidates);
   const glyphBest = glyphRanked[0];
   const glyphMargin = (glyphRanked[1]?.score ?? 1) - (glyphBest?.score ?? 1);
@@ -119,6 +123,13 @@ export async function matchEquipmentValueTemplate(bitmap, rect, functionType, { 
     margin = glyphMargin;
     method = "glyph-sequence";
   } else {
+    // Load complete value templates only when the glyph path is inconclusive.
+    // Successful glyph matches need neither these requests nor image decoding.
+    const fullValueCandidates = await Promise.all(levels.map(async (level) => ({
+      level,
+      value: legal[level - 1],
+      mask: await loadTemplateMask(functionType, level),
+    })));
     const fullRanked = rankValueTemplateCandidates(observed, fullValueCandidates);
     const fullBest = fullRanked[0];
     const fullMargin = (fullRanked[1]?.score ?? 1) - (fullBest?.score ?? 1);

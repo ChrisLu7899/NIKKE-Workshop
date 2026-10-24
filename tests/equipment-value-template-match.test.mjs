@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import {
   composeValueGlyphMasks,
   createValueGlyphMask,
@@ -71,4 +72,19 @@ test("composed character templates rank an exact legal percentage first", () => 
   assert.equal(ranked[0].level, 9);
   assert.equal(ranked[0].score, 0);
   assert.ok(ranked[1].score > ranked[0].score);
+});
+
+test("two real 8.29 percent glyphs beat 6.88 with the existing full-value safety margin", () => {
+  const fixture = JSON.parse(readFileSync(new URL("./fixtures/ocr-attack-829.json", import.meta.url), "utf8"));
+  const fromRows = (rows) => ({
+    width: rows[0].length, height: rows.length,
+    data: Uint8Array.from(rows.join(""), (pixel) => Number(pixel === "#")),
+  });
+  const candidates = fixture.references.map(({ level, rows }) => ({ level, mask: fromRows(rows) }));
+  for (const observation of fixture.observations) {
+    const ranked = rankValueTemplateCandidates(fromRows(observation.rows), candidates);
+    assert.equal(ranked[0].level, observation.expected);
+    assert.ok(ranked[0].score <= 0.42);
+    assert.ok(ranked[1].score - ranked[0].score >= 0.012);
+  }
 });
