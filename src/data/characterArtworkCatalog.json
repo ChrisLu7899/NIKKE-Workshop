@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-08",
+  "revision": "2026-10-29",
   "source": "NIKKE_files validated extracted asset library",
-  "characterCount": 203,
-  "artworkCount": 626,
+  "characterCount": 206,
+  "artworkCount": 633,
   "characters": {
     "100": [
       {
@@ -977,6 +977,12 @@
         "label": "无为",
         "assetId": "c223_01",
         "url": "/ui-assets/nikke/character-artwork/c223_01.webp"
+      },
+      {
+        "id": "skin-2",
+        "label": "三毒",
+        "assetId": "c223_02",
+        "url": "/ui-assets/nikke/character-artwork/c223_02.webp"
       },
       {
         "id": "lobby-burst-default",
@@ -2379,10 +2385,32 @@
         "url": "/ui-assets/nikke/character-artwork/c471.webp"
       },
       {
+        "id": "skin-1",
+        "label": "垂泪之日",
+        "assetId": "c471_01",
+        "url": "/ui-assets/nikke/character-artwork/c471_01.webp"
+      },
+      {
         "id": "lobby-burst-default",
         "label": "技能动画 · 默认",
         "assetId": "lobby_burst_c471_00",
         "url": "/ui-assets/nikke/character-artwork/lobby_burst_c471_00.webp"
+      }
+    ],
+    "472": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c472",
+        "url": "/ui-assets/nikke/character-artwork/c472.webp"
+      }
+    ],
+    "473": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c473",
+        "url": "/ui-assets/nikke/character-artwork/c473.webp"
       }
     ],
     "500": [
@@ -3639,6 +3667,12 @@
         "url": "/ui-assets/nikke/character-artwork/c018.webp"
       },
       {
+        "id": "skin-1",
+        "label": "亲爱的公主",
+        "assetId": "c018_01",
+        "url": "/ui-assets/nikke/character-artwork/c018_01.webp"
+      },
+      {
         "id": "lobby-burst-default",
         "label": "技能动画 · 默认",
         "assetId": "lobby_burst_c018_00",
@@ -4165,6 +4199,20 @@
         "label": "默认",
         "assetId": "c063",
         "url": "/ui-assets/nikke/character-artwork/c063.webp"
+      }
+    ],
+    "019": [
+      {
+        "id": "default",
+        "label": "默认",
+        "assetId": "c019",
+        "url": "/ui-assets/nikke/character-artwork/c019.webp"
+      },
+      {
+        "id": "skin-1",
+        "label": "最后的爱恋",
+        "assetId": "c019_01",
+        "url": "/ui-assets/nikke/character-artwork/c019_01.webp"
       }
     ]
   }

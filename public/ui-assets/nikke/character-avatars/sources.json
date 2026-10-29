@@ -31,6 +31,96 @@
         "note": "Viewed native portrait Sprite; matches official c063 identity and approved standing artwork."
       },
       "source": "character_avatars/c063/mi_c063_00_s.png"
+    },
+    "c019": {
+      "schemaVersion": 1,
+      "assetId": "c019",
+      "resourceKey": "icons-char-mi(hd)_assets_mi_c019_00_s_e4a28598bcbbefe6388340d0ff8d443b.bundle",
+      "bundleHash": "e4a28598bcbbefe6388340d0ff8d443b",
+      "bundleSha256": "06c71595a614981a4a1013cfc92464f07bc48e81461b1a4bf58f89fb71346971",
+      "spriteName": "mi_c019_00_s",
+      "cab": "CAB-266bdf611d60ed4becbdbdc6b30f0569",
+      "pathId": "2803507655563059188",
+      "size": [
+        256,
+        512
+      ],
+      "pngSha256": "88fc47d6a15df08fca42f85f14cb609e4ee25d15101fd74af090bda706a403cc",
+      "recipe": "UnityPy Sprite.image; original pixels, size and alpha; no crop, resize or repaint",
+      "reviewStatus": "passed",
+      "reviewedAt": "2026-10-29",
+      "visualReview": {
+        "sha256": "88fc47d6a15df08fca42f85f14cb609e4ee25d15101fd74af090bda706a403cc",
+        "reviewer": "Codex visual QA",
+        "checks": {
+          "identity": true,
+          "face": true,
+          "originalFraming": true,
+          "alpha": true
+        },
+        "note": "实际逐图查看当前原生portrait Sprite；与当前角色表及已验收默认standing身份一致，保留原生边界与alpha。"
+      },
+      "source": "character_avatars/c019/c019.png"
+    },
+    "c472": {
+      "schemaVersion": 1,
+      "assetId": "c472",
+      "resourceKey": "icons-char-mi(hd)_assets_mi_c472_00_s_9a4508d154748e5e9e9bd857e599e555.bundle",
+      "bundleHash": "9a4508d154748e5e9e9bd857e599e555",
+      "bundleSha256": "3ad50733980c6ff4b736d79ac17002a28ef6b0e24aa06eb64ad91c822452adaf",
+      "spriteName": "mi_c472_00_s",
+      "cab": "CAB-0922a67d1908da91ea004be947579973",
+      "pathId": "538670475926595241",
+      "size": [
+        256,
+        512
+      ],
+      "pngSha256": "30450a2326d0019a350fb9c85199796fe2ded3efba53a97eefaf1fb2fea9dde4",
+      "recipe": "UnityPy Sprite.image; original pixels, size and alpha; no crop, resize or repaint",
+      "reviewStatus": "passed",
+      "reviewedAt": "2026-10-29",
+      "visualReview": {
+        "sha256": "30450a2326d0019a350fb9c85199796fe2ded3efba53a97eefaf1fb2fea9dde4",
+        "reviewer": "Codex visual QA",
+        "checks": {
+          "identity": true,
+          "face": true,
+          "originalFraming": true,
+          "alpha": true
+        },
+        "note": "实际逐图查看当前原生portrait Sprite；与当前角色表及已验收默认standing身份一致，保留原生边界与alpha。"
+      },
+      "source": "character_avatars/c472/c472.png"
+    },
+    "c473": {
+      "schemaVersion": 1,
+      "assetId": "c473",
+      "resourceKey": "icons-char-mi(hd)_assets_mi_c473_00_s_35a47661709cc21315cbe2c2357a493a.bundle",
+      "bundleHash": "35a47661709cc21315cbe2c2357a493a",
+      "bundleSha256": "f7853b33a93c867e8e135650fd8b3bad33799a98562c3116fd7d1c4afb8dce91",
+      "spriteName": "mi_c473_00_s",
+      "cab": "CAB-a20011f696d1f9e20043ad3cefe77f32",
+      "pathId": "5443699498944920144",
+      "size": [
+        256,
+        512
+      ],
+      "pngSha256": "183b2fef5cf1ca5d0f0c8f023718b35ec98b855af47acea4c758dbe38960353e",
+      "recipe": "UnityPy Sprite.image; original pixels, size and alpha; no crop, resize or repaint",
+      "reviewStatus": "passed",
+      "reviewedAt": "2026-10-29",
+      "visualReview": {
+        "sha256": "183b2fef5cf1ca5d0f0c8f023718b35ec98b855af47acea4c758dbe38960353e",
+        "reviewer": "Codex visual QA",
+        "checks": {
+          "identity": true,
+          "face": true,
+          "originalFraming": true,
+          "alpha": true
+        },
+        "note": "实际逐图查看当前原生portrait Sprite；与当前角色表及已验收默认standing身份一致，保留原生边界与alpha。"
+      },
+      "source": "character_avatars/c473/c473.png"
     }
   }
 }

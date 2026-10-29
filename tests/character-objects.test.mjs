@@ -5,12 +5,18 @@ import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import { cubeDisplayAsset, favoriteItemDisplayAsset } from '../src/domain/characterObjectAssets.js';
 import { CUBE_ICON_CATALOG } from '../src/domain/cubeIconCatalog.js';
-import { validateObjectManifest } from '../scripts/sync-character-objects.mjs';
+import { validateObjectManifest, mergeObjectManifests } from '../scripts/sync-character-objects.mjs';
 import assets from '../src/data/characterObjectAssets.json' with { type: 'json' };
 import skills from '../src/data/characterSkillIconCatalog.json' with { type: 'json' };
 
 const publicRoot = new URL('../public/ui-assets/nikke/', import.meta.url);
 const proof = JSON.parse(await readFile(new URL('objects/extracted-sources.json', publicRoot)));
+
+test('manual cube choices match the identity-controlled cube catalog', async () => {
+  const data = JSON.parse(await readFile(new URL('../public/cubes.json', import.meta.url)));
+  assert.deepEqual(data.cubes, CUBE_ICON_CATALOG.map(c => ({ cube_id: c.cubeId, name_cn: c.nameCn, name_en: c.nameEn })));
+  for (const c of CUBE_ICON_CATALOG) await readFile(new URL(`../public/${c.assetPath}`, import.meta.url));
+});
 
 test('retired UI images and wrapper stay removed, current manifest paths exist', async () => {
   const oldCard = ['core-frame.webp', 'overload-badge-source.png', 'rarity-ssr.png', 'star-empty.png', 'star-filled.png'];
@@ -52,7 +58,8 @@ test('six native dolls and all 21 native favorite objects have identity-bound pa
 
 test('every imported object keeps exact native bytes, provenance and a decodable PNG header', async () => {
   const byName = validateObjectManifest(proof.source_manifest);
-  assert.equal(proof.items.length, 282);
+  assert.ok(!/"[A-Za-z]:[\\/]/.test(JSON.stringify(proof)), 'Delivered source evidence must not expose absolute workstation paths');
+  assert.equal(proof.items.length, 286);
   for (const item of proof.items) {
     const b = await readFile(new URL(item.file, publicRoot));
     const hash = createHash('sha256').update(b).digest('hex');
@@ -61,7 +68,7 @@ test('every imported object keeps exact native bytes, provenance and a decodable
     assert.equal(hash, byName.get(item.sprite_name).png_sha256, item.file);
     assert.deepEqual([b.readUInt32BE(16), b.readUInt32BE(20)], item.size);
   }
-  assert.equal(Object.keys(skills).length, 200);
+  assert.equal(Object.keys(skills).length, 203);
   for (const [rid, entry] of Object.entries(skills)) {
     assert.deepEqual(Object.keys(entry).sort(), ['burst', 'skill1', 'skill2']);
     assert.ok(proof.items.some(i => i.file === `skill-icons/${entry.burst}` && i.sprite_name === `icn_skill_c${rid.padStart(3, '0')}_ult`));
@@ -78,4 +85,35 @@ test('import rejects candidate, traversal, duplicate sprite and crossed identiti
   rejects(m => { m.mappings.favorites.c352.sprite = 'mi_favoriteitem_c030_00'; });
   rejects(m => { m.mappings.dolls.AR = 'mi_favoriteitem_sg_00'; });
   rejects(m => { m.mappings.skills['104'].burst = 'icn_skill_c101_ult'; });
+});
+
+test('reviewed object layers retain per-item source identity and require complete final coverage', () => {
+  const base = proof.source_manifest;
+  // Pick one known cube for a small, independently reviewed source layer.
+  const delta = structuredClone(base);
+  delta.schema = 'character-card-objects-v1';
+  delta.mappings = { cubes: [structuredClone(base.mappings.cubes[0])], dolls: {}, favorites: {}, skills: {} };
+  delta.items = [structuredClone(base.items.find(i => i.sprite_name === delta.mappings.cubes[0].sprite))];
+  const selectedSource = base.sources.find(s => s.normalized_bundle === delta.items[0].normalized_bundle
+    && (base.schema !== 'character-card-objects-layered-v1' || s.source_id === delta.items[0].source_id));
+  delta.sources = [...new Map(base.sources.map(s => [s.normalized_bundle, s])).values()]
+    .map(s => s.normalized_bundle === selectedSource.normalized_bundle ? selectedSource : s);
+  delta.sources = structuredClone(delta.sources);
+  for (const source of delta.sources) source.bundle_sha256 = 'a'.repeat(64);
+  validateObjectManifest(delta, { partial: true });
+  assert.throws(() => validateObjectManifest(delta), /coverage/i);
+  const assembled = mergeObjectManifests([base, delta], 'b'.repeat(64));
+  const byName = validateObjectManifest(assembled);
+  // A layered manifest can itself be an assembly input without rebinding old PNGs to new bundles.
+  assert.deepEqual(mergeObjectManifests([assembled], 'b'.repeat(64)).items, assembled.items);
+  const selected = byName.get(delta.items[0].sprite_name);
+  assert.ok(selected.source_id.endsWith(':'.concat('a'.repeat(64))));
+  assert.equal(assembled.mappings.cubes.length, CUBE_ICON_CATALOG.length);
+  const oldItem = assembled.items.find(i => i.sprite_name !== selected.sprite_name);
+  assert.equal(oldItem.png_sha256, base.items.find(i => i.sprite_name === oldItem.sprite_name).png_sha256);
+  const crossed = structuredClone(assembled);
+  crossed.items.find(i => i.sprite_name === selected.sprite_name).source_id = 'missing';
+  assert.throws(() => validateObjectManifest(crossed));
+  const unapproved = structuredClone(delta); unapproved.status = 'candidate';
+  assert.throws(() => mergeObjectManifests([base, unapproved], 'b'.repeat(64)));
 });

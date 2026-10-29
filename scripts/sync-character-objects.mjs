@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Only promoted library output. Never fetch images, crop screenshots, or delete files.
 import { createHash } from 'node:crypto';
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CUBE_ICON_CATALOG } from '../src/domain/cubeIconCatalog.js';
@@ -14,18 +14,34 @@ const serialize = value => JSON.stringify(value, null, 2) + '\n';
 const hashPattern = /^[a-f0-9]{64}$/;
 const sources = ['icons-equip(hd)_assets_all.bundle', 'icons-favoriteitem(hd)_assets_all.bundle', 'icons-skill(hd)_assets_all.bundle'];
 
-export function validateObjectManifest(m) {
-  if (m.schema !== 'character-card-objects-v1' || m.status !== 'promoted'
+// Original manifest digests stay binding; distribute portable evidence references only.
+function portableEvidence(value) {
+  if (typeof value === 'string' && /^[A-Za-z]:[\\/]/.test(value)) {
+    const normalized = value.replaceAll('\\', '/');
+    const library = normalized.match(/^[A-Za-z]:\/NIKKE_files\/(.+)$/i);
+    return library ? `NIKKE_files/${library[1]}` : `source-file:${path.posix.basename(normalized)}`;
+  }
+  if (Array.isArray(value)) return value.map(portableEvidence);
+  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, portableEvidence(v)]));
+  return value;
+}
+
+export function validateObjectManifest(m, { partial = false } = {}) {
+  const layered = m.schema === 'character-card-objects-layered-v1';
+  if (!['character-card-objects-v1', 'character-card-objects-layered-v1'].includes(m.schema) || m.status !== 'promoted'
     || ![m.producer_sha256, m.review_sha256, m.character_directory_sha256].every(x => hashPattern.test(x))) throw new Error('Unapproved object manifest');
-  if (m.sources?.length !== sources.length || new Set(m.sources.map(s => s.normalized_bundle)).size !== sources.length) throw new Error('Wrong source set');
+  if ((!layered && m.sources?.length !== sources.length)
+    || new Set(m.sources?.map(s => s.normalized_bundle)).size !== sources.length
+    || (layered && new Set(m.sources.map(s => s.source_id)).size !== m.sources.length)) throw new Error('Wrong source set');
   for (const s of m.sources) {
     if (!sources.includes(s.normalized_bundle) || !['core', 'dp'].includes(s.region)
       || !/^[a-f0-9]{28,32}$/.test(s.bundle_hash) || !hashPattern.test(s.bundle_sha256)
-      || !s.resource_key.endsWith(`_${s.bundle_hash}.bundle`) || !s.cabs?.length) throw new Error('Invalid current source');
+      || !s.resource_key.endsWith(`_${s.bundle_hash}.bundle`) || !s.cabs?.length
+      || (layered && s.source_id !== `${s.normalized_bundle}:${s.bundle_sha256}`)) throw new Error('Invalid current source');
   }
   const byName = new Map();
   for (const i of m.items || []) {
-    const s = m.sources.find(s => s.normalized_bundle === i.normalized_bundle);
+    const s = m.sources.find(s => s.normalized_bundle === i.normalized_bundle && (!layered || s.source_id === i.source_id));
     if (!/^(?:ie_[0-9]+|mi_favoriteitem_(?:c[0-9]+|ar|smg|mg|sg|sr|rl)_00|icn_skill_[a-z0-9_]+)$/.test(i.sprite_name)
       || byName.has(i.sprite_name) || i.file !== `originals/${i.sprite_name}.png`
       || i.review_status !== 'visually_verified' || !i.reviewed_at || !i.review_note
@@ -36,15 +52,16 @@ export function validateObjectManifest(m) {
   }
   const has = name => { if (!byName.has(name)) throw new Error(`Mapping references unreviewed sprite: ${name}`); };
   const maps = m.mappings;
-  if (maps.cubes.length !== CUBE_ICON_CATALOG.length) throw new Error('Cube mapping coverage differs');
-  for (const expected of CUBE_ICON_CATALOG) {
+  const expectedCubes = partial ? CUBE_ICON_CATALOG.filter(c => maps.cubes.some(x => x.cubeId === c.cubeId)) : CUBE_ICON_CATALOG;
+  if (maps.cubes.length !== expectedCubes.length) throw new Error('Cube mapping coverage differs');
+  for (const expected of expectedCubes) {
     const c = maps.cubes.filter(c => c.cubeId === expected.cubeId);
     if (c.length !== 1 || c[0].resourceId !== expected.resourceId || c[0].sprite !== `ie_${expected.resourceId}`) throw new Error('Cube identity mismatch');
     has(c[0].sprite);
   }
-  if (Object.keys(maps.dolls).sort().join() !== Object.keys(COLLECTIBLE_DOLL_BY_WEAPON).sort().join()) throw new Error('Doll coverage mismatch');
+  if (!partial && Object.keys(maps.dolls).sort().join() !== Object.keys(COLLECTIBLE_DOLL_BY_WEAPON).sort().join()) throw new Error('Doll coverage mismatch');
   for (const [weapon, sprite] of Object.entries(maps.dolls)) {
-    if (sprite !== `mi_favoriteitem_${weapon.toLowerCase()}_00`) throw new Error('Doll weapon mismatch');
+    if (!Object.hasOwn(COLLECTIBLE_DOLL_BY_WEAPON, weapon) || sprite !== `mi_favoriteitem_${weapon.toLowerCase()}_00`) throw new Error('Doll weapon mismatch');
     has(sprite);
   }
   for (const [cid, item] of Object.entries(maps.favorites)) {
@@ -61,17 +78,69 @@ export function validateObjectManifest(m) {
   return byName;
 }
 
-export async function readApprovedObjects(input = INPUT) {
-  const manifestBytes = await readFile(path.join(input, 'manifest.json'));
-  const manifest = JSON.parse(manifestBytes);
-  const byName = validateObjectManifest(manifest);
-  const bytes = new Map();
-  for (const [name, item] of byName) {
-    const b = await readFile(path.join(input, item.file));
-    if (b.length < 24 || b.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a' || sha(b) !== item.png_sha256
-      || b.readUInt32BE(16) !== item.size[0] || b.readUInt32BE(20) !== item.size[1]) throw new Error(`Original image changed: ${name}`);
-    bytes.set(name, b);
+export function mergeObjectManifests(parts, producerSha256) {
+  if (!parts.length || !hashPattern.test(producerSha256)) throw new Error('Missing object manifest assembly inputs');
+  const merged = structuredClone(parts[0]);
+  merged.schema = 'character-card-objects-layered-v1';
+  merged.sources = [];
+  merged.items = [];
+  merged.producer_sha256 = producerSha256;
+  merged.review_sha256 = sha(Buffer.from(parts.map(m => m.review_sha256).join('\n')));
+  merged.character_directory_sha256 = parts.at(-1).character_directory_sha256;
+  merged.review_digest_method = 'SHA256 of component review digests; original per-item visual review remains binding';
+  merged.components = [];
+  merged.mappings = { cubes: [], dolls: {}, favorites: {}, skills: {} };
+  const items = new Map(), sourceMap = new Map(), cubes = new Map();
+  for (const part of parts) {
+    validateObjectManifest(part, { partial: true });
+    merged.components.push({ schema: part.schema, manifest_sha256: sha(Buffer.from(serialize(part))),
+      producer_sha256: part.producer_sha256, review_sha256: part.review_sha256,
+      character_directory_sha256: part.character_directory_sha256 });
+    for (const source of part.sources) {
+      const sourceId = `${source.normalized_bundle}:${source.bundle_sha256}`;
+      sourceMap.set(sourceId, { ...source, source_id: sourceId });
+    }
+    for (const item of part.items) {
+      const source = part.sources.find(s => s.normalized_bundle === item.normalized_bundle
+        && (part.schema !== 'character-card-objects-layered-v1' || s.source_id === item.source_id));
+      items.set(item.sprite_name, { ...item, source_id: `${source.normalized_bundle}:${source.bundle_sha256}` });
+    }
+    for (const cube of part.mappings.cubes) cubes.set(cube.cubeId, cube);
+    Object.assign(merged.mappings.dolls, part.mappings.dolls);
+    Object.assign(merged.mappings.favorites, part.mappings.favorites);
+    for (const [rid, slots] of Object.entries(part.mappings.skills)) {
+      merged.mappings.skills[rid] = { ...merged.mappings.skills[rid], ...slots };
+    }
   }
+  merged.sources = [...sourceMap.values()];
+  merged.items = [...items.values()];
+  merged.mappings.cubes = [...cubes.values()].sort((a, b) => a.cubeId - b.cubeId);
+  validateObjectManifest(merged);
+  return merged;
+}
+
+export async function readApprovedObjects(input = INPUT) {
+  const roots = [input];
+  const updates = path.join(path.dirname(input), 'character_card_objects_updates');
+  const directories = await readdir(updates, { withFileTypes: true }).catch(e => { if (e.code === 'ENOENT') return []; throw e; });
+  for (const directory of directories.filter(d => d.isDirectory()).sort((a, b) => a.name.localeCompare(b.name, 'en', { numeric: true }))) {
+    roots.push(path.join(updates, directory.name));
+  }
+  const parts = [], bytes = new Map();
+  for (const directory of roots) {
+    const part = JSON.parse(await readFile(path.join(directory, 'manifest.json')));
+    const partItems = validateObjectManifest(part, { partial: true });
+    for (const [name, item] of partItems) {
+      const b = await readFile(path.join(directory, item.file));
+      if (b.length < 24 || b.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a' || sha(b) !== item.png_sha256
+        || b.readUInt32BE(16) !== item.size[0] || b.readUInt32BE(20) !== item.size[1]) throw new Error(`Original image changed: ${name}`);
+      bytes.set(name, b);
+    }
+    parts.push(part);
+  }
+  const manifest = portableEvidence(parts.length === 1 ? parts[0] : mergeObjectManifests(parts, sha(await readFile(fileURLToPath(import.meta.url)))));
+  const manifestBytes = Buffer.from(serialize(manifest));
+  const byName = validateObjectManifest(manifest);
   return { manifest, manifestBytes, byName, bytes };
 }
 

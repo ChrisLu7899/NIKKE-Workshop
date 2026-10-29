@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "asset": "bezel-cube.png",
+  "source": "character_card_objects_updates/153.6.10/originals/ie_10015.png",
+  "sourceManifestSha256": "0f2716d24328251b071a063ae39dfa3071df258a8b78ef2714ba7d9cdc92fd34",
+  "pngSha256": "5c8a87c25cea2e014464daec5c3c0a35d71548b2c1a95eaf6df64f0c036bdea1",
+  "recipe": "Exact approved native Sprite PNG bytes; no crop or resize",
+  "reviewStatus": "visually_verified",
+  "cubeId": 1000318,
+  "resourceId": 10015
+}

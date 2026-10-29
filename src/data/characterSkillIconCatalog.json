@@ -39,6 +39,11 @@
     "skill2": "generic/icn_skill_atkup_01.png",
     "burst": "burst/c018.png"
   },
+  "19": {
+    "skill1": "generic/icn_skill_damage_01.png",
+    "skill2": "generic/icn_skill_coredamage_01.png",
+    "burst": "burst/c019.png"
+  },
   "20": {
     "skill1": "generic/icn_skill_stathp_01.png",
     "skill2": "generic/icn_skill_defup_01.png",
@@ -753,6 +758,16 @@
     "skill1": "generic/icn_skill_damagereductionup_01.png",
     "skill2": "generic/icn_skill_statpenetration_01.png",
     "burst": "burst/c471.png"
+  },
+  "472": {
+    "skill1": "generic/icn_skill_statpenetration_01.png",
+    "skill2": "generic/icn_skill_statcritical_01.png",
+    "burst": "burst/c472.png"
+  },
+  "473": {
+    "skill1": "generic/icn_skill_heal_01.png",
+    "skill2": "generic/icn_skill_barrier_01.png",
+    "burst": "burst/c473.png"
   },
   "500": {
     "skill1": "generic/icn_skill_atkup_01.png",

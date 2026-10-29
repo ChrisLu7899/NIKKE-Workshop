@@ -18,4 +18,5 @@ export const CUBE_ICON_CATALOG = Object.freeze([
   { cubeId: 1000315, resourceId: 10010, nameCn: "遗迹粉碎魔方", nameEn: "Rupture Cube", assetPath: "ocr/cube-icons/rupture-cube.webp" },
   { cubeId: 1000316, resourceId: 10012, nameCn: "遗迹掩体魔方", nameEn: "Stealth Cube", assetPath: "ocr/cube-icons/stealth-cube.webp" },
   { cubeId: 1000317, resourceId: 10013, nameCn: "遗迹分裂魔方", nameEn: "Diffusion Cube", assetPath: "ocr/cube-icons/diffusion-cube.webp" },
+  { cubeId: 1000318, resourceId: 10015, nameCn: "遗迹外框魔方", nameEn: "Bezel Cube", assetPath: "ocr/cube-icons/bezel-cube.png" },
 ]);

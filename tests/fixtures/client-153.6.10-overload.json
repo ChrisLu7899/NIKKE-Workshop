@@ -1,0 +1,733 @@
+{
+  "clientVersion": "153.6.10",
+  "packSha256": "2950737c5ef8a8860133f32aa8a8612f33b6212ca4591dbdef2c00705873aa10",
+  "configReference": "https://raw.githubusercontent.com/EpinelPS/EpinelPS/81696fbba92c0b99e06e5855a87b0e412547856b/EpinelPS/gameconfig.json",
+  "tablesSha256": {
+    "EquipmentOption": "6ac274e0b156c2ec2f4c682f3c4537df0ea5292ab9537ff787519c319495cbcc",
+    "EquipmentOptionCost": "5db4ef399a262472917fb05f872a45e0a37c28e72f002c69e501eb34b0fac2af",
+    "StateEffect": "297655d5e0053ebc28d3192b754a277f7a73aaf9c2230b452299ede560c5456c",
+    "Function": "e2a87b40ecfb77076eb52e5896715b135fc0fc265dde388f04cc208b6d585fdf"
+  },
+  "overload": {
+    "IncElementDmg": {
+      "groupWeight": 10,
+      "tiers": [
+        {
+          "level": 1,
+          "basisPoints": 954,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 2,
+          "basisPoints": 1094,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 3,
+          "basisPoints": 1234,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 4,
+          "basisPoints": 1375,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 5,
+          "basisPoints": 1515,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 6,
+          "basisPoints": 1655,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 7,
+          "basisPoints": 1795,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 8,
+          "basisPoints": 1935,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 9,
+          "basisPoints": 2075,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 10,
+          "basisPoints": 2215,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 11,
+          "basisPoints": 2356,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 12,
+          "basisPoints": 2496,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 13,
+          "basisPoints": 2636,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 14,
+          "basisPoints": 2776,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 15,
+          "basisPoints": 2916,
+          "tierWeightPercent": 1.0
+        }
+      ]
+    },
+    "StatAccuracyCircle": {
+      "groupWeight": 12,
+      "tiers": [
+        {
+          "level": 1,
+          "basisPoints": -477,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 2,
+          "basisPoints": -547,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 3,
+          "basisPoints": -618,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 4,
+          "basisPoints": -688,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 5,
+          "basisPoints": -759,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 6,
+          "basisPoints": -829,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 7,
+          "basisPoints": -900,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 8,
+          "basisPoints": -970,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 9,
+          "basisPoints": -1040,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 10,
+          "basisPoints": -1111,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 11,
+          "basisPoints": -1181,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 12,
+          "basisPoints": -1252,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 13,
+          "basisPoints": -1322,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 14,
+          "basisPoints": -1393,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 15,
+          "basisPoints": -1463,
+          "tierWeightPercent": 1.0
+        }
+      ]
+    },
+    "StatAmmoLoad": {
+      "groupWeight": 12,
+      "tiers": [
+        {
+          "level": 1,
+          "basisPoints": 2784,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 2,
+          "basisPoints": 3195,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 3,
+          "basisPoints": 3606,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 4,
+          "basisPoints": 4017,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 5,
+          "basisPoints": 4428,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 6,
+          "basisPoints": 4839,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 7,
+          "basisPoints": 5250,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 8,
+          "basisPoints": 5660,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 9,
+          "basisPoints": 6071,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 10,
+          "basisPoints": 6482,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 11,
+          "basisPoints": 6893,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 12,
+          "basisPoints": 7304,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 13,
+          "basisPoints": 7715,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 14,
+          "basisPoints": 8126,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 15,
+          "basisPoints": 8537,
+          "tierWeightPercent": 1.0
+        }
+      ]
+    },
+    "StatAtk": {
+      "groupWeight": 10,
+      "tiers": [
+        {
+          "level": 1,
+          "basisPoints": 477,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 2,
+          "basisPoints": 547,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 3,
+          "basisPoints": 618,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 4,
+          "basisPoints": 688,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 5,
+          "basisPoints": 759,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 6,
+          "basisPoints": 829,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 7,
+          "basisPoints": 900,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 8,
+          "basisPoints": 970,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 9,
+          "basisPoints": 1040,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 10,
+          "basisPoints": 1111,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 11,
+          "basisPoints": 1181,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 12,
+          "basisPoints": 1252,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 13,
+          "basisPoints": 1322,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 14,
+          "basisPoints": 1393,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 15,
+          "basisPoints": 1463,
+          "tierWeightPercent": 1.0
+        }
+      ]
+    },
+    "StatChargeDamage": {
+      "groupWeight": 12,
+      "tiers": [
+        {
+          "level": 1,
+          "basisPoints": 477,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 2,
+          "basisPoints": 547,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 3,
+          "basisPoints": 618,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 4,
+          "basisPoints": 688,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 5,
+          "basisPoints": 759,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 6,
+          "basisPoints": 829,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 7,
+          "basisPoints": 900,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 8,
+          "basisPoints": 970,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 9,
+          "basisPoints": 1040,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 10,
+          "basisPoints": 1111,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 11,
+          "basisPoints": 1181,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 12,
+          "basisPoints": 1252,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 13,
+          "basisPoints": 1322,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 14,
+          "basisPoints": 1393,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 15,
+          "basisPoints": 1463,
+          "tierWeightPercent": 1.0
+        }
+      ]
+    },
+    "StatChargeTime": {
+      "groupWeight": 12,
+      "tiers": [
+        {
+          "level": 1,
+          "basisPoints": -198,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 2,
+          "basisPoints": -228,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 3,
+          "basisPoints": -257,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 4,
+          "basisPoints": -286,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 5,
+          "basisPoints": -316,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 6,
+          "basisPoints": -345,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 7,
+          "basisPoints": -375,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 8,
+          "basisPoints": -404,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 9,
+          "basisPoints": -433,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 10,
+          "basisPoints": -463,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 11,
+          "basisPoints": -492,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 12,
+          "basisPoints": -521,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 13,
+          "basisPoints": -551,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 14,
+          "basisPoints": -580,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 15,
+          "basisPoints": -609,
+          "tierWeightPercent": 1.0
+        }
+      ]
+    },
+    "StatCritical": {
+      "groupWeight": 12,
+      "tiers": [
+        {
+          "level": 1,
+          "basisPoints": 230,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 2,
+          "basisPoints": 264,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 3,
+          "basisPoints": 298,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 4,
+          "basisPoints": 332,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 5,
+          "basisPoints": 366,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 6,
+          "basisPoints": 400,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 7,
+          "basisPoints": 435,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 8,
+          "basisPoints": 469,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 9,
+          "basisPoints": 503,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 10,
+          "basisPoints": 537,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 11,
+          "basisPoints": 571,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 12,
+          "basisPoints": 605,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 13,
+          "basisPoints": 639,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 14,
+          "basisPoints": 673,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 15,
+          "basisPoints": 707,
+          "tierWeightPercent": 1.0
+        }
+      ]
+    },
+    "StatCriticalDamage": {
+      "groupWeight": 10,
+      "tiers": [
+        {
+          "level": 1,
+          "basisPoints": 664,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 2,
+          "basisPoints": 762,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 3,
+          "basisPoints": 860,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 4,
+          "basisPoints": 958,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 5,
+          "basisPoints": 1056,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 6,
+          "basisPoints": 1154,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 7,
+          "basisPoints": 1252,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 8,
+          "basisPoints": 1350,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 9,
+          "basisPoints": 1448,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 10,
+          "basisPoints": 1546,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 11,
+          "basisPoints": 1644,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 12,
+          "basisPoints": 1742,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 13,
+          "basisPoints": 1840,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 14,
+          "basisPoints": 1938,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 15,
+          "basisPoints": 2036,
+          "tierWeightPercent": 1.0
+        }
+      ]
+    },
+    "StatDef": {
+      "groupWeight": 10,
+      "tiers": [
+        {
+          "level": 1,
+          "basisPoints": 477,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 2,
+          "basisPoints": 547,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 3,
+          "basisPoints": 618,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 4,
+          "basisPoints": 688,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 5,
+          "basisPoints": 759,
+          "tierWeightPercent": 12.0
+        },
+        {
+          "level": 6,
+          "basisPoints": 829,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 7,
+          "basisPoints": 900,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 8,
+          "basisPoints": 970,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 9,
+          "basisPoints": 1040,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 10,
+          "basisPoints": 1111,
+          "tierWeightPercent": 7.0
+        },
+        {
+          "level": 11,
+          "basisPoints": 1181,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 12,
+          "basisPoints": 1252,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 13,
+          "basisPoints": 1322,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 14,
+          "basisPoints": 1393,
+          "tierWeightPercent": 1.0
+        },
+        {
+          "level": 15,
+          "basisPoints": 1463,
+          "tierWeightPercent": 1.0
+        }
+      ]
+    }
+  }
+}

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// 17 种魔方的本地图标模板匹配，不发送图片或模板到网络。
+// 按魔方目录加载本地图标模板匹配，不发送图片或模板到网络。
 
 import { CUBE_ICON_CATALOG } from "../domain/cubeIconCatalog.js";
 

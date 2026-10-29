@@ -1,5 +1,9 @@
 # NIKKE UI 素材库
 
+## 2026-10-29 客户端 153.6.10 增量
+
+通过正式 `character_card_objects_updates/153.6.10` 接入三名新角色技能与 `ie_10015` 遗迹外框魔方。九项技能引用中的六项通用图标与已有文件相同，实际新增三张爆裂 PNG 和一张魔方 PNG；所有源图均逐项审核，保留原生尺寸和 Alpha。`objects/extracted-sources.json` 分层记录旧库与当前 Bundle 的来源，合并清单不表示旧图全量重提取。三张新头像见 `character-avatars/sources.json`，七张新增立绘见 `character-artwork/extracted-sources.json`。各批次历史数量仅表示当时状态；当前覆盖以目录和哈希清单为准。
+
 ## 2026-09-07 普通装备
 
 `equipment/standard` 的 60 张原始 PNG 来自正式 `character_card_ui_equipment-standard`。`equipment/catalog.json` 按官方 ID/部位/职业/阶级关联 72 个资源（其中 12 张复用 `equipment/overload`），供角色卡与未来 OCR 使用；共享外观不能唯一确定阶级。来源及复核摘要见 `equipment/standard-sources.json`；更新与只读核验：`node scripts/sync-equipment-catalog.mjs [--check]`。不包含账号响应或原始缓存路径。

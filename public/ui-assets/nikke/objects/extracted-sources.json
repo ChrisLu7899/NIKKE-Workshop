@@ -1,10 +1,10 @@
 {
   "schema": "character-card-objects-delivery-v1",
   "method": "Native PNG bytes; no crop, recoloring, resize, background, embedded level, or screenshot processing",
-  "formal_manifest_sha256": "ce38d32a039f04e653607558289763dffc62f930f24f0f59e01a2c6660d7267f",
-  "producer_sha256": "f82e436959778859f74e28d98a7789efadf028dda429e185758950b947c162ac",
+  "formal_manifest_sha256": "186bd1acd34d7043677856d0e2688f25971ed933633d495a2712ebe6f6b55110",
+  "producer_sha256": "8a65ff186e27eb83f6c5b9fb932f6506a7e3bb939aa3da28ace827148cad6ca2",
   "source_manifest": {
-    "schema": "character-card-objects-v1",
+    "schema": "character-card-objects-layered-v1",
     "status": "promoted",
     "sources": [
       {
@@ -15,7 +15,8 @@
         "bundle_sha256": "6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041",
         "cabs": [
           "CAB-26fd9477ea3b77159fcdd65ee264f7b5"
-        ]
+        ],
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -25,7 +26,8 @@
         "bundle_sha256": "b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca",
         "cabs": [
           "CAB-377b61d99bd13f4da7b0d0ba29fc11e7"
-        ]
+        ],
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -35,7 +37,41 @@
         "bundle_sha256": "f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553",
         "cabs": [
           "CAB-943be9ada3c8167954fe4942ddb49057"
-        ]
+        ],
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
+      },
+      {
+        "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
+        "resource_key": "icons-equip(hd)_assets_all_ba0c54526b7113a985c7b84d22e2560d.bundle",
+        "region": "dp",
+        "bundle_hash": "ba0c54526b7113a985c7b84d22e2560d",
+        "bundle_sha256": "a105a13663147fa4219a67afbd11a5d3acb874f2adbfd6216f80cffbefa42a71",
+        "cabs": [
+          "CAB-f98e168f92b1307275fea58f344d75ca"
+        ],
+        "source_id": "icons-equip(hd)_assets_all.bundle:a105a13663147fa4219a67afbd11a5d3acb874f2adbfd6216f80cffbefa42a71"
+      },
+      {
+        "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
+        "resource_key": "icons-favoriteitem(hd)_assets_all_1e10761b4007d53a471cddcf661ad2ec.bundle",
+        "region": "dp",
+        "bundle_hash": "1e10761b4007d53a471cddcf661ad2ec",
+        "bundle_sha256": "eb28cd9687934172f92241b355122c3e1f52e59426afbffddeab5c8822e5b2de",
+        "cabs": [
+          "CAB-614aa130ba9c5a55fbb50638163b7afc"
+        ],
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:eb28cd9687934172f92241b355122c3e1f52e59426afbffddeab5c8822e5b2de"
+      },
+      {
+        "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
+        "resource_key": "icons-skill(hd)_assets_all_c445d276e3852b2f58eddb5c04e2dfea.bundle",
+        "region": "dp",
+        "bundle_hash": "c445d276e3852b2f58eddb5c04e2dfea",
+        "bundle_sha256": "766627528668bce2b2206156af05479d95235539a51abd87c47df0ddbbb0e508",
+        "cabs": [
+          "CAB-3b1d78c8360d84b421a2765e88f18d3d"
+        ],
+        "source_id": "icons-skill(hd)_assets_all.bundle:766627528668bce2b2206156af05479d95235539a51abd87c47df0ddbbb0e508"
       }
     ],
     "items": [
@@ -56,7 +92,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10001.png"
+        "file": "originals/ie_10001.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -75,7 +112,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10002.png"
+        "file": "originals/ie_10002.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -94,7 +132,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10003.png"
+        "file": "originals/ie_10003.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -113,7 +152,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10004.png"
+        "file": "originals/ie_10004.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -132,7 +172,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10005.png"
+        "file": "originals/ie_10005.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -151,7 +192,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10006.png"
+        "file": "originals/ie_10006.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -170,7 +212,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10007.png"
+        "file": "originals/ie_10007.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -189,7 +232,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10008.png"
+        "file": "originals/ie_10008.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -208,7 +252,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10009.png"
+        "file": "originals/ie_10009.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -227,7 +272,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10010.png"
+        "file": "originals/ie_10010.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -246,7 +292,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10011.png"
+        "file": "originals/ie_10011.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -265,7 +312,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10012.png"
+        "file": "originals/ie_10012.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -284,7 +332,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10013.png"
+        "file": "originals/ie_10013.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -303,26 +352,39 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10014.png"
+        "file": "originals/ie_10014.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
         "sprite_name": "ie_10015",
-        "cab": "CAB-26fd9477ea3b77159fcdd65ee264f7b5",
+        "cab": "CAB-f98e168f92b1307275fea58f344d75ca",
         "path_id": "2886329268505291419",
         "size": [
           190,
           210
         ],
-        "png_sha256": "174e4cd9b49cdb86949c2077c511775c48bf66ed0ef5218edc526cf168938e60",
-        "atlas_cab": "CAB-26fd9477ea3b77159fcdd65ee264f7b5",
+        "png_sha256": "5c8a87c25cea2e014464daec5c3c0a35d71548b2c1a95eaf6df64f0c036bdea1",
+        "atlas_cab": "CAB-f98e168f92b1307275fea58f344d75ca",
         "rect": "Rectf(height=256.0, width=256.0, x=0.0, y=0.0)",
         "pivot": "Vector2f(0.5, 0.5)",
         "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+        "file": "originals/ie_10015.png",
         "review_status": "visually_verified",
-        "reviewed_at": "2026-09-07",
-        "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10015.png"
+        "reviewed_at": "2026-10-29",
+        "review_note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+        "visual_review": {
+          "png_sha256": "5c8a87c25cea2e014464daec5c3c0a35d71548b2c1a95eaf6df64f0c036bdea1",
+          "status": "passed",
+          "reviewer": "Codex visual QA",
+          "reviewed_at": "2026-10-29",
+          "note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+          "evidence": [
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/originals/ie_10015.png",
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/review-background.png"
+          ]
+        },
+        "source_id": "icons-equip(hd)_assets_all.bundle:a105a13663147fa4219a67afbd11a5d3acb874f2adbfd6216f80cffbefa42a71"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -341,7 +403,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_10016.png"
+        "file": "originals/ie_10016.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -360,7 +423,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_11001.png"
+        "file": "originals/ie_11001.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -379,7 +443,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_11002.png"
+        "file": "originals/ie_11002.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -398,7 +463,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_12001.png"
+        "file": "originals/ie_12001.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -417,7 +483,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_12002.png"
+        "file": "originals/ie_12002.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -436,7 +503,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_13001.png"
+        "file": "originals/ie_13001.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-equip(hd)_assets_all.bundle",
@@ -455,7 +523,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/ie_13002.png"
+        "file": "originals/ie_13002.png",
+        "source_id": "icons-equip(hd)_assets_all.bundle:6b52f53d8bc2eb14c57b2793c4b77ac0d55f9d827c1ed61a4b3882f5fec55041"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -474,7 +543,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_ar_00.png"
+        "file": "originals/mi_favoriteitem_ar_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -493,7 +563,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c030_00.png"
+        "file": "originals/mi_favoriteitem_c030_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -512,7 +583,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c032_00.png"
+        "file": "originals/mi_favoriteitem_c032_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -531,7 +603,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c072_00.png"
+        "file": "originals/mi_favoriteitem_c072_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -550,7 +623,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c080_00.png"
+        "file": "originals/mi_favoriteitem_c080_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -569,7 +643,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c100_00.png"
+        "file": "originals/mi_favoriteitem_c100_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -588,7 +663,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c101_00.png"
+        "file": "originals/mi_favoriteitem_c101_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -607,7 +683,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c112_00.png"
+        "file": "originals/mi_favoriteitem_c112_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -626,7 +703,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c140_00.png"
+        "file": "originals/mi_favoriteitem_c140_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -645,7 +723,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c141_00.png"
+        "file": "originals/mi_favoriteitem_c141_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -664,7 +743,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c142_00.png"
+        "file": "originals/mi_favoriteitem_c142_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -683,7 +763,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c150_00.png"
+        "file": "originals/mi_favoriteitem_c150_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -702,7 +783,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c170_00.png"
+        "file": "originals/mi_favoriteitem_c170_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -721,7 +803,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c192_00.png"
+        "file": "originals/mi_favoriteitem_c192_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -740,7 +823,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c210_00.png"
+        "file": "originals/mi_favoriteitem_c210_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -759,7 +843,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c280_00.png"
+        "file": "originals/mi_favoriteitem_c280_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -778,7 +863,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c281_00.png"
+        "file": "originals/mi_favoriteitem_c281_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -797,7 +883,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c352_00.png"
+        "file": "originals/mi_favoriteitem_c352_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -816,7 +903,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c390_00.png"
+        "file": "originals/mi_favoriteitem_c390_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -835,7 +923,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c411_00.png"
+        "file": "originals/mi_favoriteitem_c411_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -854,7 +943,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c550_00.png"
+        "file": "originals/mi_favoriteitem_c550_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -873,7 +963,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_c580_00.png"
+        "file": "originals/mi_favoriteitem_c580_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -892,7 +983,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_mg_00.png"
+        "file": "originals/mi_favoriteitem_mg_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -911,7 +1003,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_rl_00.png"
+        "file": "originals/mi_favoriteitem_rl_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -930,7 +1023,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_sg_00.png"
+        "file": "originals/mi_favoriteitem_sg_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -949,7 +1043,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_smg_00.png"
+        "file": "originals/mi_favoriteitem_smg_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-favoriteitem(hd)_assets_all.bundle",
@@ -968,7 +1063,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/mi_favoriteitem_sr_00.png"
+        "file": "originals/mi_favoriteitem_sr_00.png",
+        "source_id": "icons-favoriteitem(hd)_assets_all.bundle:b600e677844982bd2733ba0733fc61d7e2eaf24b7ff5192fe1b318aef7075fca"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -987,7 +1083,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_atkdown_01.png"
+        "file": "originals/icn_skill_atkdown_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1006,7 +1103,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_atkup_01.png"
+        "file": "originals/icn_skill_atkup_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1025,12 +1123,13 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_attention_01.png"
+        "file": "originals/icn_skill_attention_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
         "sprite_name": "icn_skill_barrier_01",
-        "cab": "CAB-943be9ada3c8167954fe4942ddb49057",
+        "cab": "CAB-3b1d78c8360d84b421a2765e88f18d3d",
         "path_id": "7620675822518658201",
         "size": [
           89,
@@ -1041,10 +1140,22 @@
         "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
         "pivot": "Vector2f(0.5, 0.5)",
         "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+        "file": "originals/icn_skill_barrier_01.png",
         "review_status": "visually_verified",
-        "reviewed_at": "2026-09-07",
-        "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_barrier_01.png"
+        "reviewed_at": "2026-10-29",
+        "review_note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+        "visual_review": {
+          "png_sha256": "9961591db16617910328f3dbe01f16f2ae9e43d73b1721c0091bb38c06747dfa",
+          "status": "passed",
+          "reviewer": "Codex visual QA",
+          "reviewed_at": "2026-10-29",
+          "note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+          "evidence": [
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/originals/icn_skill_barrier_01.png",
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/review-background.png"
+          ]
+        },
+        "source_id": "icons-skill(hd)_assets_all.bundle:766627528668bce2b2206156af05479d95235539a51abd87c47df0ddbbb0e508"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1063,7 +1174,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_barrierdamage_01.png"
+        "file": "originals/icn_skill_barrierdamage_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1082,7 +1194,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_bonusrange_01.png"
+        "file": "originals/icn_skill_bonusrange_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1101,7 +1214,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_burstgaugespeedup_01.png"
+        "file": "originals/icn_skill_burstgaugespeedup_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1120,7 +1234,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c010_ult.png"
+        "file": "originals/icn_skill_c010_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1139,7 +1254,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c011_ult.png"
+        "file": "originals/icn_skill_c011_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1158,7 +1274,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c012_ult.png"
+        "file": "originals/icn_skill_c012_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1177,7 +1294,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c014_ult.png"
+        "file": "originals/icn_skill_c014_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1196,7 +1314,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c015_ult.png"
+        "file": "originals/icn_skill_c015_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1215,7 +1334,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c016_ult.png"
+        "file": "originals/icn_skill_c016_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1234,7 +1354,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c017_ult.png"
+        "file": "originals/icn_skill_c017_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1253,7 +1374,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c018_ult.png"
+        "file": "originals/icn_skill_c018_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1272,7 +1394,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c020_ult.png"
+        "file": "originals/icn_skill_c020_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1291,7 +1414,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c022_ult.png"
+        "file": "originals/icn_skill_c022_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1310,7 +1434,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c023_ult.png"
+        "file": "originals/icn_skill_c023_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1329,7 +1454,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c030_ult.png"
+        "file": "originals/icn_skill_c030_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1348,7 +1474,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c032_ult.png"
+        "file": "originals/icn_skill_c032_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1367,7 +1494,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c033_ult.png"
+        "file": "originals/icn_skill_c033_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1386,7 +1514,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c040_ult.png"
+        "file": "originals/icn_skill_c040_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1405,7 +1534,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c041_ult.png"
+        "file": "originals/icn_skill_c041_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1424,7 +1554,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c043_ult.png"
+        "file": "originals/icn_skill_c043_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1443,7 +1574,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c060_ult.png"
+        "file": "originals/icn_skill_c060_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1462,7 +1594,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c061_ult.png"
+        "file": "originals/icn_skill_c061_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1481,7 +1614,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c062_ult.png"
+        "file": "originals/icn_skill_c062_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1500,7 +1634,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c070_ult.png"
+        "file": "originals/icn_skill_c070_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1519,7 +1654,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c071_ult.png"
+        "file": "originals/icn_skill_c071_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1538,7 +1674,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c072_ult.png"
+        "file": "originals/icn_skill_c072_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1557,7 +1694,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c073_ult.png"
+        "file": "originals/icn_skill_c073_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1576,7 +1714,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c074_ult.png"
+        "file": "originals/icn_skill_c074_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1595,7 +1734,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c075_ult.png"
+        "file": "originals/icn_skill_c075_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1614,7 +1754,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c080_ult.png"
+        "file": "originals/icn_skill_c080_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1633,7 +1774,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c082_ult.png"
+        "file": "originals/icn_skill_c082_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1652,7 +1794,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c090_ult.png"
+        "file": "originals/icn_skill_c090_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1671,7 +1814,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c091_ult.png"
+        "file": "originals/icn_skill_c091_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1690,7 +1834,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c092_ult.png"
+        "file": "originals/icn_skill_c092_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1709,7 +1854,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c093_ult.png"
+        "file": "originals/icn_skill_c093_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1728,7 +1874,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c094_ult.png"
+        "file": "originals/icn_skill_c094_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1747,7 +1894,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c095_ult.png"
+        "file": "originals/icn_skill_c095_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1766,7 +1914,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c100_ult.png"
+        "file": "originals/icn_skill_c100_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1785,7 +1934,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c101_ult.png"
+        "file": "originals/icn_skill_c101_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1804,7 +1954,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c102_ult.png"
+        "file": "originals/icn_skill_c102_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1823,7 +1974,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c103_ult.png"
+        "file": "originals/icn_skill_c103_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1842,7 +1994,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c105_ult.png"
+        "file": "originals/icn_skill_c105_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1861,7 +2014,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c110_ult.png"
+        "file": "originals/icn_skill_c110_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1880,7 +2034,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c111_ult.png"
+        "file": "originals/icn_skill_c111_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1899,7 +2054,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c112_ult.png"
+        "file": "originals/icn_skill_c112_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1918,7 +2074,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c113_ult.png"
+        "file": "originals/icn_skill_c113_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1937,7 +2094,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c120_ult.png"
+        "file": "originals/icn_skill_c120_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1956,7 +2114,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c121_ult.png"
+        "file": "originals/icn_skill_c121_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1975,7 +2134,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c130_ult.png"
+        "file": "originals/icn_skill_c130_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -1994,7 +2154,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c131_ult.png"
+        "file": "originals/icn_skill_c131_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2013,7 +2174,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c132_ult.png"
+        "file": "originals/icn_skill_c132_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2032,7 +2194,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c140_ult.png"
+        "file": "originals/icn_skill_c140_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2051,7 +2214,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c141_ult.png"
+        "file": "originals/icn_skill_c141_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2070,7 +2234,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c142_ult.png"
+        "file": "originals/icn_skill_c142_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2089,7 +2254,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c143_ult.png"
+        "file": "originals/icn_skill_c143_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2108,7 +2274,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c150_ult.png"
+        "file": "originals/icn_skill_c150_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2127,7 +2294,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c160_ult.png"
+        "file": "originals/icn_skill_c160_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2146,7 +2314,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c161_ult.png"
+        "file": "originals/icn_skill_c161_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2165,7 +2334,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c162_ult.png"
+        "file": "originals/icn_skill_c162_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2184,7 +2354,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c170_ult.png"
+        "file": "originals/icn_skill_c170_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2203,7 +2374,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c171_ult.png"
+        "file": "originals/icn_skill_c171_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2222,7 +2394,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c172_ult.png"
+        "file": "originals/icn_skill_c172_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2241,7 +2414,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c180_ult.png"
+        "file": "originals/icn_skill_c180_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2260,7 +2434,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c181_ult.png"
+        "file": "originals/icn_skill_c181_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2279,7 +2454,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c182_ult.png"
+        "file": "originals/icn_skill_c182_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2298,7 +2474,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c183_ult.png"
+        "file": "originals/icn_skill_c183_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2317,7 +2494,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c190_ult.png"
+        "file": "originals/icn_skill_c190_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2336,7 +2514,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c191_ult.png"
+        "file": "originals/icn_skill_c191_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2355,7 +2534,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c192_ult.png"
+        "file": "originals/icn_skill_c192_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2374,7 +2554,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c193_ult.png"
+        "file": "originals/icn_skill_c193_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2393,7 +2574,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c194_ult.png"
+        "file": "originals/icn_skill_c194_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2412,7 +2594,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c195_ult.png"
+        "file": "originals/icn_skill_c195_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2431,7 +2614,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c200_ult.png"
+        "file": "originals/icn_skill_c200_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2450,7 +2634,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c201_ult.png"
+        "file": "originals/icn_skill_c201_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2469,7 +2654,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c202_ult.png"
+        "file": "originals/icn_skill_c202_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2488,7 +2674,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c203_ult.png"
+        "file": "originals/icn_skill_c203_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2507,7 +2694,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c210_ult.png"
+        "file": "originals/icn_skill_c210_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2526,7 +2714,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c212_ult.png"
+        "file": "originals/icn_skill_c212_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2545,7 +2734,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c220_ult.png"
+        "file": "originals/icn_skill_c220_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2564,7 +2754,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c221_ult.png"
+        "file": "originals/icn_skill_c221_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2583,7 +2774,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c222_ult.png"
+        "file": "originals/icn_skill_c222_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2602,7 +2794,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c223_ult.png"
+        "file": "originals/icn_skill_c223_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2621,7 +2814,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c224_ult.png"
+        "file": "originals/icn_skill_c224_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2640,7 +2834,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c225_ult.png"
+        "file": "originals/icn_skill_c225_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2659,7 +2854,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c226_ult.png"
+        "file": "originals/icn_skill_c226_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2678,7 +2874,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c230_ult.png"
+        "file": "originals/icn_skill_c230_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2697,7 +2894,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c231_ult.png"
+        "file": "originals/icn_skill_c231_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2716,7 +2914,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c232_ult.png"
+        "file": "originals/icn_skill_c232_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2735,7 +2934,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c233_ult.png"
+        "file": "originals/icn_skill_c233_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2754,7 +2954,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c234_ult.png"
+        "file": "originals/icn_skill_c234_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2773,7 +2974,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c240_ult.png"
+        "file": "originals/icn_skill_c240_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2792,7 +2994,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c241_ult.png"
+        "file": "originals/icn_skill_c241_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2811,7 +3014,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c242_ult.png"
+        "file": "originals/icn_skill_c242_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2830,7 +3034,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c260_ult.png"
+        "file": "originals/icn_skill_c260_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2849,7 +3054,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c261_ult.png"
+        "file": "originals/icn_skill_c261_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2868,7 +3074,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c262_ult.png"
+        "file": "originals/icn_skill_c262_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2887,7 +3094,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c270_ult.png"
+        "file": "originals/icn_skill_c270_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2906,7 +3114,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c271_ult.png"
+        "file": "originals/icn_skill_c271_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2925,7 +3134,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c272_ult.png"
+        "file": "originals/icn_skill_c272_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2944,7 +3154,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c280_ult.png"
+        "file": "originals/icn_skill_c280_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2963,7 +3174,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c281_ult.png"
+        "file": "originals/icn_skill_c281_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -2982,7 +3194,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c282_ult.png"
+        "file": "originals/icn_skill_c282_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3001,7 +3214,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c283_ult.png"
+        "file": "originals/icn_skill_c283_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3020,7 +3234,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c284_ult.png"
+        "file": "originals/icn_skill_c284_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3039,7 +3254,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c290_ult.png"
+        "file": "originals/icn_skill_c290_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3058,7 +3274,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c291_ult.png"
+        "file": "originals/icn_skill_c291_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3077,7 +3294,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c300_ult.png"
+        "file": "originals/icn_skill_c300_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3096,7 +3314,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c301_ult.png"
+        "file": "originals/icn_skill_c301_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3115,7 +3334,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c302_ult.png"
+        "file": "originals/icn_skill_c302_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3134,7 +3354,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c303_ult.png"
+        "file": "originals/icn_skill_c303_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3153,7 +3374,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c304_ult.png"
+        "file": "originals/icn_skill_c304_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3172,7 +3394,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c305_ult.png"
+        "file": "originals/icn_skill_c305_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3191,7 +3414,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c306_ult.png"
+        "file": "originals/icn_skill_c306_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3210,7 +3434,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c307_ult.png"
+        "file": "originals/icn_skill_c307_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3229,7 +3454,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c308_ult.png"
+        "file": "originals/icn_skill_c308_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3248,7 +3474,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c310_ult.png"
+        "file": "originals/icn_skill_c310_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3267,7 +3494,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c311_ult.png"
+        "file": "originals/icn_skill_c311_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3286,7 +3514,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c312_ult.png"
+        "file": "originals/icn_skill_c312_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3305,7 +3534,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c313_ult.png"
+        "file": "originals/icn_skill_c313_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3324,7 +3554,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c314_ult.png"
+        "file": "originals/icn_skill_c314_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3343,7 +3574,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c315_ult.png"
+        "file": "originals/icn_skill_c315_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3362,7 +3594,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c316_ult.png"
+        "file": "originals/icn_skill_c316_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3381,7 +3614,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c321_ult.png"
+        "file": "originals/icn_skill_c321_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3400,7 +3634,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c322_ult.png"
+        "file": "originals/icn_skill_c322_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3419,7 +3654,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c330_ult.png"
+        "file": "originals/icn_skill_c330_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3438,7 +3674,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c331_ult.png"
+        "file": "originals/icn_skill_c331_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3457,7 +3694,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c350_ult.png"
+        "file": "originals/icn_skill_c350_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3476,7 +3714,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c351_ult.png"
+        "file": "originals/icn_skill_c351_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3495,7 +3734,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c352_ult.png"
+        "file": "originals/icn_skill_c352_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3514,7 +3754,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c353_ult.png"
+        "file": "originals/icn_skill_c353_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3533,7 +3774,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c354_ult.png"
+        "file": "originals/icn_skill_c354_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3552,7 +3794,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c355_ult.png"
+        "file": "originals/icn_skill_c355_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3571,7 +3814,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c361_ult.png"
+        "file": "originals/icn_skill_c361_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3590,7 +3834,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c380_ult.png"
+        "file": "originals/icn_skill_c380_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3609,7 +3854,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c381_ult.png"
+        "file": "originals/icn_skill_c381_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3628,7 +3874,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c382_ult.png"
+        "file": "originals/icn_skill_c382_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3647,7 +3894,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c390_ult.png"
+        "file": "originals/icn_skill_c390_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3666,7 +3914,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c391_ult.png"
+        "file": "originals/icn_skill_c391_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3685,7 +3934,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c392_ult.png"
+        "file": "originals/icn_skill_c392_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3704,7 +3954,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c400_ult.png"
+        "file": "originals/icn_skill_c400_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3723,7 +3974,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c401_ult.png"
+        "file": "originals/icn_skill_c401_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3742,7 +3994,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c402_ult.png"
+        "file": "originals/icn_skill_c402_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3761,7 +4014,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c403_ult.png"
+        "file": "originals/icn_skill_c403_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3780,7 +4034,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c411_ult.png"
+        "file": "originals/icn_skill_c411_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3799,7 +4054,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c412_ult.png"
+        "file": "originals/icn_skill_c412_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3818,7 +4074,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c430_ult.png"
+        "file": "originals/icn_skill_c430_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3837,7 +4094,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c431_ult.png"
+        "file": "originals/icn_skill_c431_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3856,7 +4114,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c432_ult.png"
+        "file": "originals/icn_skill_c432_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3875,7 +4134,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c441_ult.png"
+        "file": "originals/icn_skill_c441_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3894,7 +4154,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c450_ult.png"
+        "file": "originals/icn_skill_c450_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3913,7 +4174,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c451_ult.png"
+        "file": "originals/icn_skill_c451_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3932,7 +4194,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c470_ult.png"
+        "file": "originals/icn_skill_c470_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3951,7 +4214,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c471_ult.png"
+        "file": "originals/icn_skill_c471_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3970,7 +4234,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c500_ult.png"
+        "file": "originals/icn_skill_c500_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -3989,7 +4254,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c501_ult.png"
+        "file": "originals/icn_skill_c501_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4008,7 +4274,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c502_ult.png"
+        "file": "originals/icn_skill_c502_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4027,7 +4294,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c511_ult.png"
+        "file": "originals/icn_skill_c511_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4046,7 +4314,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c513_ult.png"
+        "file": "originals/icn_skill_c513_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4065,7 +4334,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c514_ult.png"
+        "file": "originals/icn_skill_c514_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4084,7 +4354,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c515_ult.png"
+        "file": "originals/icn_skill_c515_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4103,7 +4374,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c520_ult.png"
+        "file": "originals/icn_skill_c520_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4122,7 +4394,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c521_ult.png"
+        "file": "originals/icn_skill_c521_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4141,7 +4414,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c532_ult.png"
+        "file": "originals/icn_skill_c532_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4160,7 +4434,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c550_ult.png"
+        "file": "originals/icn_skill_c550_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4179,7 +4454,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c551_ult.png"
+        "file": "originals/icn_skill_c551_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4198,7 +4474,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c570_ult.png"
+        "file": "originals/icn_skill_c570_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4217,7 +4494,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c580_ult.png"
+        "file": "originals/icn_skill_c580_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4236,7 +4514,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c581_ult.png"
+        "file": "originals/icn_skill_c581_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4255,7 +4534,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c582_ult.png"
+        "file": "originals/icn_skill_c582_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4274,7 +4554,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c583_ult.png"
+        "file": "originals/icn_skill_c583_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4293,7 +4574,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c590_ult.png"
+        "file": "originals/icn_skill_c590_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4312,7 +4594,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c600_ult.png"
+        "file": "originals/icn_skill_c600_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4331,7 +4614,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c601_ult.png"
+        "file": "originals/icn_skill_c601_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4350,7 +4634,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c620_ult.png"
+        "file": "originals/icn_skill_c620_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4369,7 +4654,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c800_ult.png"
+        "file": "originals/icn_skill_c800_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4388,7 +4674,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c801_ult.png"
+        "file": "originals/icn_skill_c801_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4407,7 +4694,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c802_ult.png"
+        "file": "originals/icn_skill_c802_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4426,7 +4714,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c810_ult.png"
+        "file": "originals/icn_skill_c810_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4445,7 +4734,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c811_ult.png"
+        "file": "originals/icn_skill_c811_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4464,7 +4754,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c812_ult.png"
+        "file": "originals/icn_skill_c812_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4483,7 +4774,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c820_ult.png"
+        "file": "originals/icn_skill_c820_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4502,7 +4794,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c821_ult.png"
+        "file": "originals/icn_skill_c821_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4521,7 +4814,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c822_ult.png"
+        "file": "originals/icn_skill_c822_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4540,7 +4834,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c830_ult.png"
+        "file": "originals/icn_skill_c830_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4559,7 +4854,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c831_ult.png"
+        "file": "originals/icn_skill_c831_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4578,7 +4874,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c832_ult.png"
+        "file": "originals/icn_skill_c832_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4597,7 +4894,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c833_ult.png"
+        "file": "originals/icn_skill_c833_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4616,7 +4914,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c834_ult.png"
+        "file": "originals/icn_skill_c834_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4635,7 +4934,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c835_ult.png"
+        "file": "originals/icn_skill_c835_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4654,7 +4954,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c836_ult.png"
+        "file": "originals/icn_skill_c836_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4673,7 +4974,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c840_ult.png"
+        "file": "originals/icn_skill_c840_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4692,7 +4994,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c841_ult.png"
+        "file": "originals/icn_skill_c841_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4711,7 +5014,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c842_ult.png"
+        "file": "originals/icn_skill_c842_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4730,7 +5034,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c850_ult.png"
+        "file": "originals/icn_skill_c850_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4749,7 +5054,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c851_ult.png"
+        "file": "originals/icn_skill_c851_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4768,7 +5074,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c852_ult.png"
+        "file": "originals/icn_skill_c852_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4787,7 +5094,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c860_ult.png"
+        "file": "originals/icn_skill_c860_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4806,7 +5114,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c861_ult.png"
+        "file": "originals/icn_skill_c861_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4825,7 +5134,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c862_ult.png"
+        "file": "originals/icn_skill_c862_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4844,7 +5154,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c870_ult.png"
+        "file": "originals/icn_skill_c870_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4863,7 +5174,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c871_ult.png"
+        "file": "originals/icn_skill_c871_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4882,7 +5194,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c872_ult.png"
+        "file": "originals/icn_skill_c872_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4901,12 +5214,13 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_chargedamage_01.png"
+        "file": "originals/icn_skill_chargedamage_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
         "sprite_name": "icn_skill_coredamage_01",
-        "cab": "CAB-943be9ada3c8167954fe4942ddb49057",
+        "cab": "CAB-3b1d78c8360d84b421a2765e88f18d3d",
         "path_id": "2925985326269736629",
         "size": [
           104,
@@ -4917,10 +5231,22 @@
         "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
         "pivot": "Vector2f(0.5, 0.5)",
         "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+        "file": "originals/icn_skill_coredamage_01.png",
         "review_status": "visually_verified",
-        "reviewed_at": "2026-09-07",
-        "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_coredamage_01.png"
+        "reviewed_at": "2026-10-29",
+        "review_note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+        "visual_review": {
+          "png_sha256": "4d42c315fe2c1e3b1d5d16f6bb09f381ca708115718ad5f0daae24ab29c2ed81",
+          "status": "passed",
+          "reviewer": "Codex visual QA",
+          "reviewed_at": "2026-10-29",
+          "note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+          "evidence": [
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/originals/icn_skill_coredamage_01.png",
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/review-background.png"
+          ]
+        },
+        "source_id": "icons-skill(hd)_assets_all.bundle:766627528668bce2b2206156af05479d95235539a51abd87c47df0ddbbb0e508"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4939,12 +5265,13 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_criticaldamage_01.png"
+        "file": "originals/icn_skill_criticaldamage_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
         "sprite_name": "icn_skill_damage_01",
-        "cab": "CAB-943be9ada3c8167954fe4942ddb49057",
+        "cab": "CAB-3b1d78c8360d84b421a2765e88f18d3d",
         "path_id": "-1617016425863534347",
         "size": [
           97,
@@ -4955,10 +5282,22 @@
         "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
         "pivot": "Vector2f(0.5, 0.5)",
         "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+        "file": "originals/icn_skill_damage_01.png",
         "review_status": "visually_verified",
-        "reviewed_at": "2026-09-07",
-        "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_damage_01.png"
+        "reviewed_at": "2026-10-29",
+        "review_note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+        "visual_review": {
+          "png_sha256": "b1c9e22aad2fc7fcb20d83401ef6ac5fb9860fcb776dce9b0542394ed32a9f2f",
+          "status": "passed",
+          "reviewer": "Codex visual QA",
+          "reviewed_at": "2026-10-29",
+          "note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+          "evidence": [
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/originals/icn_skill_damage_01.png",
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/review-background.png"
+          ]
+        },
+        "source_id": "icons-skill(hd)_assets_all.bundle:766627528668bce2b2206156af05479d95235539a51abd87c47df0ddbbb0e508"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4977,7 +5316,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_damagereductiondown_01.png"
+        "file": "originals/icn_skill_damagereductiondown_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -4996,7 +5336,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_damagereductionup_01.png"
+        "file": "originals/icn_skill_damagereductionup_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5015,7 +5356,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_damageshare_01.png"
+        "file": "originals/icn_skill_damageshare_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5034,7 +5376,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_damageshareinstant.png"
+        "file": "originals/icn_skill_damageshareinstant.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5053,7 +5396,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_debuffimmune_01.png"
+        "file": "originals/icn_skill_debuffimmune_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5072,7 +5416,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_debuffremove_01.png"
+        "file": "originals/icn_skill_debuffremove_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5091,7 +5436,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_defdown_01.png"
+        "file": "originals/icn_skill_defdown_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5110,7 +5456,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_defup_01.png"
+        "file": "originals/icn_skill_defup_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5129,12 +5476,13 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_durationvaluechange_01.png"
+        "file": "originals/icn_skill_durationvaluechange_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
         "sprite_name": "icn_skill_heal_01",
-        "cab": "CAB-943be9ada3c8167954fe4942ddb49057",
+        "cab": "CAB-3b1d78c8360d84b421a2765e88f18d3d",
         "path_id": "5147498852404300115",
         "size": [
           95,
@@ -5145,10 +5493,22 @@
         "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
         "pivot": "Vector2f(0.5, 0.5)",
         "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+        "file": "originals/icn_skill_heal_01.png",
         "review_status": "visually_verified",
-        "reviewed_at": "2026-09-07",
-        "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_heal_01.png"
+        "reviewed_at": "2026-10-29",
+        "review_note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+        "visual_review": {
+          "png_sha256": "9387a3fcaa3d487e08b0a799175e14298c10c75ac0e744daa8dfcc16dace4f19",
+          "status": "passed",
+          "reviewer": "Codex visual QA",
+          "reviewed_at": "2026-10-29",
+          "note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+          "evidence": [
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/originals/icn_skill_heal_01.png",
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/review-background.png"
+          ]
+        },
+        "source_id": "icons-skill(hd)_assets_all.bundle:766627528668bce2b2206156af05479d95235539a51abd87c47df0ddbbb0e508"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5167,7 +5527,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_healbarrier_01.png"
+        "file": "originals/icn_skill_healbarrier_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5186,7 +5547,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_healcover_01.png"
+        "file": "originals/icn_skill_healcover_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5205,7 +5567,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_healshare_01.png"
+        "file": "originals/icn_skill_healshare_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5224,7 +5587,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_incburstduration_01.png"
+        "file": "originals/icn_skill_incburstduration_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5243,7 +5607,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_overhealsave_01.png"
+        "file": "originals/icn_skill_overhealsave_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5262,7 +5627,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_penetrationdamage_01.png"
+        "file": "originals/icn_skill_penetrationdamage_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5281,7 +5647,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_rateoffire_01.png"
+        "file": "originals/icn_skill_rateoffire_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5300,7 +5667,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_sharedamageincrease.png"
+        "file": "originals/icn_skill_sharedamageincrease.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5319,7 +5687,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_stataccuracycircle_01.png"
+        "file": "originals/icn_skill_stataccuracycircle_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5338,12 +5707,13 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_statammo_01.png"
+        "file": "originals/icn_skill_statammo_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
         "sprite_name": "icn_skill_statcritical_01",
-        "cab": "CAB-943be9ada3c8167954fe4942ddb49057",
+        "cab": "CAB-3b1d78c8360d84b421a2765e88f18d3d",
         "path_id": "3442039893947748671",
         "size": [
           104,
@@ -5354,10 +5724,22 @@
         "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
         "pivot": "Vector2f(0.5, 0.5)",
         "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+        "file": "originals/icn_skill_statcritical_01.png",
         "review_status": "visually_verified",
-        "reviewed_at": "2026-09-07",
-        "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_statcritical_01.png"
+        "reviewed_at": "2026-10-29",
+        "review_note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+        "visual_review": {
+          "png_sha256": "facd2b302974ae0a3d73317a41047dbc5e67f53a9bda5e80b1832781082366d9",
+          "status": "passed",
+          "reviewer": "Codex visual QA",
+          "reviewed_at": "2026-10-29",
+          "note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+          "evidence": [
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/originals/icn_skill_statcritical_01.png",
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/review-background.png"
+          ]
+        },
+        "source_id": "icons-skill(hd)_assets_all.bundle:766627528668bce2b2206156af05479d95235539a51abd87c47df0ddbbb0e508"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5376,7 +5758,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_statexplosion_01.png"
+        "file": "originals/icn_skill_statexplosion_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5395,12 +5778,13 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_stathp_01.png"
+        "file": "originals/icn_skill_stathp_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
         "sprite_name": "icn_skill_statpenetration_01",
-        "cab": "CAB-943be9ada3c8167954fe4942ddb49057",
+        "cab": "CAB-3b1d78c8360d84b421a2765e88f18d3d",
         "path_id": "66458407628799776",
         "size": [
           100,
@@ -5411,10 +5795,22 @@
         "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
         "pivot": "Vector2f(0.5, 0.5)",
         "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+        "file": "originals/icn_skill_statpenetration_01.png",
         "review_status": "visually_verified",
-        "reviewed_at": "2026-09-07",
-        "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_statpenetration_01.png"
+        "reviewed_at": "2026-10-29",
+        "review_note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+        "visual_review": {
+          "png_sha256": "bb0a4c2983b3b9ed9ac954d66bed745a3b6cf903d55ef178a76a2ff3e0758a06",
+          "status": "passed",
+          "reviewer": "Codex visual QA",
+          "reviewed_at": "2026-10-29",
+          "note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+          "evidence": [
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/originals/icn_skill_statpenetration_01.png",
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/review-background.png"
+          ]
+        },
+        "source_id": "icons-skill(hd)_assets_all.bundle:766627528668bce2b2206156af05479d95235539a51abd87c47df0ddbbb0e508"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5433,7 +5829,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_statreloadtime_01.png"
+        "file": "originals/icn_skill_statreloadtime_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5452,7 +5849,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_statshotcount_01.png"
+        "file": "originals/icn_skill_statshotcount_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5471,7 +5869,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_stickyprojectile_01.png"
+        "file": "originals/icn_skill_stickyprojectile_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5490,7 +5889,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c013_ult.png"
+        "file": "originals/icn_skill_c013_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5509,7 +5909,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c104_ult.png"
+        "file": "originals/icn_skill_c104_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5528,7 +5929,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c610_01.png"
+        "file": "originals/icn_skill_c610_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5547,7 +5949,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c610_02.png"
+        "file": "originals/icn_skill_c610_02.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5566,7 +5969,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c610_ult.png"
+        "file": "originals/icn_skill_c610_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5585,7 +5989,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c901_ult.png"
+        "file": "originals/icn_skill_c901_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5604,7 +6009,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c907_01.png"
+        "file": "originals/icn_skill_c907_01.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5623,7 +6029,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c907_02.png"
+        "file": "originals/icn_skill_c907_02.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5642,7 +6049,8 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c907_ult.png"
+        "file": "originals/icn_skill_c907_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
       },
       {
         "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
@@ -5661,7 +6069,101 @@
         "review_status": "visually_verified",
         "reviewed_at": "2026-09-07",
         "review_note": "Individually inspected at native resolution on neutral gray; silhouette, glyph detail, alpha edge and no level/frame contamination checked.",
-        "file": "originals/icn_skill_c993_ult.png"
+        "file": "originals/icn_skill_c993_ult.png",
+        "source_id": "icons-skill(hd)_assets_all.bundle:f726ec7da128c96b7dc9dc8ffc157f227f5d765f3ea9af0211878767622cb553"
+      },
+      {
+        "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
+        "sprite_name": "icn_skill_c472_ult",
+        "cab": "CAB-3b1d78c8360d84b421a2765e88f18d3d",
+        "path_id": "-2362315582613882397",
+        "size": [
+          104,
+          89
+        ],
+        "png_sha256": "64348eb5ded647a5c01947e50a63d251ee772eae3a9d5829b7767ab295b02c14",
+        "atlas_cab": null,
+        "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+        "pivot": "Vector2f(0.5, 0.5)",
+        "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+        "file": "originals/icn_skill_c472_ult.png",
+        "review_status": "visually_verified",
+        "reviewed_at": "2026-10-29",
+        "review_note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+        "visual_review": {
+          "png_sha256": "64348eb5ded647a5c01947e50a63d251ee772eae3a9d5829b7767ab295b02c14",
+          "status": "passed",
+          "reviewer": "Codex visual QA",
+          "reviewed_at": "2026-10-29",
+          "note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+          "evidence": [
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/originals/icn_skill_c472_ult.png",
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/review-background.png"
+          ]
+        },
+        "source_id": "icons-skill(hd)_assets_all.bundle:766627528668bce2b2206156af05479d95235539a51abd87c47df0ddbbb0e508"
+      },
+      {
+        "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
+        "sprite_name": "icn_skill_c473_ult",
+        "cab": "CAB-3b1d78c8360d84b421a2765e88f18d3d",
+        "path_id": "1907277451644840610",
+        "size": [
+          100,
+          104
+        ],
+        "png_sha256": "4c111c2f3a3d148bf93f0910285e3bf8b62b6e27904b17b2d016722a05e2ad44",
+        "atlas_cab": null,
+        "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+        "pivot": "Vector2f(0.5, 0.5)",
+        "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+        "file": "originals/icn_skill_c473_ult.png",
+        "review_status": "visually_verified",
+        "reviewed_at": "2026-10-29",
+        "review_note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+        "visual_review": {
+          "png_sha256": "4c111c2f3a3d148bf93f0910285e3bf8b62b6e27904b17b2d016722a05e2ad44",
+          "status": "passed",
+          "reviewer": "Codex visual QA",
+          "reviewed_at": "2026-10-29",
+          "note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+          "evidence": [
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/originals/icn_skill_c473_ult.png",
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/review-background.png"
+          ]
+        },
+        "source_id": "icons-skill(hd)_assets_all.bundle:766627528668bce2b2206156af05479d95235539a51abd87c47df0ddbbb0e508"
+      },
+      {
+        "normalized_bundle": "icons-skill(hd)_assets_all.bundle",
+        "sprite_name": "icn_skill_c019_ult",
+        "cab": "CAB-3b1d78c8360d84b421a2765e88f18d3d",
+        "path_id": "6858334657836573959",
+        "size": [
+          98,
+          86
+        ],
+        "png_sha256": "e7a78d799129cb359c9d7fd529e0ca0cf802c1e347b527b49963371aa1c46c61",
+        "atlas_cab": null,
+        "rect": "Rectf(height=128.0, width=128.0, x=0.0, y=0.0)",
+        "pivot": "Vector2f(0.5, 0.5)",
+        "border": "Vector4f(0.0, 0.0, 0.0, 0.0)",
+        "file": "originals/icn_skill_c019_ult.png",
+        "review_status": "visually_verified",
+        "reviewed_at": "2026-10-29",
+        "review_note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+        "visual_review": {
+          "png_sha256": "e7a78d799129cb359c9d7fd529e0ca0cf802c1e347b527b49963371aa1c46c61",
+          "status": "passed",
+          "reviewer": "Codex visual QA",
+          "reviewed_at": "2026-10-29",
+          "note": "逐项查看原始透明PNG及灰底复核：原生glyph轮廓完整，无错位/黑边；魔方为当前ie_10015绿色外框，绑定当前业务表1000318。",
+          "evidence": [
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/originals/icn_skill_c019_ult.png",
+            "NIKKE_files/work/client-updates/153.6.10-20261029-plugin-targeted/object-candidates/review-background.png"
+          ]
+        },
+        "source_id": "icons-skill(hd)_assets_all.bundle:766627528668bce2b2206156af05479d95235539a51abd87c47df0ddbbb0e508"
       }
     ],
     "mappings": {
@@ -5784,6 +6286,14 @@
           "nameCn": "遗迹分裂魔方",
           "nameEn": "Diffusion Cube",
           "sprite": "ie_10013"
+        },
+        {
+          "cubeId": 1000318,
+          "resourceId": 10015,
+          "nameCn": "遗迹外框魔方",
+          "nameEn": "Bezel Cube",
+          "locale_source": "source-file:38af6f4a2a5d25df89b95c0fa5e13006.lsc",
+          "sprite": "ie_10015"
         }
       ],
       "dolls": {
@@ -5962,6 +6472,11 @@
           "skill1": "icn_skill_debuffimmune_01",
           "skill2": "icn_skill_atkup_01",
           "burst": "icn_skill_c018_ult"
+        },
+        "19": {
+          "skill1": "icn_skill_damage_01",
+          "skill2": "icn_skill_coredamage_01",
+          "burst": "icn_skill_c019_ult"
         },
         "20": {
           "skill1": "icn_skill_stathp_01",
@@ -6678,6 +7193,16 @@
           "skill2": "icn_skill_statpenetration_01",
           "burst": "icn_skill_c471_ult"
         },
+        "472": {
+          "skill1": "icn_skill_statpenetration_01",
+          "skill2": "icn_skill_statcritical_01",
+          "burst": "icn_skill_c472_ult"
+        },
+        "473": {
+          "skill1": "icn_skill_heal_01",
+          "skill2": "icn_skill_barrier_01",
+          "burst": "icn_skill_c473_ult"
+        },
         "500": {
           "skill1": "icn_skill_atkup_01",
           "skill2": "icn_skill_burstgaugespeedup_01",
@@ -6923,14 +7448,7 @@
           "skill2": "icn_skill_defup_01",
           "burst": "icn_skill_c872_ult"
         }
-      },
-      "unmapped_cube_resource_ids": [
-        10011,
-        10014,
-        10015,
-        10016,
-        11002
-      ]
+      }
     },
     "mapping_evidence": {
       "cube": "Existing reviewed Workshop cubeId/resourceId contract + exact native ie_<resourceId> Sprite; extra native IDs have no invented cubeId/name.",
@@ -6950,9 +7468,26 @@
       }
     },
     "method": "UnityPy Sprite.image RGBA PNG; native dimensions and alpha; no scaling or screenshot crop",
-    "producer_sha256": "dcb9281b09c1d4604a803b18cdcef433c30318f5deff2c5254c09332ed3ea945",
-    "review_sha256": "b74113803546bbb26d28145b7186c9751f3aa6fe490291ec9f908723267b332e",
-    "character_directory_sha256": "7fa6c78753647ad2ccb2529430f41cc145c26677495fd4979046dc5ae3ccf2d4"
+    "producer_sha256": "8a65ff186e27eb83f6c5b9fb932f6506a7e3bb939aa3da28ace827148cad6ca2",
+    "review_sha256": "b9f0d1ecf12c244670d78749290f4e0e70bb160671063c90e1a2b84f9601cfd6",
+    "character_directory_sha256": "a74ae6e991de41e820c1814726afc9808743e62d8269fa00884a29341eed92aa",
+    "review_digest_method": "SHA256 of component review digests; original per-item visual review remains binding",
+    "components": [
+      {
+        "schema": "character-card-objects-v1",
+        "manifest_sha256": "97038ae5eb97da81fe89d0945acd811a996eea4df22fac8e27dd09ca5be79f17",
+        "producer_sha256": "dcb9281b09c1d4604a803b18cdcef433c30318f5deff2c5254c09332ed3ea945",
+        "review_sha256": "b74113803546bbb26d28145b7186c9751f3aa6fe490291ec9f908723267b332e",
+        "character_directory_sha256": "7fa6c78753647ad2ccb2529430f41cc145c26677495fd4979046dc5ae3ccf2d4"
+      },
+      {
+        "schema": "character-card-objects-v1",
+        "manifest_sha256": "37e53590c9c9298f9eaa4849a6087ec467a364cc250784230b993a02881f6695",
+        "producer_sha256": "a0723f9b1a0b7a154e9f2b6697a7b9616d9d8dd6167898eded18ed3288caa0ba",
+        "review_sha256": "4357c43422ec50be6afe958892f57d7b905f381e080cafef89ed1eb7c78d1d77",
+        "character_directory_sha256": "a74ae6e991de41e820c1814726afc9808743e62d8269fa00884a29341eed92aa"
+      }
+    ]
   },
   "items": [
     {
@@ -7123,6 +7658,16 @@
       "size": [
         200,
         219
+      ]
+    },
+    {
+      "file": "cubes/ie_10015.png",
+      "sprite_name": "ie_10015",
+      "source_png_sha256": "5c8a87c25cea2e014464daec5c3c0a35d71548b2c1a95eaf6df64f0c036bdea1",
+      "output_png_sha256": "5c8a87c25cea2e014464daec5c3c0a35d71548b2c1a95eaf6df64f0c036bdea1",
+      "size": [
+        190,
+        210
       ]
     },
     {
@@ -7546,6 +8091,36 @@
       ]
     },
     {
+      "file": "skill-icons/generic/icn_skill_damage_01.png",
+      "sprite_name": "icn_skill_damage_01",
+      "source_png_sha256": "b1c9e22aad2fc7fcb20d83401ef6ac5fb9860fcb776dce9b0542394ed32a9f2f",
+      "output_png_sha256": "b1c9e22aad2fc7fcb20d83401ef6ac5fb9860fcb776dce9b0542394ed32a9f2f",
+      "size": [
+        97,
+        98
+      ]
+    },
+    {
+      "file": "skill-icons/generic/icn_skill_coredamage_01.png",
+      "sprite_name": "icn_skill_coredamage_01",
+      "source_png_sha256": "4d42c315fe2c1e3b1d5d16f6bb09f381ca708115718ad5f0daae24ab29c2ed81",
+      "output_png_sha256": "4d42c315fe2c1e3b1d5d16f6bb09f381ca708115718ad5f0daae24ab29c2ed81",
+      "size": [
+        104,
+        104
+      ]
+    },
+    {
+      "file": "skill-icons/burst/c019.png",
+      "sprite_name": "icn_skill_c019_ult",
+      "source_png_sha256": "e7a78d799129cb359c9d7fd529e0ca0cf802c1e347b527b49963371aa1c46c61",
+      "output_png_sha256": "e7a78d799129cb359c9d7fd529e0ca0cf802c1e347b527b49963371aa1c46c61",
+      "size": [
+        98,
+        86
+      ]
+    },
+    {
       "file": "skill-icons/generic/icn_skill_stathp_01.png",
       "sprite_name": "icn_skill_stathp_01",
       "source_png_sha256": "7c0008ea0501ce6dc503adcf0761b4c62904ea33f3ae90b92355474900b4f375",
@@ -7693,16 +8268,6 @@
       "size": [
         99,
         96
-      ]
-    },
-    {
-      "file": "skill-icons/generic/icn_skill_damage_01.png",
-      "sprite_name": "icn_skill_damage_01",
-      "source_png_sha256": "b1c9e22aad2fc7fcb20d83401ef6ac5fb9860fcb776dce9b0542394ed32a9f2f",
-      "output_png_sha256": "b1c9e22aad2fc7fcb20d83401ef6ac5fb9860fcb776dce9b0542394ed32a9f2f",
-      "size": [
-        97,
-        98
       ]
     },
     {
@@ -8423,16 +8988,6 @@
       "size": [
         112,
         105
-      ]
-    },
-    {
-      "file": "skill-icons/generic/icn_skill_coredamage_01.png",
-      "sprite_name": "icn_skill_coredamage_01",
-      "source_png_sha256": "4d42c315fe2c1e3b1d5d16f6bb09f381ca708115718ad5f0daae24ab29c2ed81",
-      "output_png_sha256": "4d42c315fe2c1e3b1d5d16f6bb09f381ca708115718ad5f0daae24ab29c2ed81",
-      "size": [
-        104,
-        104
       ]
     },
     {
@@ -9223,6 +9778,26 @@
       "size": [
         104,
         96
+      ]
+    },
+    {
+      "file": "skill-icons/burst/c472.png",
+      "sprite_name": "icn_skill_c472_ult",
+      "source_png_sha256": "64348eb5ded647a5c01947e50a63d251ee772eae3a9d5829b7767ab295b02c14",
+      "output_png_sha256": "64348eb5ded647a5c01947e50a63d251ee772eae3a9d5829b7767ab295b02c14",
+      "size": [
+        104,
+        89
+      ]
+    },
+    {
+      "file": "skill-icons/burst/c473.png",
+      "sprite_name": "icn_skill_c473_ult",
+      "source_png_sha256": "4c111c2f3a3d148bf93f0910285e3bf8b62b6e27904b17b2d016722a05e2ad44",
+      "output_png_sha256": "4c111c2f3a3d148bf93f0910285e3bf8b62b6e27904b17b2d016722a05e2ad44",
+      "size": [
+        100,
+        104
       ]
     },
     {

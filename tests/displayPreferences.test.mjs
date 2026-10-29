@@ -41,6 +41,25 @@ test("new client portrait works without a remote avatar and retains verified sou
   assert.equal(source.visualReview.sha256, source.pngSha256);
 });
 
+test("153.6.10 characters retain separate default art, local portraits and reviewed costumes", () => {
+  const sources = JSON.parse(readFileSync(new URL("../public/ui-assets/nikke/character-avatars/sources.json", import.meta.url))).assets;
+  for (const rid of [19, 472, 473]) {
+    const id = `c${String(rid).padStart(3, '0')}`;
+    const url = `/ui-assets/nikke/character-avatars/${id}.png`;
+    assert.equal(getNikkeAvatarUrl({ resource_id: rid }), url);
+    const hash = createHash('sha256').update(readFileSync(new URL(`../public${url}`, import.meta.url))).digest('hex');
+    assert.equal(sources[id].pngSha256, hash);
+    assert.equal(sources[id].visualReview.sha256, hash);
+    const choices = getNikkeArtworkCandidates({ resource_id: rid });
+    assert.ok(choices.some(c => c.id === 'default' && c.url.endsWith(`/${id}.webp`)));
+  }
+  for (const [rid, label, asset] of [[19, '最后的爱恋', 'c019_01'], [18, '亲爱的公主', 'c018_01'],
+    [471, '垂泪之日', 'c471_01'], [223, '三毒', 'c223_02']]) {
+    assert.ok(getNikkeArtworkCandidates({ resource_id: rid }).some(c => c.label === label && c.url.endsWith(`/${asset}.webp`)));
+  }
+  assert.ok(!getNikkeArtworkCandidates({ resource_id: 18 }).some(c => c.url.includes('/c019')));
+});
+
 test("artwork choices use full-body artwork and bundled renders for supported costumes", () => {
   assert.deepEqual(getNikkeArtworkCandidates({
     resource_id: 511,
