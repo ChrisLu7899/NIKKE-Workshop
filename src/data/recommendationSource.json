@@ -2,12 +2,12 @@
   "author": "屑芙蒂",
   "title": "NIKKE国际服PVE一图流",
   "authorUrl": "https://space.bilibili.com/17057196/dynamic",
-  "sourceSha256": "717768cd8509e9e72e32f474f4856accef7b27465f12038cc02deb936e850406",
+  "sourceSha256": "59623dd0eeb374db68e6b828b05a627f8d9f03fdad45e9da14658c48a843aa67",
   "sourcePublishedAt": null,
-  "reviewedAt": "2026-09-16",
-  "approvedBy": "用户确认整体方案并授权替换",
-  "cultivationEntries": 87,
-  "presetCount": 21,
+  "reviewedAt": "2026-11-05",
+  "approvedBy": "用户提供新版原图并授权更新；角色身份与字段人工复核",
+  "cultivationEntries": 86,
+  "presetCount": 20,
   "identityCorrections": [
     {
       "sectionId": "water-main-c",
@@ -18,5 +18,6 @@
       "nameCode": "5135",
       "confirmation": "用户逐项确认"
     }
-  ]
+  ],
+  "previousSourceSha256": "717768cd8509e9e72e32f474f4856accef7b27465f12038cc02deb936e850406"
 }

@@ -8,7 +8,7 @@ import { resolveSimplifiedChineseCharacterName } from "./characterNameOverrides.
 
 export const COMMON_CHARACTER_TEMPLATE_KEY = "common";
 export const COMMON_CHARACTER_TEMPLATE_NAME = "常用";
-export const COMMON_CHARACTER_TEMPLATE_VERSION = 1;
+export const COMMON_CHARACTER_TEMPLATE_VERSION = 3;
 
 const commonCharacter = (nameCode, upstreamName) => ({
   nameCode,
@@ -43,6 +43,10 @@ export const COMMON_CHARACTER_LIST = Object.freeze([
   { nameCode: "5012", name: "白雪公主" },
   { nameCode: "5101", name: "小红帽" },
   { nameCode: "1010", name: "拉普拉斯" },
+  commonCharacter("5186", "红莲：弑神"),
+  commonCharacter("5185", "玛丽安：女王"),
+  commonCharacter("5126", "芙罗拉"),
+  commonCharacter("1021", "牡丹"),
 ]);
 
 const normalizeCode = (value) => String(value ?? "").trim();
@@ -62,9 +66,11 @@ export const buildCommonCharacterData = (nikkeList, existingData = null) => {
       .map((character) => [normalizeCode(character?.name_code), character])
       .filter(([code]) => code),
   );
-  const resolved = COMMON_CHARACTER_LIST
-    .map((entry) => catalogByCode.get(entry.nameCode))
-    .filter(Boolean);
+  const commonCodes = new Set(COMMON_CHARACTER_LIST.map((entry) => entry.nameCode));
+  // Membership is maintained above; ordering follows the full catalog rather
+  // than when a character was added to this fixed list.
+  const resolved = [...catalogByCode.values()]
+    .filter((nikke) => commonCodes.has(normalizeCode(nikke?.name_code)));
   const data = buildCharactersConfig(resolved, {
     showEquipDetails: existingData?.options?.showEquipDetails !== false,
   });
@@ -72,7 +78,7 @@ export const buildCommonCharacterData = (nikkeList, existingData = null) => {
     const existing = existingByCode.get(normalizeCode(character?.name_code));
     if (Array.isArray(existing?.showStats)) character.showStats = [...existing.showStats];
   });
-  data.order = COMMON_CHARACTER_LIST.map((entry) => entry.nameCode);
+  data.order = resolved.map((nikke) => normalizeCode(nikke?.name_code));
   return {
     data,
     missing: COMMON_CHARACTER_LIST.filter((entry) => !catalogByCode.has(entry.nameCode)),
